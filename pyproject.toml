@@ -1,0 +1,55 @@
+[project]
+name = "turnaround"
+version = "0.1.0"
+description = "The showtime grid, solved. A constraint solver for the cinema week: every screen, every session, every distributor term, and the turnaround between them."
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "designedbybruno", email = "123848709+brunohart@users.noreply.github.com" }
+]
+requires-python = ">=3.13"
+keywords = ["cinema", "scheduling", "constraint-programming", "cp-sat", "exhibition", "showtimes"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Office/Business :: Scheduling",
+]
+dependencies = [
+    "ortools>=9.15",
+    "pydantic>=2.11",
+    "typer>=0.16",
+    "rich>=14",
+    "jinja2>=3.1",
+]
+
+[project.scripts]
+turnaround = "turnaround.cli:app"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4",
+    "ruff>=0.13",
+    "mypy>=1.17",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.11,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+ignore_missing_imports = true
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

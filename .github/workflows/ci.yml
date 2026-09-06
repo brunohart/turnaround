@@ -1,0 +1,22 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.13"
+      - run: scripts/build.sh
+      - run: scripts/test.sh
+      - run: scripts/run.sh
+      - name: every example grid passes the checker
+        run: |
+          for b in examples/*.json; do
+            n=$(basename "$b" .json)
+            uv run turnaround check "$b" "docs/grids/$n.json"
+          done

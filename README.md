@@ -1,0 +1,114 @@
+# turnaround
+
+**The showtime grid, solved.** A constraint solver for the cinema week: every screen, every session, every distributor term, and the turnaround between them.
+
+<img src="docs/grids/regent.png" alt="The Regent's week sheet: three screens, fifteen sessions, the prime window washed in navy, every proof check green" width="100%">
+
+*The Regent — 3 screens, 5 titles, one PLF exclusive with a prime guarantee, a kids' 3D title that must start by 17:00, a horror title held to 16:00 or later. Solved `OPTIMAL` in 0.96 s. Every check green.*
+
+---
+
+## What it does
+
+You hand it a **brief** — the house, the slate, and the house policy:
+
+```jsonc
+{
+  "house": "The Regent",
+  "screens": [
+    { "id": "1", "capacity": 320, "formats": ["2D", "PLF"] },
+    { "id": "2", "capacity": 180, "formats": ["2D", "3D"] },
+    { "id": "3", "capacity": 96,  "formats": ["2D"], "clean_min": 15 }
+  ],
+  "films": [
+    { "id": "odyssey", "title": "The Long Voyage", "runtime_min": 168, "format": "PLF", "weight": 2.2,
+      "terms": { "min_shows": 3, "prime_shows": 1, "exclusive_screen": true } },
+    { "id": "bees", "title": "The Bee Kingdom", "runtime_min": 84, "format": "3D", "weight": 0.8,
+      "daypart_weights": { "matinee": 1.6, "prime": 0.4, "late": 0.05 },
+      "terms": { "min_shows": 2, "latest_start": "17:00" } }
+  ],
+  "policy": { "open": "10:00", "last_start": "21:30", "preshow_min": 20, "clean_min": 20, "stagger_min": 10 }
+}
+```
+
+It returns a **grid** — sessions on screens with start times — and a **proof**: every hard constraint re-verified by a checker that shares no code with the solver.
+
+```
+$ turnaround plan examples/regent.json --html sheet.html
+
+ Screen 1  10:20 The Long Voyage · 14:00 The Long Voyage · 17:30 The Long Voyage · 21:15 The Long Voyage
+ Screen 2  10:00 Harvest Moon · 12:25 Harvest Moon · 14:50 The Bee Kingdom · 16:55 The Bee Kingdom · 19:05 Harvest Moon · 21:30 Dead Signal
+ Screen 3  10:10 Harvest Moon · 12:40 Harvest Moon · 15:05 Atlas of Small Rooms · 17:55 Atlas of Small Rooms · 20:35 Dead Signal
+
+ ✓ turnaround        no screen double-booked
+ ✓ stagger           min gap 10 min; every start clears the lobby
+ ✓ exclusive_screen  odyssey   own screen: 1
+ ✓ prime_shows       odyssey   1 ≥ 1 in 17:30–20:45
+ ✓ latest_start      bees      0 after 17:00
+ …
+```
+
+If the terms cannot all be met, it says `INFEASIBLE` and gives you nothing — not a grid with a distributor's minimum quietly dropped.
+
+## Why a solver
+
+The showtime grid is a constraint problem wearing a spreadsheet. A screen holds one thing at a time; the turnaround between features is a hard floor; two shows should not start within ten minutes of each other or the lobby cannot cope; a distributor's terms say *three shows, one in prime, its own screen*; the kids' film cannot start after five; the horror cannot start before four. A person builds this by hand every Wednesday, and the grid they arrive at is one they can live with, not one they can prove.
+
+`turnaround` builds the grid with [OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver): one boolean per (screen, film, start), an optional interval under `NoOverlap` per screen so the turnaround is inside the block, every term a linear constraint, and an objective that puts the wanted film in the big room at the wanted hour. Then it throws the grid at a second, independent reading of the same rules. Two readings that agree are evidence; one is an assertion.
+
+## Install
+
+```bash
+uv tool install turnaround      # once it is on PyPI
+# or, from source
+git clone https://github.com/brunohart/turnaround && cd turnaround && uv sync
+uv run turnaround plan examples/regent.json --html sheet.html
+```
+
+Python 3.13+. The only heavy dependency is `ortools`.
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `turnaround plan brief.json [--out grid.json] [--html sheet.html]` | Solve a day; print the grid and its proof. Exit 2 if infeasible, 3 if the checker ever disagrees with the solver. |
+| `turnaround check brief.json grid.json` | Verify any grid — the solver's or one made by hand — against its brief. |
+| `turnaround render brief.json grid.json --html sheet.html` | Render an existing grid as the week sheet. |
+| `turnaround validate brief.json` | Validate and summarise a brief. |
+
+## The brief
+
+**Screens** have `capacity`, `formats` (`2D`, `3D`, `PLF`, or your own names) and an optional `clean_min` override.
+
+**Films** have `runtime_min`, `format`, a `weight` (relative demand; 2.0 wants twice the seats of 1.0), optional `daypart_weights`, and **terms**:
+
+| Term | Meaning |
+|---|---|
+| `min_shows` / `max_shows` | Sessions today, at least / at most |
+| `prime_shows` | Sessions starting inside the prime window, at least |
+| `exclusive_screen` | Must have a screen playing nothing else today |
+| `earliest_start` / `latest_start` | Start window, `HH:MM` |
+| `screens` | Only these screen ids |
+| `min_capacity` | Only rooms at least this big |
+
+**Policy**: `open`, `last_start` (hours past 24 are fine: `"25:00"` is 1 a.m.), `preshow_min`, `clean_min`, `stagger_min`, `slot_min`, and the `dayparts` with their weights (matinee / afternoon / prime / late by default).
+
+## What it does not do yet
+
+This is Day 0 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: an explanation of *which* terms conflict when the answer is infeasible (Day 1); the week as a unit with per-day overrides (Day 2); a demand model so the objective is admissions rather than judgment-weighted seats (Day 3); staff and credits-overlap realities (Day 4); week-scoped distributor terms (Day 5); the full print identity (Day 6); *why* each session is where it is (Day 7); scale benchmarks (Day 8); CSV/iCal in and out (Day 9); a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12).
+
+The design decisions and their reasons are in `DECISIONS.md`. The log of what each day shipped and what it left rough is in `docs/LOG.md`.
+
+## Proof
+
+```bash
+scripts/build.sh    # ruff, format check, mypy --strict
+scripts/test.sh     # pytest
+scripts/run.sh      # solve every example into docs/grids/, then `turnaround check` each
+```
+
+CI runs all three on every push.
+
+## Licence
+
+MIT. Built by designedbybruno. Not affiliated with any cinema software vendor; the brief is the tool's own format.

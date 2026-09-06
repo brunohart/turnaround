@@ -1,0 +1,129 @@
+{
+  "house": "The Regent",
+  "date": "2026-09-10",
+  "status": "OPTIMAL",
+  "objective": 3741.0,
+  "solve_seconds": 0.786,
+  "sessions": [
+    {
+      "screen": "1",
+      "film": "odyssey",
+      "start": 625,
+      "feature_start": 645,
+      "feature_end": 813,
+      "clear": 833
+    },
+    {
+      "screen": "1",
+      "film": "odyssey",
+      "start": 840,
+      "feature_start": 860,
+      "feature_end": 1028,
+      "clear": 1048
+    },
+    {
+      "screen": "1",
+      "film": "odyssey",
+      "start": 1050,
+      "feature_start": 1070,
+      "feature_end": 1238,
+      "clear": 1258
+    },
+    {
+      "screen": "1",
+      "film": "odyssey",
+      "start": 1275,
+      "feature_start": 1295,
+      "feature_end": 1463,
+      "clear": 1483
+    },
+    {
+      "screen": "2",
+      "film": "harvest",
+      "start": 600,
+      "feature_start": 620,
+      "feature_end": 724,
+      "clear": 744
+    },
+    {
+      "screen": "2",
+      "film": "harvest",
+      "start": 745,
+      "feature_start": 765,
+      "feature_end": 869,
+      "clear": 889
+    },
+    {
+      "screen": "2",
+      "film": "bees",
+      "start": 895,
+      "feature_start": 915,
+      "feature_end": 999,
+      "clear": 1019
+    },
+    {
+      "screen": "2",
+      "film": "bees",
+      "start": 1020,
+      "feature_start": 1040,
+      "feature_end": 1124,
+      "clear": 1144
+    },
+    {
+      "screen": "2",
+      "film": "harvest",
+      "start": 1145,
+      "feature_start": 1165,
+      "feature_end": 1269,
+      "clear": 1289
+    },
+    {
+      "screen": "2",
+      "film": "signal",
+      "start": 1290,
+      "feature_start": 1310,
+      "feature_end": 1402,
+      "clear": 1422
+    },
+    {
+      "screen": "3",
+      "film": "harvest",
+      "start": 610,
+      "feature_start": 630,
+      "feature_end": 734,
+      "clear": 749
+    },
+    {
+      "screen": "3",
+      "film": "harvest",
+      "start": 765,
+      "feature_start": 785,
+      "feature_end": 889,
+      "clear": 904
+    },
+    {
+      "screen": "3",
+      "film": "atlas",
+      "start": 905,
+      "feature_start": 925,
+      "feature_end": 1046,
+      "clear": 1061
+    },
+    {
+      "screen": "3",
+      "film": "atlas",
+      "start": 1065,
+      "feature_start": 1085,
+      "feature_end": 1206,
+      "clear": 1221
+    },
+    {
+      "screen": "3",
+      "film": "signal",
+      "start": 1225,
+      "feature_start": 1245,
+      "feature_end": 1337,
+      "clear": 1352
+    }
+  ]
+}
