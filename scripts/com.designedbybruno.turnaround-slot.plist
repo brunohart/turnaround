@@ -6,13 +6,13 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/brunohart/turnaround/scripts/slot.sh</string>
+    <string>/Users/brunohart/Documents/turnaround/scripts/slot.sh</string>
   </array>
-  <key>WorkingDirectory</key><string>/Users/brunohart/turnaround</string>
+  <key>WorkingDirectory</key><string>/Users/brunohart/Documents/turnaround</string>
   <key>StartCalendarInterval</key>
   <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>45</integer></dict>
-  <key>StandardOutPath</key><string>/Users/brunohart/turnaround/build/slots/launchd.out.log</string>
-  <key>StandardErrorPath</key><string>/Users/brunohart/turnaround/build/slots/launchd.err.log</string>
+  <key>StandardOutPath</key><string>/Users/brunohart/Documents/turnaround/build/slots/launchd.out.log</string>
+  <key>StandardErrorPath</key><string>/Users/brunohart/Documents/turnaround/build/slots/launchd.err.log</string>
   <key>EnvironmentVariables</key>
   <dict>
     <key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/Users/brunohart/.local/bin</string>
