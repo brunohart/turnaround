@@ -25,7 +25,7 @@ from dataclasses import dataclass, field
 
 from ortools.sat.python import cp_model
 
-from .model import Brief, Film, Grid, Session, TermRef, parse_time
+from .model import Brief, Film, Grid, Session, TermRef, WeekBrief, WeekGrid, parse_time
 
 # Relaxation order: the term with the smallest key goes first.
 # exclusive_screen is always last; otherwise the lightest film first,
@@ -110,14 +110,23 @@ class _Model:
         return a
 
 
+Hold = dict[str, frozenset[int]]
+"""Per film id, the start times it had on the anchor day of the week."""
+
+
 def _build(
     brief: Brief,
     dropped: frozenset[tuple[str, str]] = frozenset(),
     *,
     feasibility_only: bool = False,
+    hold: Hold | None = None,
+    hold_penalty: float = 0.0,
 ) -> _Model:
     """The model. Terms in `dropped` are not enforced; every other term is guarded.
-    A feasibility-only model has no objective: a probe stops at the first grid it finds."""
+    A feasibility-only model has no objective: a probe stops at the first grid it finds.
+    `hold` is the soft term: a title whose set of starts today differs from the set it
+    had on the anchor day costs `hold_penalty` weighted seats. Nothing is forced; a day
+    whose hours cannot carry the anchor's starts simply pays."""
     p = brief.policy
     cands = candidates(brief)
     m = cp_model.CpModel()
@@ -202,9 +211,34 @@ def _build(
                 else:
                     m.add(a == 0)
 
-    # Objective: weighted seats on offer. Scale to integers for CP-SAT.
+    # The soft term: differs[f] = 1 unless today's starts for f are exactly the anchor's.
+    differs: list[cp_model.IntVar] = []
+    if hold and hold_penalty > 0 and not feasibility_only:
+        for f in brief.films:
+            if f.id not in hold:
+                continue
+            anchor = hold[f.id]
+            d = m.new_bool_var(f"differs[{f.id}]")
+            mine_at: dict[int, list[cp_model.IntVar]] = {}
+            for c in cands:
+                if c.film == f.id:
+                    mine_at.setdefault(c.start, []).append(mdl.x[c])
+            for start, vs in mine_at.items():
+                if start in anchor:
+                    m.add(sum(vs) >= 1).only_enforce_if(d.negated())
+                else:
+                    for v in vs:
+                        m.add_implication(v, d)
+            if any(start not in mine_at for start in anchor):
+                m.add(d == 1)  # an anchor start is not on offer today: it cannot hold
+            differs.append(d)
+
+    # Objective: weighted seats on offer, less the hold penalty. Scale to integers.
     if not feasibility_only:
-        m.maximize(sum(int(round(c.value * 100)) * mdl.x[c] for c in cands))
+        m.maximize(
+            sum(int(round(c.value * 100)) * mdl.x[c] for c in cands)
+            - sum(int(round(hold_penalty * 100)) * d for d in differs)
+        )
     return mdl
 
 
@@ -336,10 +370,12 @@ def solve(
     workers: int = 8,
     dropped: frozenset[tuple[str, str]] = frozenset(),
     minimise: bool = True,
+    hold: Hold | None = None,
+    hold_penalty: float = 0.0,
 ) -> Grid:
     """Solve one day. On INFEASIBLE the grid carries the conflicting terms."""
     t0 = time.perf_counter()
-    mdl = _build(brief, dropped)
+    mdl = _build(brief, dropped, hold=hold, hold_penalty=hold_penalty)
     terms = list(mdl.assumptions)
     _pin(mdl, terms)
     solver = _solver(time_limit_s, workers)
@@ -375,14 +411,28 @@ def relax_key(brief: Brief, ref: TermRef) -> tuple[int, float, int]:
     )
 
 
-def relax(brief: Brief, *, time_limit_s: float = 30.0, workers: int = 8) -> Grid:
+def relax(
+    brief: Brief,
+    *,
+    time_limit_s: float = 30.0,
+    workers: int = 8,
+    hold: Hold | None = None,
+    hold_penalty: float = 0.0,
+) -> Grid:
     """Drop terms one at a time, from the conflict, in relax_key order, until a grid
     exists. The grid lists every term dropped. Nothing is dropped that the
     conflict did not name."""
     t0 = time.perf_counter()
     dropped: frozenset[tuple[str, str]] = frozenset()
     while True:
-        grid = solve(brief, time_limit_s=time_limit_s, workers=workers, dropped=dropped)
+        grid = solve(
+            brief,
+            time_limit_s=time_limit_s,
+            workers=workers,
+            dropped=dropped,
+            hold=hold,
+            hold_penalty=hold_penalty,
+        )
         if grid.status != "INFEASIBLE" or not grid.conflict:
             break
         if grid.conflict_alone:  # each fails by itself; every one of them has to go
@@ -421,3 +471,55 @@ def explain(brief: Brief, grid: Grid) -> str:
         + f" and a {p.prime_start}–{p.prime_end} prime window"
     )
     return lead + " · ".join(parts) + " — " + house
+
+
+def _starts(grid: Grid) -> Hold:
+    out: dict[str, set[int]] = {}
+    for s in grid.sessions:
+        out.setdefault(s.film, set()).add(s.start)
+    return {f: frozenset(v) for f, v in out.items()}
+
+
+def solve_week(
+    week: WeekBrief,
+    *,
+    time_limit_s: float = 30.0,
+    workers: int = 8,
+    relax_terms: bool = False,
+) -> WeekGrid:
+    """Solve the week day by day. The first hold day that solves becomes the anchor;
+    every later hold day pays `week.hold_penalty` per title whose starts differ from
+    it. A day that cannot hold its terms keeps its own conflict on its own grid; the
+    other days are still solved. With `relax_terms`, each such day is relaxed on its
+    own (ADR-009), never the week as a whole."""
+    t0 = time.perf_counter()
+    grids: list[Grid] = []
+    anchor: Hold | None = None
+    hold_set = set(week.hold_indices)
+    for i in range(len(week.days)):
+        brief = week.day(i)
+        hold = anchor if i in hold_set else None
+        penalty = week.hold_penalty if hold else 0.0
+        run = relax if relax_terms else solve
+        grid = run(
+            brief, time_limit_s=time_limit_s, workers=workers, hold=hold, hold_penalty=penalty
+        )
+        grids.append(grid)
+        if i in hold_set and anchor is None and grid.status in ("OPTIMAL", "FEASIBLE"):
+            anchor = _starts(grid)
+            # A title with no session on the anchor day holds by staying absent.
+            for f in week.films:
+                anchor.setdefault(f.id, frozenset())
+    solved = [grids[i] for i in week.hold_indices if grids[i].status in ("OPTIMAL", "FEASIBLE")]
+    held: list[str] = []
+    if len(solved) >= 2:
+        sets = [_starts(g) for g in solved]
+        held = [f.id for f in week.films if len({s.get(f.id, frozenset()) for s in sets}) == 1]
+    return WeekGrid(
+        house=week.house,
+        days=[d.name for d in week.days],
+        grids=grids,
+        hold_days=[d.name for d in week.days if d.name in week.hold_days],
+        held=held,
+        solve_seconds=round(time.perf_counter() - t0, 3),
+    )

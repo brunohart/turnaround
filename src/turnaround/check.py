@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from .model import Brief, Grid, Terms, fmt_time, parse_time
+from .model import Brief, Grid, Terms, WeekBrief, WeekGrid, fmt_time, parse_time
 
 RELAXABLE = ("min_shows", "max_shows", "prime_shows", "exclusive_screen")
 
@@ -193,3 +193,79 @@ def check(brief: Brief, grid: Grid) -> Report:
                 "exclusive_screen" in gave_up,
             )
     return r
+
+
+def starts_of(grid: Grid, film_id: str) -> frozenset[int]:
+    """The set of start times a title has on this grid, screens ignored."""
+    return frozenset(s.start for s in grid.sessions if s.film == film_id)
+
+
+def held_titles(week: WeekBrief, wg: WeekGrid) -> list[str]:
+    """Film ids whose start times are identical on every hold day that has a grid.
+    A day that did not solve is left out; if fewer than two hold days solved,
+    nothing can be said to hold and the list is empty."""
+    solved = [
+        wg.grids[i]
+        for i in week.hold_indices
+        if i < len(wg.grids) and wg.grids[i].status in ("OPTIMAL", "FEASIBLE")
+    ]
+    if len(solved) < 2:
+        return []
+    out = []
+    for f in week.films:
+        sets = {starts_of(g, f.id) for g in solved}
+        if len(sets) == 1:
+            out.append(f.id)
+    return out
+
+
+@dataclass
+class WeekReport:
+    """One report per day, plus the checks that only make sense across the week."""
+
+    days: list[str]
+    reports: list[Report]
+    week: Report = field(default_factory=Report)
+
+    @property
+    def ok(self) -> bool:
+        return self.week.ok and all(r.ok for r in self.reports)
+
+    @property
+    def clean(self) -> bool:
+        return self.week.clean and all(r.clean for r in self.reports)
+
+    @property
+    def failures(self) -> list[tuple[str, Check]]:
+        out = [("week", c) for c in self.week.failures]
+        for d, r in zip(self.days, self.reports, strict=True):
+            out += [(d, c) for c in r.failures]
+        return out
+
+
+def check_week(week: WeekBrief, wg: WeekGrid) -> WeekReport:
+    """Every day against its own unfolded brief, then the week's own claims:
+    the grids line up with the days, and the titles the grid says held their
+    times really did."""
+    names = [d.name for d in week.days]
+    w = Report()
+    w.add(
+        "days",
+        wg.days == names and len(wg.grids) == len(names),
+        f"{len(wg.grids)} grids for {len(names)} days"
+        + ("" if wg.days == names else f"; grid names {wg.days}, brief names {names}"),
+    )
+    reports = [
+        check(week.day(i), wg.grids[i]) if i < len(wg.grids) else Report()
+        for i in range(len(week.days))
+    ]
+    truly = sorted(held_titles(week, wg))
+    claimed = sorted(wg.held)
+    run = "/".join(d for d in names if d in week.hold_days)
+    w.add(
+        "held",
+        claimed == truly,
+        f"{len(truly)} of {len(week.films)} titles keep their starts on {run}"
+        + ("" if claimed == truly else f"; the grid claims {claimed}, found {truly}"),
+    )
+    return WeekReport(days=names, reports=reports, week=w)

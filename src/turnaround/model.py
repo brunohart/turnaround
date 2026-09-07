@@ -7,12 +7,17 @@ start times, plus the proof that every term was honoured.
 
 Times are minutes after midnight on the day being planned. "24:30" is a valid
 last-start time (a late show), so minutes may exceed 1440.
+
+A *week brief* is seven briefs that share a house and a slate: each day may
+override the policy (Friday's late show) and a film's terms (the opening
+exclusive lifts on Monday). It unfolds into one plain `Brief` per day, so the
+solver and the checker never learn what a week is.
 """
 
 from __future__ import annotations
 
 import re
-from typing import Annotated
+from typing import Annotated, Any
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
@@ -329,3 +334,129 @@ class Grid(BaseModel):
         for s in sorted(self.sessions, key=lambda x: (x.film, x.start)):
             out.setdefault(s.film, []).append(s)
         return out
+
+
+HOLD_DAYS_DEFAULT = ["Mon", "Tue", "Wed", "Thu"]
+
+
+class DayOverride(BaseModel):
+    """One day of the week: a name, a date, and what differs from the base brief."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    name: str = Field(description="Thu, Fri, … — the day as the booth calls it")
+    date: str | None = Field(default=None, description="ISO date, informational")
+    policy: dict[str, Any] = Field(
+        default_factory=dict, description="Policy fields that differ today, e.g. last_start"
+    )
+    terms: dict[str, dict[str, Any]] = Field(
+        default_factory=dict,
+        description="Per film id, the term fields that differ today, e.g. exclusive_screen",
+    )
+
+
+class WeekBrief(BaseModel):
+    """Seven days (or fewer) sharing a house, a slate and a base policy.
+
+    `day(i)` is the plain Brief for that day with the overrides applied. The
+    hold days are the run of the week where a title should keep the same start
+    times if it can; the solver pays `hold_penalty` weighted seats for each
+    title whose starts on a hold day differ from the first hold day's.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    house: str
+    screens: list[Screen] = Field(min_length=1)
+    films: list[Film] = Field(min_length=1)
+    policy: Policy = Field(default_factory=Policy)
+    days: list[DayOverride] = Field(min_length=1, max_length=7)
+    hold_days: list[str] = Field(
+        default_factory=lambda: list(HOLD_DAYS_DEFAULT),
+        description="Days on which a title should keep the same starts, where it can",
+    )
+    hold_penalty: float = Field(
+        default=60.0,
+        ge=0,
+        description="Weighted seats the objective gives up per title that changes its times",
+    )
+
+    @model_validator(mode="after")
+    def _check(self) -> WeekBrief:
+        names = [d.name for d in self.days]
+        if len(names) != len(set(names)):
+            raise ValueError("day names must be unique")
+        film_ids = {f.id for f in self.films}
+        for d in self.days:
+            unknown = set(d.terms) - film_ids
+            if unknown:
+                raise ValueError(f"day {d.name} sets terms for unknown films {sorted(unknown)}")
+            self.day(self.days.index(d))  # every day must be a valid Brief on its own
+        return self
+
+    @property
+    def hold_indices(self) -> list[int]:
+        """Positions of the hold days, in week order."""
+        return [i for i, d in enumerate(self.days) if d.name in self.hold_days]
+
+    def day(self, i: int) -> Brief:
+        """The plain brief for day i, overrides applied."""
+        d = self.days[i]
+        policy = Policy.model_validate({**self.policy.model_dump(), **d.policy})
+        films = []
+        for f in self.films:
+            if f.id in d.terms:
+                terms = Terms.model_validate({**f.terms.model_dump(), **d.terms[f.id]})
+                films.append(f.model_copy(update={"terms": terms}))
+            else:
+                films.append(f)
+        return Brief(
+            house=self.house,
+            date=d.date,
+            screens=self.screens,
+            films=films,
+            policy=policy,
+        )
+
+    def briefs(self) -> list[Brief]:
+        return [self.day(i) for i in range(len(self.days))]
+
+    def film_title(self, film_id: str) -> str:
+        for f in self.films:
+            if f.id == film_id:
+                return f.title
+        raise KeyError(film_id)
+
+
+class WeekGrid(BaseModel):
+    """The solver's answer for a week: one grid per day, and which titles held their times."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    house: str
+    days: list[str] = Field(description="Day names, in order, matching `grids`")
+    grids: list[Grid]
+    hold_days: list[str] = Field(default_factory=list)
+    held: list[str] = Field(
+        default_factory=list,
+        description="Film ids whose start times are the same on every hold day that solved",
+    )
+    solve_seconds: float = 0.0
+
+    @property
+    def status(self) -> str:
+        """OPTIMAL if every day is, else the worst day's status."""
+        order = ["INFEASIBLE", "UNKNOWN", "MODEL_INVALID", "FEASIBLE", "OPTIMAL"]
+        worst = min(self.grids, key=lambda g: order.index(g.status) if g.status in order else 0)
+        return worst.status
+
+    @property
+    def sessions(self) -> int:
+        return sum(len(g.sessions) for g in self.grids)
+
+    @property
+    def objective(self) -> float:
+        return sum(g.objective for g in self.grids)
+
+    def grid(self, name: str) -> Grid:
+        return self.grids[self.days.index(name)]
