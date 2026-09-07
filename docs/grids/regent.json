@@ -3,39 +3,39 @@
   "date": "2026-09-10",
   "status": "OPTIMAL",
   "objective": 3741.0,
-  "solve_seconds": 1.639,
+  "solve_seconds": 0.818,
   "sessions": [
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 625,
-      "feature_start": 645,
-      "feature_end": 813,
-      "clear": 833
+      "start": 630,
+      "feature_start": 650,
+      "feature_end": 818,
+      "clear": 838
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 840,
-      "feature_start": 860,
-      "feature_end": 1028,
-      "clear": 1048
+      "start": 850,
+      "feature_start": 870,
+      "feature_end": 1038,
+      "clear": 1058
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 1050,
-      "feature_start": 1070,
-      "feature_end": 1238,
-      "clear": 1258
+      "start": 1060,
+      "feature_start": 1080,
+      "feature_end": 1248,
+      "clear": 1268
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 1270,
-      "feature_start": 1290,
-      "feature_end": 1458,
-      "clear": 1478
+      "start": 1280,
+      "feature_start": 1300,
+      "feature_end": 1468,
+      "clear": 1488
     },
     {
       "screen": "2",
@@ -96,34 +96,34 @@
     {
       "screen": "3",
       "film": "harvest",
-      "start": 765,
-      "feature_start": 785,
-      "feature_end": 889,
-      "clear": 904
+      "start": 775,
+      "feature_start": 795,
+      "feature_end": 899,
+      "clear": 914
     },
     {
       "screen": "3",
       "film": "atlas",
-      "start": 910,
-      "feature_start": 930,
-      "feature_end": 1051,
-      "clear": 1066
+      "start": 915,
+      "feature_start": 935,
+      "feature_end": 1056,
+      "clear": 1071
     },
     {
       "screen": "3",
       "film": "atlas",
-      "start": 1070,
-      "feature_start": 1090,
-      "feature_end": 1211,
-      "clear": 1226
+      "start": 1080,
+      "feature_start": 1100,
+      "feature_end": 1221,
+      "clear": 1236
     },
     {
       "screen": "3",
       "film": "signal",
-      "start": 1230,
-      "feature_start": 1250,
-      "feature_end": 1342,
-      "clear": 1357
+      "start": 1240,
+      "feature_start": 1260,
+      "feature_end": 1352,
+      "clear": 1367
     }
   ],
   "conflict": [],

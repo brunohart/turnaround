@@ -60,9 +60,21 @@
   .given-up { color:var(--red); }
   .proof td:first-child { white-space:nowrap; }
   footer { margin-top:56px; color:var(--grey); display:flex; justify-content:space-between; }
-  @media print { body::after{display:none} .sheet{padding:12mm} h1{font-size:34px} .cols{grid-template-columns:1fr} }
+  .week-table th.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:11px; }
+  .week-table td.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11px; letter-spacing:.02em; line-height:1.6; white-space:nowrap; }
+  .week-table td.day.dark { color:var(--grey); }
+  .week-table td.day.hold { background:rgba(27,45,79,.05); }
+  .held { display:inline-block; border:1px solid var(--blue); color:var(--blue); padding:1px 5px; transform:rotate(-1.2deg); font-size:10px; }
+  .status-inf { color:var(--red); font-weight:600; }
+  .day-page { margin-top:64px; padding-top:28px; border-top:1px solid var(--ink); position:relative; }
+  .day-page h2 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:34px; line-height:.95; letter-spacing:-.03em; margin:0 0 6px; }
+  .day-page .stamp { margin-bottom:8px; }
+  .day-head { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:end; margin-bottom:18px; }
+  @media print {
+    .day-page { break-before:page; page-break-before:always; border-top:0; margin-top:0; padding-top:0; } body::after{display:none} .sheet{padding:12mm} h1{font-size:34px} .cols{grid-template-columns:1fr} }
   @media (max-width:800px) { header,.cols{grid-template-columns:1fr} .meta{text-align:left} .row{grid-template-columns:110px 1fr} .ruler{margin-left:110px} h1{font-size:38px} }
 </style>
+
 </head>
 <body>
 <div class="sheet">
@@ -78,11 +90,12 @@
       <div class="given-up">4 terms given up · see proof</div>
       <div>2,756 seats on offer</div>
       <div>doors 10:00 · last start 21:30 · turnaround 20′</div>
-      <div>solved in 24.016s</div>
+      <div>solved in 21.639s</div>
     </div>
   </header>
   <div class="divider"></div>
 
+  
   <div class="grid">
     <div class="ruler" style="--pl:50.0%; --pr:71.66666666666667%">
       <span class="prime-label mono" style="left:50.0%">prime 17:30–20:45</span>
@@ -97,32 +110,32 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:3.3333333333333335%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 10:30 · feature 10:50–13:38 · clear 13:58">
+          <div class="block" style="left:4.444444444444445%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 10:40 · feature 11:00–13:48 · clear 14:08">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">10:30 · 168′ · PLF</div>
+              <div class="tm mono">10:40 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:26.666666666666668%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 14:00 · feature 14:20–17:08 · clear 17:28">
+          <div class="block" style="left:27.77777777777778%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 14:10 · feature 14:30–17:18 · clear 17:38">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">14:00 · 168′ · PLF</div>
+              <div class="tm mono">14:10 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block prime" style="left:50.55555555555556%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 17:35 · feature 17:55–20:43 · clear 21:03">
+          <div class="block prime" style="left:51.11111111111111%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 17:40 · feature 18:00–20:48 · clear 21:08">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">17:35 · 168′ · PLF</div>
+              <div class="tm mono">17:40 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
@@ -147,22 +160,22 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:4.444444444444445%; width:16.0%"
-               title="Harvest Moon · preshow 10:40 · feature 11:00–12:44 · clear 13:04">
+          <div class="block" style="left:2.2222222222222223%; width:16.0%"
+               title="Harvest Moon · preshow 10:20 · feature 10:40–12:24 · clear 12:44">
             <div class="pre" style="width:13.88888888888889%"></div>
             <div class="feat" style="width:72.22222222222221%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">10:40 · 104′</div>
+              <div class="tm mono">10:20 · 104′</div>
             </div>
             <div class="clean" style="width:13.88888888888889%"></div>
           </div>
           
-          <div class="block" style="left:21.666666666666668%; width:16.0%"
-               title="Harvest Moon · preshow 13:15 · feature 13:35–15:19 · clear 15:39">
+          <div class="block" style="left:20.0%; width:16.0%"
+               title="Harvest Moon · preshow 13:00 · feature 13:20–15:04 · clear 15:24">
             <div class="pre" style="width:13.88888888888889%"></div>
             <div class="feat" style="width:72.22222222222221%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">13:15 · 104′</div>
+              <div class="tm mono">13:00 · 104′</div>
             </div>
             <div class="clean" style="width:13.88888888888889%"></div>
           </div>
@@ -207,22 +220,22 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:0.0%; width:15.444444444444445%"
-               title="Harvest Moon · preshow 10:00 · feature 10:20–12:04 · clear 12:19">
+          <div class="block" style="left:0.5555555555555556%; width:15.444444444444445%"
+               title="Harvest Moon · preshow 10:05 · feature 10:25–12:09 · clear 12:24">
             <div class="pre" style="width:14.388489208633093%"></div>
             <div class="feat" style="width:74.82014388489209%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">10:00 · 104′</div>
+              <div class="tm mono">10:05 · 104′</div>
             </div>
             <div class="clean" style="width:10.79136690647482%"></div>
           </div>
           
-          <div class="block" style="left:15.555555555555555%; width:15.444444444444445%"
-               title="Harvest Moon · preshow 12:20 · feature 12:40–14:24 · clear 14:39">
+          <div class="block" style="left:16.11111111111111%; width:15.444444444444445%"
+               title="Harvest Moon · preshow 12:25 · feature 12:45–14:29 · clear 14:44">
             <div class="pre" style="width:14.388489208633093%"></div>
             <div class="feat" style="width:74.82014388489209%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">12:20 · 104′</div>
+              <div class="tm mono">12:25 · 104′</div>
             </div>
             <div class="clean" style="width:10.79136690647482%"></div>
           </div>
@@ -237,22 +250,22 @@
             <div class="clean" style="width:10.79136690647482%"></div>
           </div>
           
-          <div class="block" style="left:47.22222222222222%; width:14.111111111111112%"
-               title="Dead Signal · preshow 17:05 · feature 17:25–18:57 · clear 19:12">
+          <div class="block" style="left:47.77777777777778%; width:14.111111111111112%"
+               title="Dead Signal · preshow 17:10 · feature 17:30–19:02 · clear 19:17">
             <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">17:05 · 92′</div>
+              <div class="tm mono">17:10 · 92′</div>
             </div>
             <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
-          <div class="block prime" style="left:61.66666666666667%; width:14.111111111111112%"
-               title="Dead Signal · preshow 19:15 · feature 19:35–21:07 · clear 21:22">
+          <div class="block prime" style="left:62.22222222222222%; width:14.111111111111112%"
+               title="Dead Signal · preshow 19:20 · feature 19:40–21:12 · clear 21:27">
             <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">19:15 · 92′</div>
+              <div class="tm mono">19:20 · 92′</div>
             </div>
             <div class="clean" style="width:11.811023622047244%"></div>
           </div>
@@ -274,6 +287,7 @@
     <div class="legend mono"><span><i class="pre"></i>preshow 20′</span><span><i class="feat"></i>feature</span><span><i class="clean"></i>turnaround</span><span>stagger ≥ 10′</span></div>
   </div>
 
+  
   <div class="cols">
     <div>
       <div class="stamp mono">By title</div>
@@ -286,7 +300,7 @@
           <td>4<span class="mono" style="color:var(--grey)"> /6 min</span></td>
           <td>1<span class="mono" style="color:var(--grey)"> /1</span></td>
           <td>1,280</td>
-          <td class="starts">10:30  14:00  17:35  21:15</td>
+          <td class="starts">10:40  14:10  17:40  21:15</td>
         </tr>
         
         <tr>
@@ -294,7 +308,7 @@
           <td>7<span class="mono" style="color:var(--grey)"> /6 min</span></td>
           <td>2<span class="mono" style="color:var(--grey)"> /2</span></td>
           <td>1,008</td>
-          <td class="starts">10:00  10:40  12:20  13:15  14:45  18:15  20:40</td>
+          <td class="starts">10:05  10:20  12:25  13:00  14:45  18:15  20:40</td>
         </tr>
         
         <tr>
@@ -302,7 +316,7 @@
           <td>4<span class="mono" style="color:var(--grey)"> /4 min</span></td>
           <td>1</td>
           <td>468</td>
-          <td class="starts">16:00  17:05  19:15  21:30</td>
+          <td class="starts">16:00  17:10  19:20  21:30</td>
         </tr>
         
         <tr>
@@ -374,6 +388,7 @@
       
     </div>
   </div>
+
 
   <footer class="mono">
     <span>turnaround · the showtime grid, solved</span>

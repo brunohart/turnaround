@@ -3,31 +3,31 @@
   "date": "2026-09-11",
   "status": "OPTIMAL",
   "objective": 3797.62,
-  "solve_seconds": 24.016,
+  "solve_seconds": 21.639,
   "sessions": [
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 630,
-      "feature_start": 650,
-      "feature_end": 818,
-      "clear": 838
+      "start": 640,
+      "feature_start": 660,
+      "feature_end": 828,
+      "clear": 848
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 840,
-      "feature_start": 860,
-      "feature_end": 1028,
-      "clear": 1048
+      "start": 850,
+      "feature_start": 870,
+      "feature_end": 1038,
+      "clear": 1058
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 1055,
-      "feature_start": 1075,
-      "feature_end": 1243,
-      "clear": 1263
+      "start": 1060,
+      "feature_start": 1080,
+      "feature_end": 1248,
+      "clear": 1268
     },
     {
       "screen": "1",
@@ -40,18 +40,18 @@
     {
       "screen": "2",
       "film": "harvest",
-      "start": 640,
-      "feature_start": 660,
-      "feature_end": 764,
-      "clear": 784
+      "start": 620,
+      "feature_start": 640,
+      "feature_end": 744,
+      "clear": 764
     },
     {
       "screen": "2",
       "film": "harvest",
-      "start": 795,
-      "feature_start": 815,
-      "feature_end": 919,
-      "clear": 939
+      "start": 780,
+      "feature_start": 800,
+      "feature_end": 904,
+      "clear": 924
     },
     {
       "screen": "2",
@@ -80,18 +80,18 @@
     {
       "screen": "3",
       "film": "harvest",
-      "start": 600,
-      "feature_start": 620,
-      "feature_end": 724,
-      "clear": 739
+      "start": 605,
+      "feature_start": 625,
+      "feature_end": 729,
+      "clear": 744
     },
     {
       "screen": "3",
       "film": "harvest",
-      "start": 740,
-      "feature_start": 760,
-      "feature_end": 864,
-      "clear": 879
+      "start": 745,
+      "feature_start": 765,
+      "feature_end": 869,
+      "clear": 884
     },
     {
       "screen": "3",
@@ -104,18 +104,18 @@
     {
       "screen": "3",
       "film": "signal",
-      "start": 1025,
-      "feature_start": 1045,
-      "feature_end": 1137,
-      "clear": 1152
+      "start": 1030,
+      "feature_start": 1050,
+      "feature_end": 1142,
+      "clear": 1157
     },
     {
       "screen": "3",
       "film": "signal",
-      "start": 1155,
-      "feature_start": 1175,
-      "feature_end": 1267,
-      "clear": 1282
+      "start": 1160,
+      "feature_start": 1180,
+      "feature_end": 1272,
+      "clear": 1287
     },
     {
       "screen": "3",

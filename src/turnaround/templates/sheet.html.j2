@@ -1,68 +1,10 @@
-<!doctype html>
+{% import "_day.html.j2" as day %}<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ brief.house }} — {{ brief.date or "the day" }} — turnaround</title>
-<style>
-  :root {
-    --bg:#F0EDE6; --ink:#1A1A1A; --orange:#D4622B; --blue:#1B2D4F; --red:#C4391D;
-    --cream:#F5F0E1; --grey:#8A8578;
-  }
-  * { box-sizing:border-box; }
-  html,body { margin:0; background:var(--bg); color:var(--ink);
-    font-family: Inter, -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; }
-  body::after { content:""; position:fixed; inset:0; pointer-events:none; opacity:.06; mix-blend-mode:multiply;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
-  .mono { font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:11px; }
-  .sheet { max-width:1240px; margin:0 auto; padding:40px 32px 64px; position:relative; }
-  .wash { position:absolute; width:46%; height:180px; top:-30px; right:-6%; background:var(--orange); opacity:.045; mix-blend-mode:multiply; transform:rotate(-2.2deg); pointer-events:none; }
-  header { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:end; margin-bottom:28px; }
-  h1 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:56px; line-height:.92; letter-spacing:-.03em; margin:0; position:relative; }
-  h1 .ghost { position:absolute; left:4px; top:3px; color:var(--orange); opacity:.09; pointer-events:none; }
-  .stamp { display:inline-block; border:1px solid var(--ink); padding:4px 8px; transform:rotate(-.8deg); margin-bottom:12px; }
-  .meta { text-align:right; color:var(--grey); line-height:1.7; }
-  .meta b { color:var(--ink); font-weight:500; }
-  .divider { height:1px; margin:22px 0; background:linear-gradient(90deg, var(--ink) 0 38%, transparent 38% 41%, var(--ink) 41% 77%, transparent 77% 80%, var(--ink) 80%); opacity:.55; }
-  .grid { position:relative; }
-  .ruler { position:relative; height:26px; margin-left:170px; border-bottom:1px solid var(--ink); }
-  .ruler .h { position:absolute; bottom:4px; transform:translateX(-50%); color:var(--grey); }
-  .ruler .h::after { content:""; position:absolute; left:50%; bottom:-5px; width:1px; height:4px; background:var(--ink); }
-  .lane { background:linear-gradient(90deg, transparent var(--pl), rgba(27,45,79,.06) var(--pl), rgba(27,45,79,.06) var(--pr), transparent var(--pr)); }
-  .ruler .prime-label { position:absolute; top:-2px; color:var(--blue); opacity:.75; transform:none; }
-  .row { display:grid; grid-template-columns:170px 1fr; min-height:74px; border-bottom:1px dashed rgba(26,26,26,.25); }
-  .row .name { padding:14px 12px 10px 0; }
-  .row .name .n { font-family:"Space Grotesk", Helvetica, Arial, sans-serif; font-weight:700; font-size:18px; letter-spacing:-.02em; line-height:1; }
-  .row .name .cap { color:var(--grey); margin-top:6px; }
-  .lane { position:relative; }
-  .block { position:absolute; top:12px; height:50px; display:flex; }
-  .block .pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); border:1px solid var(--ink); border-right:0; }
-  .block .feat { position:relative; background:var(--cream); border:1px solid var(--ink); padding:5px 7px; overflow:hidden; white-space:nowrap; }
-  .block .feat::before { content:""; position:absolute; inset:0; background:var(--orange); opacity:.0; }
-  .block.prime .feat { background:#fff; }
-  .block .feat::after { content:""; position:absolute; left:6px; top:6px; right:-6px; bottom:-6px; border:1px solid var(--orange); opacity:.35; z-index:-1; }
-  .block .feat .t { font-family:"Space Grotesk", Helvetica, Arial, sans-serif; font-weight:700; font-size:13px; letter-spacing:-.02em; line-height:1.05; }
-  .block .feat .tm { color:var(--grey); margin-top:5px; }
-  .block .clean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); border:1px solid var(--ink); border-left:0; }
-  .block:hover { transform:translateY(-1px); }
-  .legend { display:flex; gap:22px; margin-top:16px; color:var(--grey); align-items:center; }
-  .legend i { display:inline-block; width:22px; height:12px; border:1px solid var(--ink); vertical-align:middle; margin-right:6px; }
-  .legend i.pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); }
-  .legend i.feat { background:var(--cream); }
-  .legend i.clean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); }
-  .cols { display:grid; grid-template-columns:1.15fr .85fr; gap:40px; margin-top:44px; }
-  table { border-collapse:collapse; width:100%; font-size:13px; }
-  th { text-align:left; font-weight:400; color:var(--grey); border-bottom:1px solid var(--ink); padding:6px 6px 8px; }
-  td { padding:8px 6px; border-bottom:1px dashed rgba(26,26,26,.2); vertical-align:top; }
-  td.starts { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:12px; letter-spacing:.02em; line-height:1.7; }
-  .ok { color:var(--blue); } .fail { color:var(--red); font-weight:600; }
-  .relaxed { display:inline-block; color:var(--red); border:1px solid var(--red); padding:1px 5px; margin-right:4px; transform:rotate(-1.2deg); font-size:10px; }
-  .given-up { color:var(--red); }
-  .proof td:first-child { white-space:nowrap; }
-  footer { margin-top:56px; color:var(--grey); display:flex; justify-content:space-between; }
-  @media print { body::after{display:none} .sheet{padding:12mm} h1{font-size:34px} .cols{grid-template-columns:1fr} }
-  @media (max-width:800px) { header,.cols{grid-template-columns:1fr} .meta{text-align:left} .row{grid-template-columns:110px 1fr} .ruler{margin-left:110px} h1{font-size:38px} }
-</style>
+{{ day.style() }}
 </head>
 <body>
 <div class="sheet">
@@ -76,76 +18,15 @@
       <div><b>{{ brief.date or "—" }}</b></div>
       <div>{{ grid.sessions|length }} sessions · {{ brief.screens|length }} screens · {{ brief.films|length }} titles</div>
       {% if grid.relaxed %}<div class="given-up">{{ grid.relaxed|length }} term{{ 's' if grid.relaxed|length != 1 }} given up · see proof</div>{% endif %}
-      <div>{{ "{:,}".format(seats) }} seats on offer</div>
+      <div>{{ "{:,}".format(d.seats) }} seats on offer</div>
       <div>doors {{ brief.policy.open }} · last start {{ brief.policy.last_start }} · turnaround {{ brief.policy.clean_min }}′</div>
       <div>solved in {{ grid.solve_seconds }}s</div>
     </div>
   </header>
   <div class="divider"></div>
 
-  <div class="grid">
-    <div class="ruler" style="--pl:{{ prime_left }}%; --pr:{{ prime_left + prime_w }}%">
-      <span class="prime-label mono" style="left:{{ prime_left }}%">prime {{ brief.policy.prime_start }}–{{ brief.policy.prime_end }}</span>
-      {% for h in hours %}<span class="h mono" style="left:{{ (h - day_start) / span * 100 }}%">{{ h|hhmm }}</span>{% endfor %}
-    </div>
-    <div style="position:relative; --pl:{{ prime_left }}%; --pr:{{ prime_left + prime_w }}%">
-      {% for row in rows %}
-      <div class="row">
-        <div class="name">
-          <div class="n">{{ row.screen.label }}</div>
-          <div class="cap mono">{{ row.screen.capacity }} seats · {{ row.screen.formats|join("/") }} · {{ row.count }} shows</div>
-        </div>
-        <div class="lane">
-          {% for b in row.blocks %}
-          <div class="block{% if b.prime %} prime{% endif %}" style="left:{{ b.left }}%; width:{{ b.pre_w + b.feat_w + b.clean_w }}%"
-               title="{{ b.film.title }} · preshow {{ b.s.start|hhmm }} · feature {{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }} · clear {{ b.s.clear|hhmm }}">
-            <div class="pre" style="width:{{ b.pre_w / (b.pre_w + b.feat_w + b.clean_w) * 100 }}%"></div>
-            <div class="feat" style="width:{{ b.feat_w / (b.pre_w + b.feat_w + b.clean_w) * 100 }}%">
-              <div class="t">{{ b.film.title }}</div>
-              <div class="tm mono">{{ b.s.start|hhmm }} · {{ b.film.runtime_min }}′{% if b.film.format != "2D" %} · {{ b.film.format }}{% endif %}</div>
-            </div>
-            <div class="clean" style="width:{{ b.clean_w / (b.pre_w + b.feat_w + b.clean_w) * 100 }}%"></div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="legend mono"><span><i class="pre"></i>preshow {{ brief.policy.preshow_min }}′</span><span><i class="feat"></i>feature</span><span><i class="clean"></i>turnaround</span><span>stagger ≥ {{ brief.policy.stagger_min }}′</span></div>
-  </div>
-
-  <div class="cols">
-    <div>
-      <div class="stamp mono">By title</div>
-      <table>
-        <thead><tr><th>Title</th><th>Shows</th><th>Prime</th><th>Seats</th><th>Starts</th></tr></thead>
-        <tbody>
-        {% for f in films %}
-        <tr>
-          <td><b>{{ f.film.title }}</b><br><span class="mono" style="color:var(--grey)">{{ f.film.runtime_min }}′ · {{ f.film.format }}{% if f.film.rating %} · {{ f.film.rating }}{% endif %} · w{{ f.film.weight }}</span></td>
-          <td>{{ f.starts|length }}{% if f.film.terms.min_shows %}<span class="mono" style="color:var(--grey)"> /{{ f.film.terms.min_shows }} min</span>{% endif %}</td>
-          <td>{{ f.prime }}{% if f.film.terms.prime_shows %}<span class="mono" style="color:var(--grey)"> /{{ f.film.terms.prime_shows }}</span>{% endif %}</td>
-          <td>{{ "{:,}".format(f.seats) }}</td>
-          <td class="starts">{{ f.starts|join("  ") }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    <div>
-      <div class="stamp mono">Proof</div>
-      {% if report %}
-      <table class="proof">
-        <thead><tr><th>Check</th><th>Title</th><th>Evidence</th></tr></thead>
-        <tbody>
-        {% for c in report.checks %}
-        <tr><td class="{{ 'ok' if c.ok else 'fail' }}">{{ '✓' if c.ok else '✗' }} {{ c.name }}</td><td>{{ c.film or '' }}</td><td>{% if c.relaxed %}<span class="relaxed mono">relaxed</span> {% endif %}{{ c.evidence }}</td></tr>
-        {% endfor %}
-        </tbody>
-      </table>
-      {% else %}<p class="mono" style="color:var(--grey)">no check run</p>{% endif %}
-    </div>
-  </div>
+  {{ day.grid(brief, d) }}
+  {{ day.tables(d, report) }}
 
   <footer class="mono">
     <span>turnaround · the showtime grid, solved</span>

@@ -1,0 +1,180 @@
+{
+  "house": "The Regent",
+  "screens": [
+    {
+      "id": "1",
+      "name": "Screen 1",
+      "capacity": 320,
+      "formats": [
+        "2D",
+        "PLF"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Screen 2",
+      "capacity": 180,
+      "formats": [
+        "2D",
+        "3D"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Screen 3",
+      "capacity": 96,
+      "formats": [
+        "2D"
+      ],
+      "clean_min": 15
+    }
+  ],
+  "films": [
+    {
+      "id": "odyssey",
+      "title": "The Long Voyage",
+      "runtime_min": 168,
+      "format": "PLF",
+      "rating": "M",
+      "weight": 2.2,
+      "terms": {
+        "min_shows": 3,
+        "prime_shows": 1,
+        "exclusive_screen": true
+      }
+    },
+    {
+      "id": "harvest",
+      "title": "Harvest Moon",
+      "runtime_min": 104,
+      "format": "2D",
+      "rating": "PG",
+      "weight": 1.3,
+      "daypart_weights": {
+        "matinee": 1.5,
+        "late": 0.3
+      },
+      "terms": {
+        "min_shows": 3
+      }
+    },
+    {
+      "id": "signal",
+      "title": "Dead Signal",
+      "runtime_min": 92,
+      "format": "2D",
+      "rating": "R16",
+      "weight": 1.1,
+      "daypart_weights": {
+        "matinee": 0.3,
+        "late": 1.4
+      },
+      "terms": {
+        "min_shows": 2,
+        "earliest_start": "16:00"
+      }
+    },
+    {
+      "id": "atlas",
+      "title": "Atlas of Small Rooms",
+      "runtime_min": 121,
+      "format": "2D",
+      "rating": "M",
+      "weight": 0.9,
+      "terms": {
+        "min_shows": 2,
+        "prime_shows": 1
+      }
+    },
+    {
+      "id": "bees",
+      "title": "The Bee Kingdom",
+      "runtime_min": 84,
+      "format": "3D",
+      "rating": "G",
+      "weight": 0.8,
+      "daypart_weights": {
+        "matinee": 1.6,
+        "afternoon": 1.2,
+        "prime": 0.4,
+        "late": 0.05
+      },
+      "terms": {
+        "min_shows": 2,
+        "latest_start": "17:00"
+      }
+    }
+  ],
+  "policy": {
+    "open": "10:00",
+    "last_start": "21:30",
+    "preshow_min": 20,
+    "clean_min": 20,
+    "stagger_min": 10,
+    "slot_min": 5
+  },
+  "days": [
+    {
+      "name": "Thu",
+      "date": "2026-09-10"
+    },
+    {
+      "name": "Fri",
+      "date": "2026-09-11",
+      "policy": {
+        "last_start": "22:30"
+      }
+    },
+    {
+      "name": "Sat",
+      "date": "2026-09-12",
+      "policy": {
+        "last_start": "22:30"
+      }
+    },
+    {
+      "name": "Sun",
+      "date": "2026-09-13",
+      "policy": {
+        "open": "11:00"
+      }
+    },
+    {
+      "name": "Mon",
+      "date": "2026-09-14",
+      "terms": {
+        "odyssey": {
+          "exclusive_screen": false
+        }
+      }
+    },
+    {
+      "name": "Tue",
+      "date": "2026-09-15",
+      "terms": {
+        "odyssey": {
+          "exclusive_screen": false
+        },
+        "bees": {
+          "min_shows": 3
+        }
+      }
+    },
+    {
+      "name": "Wed",
+      "date": "2026-09-16",
+      "terms": {
+        "odyssey": {
+          "exclusive_screen": false
+        }
+      }
+    }
+  ],
+  "hold_days": [
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu"
+  ],
+  "hold_penalty": 60
+}
