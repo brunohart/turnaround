@@ -50,3 +50,10 @@ Architecture decision records. A future day must not reverse one of these by acc
 **Decided:** 2026-09-06.
 **Decision:** The brief is the tool's own format. Imports from any platform's export are adapters and arrive later; the core never depends on one.
 **Why:** The tool is for the exhibitor. Its usefulness must not depend on which system sells their tickets.
+
+## ADR-009 — Relaxation drops only named terms, in a fixed order, and writes every drop on the grid
+
+**Decided:** 2026-09-07 (Day 1).
+**Decision:** A relaxable term is one the solver can name: it has an assumption literal in `solve.terms_of` and an entry in `check.RELAXABLE`. A term added to `Terms` is not relaxable until it is in both, and the checker's list is written first. `--relax` drops one term per round, always from the conflict the solver has just named, in the order `exclusive_screen` last, then the lightest film, then `prime_shows` before `max_shows` before `min_shows`. A round that ends `UNKNOWN` stops relaxation: nothing is dropped on a guess. Every drop is recorded in `Grid.relaxed`; the checker treats a failed check as acceptable only when the grid declares it, and rejects a declared relaxation that names a term the brief does not carry.
+**Why:** ADR-002 says the solver never relaxes silently. This is what "not silently" means in code: the grid itself is the record, and the checker, which shares no code with the solver, refuses to trust a relaxation it cannot match to a real term. Dropping only from the named conflict means the tool never gives up a term that was not part of the problem. The fixed order is a judgment (a distributor's exclusive is the term hardest to renegotiate; a light title's prime guarantee the easiest) and lives in one function, `relax_key`, so a later day can replace it deliberately.
+**Cost:** When several equally small conflicts exist the order rule alone decides which title pays, and a dropped `min_shows` lets the title vanish from the grid under the placeholder objective (ADR-006).

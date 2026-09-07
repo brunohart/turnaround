@@ -18,7 +18,7 @@ If the previous day left the build broken, fixing that comes before anything bel
 
 Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT model (booleans per screen × film × start, optional intervals, NoOverlap per screen, house-wide stagger, min/max/prime/exclusive/window terms); the independent checker with a proof table; the `plan` / `check` / `render` / `validate` CLI; the week sheet in the house identity; sixteen tests; CI; the Regent example (3 screens, 5 titles, one PLF exclusive) solved OPTIMAL in under a second with every check green.
 
-## Day 1 — Sun 7 Sep — Infeasibility, explained
+## Day 1 — Sun 7 Sep — Infeasibility, explained ✅
 
 - When the terms cannot all hold, name the smallest set that conflicts. One assumption literal per (film, term) in the model; on `INFEASIBLE`, `solver.sufficient_assumptions_for_infeasibility()` gives the culprits. `plan` exits 2 and prints them in the trade's words: *"these cannot hold together: The Long Voyage min_shows 6 · The Long Voyage exclusive_screen · Harvest Moon prime_shows 2 — the house has 3 screens and a 17:30–20:45 prime window."*
 - `--relax`: drop terms in order (lowest film weight first, `prime_shows` before `min_shows`, `exclusive_screen` last) until feasible, and print each dropped term in the proof table as a rust ✗ *relaxed*, never silently (ADR-002).
