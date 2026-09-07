@@ -50,6 +50,22 @@ $ turnaround plan examples/regent.json --html sheet.html
 
 If the terms cannot all be met, it says `INFEASIBLE` and gives you nothing — not a grid with a distributor's minimum quietly dropped.
 
+Hand it a **week** instead — the same house and slate, with only what differs each day — and it solves Thursday to Wednesday, keeps each title's start times the same across the weekdays where it can, and says which titles held:
+
+```jsonc
+{
+  "house": "The Regent", "screens": [ … ], "films": [ … ], "policy": { … },
+  "days": [
+    { "name": "Thu", "date": "2026-09-10" },
+    { "name": "Fri", "date": "2026-09-11", "policy": { "last_start": "22:30" } },
+    { "name": "Sun", "date": "2026-09-13", "policy": { "open": "11:00" } },
+    { "name": "Mon", "date": "2026-09-14", "terms": { "odyssey": { "exclusive_screen": false } } }
+  ]
+}
+```
+
+<img src="docs/grids/day-2-week.png" alt="The Regent's week: five titles across seven days, the hold days washed in navy, three titles stamped HOLDS" width="100%">
+
 ## Why a solver
 
 The showtime grid is a constraint problem wearing a spreadsheet. A screen holds one thing at a time; the turnaround between features is a hard floor; two shows should not start within ten minutes of each other or the lobby cannot cope; a distributor's terms say *three shows, one in prime, its own screen*; the kids' film cannot start after five; the horror cannot start before four. A person builds this by hand every Wednesday, and the grid they arrive at is one they can live with, not one they can prove.
@@ -71,7 +87,7 @@ Python 3.13+. The only heavy dependency is `ortools`.
 
 | Command | What it does |
 |---|---|
-| `turnaround plan brief.json [--out grid.json] [--html sheet.html]` | Solve a day; print the grid and its proof. Exit 2 if infeasible, 3 if the checker ever disagrees with the solver. |
+| `turnaround plan brief.json [--out grid.json] [--html sheet.html]` | Solve a day, or a week if the brief has `days`; print the grid and its proof. Exit 2 if infeasible, 3 if the checker ever disagrees with the solver. `--relax` drops conflicting terms one at a time, out loud. |
 | `turnaround check brief.json grid.json` | Verify any grid — the solver's or one made by hand — against its brief. |
 | `turnaround render brief.json grid.json --html sheet.html` | Render an existing grid as the week sheet. |
 | `turnaround validate brief.json` | Validate and summarise a brief. |
@@ -93,9 +109,11 @@ Python 3.13+. The only heavy dependency is `ortools`.
 
 **Policy**: `open`, `last_start` (hours past 24 are fine: `"25:00"` is 1 a.m.), `preshow_min`, `clean_min`, `stagger_min`, `slot_min`, and the `dayparts` with their weights (matinee / afternoon / prime / late by default).
 
+**A week** adds `days`: up to seven of `{ "name", "date", "policy": { … }, "terms": { film_id: { … } } }`, each carrying only what differs from the base. `hold_days` (default Mon–Thu) are the days a title should keep the same start times; `hold_penalty` is what the objective gives up per title that changes them. Every day is solved and checked on its own; the week sheet puts the by-title table across all seven days first and each day's grid on its own page.
+
 ## What it does not do yet
 
-This is Day 0 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: an explanation of *which* terms conflict when the answer is infeasible (Day 1); the week as a unit with per-day overrides (Day 2); a demand model so the objective is admissions rather than judgment-weighted seats (Day 3); staff and credits-overlap realities (Day 4); week-scoped distributor terms (Day 5); the full print identity (Day 6); *why* each session is where it is (Day 7); scale benchmarks (Day 8); CSV/iCal in and out (Day 9); a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12).
+This is Day 2 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: a demand model so the objective is admissions rather than judgment-weighted seats (Day 3); staff and credits-overlap realities (Day 4); week-scoped distributor terms (Day 5); the full print identity (Day 6); *why* each session is where it is (Day 7); scale benchmarks (Day 8); CSV/iCal in and out (Day 9); a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12).
 
 The design decisions and their reasons are in `DECISIONS.md`. The log of what each day shipped and what it left rough is in `docs/LOG.md`.
 

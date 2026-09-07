@@ -24,7 +24,7 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - `--relax`: drop terms in order (lowest film weight first, `prime_shows` before `min_shows`, `exclusive_screen` last) until feasible, and print each dropped term in the proof table as a rust ✗ *relaxed*, never silently (ADR-002).
 - Tests: three constructed conflicts (too many shows for the hours; two exclusives, one eligible screen; prime guarantees exceeding the prime window) each name the right terms. Relaxation of the Regent with `min_shows` doubled produces a checkable grid and lists what was given up.
 
-## Day 2 — Mon 8 Sep — The week
+## Day 2 — Mon 8 Sep — The week ✅
 
 - A `WeekBrief`: seven days sharing house and slate, with per-day `policy` overrides (Fri/Sat `last_start` 22:30, Sun doors 11:00) and per-day `terms` overrides (the opening Thursday's exclusive lifts on Monday). Solve day by day; a `WeekGrid` carries seven `Grid`s.
 - Soft constraint: a title keeps the same start times Monday to Thursday where it can (customers remember times). Penalty per differing start set; report how many titles hold their times.
@@ -37,6 +37,7 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - A `demand.json` example built from stated assumptions (weekend uplift, school-holiday flag, family titles front-loaded) — assumptions written in the file, not the code.
 - Report per title and per day: seats on offer, expected admissions, expected turned away at capacity. Sheet footer carries expected admissions for the day.
 - Tests: raising a title's demand moves it to the bigger room; capping capacity leaves turned-away non-zero and reported.
+- *From Day 2:* `WeekBrief.hold_penalty` is in weighted seats (ADR-010); restate it in expected admissions with the new objective, and keep `Grid.objective` net of the penalty so the week's `held` count stays honest.
 
 ## Day 4 — Wed 10 Sep — The booth's realities
 
