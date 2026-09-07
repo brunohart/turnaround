@@ -56,6 +56,8 @@
   td { padding:8px 6px; border-bottom:1px dashed rgba(26,26,26,.2); vertical-align:top; }
   td.starts { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:12px; letter-spacing:.02em; line-height:1.7; }
   .ok { color:var(--blue); } .fail { color:var(--red); font-weight:600; }
+  .relaxed { display:inline-block; color:var(--red); border:1px solid var(--red); padding:1px 5px; margin-right:4px; transform:rotate(-1.2deg); font-size:10px; }
+  .given-up { color:var(--red); }
   .proof td:first-child { white-space:nowrap; }
   footer { margin-top:56px; color:var(--grey); display:flex; justify-content:space-between; }
   @media print { body::after{display:none} .sheet{padding:12mm} h1{font-size:34px} .cols{grid-template-columns:1fr} }
@@ -67,12 +69,13 @@
   <div class="wash"></div>
   <header>
     <div>
-      <div class="stamp mono">Week sheet · {{ grid.status }}</div>
+      <div class="stamp mono">Week sheet · {{ grid.status }}{% if grid.relaxed %} · relaxed{% endif %}</div>
       <h1><span class="ghost" aria-hidden="true">{{ brief.house }}</span>{{ brief.house }}</h1>
     </div>
     <div class="meta mono">
       <div><b>{{ brief.date or "—" }}</b></div>
       <div>{{ grid.sessions|length }} sessions · {{ brief.screens|length }} screens · {{ brief.films|length }} titles</div>
+      {% if grid.relaxed %}<div class="given-up">{{ grid.relaxed|length }} term{{ 's' if grid.relaxed|length != 1 }} given up · see proof</div>{% endif %}
       <div>{{ "{:,}".format(seats) }} seats on offer</div>
       <div>doors {{ brief.policy.open }} · last start {{ brief.policy.last_start }} · turnaround {{ brief.policy.clean_min }}′</div>
       <div>solved in {{ grid.solve_seconds }}s</div>
@@ -136,7 +139,7 @@
         <thead><tr><th>Check</th><th>Title</th><th>Evidence</th></tr></thead>
         <tbody>
         {% for c in report.checks %}
-        <tr><td class="{{ 'ok' if c.ok else 'fail' }}">{{ '✓' if c.ok else '✗' }} {{ c.name }}</td><td>{{ c.film or '' }}</td><td>{{ c.evidence }}</td></tr>
+        <tr><td class="{{ 'ok' if c.ok else 'fail' }}">{{ '✓' if c.ok else '✗' }} {{ c.name }}</td><td>{{ c.film or '' }}</td><td>{% if c.relaxed %}<span class="relaxed mono">relaxed</span> {% endif %}{{ c.evidence }}</td></tr>
         {% endfor %}
         </tbody>
       </table>

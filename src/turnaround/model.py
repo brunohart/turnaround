@@ -282,6 +282,19 @@ class Session(BaseModel):
         return fmt_time(self.feature_end)
 
 
+class TermRef(BaseModel):
+    """One distributor term on one film: the unit the solver can name or give up."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    film: str
+    term: str = Field(description="A field of Terms: min_shows, prime_shows, exclusive_screen…")
+    value: str = Field(default="", description="The term's value as written, for the record")
+
+    def __str__(self) -> str:
+        return f"{self.film} {self.term}{' ' + self.value if self.value else ''}"
+
+
 class Grid(BaseModel):
     """The solver's answer for one day."""
 
@@ -293,6 +306,17 @@ class Grid(BaseModel):
     objective: float
     solve_seconds: float
     sessions: list[Session]
+    conflict: list[TermRef] = Field(
+        default_factory=list,
+        description="On INFEASIBLE: a minimal set of terms that cannot hold together",
+    )
+    conflict_alone: bool = Field(
+        default=False, description="Each term in `conflict` is infeasible by itself"
+    )
+    relaxed: list[TermRef] = Field(
+        default_factory=list,
+        description="Terms the solver was told it could drop, and did. Never silent (ADR-002)",
+    )
 
     def by_screen(self) -> dict[str, list[Session]]:
         out: dict[str, list[Session]] = {}

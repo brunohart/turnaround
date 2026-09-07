@@ -9,7 +9,15 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from .model import Brief, Grid, fmt_time, parse_time
+from .model import Brief, Grid, Terms, fmt_time, parse_time
+
+RELAXABLE = ("min_shows", "max_shows", "prime_shows", "exclusive_screen")
+
+
+def term_is_set(t: Terms, name: str) -> bool:
+    """Does this film's booking actually carry the named term?"""
+    v = getattr(t, name)
+    return v is not None if name == "max_shows" else bool(v)
 
 
 @dataclass
@@ -18,6 +26,7 @@ class Check:
     ok: bool
     evidence: str
     film: str | None = None
+    relaxed: bool = False  # the term fails, and the grid says so on its face
 
 
 @dataclass
@@ -26,19 +35,49 @@ class Report:
 
     @property
     def ok(self) -> bool:
+        """Every check holds, or fails only where the grid declares a relaxation."""
+        return all(c.ok or c.relaxed for c in self.checks)
+
+    @property
+    def clean(self) -> bool:
+        """Every check holds and nothing was relaxed."""
         return all(c.ok for c in self.checks)
 
     @property
     def failures(self) -> list[Check]:
-        return [c for c in self.checks if not c.ok]
+        return [c for c in self.checks if not c.ok and not c.relaxed]
 
-    def add(self, name: str, ok: bool, evidence: str, film: str | None = None) -> None:
-        self.checks.append(Check(name, ok, evidence, film))
+    @property
+    def relaxations(self) -> list[Check]:
+        return [c for c in self.checks if c.relaxed]
+
+    def add(
+        self, name: str, ok: bool, evidence: str, film: str | None = None, relaxed: bool = False
+    ) -> None:
+        self.checks.append(Check(name, ok, evidence, film, relaxed and not ok))
 
 
 def check(brief: Brief, grid: Grid) -> Report:
     r = Report()
     p = brief.policy
+    declared = {(t.film, t.term) for t in grid.relaxed}
+
+    # A declared relaxation must name a real film and a term that film actually carries.
+    film_ids = {f.id for f in brief.films}
+    bogus = [
+        t
+        for t in grid.relaxed
+        if t.film not in film_ids
+        or t.term not in RELAXABLE
+        or not term_is_set(brief.film(t.film).terms, t.term)
+    ]
+    r.add(
+        "relaxed",
+        not bogus,
+        f"{len(grid.relaxed)} declared"
+        + (f", {len(bogus)} name no such term" if bogus else "")
+        + ("" if grid.relaxed else " — every term held as written"),
+    )
 
     # References resolve.
     bad = [s for s in grid.sessions if s.screen not in {x.id for x in brief.screens}] + [
@@ -114,10 +153,15 @@ def check(brief: Brief, grid: Grid) -> Report:
         mine = by_film.get(f.id, [])
         t = f.terms
         n = len(mine)
+        gave_up = {name for (fid, name) in declared if fid == f.id}
         if t.min_shows:
-            r.add("min_shows", n >= t.min_shows, f"{n} ≥ {t.min_shows}", f.id)
+            r.add(
+                "min_shows", n >= t.min_shows, f"{n} ≥ {t.min_shows}", f.id, "min_shows" in gave_up
+            )
         if t.max_shows is not None:
-            r.add("max_shows", n <= t.max_shows, f"{n} ≤ {t.max_shows}", f.id)
+            r.add(
+                "max_shows", n <= t.max_shows, f"{n} ≤ {t.max_shows}", f.id, "max_shows" in gave_up
+            )
         if t.prime_shows:
             pn = sum(1 for s in mine if p.is_prime(s.start))
             r.add(
@@ -125,6 +169,7 @@ def check(brief: Brief, grid: Grid) -> Report:
                 pn >= t.prime_shows,
                 f"{pn} ≥ {t.prime_shows} in {p.prime_start}–{p.prime_end}",
                 f.id,
+                "prime_shows" in gave_up,
             )
         if t.earliest_start:
             lo = parse_time(t.earliest_start)
@@ -141,6 +186,10 @@ def check(brief: Brief, grid: Grid) -> Report:
                 if ss and all(s.film == f.id for s in ss)
             ]
             r.add(
-                "exclusive_screen", bool(owned), f"own screen: {', '.join(owned) or 'none'}", f.id
+                "exclusive_screen",
+                bool(owned),
+                f"own screen: {', '.join(owned) or 'none'}",
+                f.id,
+                "exclusive_screen" in gave_up,
             )
     return r
