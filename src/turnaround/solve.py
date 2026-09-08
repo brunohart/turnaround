@@ -3,9 +3,11 @@
 One boolean per (screen, film, start slot). An optional interval per boolean
 carries the block the session would occupy; NoOverlap per screen keeps the
 turnaround honest. Distributor terms are linear constraints over those
-booleans. The objective is weighted seats on offer: each session earns
-film.weight x daypart weight x screen capacity, so the solver puts the film
-people want in the big room at the hour they want it.
+booleans. The objective is expected admissions: seats *sold*, not seats offered.
+Each title's k-th session in a daypart draws less than the one before it, and no
+session sells more than its room holds, so the solver puts the film people want
+in the room that can hold them at the hour they want it, and stops adding shows
+of a title when the next one would play to nobody.
 
 The solver never silently relaxes a term. If the terms cannot all be met the
 status is INFEASIBLE and the grid names a minimal set of terms that cannot
@@ -40,7 +42,7 @@ class Candidate:
     start: int
     block: int  # preshow + runtime + clean
     prime: bool
-    value: float
+    daypart: str | None
 
 
 def candidates(brief: Brief) -> list[Candidate]:
@@ -63,10 +65,6 @@ def candidates(brief: Brief) -> list[Candidate]:
             first = lo + (-(lo - p.open_min) % p.slot_min)
             for start in range(first, hi + 1, p.slot_min):
                 dp = p.daypart_at(start)
-                w = dp.weight if dp else 0.5
-                if f.daypart_weights and dp and dp.name in f.daypart_weights:
-                    w *= f.daypart_weights[dp.name]
-                value = f.weight * w * scr.capacity + p.fill_bonus * scr.capacity
                 out.append(
                     Candidate(
                         screen=scr.id,
@@ -74,7 +72,7 @@ def candidates(brief: Brief) -> list[Candidate]:
                         start=start,
                         block=block,
                         prime=p.is_prime(start),
-                        value=value,
+                        daypart=dp.name if dp else None,
                     )
                 )
     return out
@@ -101,6 +99,10 @@ class _Model:
     cands: list[Candidate]
     x: dict[Candidate, cp_model.IntVar]
     assumptions: dict[TermRef, cp_model.IntVar] = field(default_factory=dict)
+    sold: list[tuple[int, cp_model.IntVar]] = field(default_factory=list)
+    """(admissions in cents, rank literal): the objective's positive terms."""
+    differs: list[cp_model.IntVar] = field(default_factory=list)
+    """One per held title: 1 if today's starts are not the anchor's."""
 
     def guard(self, ref: TermRef) -> cp_model.IntVar:
         a = self.assumptions.get(ref)
@@ -125,8 +127,8 @@ def _build(
     """The model. Terms in `dropped` are not enforced; every other term is guarded.
     A feasibility-only model has no objective: a probe stops at the first grid it finds.
     `hold` is the soft term: a title whose set of starts today differs from the set it
-    had on the anchor day costs `hold_penalty` weighted seats. Nothing is forced; a day
-    whose hours cannot carry the anchor's starts simply pays."""
+    had on the anchor day costs `hold_penalty` expected admissions. Nothing is forced; a
+    day whose hours cannot carry the anchor's starts simply pays."""
     p = brief.policy
     cands = candidates(brief)
     m = cp_model.CpModel()
@@ -211,8 +213,44 @@ def _build(
                 else:
                     m.add(a == 0)
 
+    # Demand. Within a title and a daypart the first session draws the most and each
+    # further one decays, and a room sells no more than its seats. y[s,f,d,k] says the
+    # k-th ranked session of f in daypart d is on screen s; the solver hands out ranks,
+    # and because a bigger room can only sell more, the biggest room takes rank 0. The
+    # rank count is an upper bound on how many sessions of f can start in d at all.
+    if not feasibility_only:
+        for f in brief.films:
+            mine = [c for c in cands if c.film == f.id]
+            by_dp: dict[str | None, list[Candidate]] = {}
+            for c in mine:
+                by_dp.setdefault(c.daypart, []).append(c)
+            for dp_name, group in by_dp.items():
+                dp = next((d for d in p.dayparts if d.name == dp_name), None)
+                screens_here = sorted({c.screen for c in group})
+                ranks = 0
+                for sid in screens_here:
+                    starts_here = [c.start for c in group if c.screen == sid]
+                    block = brief.block_len(brief.screen(sid), f)
+                    ranks += (max(starts_here) - min(starts_here)) // block + 1
+                took: list[list[cp_model.IntVar]] = [[] for _ in range(ranks)]
+                for sid in screens_here:
+                    cap = brief.screen(sid).capacity
+                    ys = []
+                    for k in range(ranks):
+                        y = m.new_bool_var(f"rank[{sid},{f.id},{dp_name},{k}]")
+                        ys.append(y)
+                        took[k].append(y)
+                        cents = int(round(min(float(cap), brief.expected(f, dp, k)) * 100))
+                        if cents:
+                            mdl.sold.append((cents, y))
+                    m.add(sum(ys) == sum(mdl.x[c] for c in group if c.screen == sid))
+                for k, holders in enumerate(took):
+                    m.add(sum(holders) <= 1)
+                    if k:  # ranks fill in order; a tightening, the objective would anyway
+                        m.add(sum(holders) <= sum(took[k - 1]))
+
     # The soft term: differs[f] = 1 unless today's starts for f are exactly the anchor's.
-    differs: list[cp_model.IntVar] = []
+    differs = mdl.differs
     if hold and hold_penalty > 0 and not feasibility_only:
         for f in brief.films:
             if f.id not in hold:
@@ -233,10 +271,10 @@ def _build(
                 m.add(d == 1)  # an anchor start is not on offer today: it cannot hold
             differs.append(d)
 
-    # Objective: weighted seats on offer, less the hold penalty. Scale to integers.
+    # Objective: expected admissions less the hold penalty, in cents so it stays integer.
     if not feasibility_only:
         m.maximize(
-            sum(int(round(c.value * 100)) * mdl.x[c] for c in cands)
+            sum(cents * y for cents, y in mdl.sold)
             - sum(int(round(hold_penalty * 100)) * d for d in differs)
         )
     return mdl
@@ -329,10 +367,15 @@ def _grid(
     *,
     conflict: list[TermRef],
     relaxed: list[TermRef],
+    hold_penalty: float = 0.0,
 ) -> Grid:
     p = brief.policy
     sessions: list[Session] = []
+    admissions: float | None = None
+    hold_paid = 0.0
     if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        admissions = sum(cents for cents, y in mdl.sold if solver.value(y)) / 100
+        hold_paid = hold_penalty * sum(1 for d in mdl.differs if solver.value(d))
         for c in mdl.cands:
             if solver.value(mdl.x[c]):
                 scr = brief.screen(c.screen)
@@ -350,12 +393,14 @@ def _grid(
                     )
                 )
     sessions.sort(key=lambda s: (s.screen, s.start))
-    objective = solver.objective_value / 100 if sessions else 0.0
+    objective = solver.objective_value / 100 if admissions is not None else 0.0
     return Grid(
         house=brief.house,
         date=brief.date,
         status=solver.status_name(status),
         objective=objective,
+        admissions=admissions,
+        hold_paid=hold_paid,
         solve_seconds=round(elapsed, 3),
         sessions=sessions,
         conflict=conflict,
@@ -396,7 +441,16 @@ def solve(
                 )
     elapsed = time.perf_counter() - t0
     relaxed = [r for f in brief.films for r in terms_of(f) if (r.film, r.term) in dropped]
-    grid = _grid(brief, mdl, solver, status, elapsed, conflict=conflict, relaxed=relaxed)
+    grid = _grid(
+        brief,
+        mdl,
+        solver,
+        status,
+        elapsed,
+        conflict=conflict,
+        relaxed=relaxed,
+        hold_penalty=hold_penalty if hold else 0.0,
+    )
     grid.conflict_alone = alone
     return grid
 

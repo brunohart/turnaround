@@ -48,16 +48,24 @@ def briefs(draw: st.DrawFn) -> Brief:
             terms["earliest_start"] = draw(st.sampled_from(["12:00", "14:00", "16:00"]))
         if draw(st.booleans()):
             terms["latest_start"] = draw(st.sampled_from(["17:00", "19:00", "21:00"]))
-        films.append(
-            {
-                "id": f"f{i}",
-                "title": f"F{i}",
-                "runtime_min": draw(st.integers(60, 150)),
-                "format": draw(st.sampled_from(FORMATS)),
-                "weight": draw(st.floats(0.3, 2.5)),
-                "terms": terms,
+        film: dict[str, object] = {
+            "id": f"f{i}",
+            "title": f"F{i}",
+            "runtime_min": draw(st.integers(60, 150)),
+            "format": draw(st.sampled_from(FORMATS)),
+            "weight": draw(st.floats(0.3, 2.5)),
+            "terms": terms,
+        }
+        if draw(st.booleans()):  # a stated demand block; otherwise weight stands in
+            film["demand"] = {
+                "per_session": {
+                    d: draw(st.floats(0, 400)) for d in ["matinee", "afternoon", "prime", "late"]
+                },
+                "decay": draw(st.floats(0.2, 1.0)),
+                "weekday": {"Sat": draw(st.floats(0.5, 2.0))},
+                "holiday": draw(st.floats(1.0, 2.0)),
             }
-        )
+        films.append(film)
     open_ = draw(st.sampled_from(["10:00", "12:00", "13:30"]))
     last = draw(st.sampled_from(["19:00", "20:30", "22:00"]))
     return Brief.model_validate(
@@ -65,9 +73,11 @@ def briefs(draw: st.DrawFn) -> Brief:
             "house": "Random",
             "screens": screens,
             "films": films,
+            "weekday": draw(st.sampled_from([None, "Sat", "Tue"])),
             "policy": {
                 "open": open_,
                 "last_start": last,
+                "school_holiday": draw(st.booleans()),
                 "preshow_min": draw(st.integers(0, 25)),
                 "clean_min": draw(st.integers(5, 30)),
                 "stagger_min": draw(st.integers(0, 15)),

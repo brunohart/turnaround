@@ -9,9 +9,56 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from .model import Brief, Grid, Terms, WeekBrief, WeekGrid, fmt_time, parse_time
+from .model import Brief, Daypart, Grid, Session, Terms, WeekBrief, WeekGrid, fmt_time, parse_time
 
 RELAXABLE = ("min_shows", "max_shows", "prime_shows", "exclusive_screen")
+
+
+@dataclass
+class TitleAdmissions:
+    """One title's day in seats: offered, expected to come, expected to sell, turned away."""
+
+    film: str
+    shows: int
+    offered: int
+    demand: float  # who would come, capacity ignored
+    admissions: float  # who gets a seat: min(demand, capacity), session by session
+
+    @property
+    def turned_away(self) -> float:
+        return self.demand - self.admissions
+
+
+def admissions(brief: Brief, grid: Grid) -> list[TitleAdmissions]:
+    """Re-count expected admissions from the brief and the grid alone. Within a title's
+    sessions in one daypart the first draws the most and each further one decays, and
+    the biggest room takes the first rank: a room can only sell the seats it has, so
+    no other assignment sells more. Written here without the solver."""
+    out: list[TitleAdmissions] = []
+    for f in brief.films:
+        mine = [s for s in grid.sessions if s.film == f.id]
+        by_dp: dict[str | None, list[tuple[Daypart | None, Session]]] = {}
+        for s in mine:
+            dp = brief.policy.daypart_at(s.start)
+            by_dp.setdefault(dp.name if dp else None, []).append((dp, s))
+        demand = 0.0
+        sold = 0.0
+        for group in by_dp.values():
+            group.sort(key=lambda x: -brief.screen(x[1].screen).capacity)
+            for rank, (dp, s) in enumerate(group):
+                e = brief.expected(f, dp, rank)
+                demand += e
+                sold += min(float(brief.screen(s.screen).capacity), e)
+        out.append(
+            TitleAdmissions(
+                film=f.id,
+                shows=len(mine),
+                offered=sum(brief.screen(s.screen).capacity for s in mine),
+                demand=demand,
+                admissions=sold,
+            )
+        )
+    return out
 
 
 def term_is_set(t: Terms, name: str) -> bool:
@@ -192,6 +239,29 @@ def check(brief: Brief, grid: Grid) -> Report:
                 f.id,
                 "exclusive_screen" in gave_up,
             )
+
+    # The objective, re-counted. The solver claims expected admissions; count them again
+    # from the brief and the sessions, and hold the claim to within a cent a session.
+    rows = admissions(brief, grid)
+    sold = sum(x.admissions for x in rows)
+    away = sum(x.turned_away for x in rows)
+    tol = 0.01 * max(len(grid.sessions), 1) + 1e-6
+    tail = f"{sold:,.1f} re-counted · {away:,.0f} turned away at capacity"
+    if grid.admissions is None:
+        r.add("admissions", True, "unclaimed · " + tail)
+    else:
+        r.add(
+            "admissions",
+            abs(grid.admissions - sold) <= tol,
+            f"{grid.admissions:,.1f} claimed · " + tail,
+        )
+        net = grid.admissions - grid.hold_paid
+        r.add(
+            "objective",
+            abs(grid.objective - net) <= 0.01,
+            f"{grid.objective:,.1f} = {grid.admissions:,.1f} admissions"
+            + (f" − {grid.hold_paid:,.0f} hold penalty" if grid.hold_paid else ""),
+        )
     return r
 
 
@@ -267,5 +337,30 @@ def check_week(week: WeekBrief, wg: WeekGrid) -> WeekReport:
         claimed == truly,
         f"{len(truly)} of {len(week.films)} titles keep their starts on {run}"
         + ("" if claimed == truly else f"; the grid claims {claimed}, found {truly}"),
+    )
+    # The hold penalty each day says it paid, re-derived: nothing before the anchor, and
+    # after it `hold_penalty` per title whose starts differ from the anchor's.
+    solved = [
+        i
+        for i in week.hold_indices
+        if i < len(wg.grids) and wg.grids[i].status in ("OPTIMAL", "FEASIBLE")
+    ]
+    anchor = solved[0] if solved else None
+    owed = 0.0
+    wrong: list[str] = []
+    for i, g in enumerate(wg.grids):
+        due = 0.0
+        if anchor is not None and i in solved and i > anchor:
+            moved = sum(
+                1 for f in week.films if starts_of(g, f.id) != starts_of(wg.grids[anchor], f.id)
+            )
+            due = week.hold_penalty * moved
+        owed += due
+        if abs(g.hold_paid - due) > 0.01:
+            wrong.append(f"{names[i]} paid {g.hold_paid:,.0f}, owed {due:,.0f}")
+    w.add(
+        "hold_paid",
+        not wrong,
+        f"{owed:,.0f} admissions paid to hold times" + ("; " + "; ".join(wrong) if wrong else ""),
     )
     return WeekReport(days=names, reports=reports, week=w)

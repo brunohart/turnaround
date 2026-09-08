@@ -17,6 +17,7 @@ solver and the checker never learn what a week is.
 from __future__ import annotations
 
 import re
+from datetime import date
 from typing import Annotated, Any
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -87,6 +88,53 @@ class Terms(BaseModel):
     min_capacity: int | None = Field(default=None, ge=0, description="Only screens this big")
 
 
+DEFAULT_DECAY = 0.6
+"""Each further session of a title in the same daypart draws this fraction of the one before."""
+
+WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+
+class Demand(BaseModel):
+    """What the programmer expects a title to draw, stated so the file carries its reasoning.
+
+    `per_session` is expected admissions for the *first* session of the title in each
+    daypart on an ordinary day. Each further session in the same daypart draws `decay`
+    times the one before: the second 19:00 show earns less. `weekday` multiplies by the
+    day's name; `holiday` applies when the day's policy says school holidays. None of it
+    is a forecast the tool makes; it is the house's own assumptions, written down.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    per_session: dict[str, float] = Field(
+        description="Daypart name -> admissions the first session there would draw"
+    )
+    decay: float = Field(
+        default=DEFAULT_DECAY,
+        gt=0,
+        le=1,
+        description="Fraction of the previous session's admissions the next one in the same "
+        "daypart draws",
+    )
+    weekday: dict[str, float] = Field(
+        default_factory=dict, description="Multiplier by day name, e.g. {'Sat': 1.5}"
+    )
+    holiday: float = Field(
+        default=1.0, gt=0, description="Multiplier when policy.school_holiday is true"
+    )
+    assumptions: list[str] = Field(
+        default_factory=list, description="Where the numbers came from, in words"
+    )
+
+    @field_validator("per_session", "weekday")
+    @classmethod
+    def _non_negative(cls, v: dict[str, float]) -> dict[str, float]:
+        bad = [k for k, x in v.items() if x < 0]
+        if bad:
+            raise ValueError(f"demand cannot be negative: {bad}")
+        return v
+
+
 class Film(BaseModel):
     """A title on the slate."""
 
@@ -98,11 +146,19 @@ class Film(BaseModel):
     format: str = "2D"
     rating: str | None = None
     weight: float = Field(
-        default=1.0, gt=0, description="Relative demand. 2.0 wants twice the seats of 1.0"
+        default=1.0,
+        gt=0,
+        description="Relative demand for a title with no demand block. 2.0 draws twice 1.0",
     )
     daypart_weights: dict[str, float] | None = Field(
         default=None,
-        description="Optional per-daypart multipliers, e.g. {'matinee': 1.4, 'late': 0.2}",
+        description="Optional per-daypart multipliers for a title with no demand block, "
+        "e.g. {'matinee': 1.4, 'late': 0.2}",
+    )
+    demand: Demand | None = Field(
+        default=None,
+        description="Expected admissions by daypart. Without it, `weight` and the house's "
+        "assumed_admissions stand in",
     )
     terms: Terms = Field(default_factory=Terms)
 
@@ -150,8 +206,14 @@ class Policy(BaseModel):
     prime_start: str = "17:30"
     prime_end: str = "20:45"
     dayparts: list[Daypart] = Field(default_factory=lambda: list(DEFAULT_DAYPARTS))
-    fill_bonus: float = Field(
-        default=0.05, ge=0, description="Small reward per session so the grid fills"
+    school_holiday: bool = Field(
+        default=False, description="School holidays today: demand blocks apply their uplift"
+    )
+    assumed_admissions: float = Field(
+        default=100.0,
+        gt=0,
+        description="For a title with no demand block: admissions its first prime session "
+        "would draw at weight 1.0. Dayparts scale it by their weight",
     )
 
     @property
@@ -200,6 +262,10 @@ class Brief(BaseModel):
 
     house: str
     date: str | None = Field(default=None, description="ISO date, informational")
+    weekday: str | None = Field(
+        default=None,
+        description="Mon…Sun, for demand multipliers. Derived from `date` when absent",
+    )
     screens: list[Screen] = Field(min_length=1)
     films: list[Film] = Field(min_length=1)
     policy: Policy = Field(default_factory=Policy)
@@ -232,7 +298,49 @@ class Brief(BaseModel):
                 parse_time(f.terms.earliest_start)
             if f.terms.latest_start:
                 parse_time(f.terms.latest_start)
+            if f.demand is not None:
+                names = {d.name for d in self.policy.dayparts}
+                missing = sorted(set(f.demand.per_session) - names)
+                if missing:
+                    raise ValueError(
+                        f"film {f.id} forecasts a daypart the policy does not define: "
+                        f"{missing}; the dayparts are {sorted(names)}"
+                    )
+        if self.date is not None:
+            date.fromisoformat(self.date)
         return self
+
+    @property
+    def day_name(self) -> str | None:
+        """Mon…Sun: the stated weekday, else the date's, else nothing."""
+        if self.weekday:
+            return self.weekday
+        if self.date:
+            return WEEKDAYS[date.fromisoformat(self.date).weekday()]
+        return None
+
+    def expected(self, film: Film, daypart: Daypart | None, rank: int) -> float:
+        """Admissions the `rank`-th session (0 first) of `film` in `daypart` would draw
+        today, capacity ignored. A title with a demand block speaks for itself; one
+        without it is `weight` x daypart weight x the house's assumed_admissions. A
+        start outside every daypart draws half the assumed figure, as before."""
+        p = self.policy
+        d = film.demand
+        if d is not None:
+            base = d.per_session.get(daypart.name, 0.0) if daypart else 0.0
+            day = self.day_name
+            if day is not None:
+                base *= d.weekday.get(day, 1.0)
+            if p.school_holiday:
+                base *= d.holiday
+            decay = d.decay
+        else:
+            w = daypart.weight if daypart else 0.5
+            if film.daypart_weights and daypart and daypart.name in film.daypart_weights:
+                w *= film.daypart_weights[daypart.name]
+            base = film.weight * w * p.assumed_admissions
+            decay = DEFAULT_DECAY
+        return base * decay**rank
 
     def screen(self, screen_id: str) -> Screen:
         for s in self.screens:
@@ -308,7 +416,17 @@ class Grid(BaseModel):
     house: str
     date: str | None = None
     status: str
-    objective: float
+    objective: float = Field(
+        description="What the solver maximised: expected admissions less the hold penalty"
+    )
+    admissions: float | None = Field(
+        default=None,
+        description="The solver's claim: expected admissions, seat by seat under capacity. "
+        "None on a grid nobody solved",
+    )
+    hold_paid: float = Field(
+        default=0.0, ge=0, description="Hold penalty this day paid, in expected admissions"
+    )
     solve_seconds: float
     sessions: list[Session]
     conflict: list[TermRef] = Field(
@@ -360,7 +478,7 @@ class WeekBrief(BaseModel):
 
     `day(i)` is the plain Brief for that day with the overrides applied. The
     hold days are the run of the week where a title should keep the same start
-    times if it can; the solver pays `hold_penalty` weighted seats for each
+    times if it can; the solver pays `hold_penalty` expected admissions for each
     title whose starts on a hold day differ from the first hold day's.
     """
 
@@ -378,7 +496,8 @@ class WeekBrief(BaseModel):
     hold_penalty: float = Field(
         default=60.0,
         ge=0,
-        description="Weighted seats the objective gives up per title that changes its times",
+        description="Expected admissions the objective gives up per title that changes its "
+        "times on a hold day",
     )
 
     @model_validator(mode="after")
@@ -413,6 +532,7 @@ class WeekBrief(BaseModel):
         return Brief(
             house=self.house,
             date=d.date,
+            weekday=d.name if d.name in WEEKDAYS else None,
             screens=self.screens,
             films=films,
             policy=policy,

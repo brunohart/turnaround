@@ -13,6 +13,7 @@ from turnaround.solve import solve, solve_week
 def _week(tiny: Brief, **extra: object) -> WeekBrief:
     base = tiny.model_dump()
     base.pop("date")
+    base.pop("weekday")
     return WeekBrief.model_validate(
         {
             **base,
@@ -128,7 +129,8 @@ def test_checker_rejects_a_week_that_claims_a_hold_it_did_not_keep(tiny: Brief) 
     ]
     rep = check_week(w, forged)
     assert not rep.ok
-    assert [c.name for _, c in rep.failures if _ == "week"] == ["held"]
+    # The forged Tuesday moved y's starts without paying for it, so both week claims fail.
+    assert [c.name for _, c in rep.failures if _ == "week"] == ["held", "hold_paid"]
     assert "the grid claims" in rep.week.checks[1].evidence
 
 
