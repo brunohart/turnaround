@@ -14,7 +14,7 @@ from typing import Any
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from .check import Report, WeekReport
+from .check import Report, WeekReport, admissions
 from .model import Brief, Grid, WeekBrief, WeekGrid, fmt_time
 
 _TEMPLATES = Path(__file__).parent / "templates"
@@ -53,14 +53,18 @@ def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
             )
         rows.append({"screen": scr, "blocks": blocks, "count": len(sessions)})
     films = []
+    seats_sold = {a.film: a for a in admissions(brief, grid)}
     for f in brief.films:
         ss = grid.by_film().get(f.id, [])
+        a = seats_sold[f.id]
         films.append(
             {
                 "film": f,
                 "starts": [fmt_time(s.start) for s in ss],
                 "prime": sum(1 for s in ss if p.is_prime(s.start)),
-                "seats": sum(brief.screen(s.screen).capacity for s in ss),
+                "seats": a.offered,
+                "admissions": a.admissions,
+                "turned_away": a.turned_away,
             }
         )
     return {
@@ -72,6 +76,8 @@ def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
         "prime_left": (p.prime_start_min - day_start) / span * 100,
         "prime_w": (p.prime_end_min - p.prime_start_min) / span * 100,
         "seats": sum(brief.screen(s.screen).capacity for s in grid.sessions),
+        "admissions": sum(a.admissions for a in seats_sold.values()),
+        "turned_away": sum(a.turned_away for a in seats_sold.values()),
     }
 
 
@@ -115,6 +121,9 @@ def render_week_html(
                 "explain": (explain or {}).get(d.name),
             }
         )
+    sold_by_day = [
+        {a.film: a for a in admissions(b, g)} for b, g in zip(briefs, wg.grids, strict=True)
+    ]
     title_rows = []
     for f in week.films:
         cells = []
@@ -123,7 +132,15 @@ def render_week_html(
             starts = [fmt_time(s.start) for s in grid.by_film().get(f.id, [])]
             total += len(starts)
             cells.append({"starts": starts, "status": grid.status, "hold": i in hold})
-        title_rows.append({"film": f, "cells": cells, "total": total})
+        title_rows.append(
+            {
+                "film": f,
+                "cells": cells,
+                "total": total,
+                "admissions": sum(d[f.id].admissions for d in sold_by_day),
+                "turned_away": sum(d[f.id].turned_away for d in sold_by_day),
+            }
+        )
     seats = sum(
         brief.screen(s.screen).capacity
         for brief, grid in zip(briefs, wg.grids, strict=True)
@@ -136,5 +153,8 @@ def render_week_html(
         title_rows=title_rows,
         week_report=report,
         seats=seats,
+        admissions=sum(a.admissions for d in sold_by_day for a in d.values()),
+        turned_away=sum(a.turned_away for d in sold_by_day for a in d.values()),
+        hold_paid=sum(g.hold_paid for g in wg.grids),
         relaxed_total=sum(len(g.relaxed) for g in wg.grids),
     )

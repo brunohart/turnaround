@@ -50,6 +50,10 @@
   th { text-align:left; font-weight:400; color:var(--grey); border-bottom:1px solid var(--ink); padding:6px 6px 8px; }
   td { padding:8px 6px; border-bottom:1px dashed rgba(26,26,26,.2); vertical-align:top; }
   td.starts { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:12px; letter-spacing:.02em; line-height:1.7; }
+  td.num { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:12px; text-align:right; white-space:nowrap; }
+  th.num { text-align:right; }
+  td.away { color:var(--red); }
+  tfoot td { border-bottom:0; border-top:1px solid var(--ink); font-weight:500; }
   .ok { color:var(--blue); } .fail { color:var(--red); font-weight:600; }
   .relaxed { display:inline-block; color:var(--red); border:1px solid var(--red); padding:1px 5px; margin-right:4px; transform:rotate(-1.2deg); font-size:10px; }
   .given-up { color:var(--red); }
@@ -109,18 +113,21 @@
     <div>
       <div class="stamp mono">By title</div>
       <table>
-        <thead><tr><th>Title</th><th>Shows</th><th>Prime</th><th>Seats</th><th>Starts</th></tr></thead>
+        <thead><tr><th>Title</th><th>Shows</th><th>Prime</th><th>Seats</th><th>Expected</th><th>Turned away</th><th>Starts</th></tr></thead>
         <tbody>
         {% for f in d.films %}
         <tr>
-          <td><b>{{ f.film.title }}</b><br><span class="mono" style="color:var(--grey)">{{ f.film.runtime_min }}′ · {{ f.film.format }}{% if f.film.rating %} · {{ f.film.rating }}{% endif %} · w{{ f.film.weight }}</span></td>
+          <td><b>{{ f.film.title }}</b><br><span class="mono" style="color:var(--grey)">{{ f.film.runtime_min }}′ · {{ f.film.format }}{% if f.film.rating %} · {{ f.film.rating }}{% endif %} · {{ "demand stated" if f.film.demand else "w" ~ f.film.weight }}</span></td>
           <td>{{ f.starts|length }}{% if f.film.terms.min_shows %}<span class="mono" style="color:var(--grey)"> /{{ f.film.terms.min_shows }} min</span>{% endif %}</td>
           <td>{{ f.prime }}{% if f.film.terms.prime_shows %}<span class="mono" style="color:var(--grey)"> /{{ f.film.terms.prime_shows }}</span>{% endif %}</td>
-          <td>{{ "{:,}".format(f.seats) }}</td>
+          <td class="num">{{ "{:,}".format(f.seats) }}</td>
+          <td class="num">{{ "{:,.0f}".format(f.admissions) }}</td>
+          <td class="num{% if f.turned_away >= 0.5 %} away{% endif %}">{{ "{:,.0f}".format(f.turned_away) if f.turned_away >= 0.5 else "—" }}</td>
           <td class="starts">{{ f.starts|join("  ") }}</td>
         </tr>
         {% endfor %}
         </tbody>
+        <tfoot><tr><td class="mono" style="color:var(--grey)">the day</td><td>{{ d.rows|sum(attribute="count") }}</td><td></td><td class="num">{{ "{:,}".format(d.seats) }}</td><td class="num">{{ "{:,.0f}".format(d.admissions) }}</td><td class="num{% if d.turned_away >= 0.5 %} away{% endif %}">{{ "{:,.0f}".format(d.turned_away) if d.turned_away >= 0.5 else "—" }}</td><td></td></tr></tfoot>
       </table>
     </div>
     <div>

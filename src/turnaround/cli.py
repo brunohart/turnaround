@@ -11,7 +11,7 @@ from rich.console import Console
 from rich.table import Table
 
 from . import __version__
-from .check import WeekReport, check_week
+from .check import WeekReport, admissions, check_week
 from .check import check as run_check
 from .model import Brief, Grid, WeekBrief, WeekGrid, fmt_time
 from .render import render_html, render_week_html
@@ -52,6 +52,23 @@ def _print_grid(brief: Brief, grid: Grid) -> None:
         cells = [f"{fmt_time(s.start)} {brief.film(s.film).title}" for s in ss]
         t.add_row(scr.label, "  ·  ".join(cells) or "[dim]dark[/dim]")
     console.print(t)
+    _say_admissions(brief, grid)
+
+
+def _say_admissions(brief: Brief, grid: Grid, prefix: str = "") -> None:
+    """One line: who is expected to come, who gets a seat, who is turned away."""
+    rows = admissions(brief, grid)
+    sold = sum(r.admissions for r in rows)
+    offered = sum(r.offered for r in rows)
+    away = sum(r.turned_away for r in rows)
+    line = f"{prefix}expected admissions [bold]{sold:,.0f}[/bold] of {offered:,} seats on offer"
+    if away >= 0.5:
+        line += f" · [red]{away:,.0f} turned away at capacity[/red]"
+        full = [brief.film(r.film).title for r in rows if r.turned_away >= 0.5]
+        line += " (" + ", ".join(full) + ")"
+    if grid.hold_paid:
+        line += f" · {grid.hold_paid:,.0f} paid to hold times"
+    console.print(line)
 
 
 def _print_report(brief: Brief, grid: Grid) -> bool:
@@ -111,6 +128,9 @@ def _print_week(week: WeekBrief, wg: WeekGrid) -> None:
     console.print(
         f"* hold days {run}: {len(wg.held)} of {len(week.films)} titles keep their starts — {held}"
     )
+    for d, brief, grid in zip(week.days, week.briefs(), wg.grids, strict=True):
+        if grid.status in ("OPTIMAL", "FEASIBLE"):
+            _say_admissions(brief, grid, prefix=f"{d.name}: ")
 
 
 def _print_week_report(week: WeekBrief, wg: WeekGrid) -> WeekReport:

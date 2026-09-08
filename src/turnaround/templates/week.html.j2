@@ -18,8 +18,9 @@
       <div><b>{{ week.days[0].name }} {{ week.days[0].date or "" }} → {{ week.days[-1].name }} {{ week.days[-1].date or "" }}</b></div>
       <div>{{ wg.sessions }} sessions · {{ week.screens|length }} screens · {{ week.films|length }} titles</div>
       {% if relaxed_total %}<div class="given-up">{{ relaxed_total }} term{{ 's' if relaxed_total != 1 }} given up · see each day's proof</div>{% endif %}
-      <div>{{ "{:,}".format(seats) }} seats on offer</div>
-      <div>{{ wg.held|length }} of {{ week.films|length }} titles hold their times {{ wg.hold_days|join("/") }}</div>
+      <div><b>{{ "{:,.0f}".format(admissions) }}</b> expected admissions · {{ "{:,}".format(seats) }} seats on offer</div>
+      {% if turned_away >= 0.5 %}<div class="given-up">{{ "{:,.0f}".format(turned_away) }} turned away at capacity</div>{% endif %}
+      <div>{{ wg.held|length }} of {{ week.films|length }} titles hold their times {{ wg.hold_days|join("/") }}{% if hold_paid %} · {{ "{:,.0f}".format(hold_paid) }} paid to hold{% endif %}{% if week.policy.school_holiday %} · school holidays{% endif %}</div>
       <div>solved in {{ wg.solve_seconds }}s</div>
     </div>
   </header>
@@ -27,13 +28,15 @@
 
   <div class="stamp mono">By title, the week</div>
   <table class="week-table">
-    <thead><tr><th>Title</th>{% for dd in days %}<th class="day">{{ dd.name }}{% if dd.brief.date %}<br><span style="color:var(--grey);letter-spacing:.06em">{{ dd.brief.date[5:] }}</span>{% endif %}</th>{% endfor %}<th>Shows</th><th>Holds</th></tr></thead>
+    <thead><tr><th>Title</th>{% for dd in days %}<th class="day">{{ dd.name }}{% if dd.brief.date %}<br><span style="color:var(--grey);letter-spacing:.06em">{{ dd.brief.date[5:] }}</span>{% endif %}</th>{% endfor %}<th>Shows</th><th class="num">Expected</th><th class="num">Turned away</th><th>Holds</th></tr></thead>
     <tbody>
     {% for row in title_rows %}
     <tr>
-      <td><b>{{ row.film.title }}</b><br><span class="mono" style="color:var(--grey)">{{ row.film.runtime_min }}′ · {{ row.film.format }}{% if row.film.rating %} · {{ row.film.rating }}{% endif %} · w{{ row.film.weight }}</span></td>
+      <td><b>{{ row.film.title }}</b><br><span class="mono" style="color:var(--grey)">{{ row.film.runtime_min }}′ · {{ row.film.format }}{% if row.film.rating %} · {{ row.film.rating }}{% endif %} · {{ "demand stated" if row.film.demand else "w" ~ row.film.weight }}</span></td>
       {% for cell in row.cells %}<td class="day{% if cell.hold %} hold{% endif %}{% if not cell.starts %} dark{% endif %}">{% if cell.status not in ("OPTIMAL", "FEASIBLE") %}<span class="status-inf">{{ cell.status }}</span>{% else %}{{ cell.starts|join("<br>")|safe if cell.starts else "—" }}{% endif %}</td>{% endfor %}
       <td>{{ row.total }}</td>
+      <td class="num">{{ "{:,.0f}".format(row.admissions) }}</td>
+      <td class="num{% if row.turned_away >= 0.5 %} away{% endif %}">{{ "{:,.0f}".format(row.turned_away) if row.turned_away >= 0.5 else "—" }}</td>
       <td>{% if row.film.id in wg.held %}<span class="held mono">holds</span>{% endif %}</td>
     </tr>
     {% endfor %}
@@ -63,11 +66,12 @@
         <h2>{{ dd.name }}{% if dd.brief.date %} <span style="color:var(--grey);font-weight:400">{{ dd.brief.date }}</span>{% endif %}</h2>
       </div>
       <div class="meta mono">
-        <div>{{ dd.grid.sessions|length }} sessions · {{ "{:,}".format(dd.d.seats) }} seats on offer</div>
+        <div>{{ dd.grid.sessions|length }} sessions · <b>{{ "{:,.0f}".format(dd.d.admissions) }}</b> expected admissions · {{ "{:,}".format(dd.d.seats) }} seats on offer</div>
+        {% if dd.d.turned_away >= 0.5 %}<div class="given-up">{{ "{:,.0f}".format(dd.d.turned_away) }} turned away at capacity</div>{% endif %}
         {% if dd.grid.relaxed %}<div class="given-up">{{ dd.grid.relaxed|length }} term{{ 's' if dd.grid.relaxed|length != 1 }} given up · see proof</div>{% endif %}
-        <div>doors {{ dd.brief.policy.open }} · last start {{ dd.brief.policy.last_start }} · turnaround {{ dd.brief.policy.clean_min }}′</div>
+        <div>doors {{ dd.brief.policy.open }} · last start {{ dd.brief.policy.last_start }} · turnaround {{ dd.brief.policy.clean_min }}′{% if dd.brief.policy.school_holiday %} · school holidays{% endif %}</div>
         {% if dd.overrides %}<div>{{ dd.overrides|join(" · ") }}</div>{% endif %}
-        <div>solved in {{ dd.grid.solve_seconds }}s · objective {{ "{:,.0f}".format(dd.grid.objective) }}</div>
+        <div>solved in {{ dd.grid.solve_seconds }}s · objective {{ "{:,.0f}".format(dd.grid.objective) }}{% if dd.grid.hold_paid %} after {{ "{:,.0f}".format(dd.grid.hold_paid) }} paid to hold{% endif %}</div>
       </div>
     </div>
     {% if dd.grid.status in ("OPTIMAL", "FEASIBLE") %}
@@ -81,7 +85,7 @@
 
   <footer class="mono">
     <span>turnaround · the showtime grid, solved</span>
-    <span>objective {{ "{:,.0f}".format(wg.objective) }} weighted seats over {{ days|length }} days</span>
+    <span>objective {{ "{:,.0f}".format(wg.objective) }} expected admissions over {{ days|length }} days{% if hold_paid %} · {{ "{:,.0f}".format(hold_paid) }} paid to hold times{% endif %}</span>
   </footer>
 </div>
 </body>

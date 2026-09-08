@@ -18,8 +18,9 @@
       <div><b>{{ brief.date or "—" }}</b></div>
       <div>{{ grid.sessions|length }} sessions · {{ brief.screens|length }} screens · {{ brief.films|length }} titles</div>
       {% if grid.relaxed %}<div class="given-up">{{ grid.relaxed|length }} term{{ 's' if grid.relaxed|length != 1 }} given up · see proof</div>{% endif %}
-      <div>{{ "{:,}".format(d.seats) }} seats on offer</div>
-      <div>doors {{ brief.policy.open }} · last start {{ brief.policy.last_start }} · turnaround {{ brief.policy.clean_min }}′</div>
+      <div><b>{{ "{:,.0f}".format(d.admissions) }}</b> expected admissions · {{ "{:,}".format(d.seats) }} seats on offer</div>
+      {% if d.turned_away >= 0.5 %}<div class="given-up">{{ "{:,.0f}".format(d.turned_away) }} turned away at capacity</div>{% endif %}
+      <div>doors {{ brief.policy.open }} · last start {{ brief.policy.last_start }} · turnaround {{ brief.policy.clean_min }}′{% if brief.policy.school_holiday %} · school holidays{% endif %}{% if brief.day_name %} · {{ brief.day_name }}{% endif %}</div>
       <div>solved in {{ grid.solve_seconds }}s</div>
     </div>
   </header>
@@ -30,7 +31,7 @@
 
   <footer class="mono">
     <span>turnaround · the showtime grid, solved</span>
-    <span>objective {{ "{:,.0f}".format(grid.objective) }} weighted seats</span>
+    <span>objective {{ "{:,.0f}".format(grid.objective) }} expected admissions{% if grid.hold_paid %} after {{ "{:,.0f}".format(grid.hold_paid) }} paid to hold times{% endif %}</span>
   </footer>
 </div>
 </body>
