@@ -2,40 +2,42 @@
   "house": "The Regent",
   "date": "2026-09-10",
   "status": "OPTIMAL",
-  "objective": 3741.0,
-  "solve_seconds": 0.818,
+  "objective": 1608.6,
+  "admissions": 1608.6,
+  "hold_paid": 0.0,
+  "solve_seconds": 4.449,
   "sessions": [
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 630,
-      "feature_start": 650,
-      "feature_end": 818,
-      "clear": 838
+      "start": 625,
+      "feature_start": 645,
+      "feature_end": 813,
+      "clear": 833
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 850,
-      "feature_start": 870,
-      "feature_end": 1038,
-      "clear": 1058
+      "start": 845,
+      "feature_start": 865,
+      "feature_end": 1033,
+      "clear": 1053
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 1060,
-      "feature_start": 1080,
-      "feature_end": 1248,
-      "clear": 1268
+      "start": 1065,
+      "feature_start": 1085,
+      "feature_end": 1253,
+      "clear": 1273
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 1280,
-      "feature_start": 1300,
-      "feature_end": 1468,
-      "clear": 1488
+      "start": 1275,
+      "feature_start": 1295,
+      "feature_end": 1463,
+      "clear": 1483
     },
     {
       "screen": "2",
@@ -47,19 +49,19 @@
     },
     {
       "screen": "2",
-      "film": "harvest",
+      "film": "bees",
       "start": 745,
       "feature_start": 765,
-      "feature_end": 869,
-      "clear": 889
+      "feature_end": 849,
+      "clear": 869
     },
     {
       "screen": "2",
-      "film": "bees",
-      "start": 890,
-      "feature_start": 910,
-      "feature_end": 994,
-      "clear": 1014
+      "film": "harvest",
+      "start": 875,
+      "feature_start": 895,
+      "feature_end": 999,
+      "clear": 1019
     },
     {
       "screen": "2",
@@ -95,35 +97,35 @@
     },
     {
       "screen": "3",
-      "film": "harvest",
-      "start": 775,
-      "feature_start": 795,
-      "feature_end": 899,
-      "clear": 914
-    },
-    {
-      "screen": "3",
       "film": "atlas",
-      "start": 915,
-      "feature_start": 935,
-      "feature_end": 1056,
-      "clear": 1071
-    },
-    {
-      "screen": "3",
-      "film": "atlas",
-      "start": 1080,
-      "feature_start": 1100,
-      "feature_end": 1221,
-      "clear": 1236
+      "start": 790,
+      "feature_start": 810,
+      "feature_end": 931,
+      "clear": 946
     },
     {
       "screen": "3",
       "film": "signal",
-      "start": 1240,
-      "feature_start": 1260,
-      "feature_end": 1352,
-      "clear": 1367
+      "start": 975,
+      "feature_start": 995,
+      "feature_end": 1087,
+      "clear": 1102
+    },
+    {
+      "screen": "3",
+      "film": "signal",
+      "start": 1105,
+      "feature_start": 1125,
+      "feature_end": 1217,
+      "clear": 1232
+    },
+    {
+      "screen": "3",
+      "film": "atlas",
+      "start": 1235,
+      "feature_start": 1255,
+      "feature_end": 1376,
+      "clear": 1391
     }
   ],
   "conflict": [],

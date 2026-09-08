@@ -1,0 +1,105 @@
+{
+  "house": "The Regent",
+  "screens": [
+    { "id": "1", "name": "Screen 1", "capacity": 320, "formats": ["2D", "PLF"] },
+    { "id": "2", "name": "Screen 2", "capacity": 180, "formats": ["2D", "3D"] },
+    { "id": "3", "name": "Screen 3", "capacity": 96, "formats": ["2D"], "clean_min": 15 }
+  ],
+  "films": [
+    {
+      "id": "odyssey", "title": "The Long Voyage", "runtime_min": 168, "format": "PLF", "rating": "M",
+      "demand": {
+        "per_session": { "matinee": 90, "afternoon": 140, "prime": 300, "late": 190 },
+        "decay": 0.55,
+        "weekday": { "Fri": 1.25, "Sat": 1.5, "Sun": 1.3 },
+        "holiday": 1.1,
+        "assumptions": [
+          "Opening week of a PLF event title: the first prime show fills the big room on any night and sells out Fri/Sat.",
+          "Weekend uplift 25-50%, Sunday softer than Saturday because of the late start.",
+          "School holidays lift it a little (10%): it is not a family title.",
+          "A second show in the same daypart draws 55% of the first: the audience is there for the format and picks one."
+        ]
+      },
+      "terms": { "min_shows": 3, "prime_shows": 1, "exclusive_screen": true }
+    },
+    {
+      "id": "harvest", "title": "Harvest Moon", "runtime_min": 104, "format": "2D", "rating": "PG",
+      "demand": {
+        "per_session": { "matinee": 110, "afternoon": 95, "prime": 80, "late": 25 },
+        "decay": 0.6,
+        "weekday": { "Sat": 1.4, "Sun": 1.5 },
+        "holiday": 1.5,
+        "assumptions": [
+          "A PG family drama in its third week: strongest before 14:00, dies after 21:00.",
+          "Front-loaded for the holidays: the daytime figure is 50% higher when school is out.",
+          "Sunday is its best day; grandparents' matinee."
+        ]
+      },
+      "terms": { "min_shows": 3 }
+    },
+    {
+      "id": "signal", "title": "Dead Signal", "runtime_min": 92, "format": "2D", "rating": "R16",
+      "demand": {
+        "per_session": { "matinee": 15, "afternoon": 35, "prime": 90, "late": 120 },
+        "decay": 0.5,
+        "weekday": { "Fri": 1.4, "Sat": 1.5 },
+        "holiday": 1.0,
+        "assumptions": [
+          "R16 horror: the late show is the show; matinees are near empty.",
+          "Friday and Saturday nights carry 40-50% more.",
+          "No holiday effect: its audience is not at school."
+        ]
+      },
+      "terms": { "min_shows": 2, "earliest_start": "16:00" }
+    },
+    {
+      "id": "atlas", "title": "Atlas of Small Rooms", "runtime_min": 121, "format": "2D", "rating": "M",
+      "demand": {
+        "per_session": { "matinee": 30, "afternoon": 45, "prime": 85, "late": 40 },
+        "decay": 0.7,
+        "weekday": { "Sun": 1.2 },
+        "holiday": 1.0,
+        "assumptions": [
+          "Arthouse: a steady 30-85 across the day, a Sunday bump.",
+          "A second show in a daypart still draws 70% of the first: this audience chooses its time rather than splitting."
+        ]
+      },
+      "terms": { "min_shows": 2, "prime_shows": 1 }
+    },
+    {
+      "id": "bees", "title": "The Bee Kingdom", "runtime_min": 84, "format": "3D", "rating": "G",
+      "demand": {
+        "per_session": { "matinee": 150, "afternoon": 110, "prime": 30, "late": 5 },
+        "decay": 0.6,
+        "weekday": { "Sat": 1.3, "Sun": 1.4 },
+        "holiday": 1.7,
+        "assumptions": [
+          "G-rated 3D animation: the holiday matinee is the whole business; nothing after dinner.",
+          "School holidays lift it 70%. At 150 x 1.7 the 180-seat 3D room turns people away before noon: the report should say so.",
+          "Weekends are big but the holidays flatten the difference."
+        ]
+      },
+      "terms": { "min_shows": 2, "latest_start": "17:00" }
+    }
+  ],
+  "policy": {
+    "open": "10:00",
+    "last_start": "21:30",
+    "preshow_min": 20,
+    "clean_min": 20,
+    "stagger_min": 10,
+    "slot_min": 5,
+    "school_holiday": true
+  },
+  "days": [
+    { "name": "Thu", "date": "2026-10-01" },
+    { "name": "Fri", "date": "2026-10-02", "policy": { "last_start": "22:30" } },
+    { "name": "Sat", "date": "2026-10-03", "policy": { "last_start": "22:30" } },
+    { "name": "Sun", "date": "2026-10-04", "policy": { "open": "11:00" } },
+    { "name": "Mon", "date": "2026-10-05", "terms": { "odyssey": { "exclusive_screen": false } } },
+    { "name": "Tue", "date": "2026-10-06", "terms": { "odyssey": { "exclusive_screen": false }, "bees": { "min_shows": 3 } } },
+    { "name": "Wed", "date": "2026-10-07", "terms": { "odyssey": { "exclusive_screen": false } } }
+  ],
+  "hold_days": ["Mon", "Tue", "Wed", "Thu"],
+  "hold_penalty": 40
+}
