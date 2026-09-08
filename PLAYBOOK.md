@@ -31,7 +31,7 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - The sheet gains a week view: seven rows of the by-title table, one full grid per day on its own page, print stylesheet stacks them.
 - Property tests with Hypothesis: for random small briefs that solve, the checker always passes; for random hand-built grids, the checker's verdict matches a brute-force re-check.
 
-## Day 3 — Tue 9 Sep — Demand
+## Day 3 — Tue 9 Sep — Demand ✅
 
 - Replace the placeholder objective (ADR-006). A `demand` block per film: expected admissions per session by daypart and weekday, with diminishing returns per additional same-title session in the same daypart (the second 19:00 show earns less). Objective becomes Σ min(expected, capacity): seats *sold*, not seats offered.
 - A `demand.json` example built from stated assumptions (weekend uplift, school-holiday flag, family titles front-loaded) — assumptions written in the file, not the code.
@@ -72,6 +72,7 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - `examples/sixteen.json`: a 16-screen multiplex, 22 titles, a full week. Measure: candidates, booleans, time to first feasible, time to optimal or the gap at 60 s. Write `docs/bench.md` as a table and commit it.
 - Contain it: prune dominated starts, break symmetry between identical screens, adaptive `slot_min` (10-minute grid when candidates exceed a threshold, with the choice reported), solver hints from yesterday's grid when re-planning.
 - Target written down before optimising: one day of the sixteen under 60 s to a proven-optimal or ≤2 % gap. Record the number hit, not the number hoped for.
+- *From Day 3:* the demand rank literals (one per screen × title × daypart × rank) took the Regent from 0.8 s to 4.4 s. Measure their share first; the rank count is an upper bound the house-wide stagger could tighten.
 
 ## Day 9 — Mon 15 Sep — In and out
 

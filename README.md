@@ -4,7 +4,7 @@
 
 <img src="docs/grids/regent.png" alt="The Regent's week sheet: three screens, fifteen sessions, the prime window washed in navy, every proof check green" width="100%">
 
-*The Regent — 3 screens, 5 titles, one PLF exclusive with a prime guarantee, a kids' 3D title that must start by 17:00, a horror title held to 16:00 or later. Solved `OPTIMAL` in 0.96 s. Every check green.*
+*The Regent — 3 screens, 5 titles, one PLF exclusive with a prime guarantee, a kids' 3D title that must start by 17:00, a horror title held to 16:00 or later. Solved `OPTIMAL` in 4.4 s for 1,609 expected admissions of 2,840 seats on offer. Every check green.*
 
 ---
 
@@ -66,11 +66,28 @@ Hand it a **week** instead — the same house and slate, with only what differs 
 
 <img src="docs/grids/day-2-week.png" alt="The Regent's week: five titles across seven days, the hold days washed in navy, three titles stamped HOLDS" width="100%">
 
+Tell it what each title is expected to draw — and why, in words, beside the numbers — and the objective becomes admissions. The report says who comes, who gets a seat, and who is turned away at capacity:
+
+```jsonc
+{ "id": "bees", "title": "The Bee Kingdom", "runtime_min": 84, "format": "3D",
+  "demand": {
+    "per_session": { "matinee": 150, "afternoon": 110, "prime": 30, "late": 5 },
+    "decay": 0.6, "weekday": { "Sat": 1.3, "Sun": 1.4 }, "holiday": 1.7,
+    "assumptions": [
+      "G-rated 3D animation: the holiday matinee is the whole business; nothing after dinner.",
+      "School holidays lift it 70%. At 150 x 1.7 the 180-seat 3D room turns people away before noon: the report should say so."
+    ]
+  },
+  "terms": { "min_shows": 2, "latest_start": "17:00" } }
+```
+
+<img src="docs/grids/day-3-demand.png" alt="The Regent's school-holiday week: 15,490 expected admissions of 19,892 seats on offer, 2,206 turned away at capacity in rust, every title holding its times" width="100%">
+
 ## Why a solver
 
 The showtime grid is a constraint problem wearing a spreadsheet. A screen holds one thing at a time; the turnaround between features is a hard floor; two shows should not start within ten minutes of each other or the lobby cannot cope; a distributor's terms say *three shows, one in prime, its own screen*; the kids' film cannot start after five; the horror cannot start before four. A person builds this by hand every Wednesday, and the grid they arrive at is one they can live with, not one they can prove.
 
-`turnaround` builds the grid with [OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver): one boolean per (screen, film, start), an optional interval under `NoOverlap` per screen so the turnaround is inside the block, every term a linear constraint, and an objective that puts the wanted film in the big room at the wanted hour. Then it throws the grid at a second, independent reading of the same rules. Two readings that agree are evidence; one is an assertion.
+`turnaround` builds the grid with [OR-Tools CP-SAT](https://developers.google.com/optimization/cp/cp_solver): one boolean per (screen, film, start), an optional interval under `NoOverlap` per screen so the turnaround is inside the block, every term a linear constraint, and an objective that counts seats *sold*, not seats offered: each title's expected admissions by daypart, a second show in the same daypart drawing less than the first, no room selling more than it holds. Then it throws the grid at a second, independent reading of the same rules. Two readings that agree are evidence; one is an assertion.
 
 ## Install
 
@@ -96,7 +113,7 @@ Python 3.13+. The only heavy dependency is `ortools`.
 
 **Screens** have `capacity`, `formats` (`2D`, `3D`, `PLF`, or your own names) and an optional `clean_min` override.
 
-**Films** have `runtime_min`, `format`, a `weight` (relative demand; 2.0 wants twice the seats of 1.0), optional `daypart_weights`, and **terms**:
+**Films** have `runtime_min`, `format`, an optional **demand** block (`per_session` admissions by daypart for the first show, `decay` per further show in the same daypart, `weekday` and `holiday` multipliers, `assumptions` in words), or failing that a `weight` (2.0 draws twice 1.0) and optional `daypart_weights` that stand in for one, and **terms**:
 
 | Term | Meaning |
 |---|---|
@@ -107,13 +124,13 @@ Python 3.13+. The only heavy dependency is `ortools`.
 | `screens` | Only these screen ids |
 | `min_capacity` | Only rooms at least this big |
 
-**Policy**: `open`, `last_start` (hours past 24 are fine: `"25:00"` is 1 a.m.), `preshow_min`, `clean_min`, `stagger_min`, `slot_min`, and the `dayparts` with their weights (matinee / afternoon / prime / late by default).
+**Policy**: `open`, `last_start` (hours past 24 are fine: `"25:00"` is 1 a.m.), `preshow_min`, `clean_min`, `stagger_min`, `slot_min`, `school_holiday`, `assumed_admissions` (what a weight-1.0 title's first prime show draws when no demand is stated), and the `dayparts` with their weights (matinee / afternoon / prime / late by default).
 
 **A week** adds `days`: up to seven of `{ "name", "date", "policy": { … }, "terms": { film_id: { … } } }`, each carrying only what differs from the base. `hold_days` (default Mon–Thu) are the days a title should keep the same start times; `hold_penalty` is what the objective gives up per title that changes them. Every day is solved and checked on its own; the week sheet puts the by-title table across all seven days first and each day's grid on its own page.
 
 ## What it does not do yet
 
-This is Day 2 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: a demand model so the objective is admissions rather than judgment-weighted seats (Day 3); staff and credits-overlap realities (Day 4); week-scoped distributor terms (Day 5); the full print identity (Day 6); *why* each session is where it is (Day 7); scale benchmarks (Day 8); CSV/iCal in and out (Day 9); a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12).
+This is Day 3 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: staff and credits-overlap realities (Day 4); week-scoped distributor terms (Day 5); the full print identity (Day 6); *why* each session is where it is (Day 7); scale benchmarks (Day 8); CSV/iCal in and out (Day 9); a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12).
 
 The design decisions and their reasons are in `DECISIONS.md`. The log of what each day shipped and what it left rough is in `docs/LOG.md`.
 
