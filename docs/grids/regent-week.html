@@ -36,6 +36,8 @@
   .row .name .cap { color:var(--grey); margin-top:6px; }
   .lane { position:relative; }
   .block { position:absolute; top:12px; height:50px; display:flex; }
+  .block > div { flex:none; }
+  .block .clean.over { border-left:1px dashed var(--ink); }
   .block .pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); border:1px solid var(--ink); border-right:0; }
   .block .feat { position:relative; background:var(--cream); border:1px solid var(--ink); padding:5px 7px; overflow:hidden; white-space:nowrap; }
   .block .feat::before { content:""; position:absolute; inset:0; background:var(--orange); opacity:.0; }
@@ -95,7 +97,7 @@
       <div><b>11,316</b> expected admissions · 19,892 seats on offer</div>
       <div class="given-up">76 turned away at capacity</div>
       <div>3 of 5 titles hold their times Thu/Mon/Tue/Wed · 120 paid to hold</div>
-      <div>solved in 21.662s</div>
+      <div>solved in 27.027s</div>
     </div>
   </header>
   <div class="divider"></div>
@@ -107,7 +109,7 @@
     
     <tr>
       <td><b>The Long Voyage</b><br><span class="mono" style="color:var(--grey)">168′ · PLF · M · w2.2</span></td>
-      <td class="day hold">10:25<br>14:05<br>17:45<br>21:15</td><td class="day">10:35<br>15:10<br>18:40<br>22:10</td><td class="day">10:35<br>14:20<br>17:50<br>22:00</td><td class="day">11:00<br>14:30<br>18:00<br>21:30</td><td class="day hold">10:25<br>14:05<br>17:45<br>21:15</td><td class="day hold">10:25<br>14:05<br>17:45<br>21:15</td><td class="day hold">10:25<br>14:05<br>17:45<br>21:15</td>
+      <td class="day hold">10:30<br>14:00<br>17:35<br>21:15</td><td class="day">11:00<br>14:45<br>18:15<br>22:05</td><td class="day">10:45<br>14:15<br>18:10<br>22:05</td><td class="day">11:00<br>14:30<br>18:00<br>21:30</td><td class="day hold">10:30<br>14:00<br>17:35<br>21:15</td><td class="day hold">10:30<br>14:00<br>17:35<br>21:15</td><td class="day hold">10:30<br>14:00<br>17:35<br>21:15</td>
       <td>28</td>
       <td class="num">4,543</td>
       <td class="num">—</td>
@@ -116,7 +118,7 @@
     
     <tr>
       <td><b>Harvest Moon</b><br><span class="mono" style="color:var(--grey)">104′ · 2D · PG · w1.3</span></td>
-      <td class="day hold">10:50<br>12:05<br>14:30<br>19:05</td><td class="day">10:00<br>10:15<br>15:00<br>20:05</td><td class="day">10:00<br>10:10<br>15:05<br>19:50</td><td class="day">13:30<br>14:05<br>20:40</td><td class="day hold">10:50<br>12:05<br>14:30<br>19:05</td><td class="day hold">10:50<br>16:40<br>19:05</td><td class="day hold">10:50<br>12:05<br>14:30<br>19:05</td>
+      <td class="day hold">10:00<br>10:55<br>14:35<br>19:05</td><td class="day">10:00<br>10:15<br>15:05<br>17:40</td><td class="day">10:00<br>10:55<br>15:00<br>19:55</td><td class="day">13:45<br>14:00<br>20:40</td><td class="day hold">10:00<br>10:55<br>14:35<br>19:05</td><td class="day hold">10:05<br>16:40<br>19:05</td><td class="day hold">10:00<br>10:55<br>14:35<br>19:05</td>
       <td>26</td>
       <td class="num">2,649</td>
       <td class="num away">16</td>
@@ -125,7 +127,7 @@
     
     <tr>
       <td><b>Dead Signal</b><br><span class="mono" style="color:var(--grey)">92′ · 2D · R16 · w1.1</span></td>
-      <td class="day hold">16:05<br>18:25<br>21:30</td><td class="day">17:25<br>17:45<br>22:20<br>22:30</td><td class="day">17:25<br>17:35<br>22:15<br>22:25</td><td class="day">16:25<br>18:25<br>21:20</td><td class="day hold">16:05<br>18:25<br>21:30</td><td class="day hold">16:05<br>18:25<br>21:30</td><td class="day hold">16:05<br>18:25<br>21:30</td>
+      <td class="day hold">16:10<br>18:20<br>21:30</td><td class="day">17:25<br>20:05<br>22:20<br>22:30</td><td class="day">17:20<br>17:40<br>22:20<br>22:30</td><td class="day">16:20<br>18:20<br>21:10</td><td class="day hold">16:10<br>18:20<br>21:30</td><td class="day hold">16:10<br>18:20<br>21:30</td><td class="day hold">16:10<br>18:20<br>21:30</td>
       <td>23</td>
       <td class="num">2,108</td>
       <td class="num away">60</td>
@@ -134,7 +136,7 @@
     
     <tr>
       <td><b>Atlas of Small Rooms</b><br><span class="mono" style="color:var(--grey)">121′ · 2D · M · w0.9</span></td>
-      <td class="day hold">13:25<br>20:35</td><td class="day">12:20<br>19:40</td><td class="day">12:20<br>19:35</td><td class="day">11:25<br>18:40</td><td class="day hold">13:25<br>20:35</td><td class="day hold">13:25<br>20:35</td><td class="day hold">13:25<br>20:35</td>
+      <td class="day hold">13:15<br>20:40</td><td class="day">12:20<br>19:50</td><td class="day">12:20<br>19:45</td><td class="day">11:20<br>18:30</td><td class="day hold">13:15<br>20:40</td><td class="day hold">13:15<br>20:40</td><td class="day hold">13:15<br>20:40</td>
       <td>14</td>
       <td class="num">976</td>
       <td class="num">—</td>
@@ -143,7 +145,7 @@
     
     <tr>
       <td><b>The Bee Kingdom</b><br><span class="mono" style="color:var(--grey)">84′ · 3D · G · w0.8</span></td>
-      <td class="day hold">10:00<br>16:55</td><td class="day">13:05<br>15:40</td><td class="day">13:25<br>15:30</td><td class="day">11:15<br>16:10</td><td class="day hold">10:00<br>16:55</td><td class="day hold">10:00<br>12:30<br>14:35</td><td class="day hold">10:00<br>16:55</td>
+      <td class="day hold">12:25<br>17:00</td><td class="day">12:40<br>14:55</td><td class="day">13:20<br>15:25</td><td class="day">11:35<br>16:10</td><td class="day hold">12:25<br>17:00</td><td class="day hold">10:15<br>12:20<br>14:35</td><td class="day hold">12:25<br>17:00</td>
       <td>15</td>
       <td class="num">1,039</td>
       <td class="num">—</td>
@@ -181,7 +183,7 @@
         
         <div>doors 10:00 · last start 21:30 · turnaround 20′</div>
         
-        <div>solved in 4.626s · objective 1,609</div>
+        <div>solved in 5.871s · objective 1,609</div>
       </div>
     </div>
     
@@ -200,32 +202,32 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:2.7777777777777777%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 10:25 · feature 10:45–13:33 · clear 13:53">
+          <div class="block" style="left:3.3333333333333335%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 10:30 · feature 10:50–13:38 · clear 13:58">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">10:25 · 168′ · PLF</div>
+              <div class="tm mono">10:30 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:27.22222222222222%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 14:05 · feature 14:25–17:13 · clear 17:33">
+          <div class="block" style="left:26.666666666666668%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 14:00 · feature 14:20–17:08 · clear 17:28">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">14:05 · 168′ · PLF</div>
+              <div class="tm mono">14:00 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block prime" style="left:51.66666666666667%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 17:45 · feature 18:05–20:53 · clear 21:13">
+          <div class="block prime" style="left:50.55555555555556%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 17:35 · feature 17:55–20:43 · clear 21:03">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">17:45 · 168′ · PLF</div>
+              <div class="tm mono">17:35 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
@@ -250,42 +252,42 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:0.0%; width:13.777777777777779%"
-               title="The Bee Kingdom · preshow 10:00 · feature 10:20–11:44 · clear 12:04">
+          <div class="block" style="left:0.0%; width:16.0%"
+               title="Harvest Moon · preshow 10:00 · feature 10:20–12:04 · clear 12:24">
+            <div class="pre" style="width:13.88888888888889%"></div>
+            <div class="feat" style="width:72.22222222222221%">
+              <div class="t">Harvest Moon</div>
+              <div class="tm mono">10:00 · 104′</div>
+            </div>
+            <div class="clean" style="width:13.88888888888889%"></div>
+          </div>
+          
+          <div class="block" style="left:16.11111111111111%; width:13.777777777777779%"
+               title="The Bee Kingdom · preshow 12:25 · feature 12:45–14:09 · clear 14:29">
             <div class="pre" style="width:16.129032258064516%"></div>
             <div class="feat" style="width:67.74193548387096%">
               <div class="t">The Bee Kingdom</div>
-              <div class="tm mono">10:00 · 84′ · 3D</div>
+              <div class="tm mono">12:25 · 84′ · 3D</div>
             </div>
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
           
-          <div class="block" style="left:13.88888888888889%; width:16.0%"
-               title="Harvest Moon · preshow 12:05 · feature 12:25–14:09 · clear 14:29">
+          <div class="block" style="left:30.555555555555557%; width:16.0%"
+               title="Harvest Moon · preshow 14:35 · feature 14:55–16:39 · clear 16:59">
             <div class="pre" style="width:13.88888888888889%"></div>
             <div class="feat" style="width:72.22222222222221%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">12:05 · 104′</div>
+              <div class="tm mono">14:35 · 104′</div>
             </div>
             <div class="clean" style="width:13.88888888888889%"></div>
           </div>
           
-          <div class="block" style="left:30.0%; width:16.0%"
-               title="Harvest Moon · preshow 14:30 · feature 14:50–16:34 · clear 16:54">
-            <div class="pre" style="width:13.88888888888889%"></div>
-            <div class="feat" style="width:72.22222222222221%">
-              <div class="t">Harvest Moon</div>
-              <div class="tm mono">14:30 · 104′</div>
-            </div>
-            <div class="clean" style="width:13.88888888888889%"></div>
-          </div>
-          
-          <div class="block" style="left:46.111111111111114%; width:13.777777777777779%"
-               title="The Bee Kingdom · preshow 16:55 · feature 17:15–18:39 · clear 18:59">
+          <div class="block" style="left:46.666666666666664%; width:13.777777777777779%"
+               title="The Bee Kingdom · preshow 17:00 · feature 17:20–18:44 · clear 19:04">
             <div class="pre" style="width:16.129032258064516%"></div>
             <div class="feat" style="width:67.74193548387096%">
               <div class="t">The Bee Kingdom</div>
-              <div class="tm mono">16:55 · 84′ · 3D</div>
+              <div class="tm mono">17:00 · 84′ · 3D</div>
             </div>
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
@@ -300,7 +302,7 @@
             <div class="clean" style="width:13.88888888888889%"></div>
           </div>
           
-          <div class="block" style="left:76.66666666666667%; width:14.666666666666668%"
+          <div class="block" style="left:76.66666666666667%; width:14.666666666666666%"
                title="Dead Signal · preshow 21:30 · feature 21:50–23:22 · clear 23:42">
             <div class="pre" style="width:15.151515151515152%"></div>
             <div class="feat" style="width:69.6969696969697%">
@@ -320,54 +322,54 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:5.555555555555555%; width:15.444444444444445%"
-               title="Harvest Moon · preshow 10:50 · feature 11:10–12:54 · clear 13:09">
+          <div class="block" style="left:6.111111111111111%; width:15.444444444444445%"
+               title="Harvest Moon · preshow 10:55 · feature 11:15–12:59 · clear 13:14">
             <div class="pre" style="width:14.388489208633093%"></div>
             <div class="feat" style="width:74.82014388489209%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">10:50 · 104′</div>
+              <div class="tm mono">10:55 · 104′</div>
             </div>
             <div class="clean" style="width:10.79136690647482%"></div>
           </div>
           
-          <div class="block" style="left:22.77777777777778%; width:17.333333333333336%"
-               title="Atlas of Small Rooms · preshow 13:25 · feature 13:45–15:46 · clear 16:01">
+          <div class="block" style="left:21.666666666666668%; width:17.333333333333336%"
+               title="Atlas of Small Rooms · preshow 13:15 · feature 13:35–15:36 · clear 15:51">
             <div class="pre" style="width:12.82051282051282%"></div>
-            <div class="feat" style="width:77.56410256410255%">
+            <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
-              <div class="tm mono">13:25 · 121′</div>
+              <div class="tm mono">13:15 · 121′</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:40.55555555555556%; width:14.111111111111112%"
-               title="Dead Signal · preshow 16:05 · feature 16:25–17:57 · clear 18:12">
+          <div class="block" style="left:41.11111111111111%; width:14.11111111111111%"
+               title="Dead Signal · preshow 16:10 · feature 16:30–18:02 · clear 18:17">
             <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">16:05 · 92′</div>
+              <div class="tm mono">16:10 · 92′</div>
             </div>
             <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
-          <div class="block prime" style="left:56.111111111111114%; width:14.111111111111112%"
-               title="Dead Signal · preshow 18:25 · feature 18:45–20:17 · clear 20:32">
+          <div class="block prime" style="left:55.55555555555556%; width:14.11111111111111%"
+               title="Dead Signal · preshow 18:20 · feature 18:40–20:12 · clear 20:27">
             <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">18:25 · 92′</div>
+              <div class="tm mono">18:20 · 92′</div>
             </div>
             <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
-          <div class="block prime" style="left:70.55555555555556%; width:17.333333333333336%"
-               title="Atlas of Small Rooms · preshow 20:35 · feature 20:55–22:56 · clear 23:11">
+          <div class="block prime" style="left:71.11111111111111%; width:17.333333333333336%"
+               title="Atlas of Small Rooms · preshow 20:40 · feature 21:00–23:01 · clear 23:16">
             <div class="pre" style="width:12.82051282051282%"></div>
-            <div class="feat" style="width:77.56410256410255%">
+            <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
-              <div class="tm mono">20:35 · 121′</div>
+              <div class="tm mono">20:40 · 121′</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
         </div>
@@ -392,7 +394,7 @@
           <td class="num">1,280</td>
           <td class="num">649</td>
           <td class="num">—</td>
-          <td class="starts">10:25  14:05  17:45  21:15</td>
+          <td class="starts">10:30  14:00  17:35  21:15</td>
         </tr>
         
         <tr>
@@ -402,7 +404,7 @@
           <td class="num">636</td>
           <td class="num">399</td>
           <td class="num">—</td>
-          <td class="starts">10:50  12:05  14:30  19:05</td>
+          <td class="starts">10:00  10:55  14:35  19:05</td>
         </tr>
         
         <tr>
@@ -412,7 +414,7 @@
           <td class="num">372</td>
           <td class="num">279</td>
           <td class="num away">14</td>
-          <td class="starts">16:05  18:25  21:30</td>
+          <td class="starts">16:10  18:20  21:30</td>
         </tr>
         
         <tr>
@@ -422,7 +424,7 @@
           <td class="num">192</td>
           <td class="num">140</td>
           <td class="num">—</td>
-          <td class="starts">13:25  20:35</td>
+          <td class="starts">13:15  20:40</td>
         </tr>
         
         <tr>
@@ -432,7 +434,7 @@
           <td class="num">360</td>
           <td class="num">142</td>
           <td class="num">—</td>
-          <td class="starts">10:00  16:55</td>
+          <td class="starts">12:25  17:00</td>
         </tr>
         
         </tbody>
@@ -507,7 +509,7 @@
         
         <div>doors 10:00 · last start 22:30 · turnaround 20′</div>
         <div>last_start 22:30</div>
-        <div>solved in 5.406s · objective 1,681</div>
+        <div>solved in 9.935s · objective 1,681</div>
       </div>
     </div>
     
@@ -526,44 +528,44 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:3.6458333333333335%; width:21.666666666666664%"
-               title="The Long Voyage · preshow 10:35 · feature 10:55–13:43 · clear 14:03">
-            <div class="pre" style="width:9.615384615384615%"></div>
-            <div class="feat" style="width:80.76923076923079%">
+          <div class="block" style="left:6.25%; width:21.666666666666668%"
+               title="The Long Voyage · preshow 11:00 · feature 11:20–14:08 · clear 14:28">
+            <div class="pre" style="width:9.615384615384617%"></div>
+            <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">10:35 · 168′ · PLF</div>
+              <div class="tm mono">11:00 · 168′ · PLF</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:32.29166666666667%; width:21.666666666666664%"
-               title="The Long Voyage · preshow 15:10 · feature 15:30–18:18 · clear 18:38">
-            <div class="pre" style="width:9.615384615384615%"></div>
-            <div class="feat" style="width:80.76923076923079%">
+          <div class="block" style="left:29.6875%; width:21.666666666666668%"
+               title="The Long Voyage · preshow 14:45 · feature 15:05–17:53 · clear 18:13">
+            <div class="pre" style="width:9.615384615384617%"></div>
+            <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">15:10 · 168′ · PLF</div>
+              <div class="tm mono">14:45 · 168′ · PLF</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block prime" style="left:54.166666666666664%; width:21.666666666666664%"
-               title="The Long Voyage · preshow 18:40 · feature 19:00–21:48 · clear 22:08">
-            <div class="pre" style="width:9.615384615384615%"></div>
-            <div class="feat" style="width:80.76923076923079%">
+          <div class="block prime" style="left:51.5625%; width:21.666666666666668%"
+               title="The Long Voyage · preshow 18:15 · feature 18:35–21:23 · clear 21:43">
+            <div class="pre" style="width:9.615384615384617%"></div>
+            <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">18:40 · 168′ · PLF</div>
+              <div class="tm mono">18:15 · 168′ · PLF</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:76.04166666666666%; width:21.666666666666664%"
-               title="The Long Voyage · preshow 22:10 · feature 22:30–01:18 · clear 01:38">
-            <div class="pre" style="width:9.615384615384615%"></div>
-            <div class="feat" style="width:80.76923076923079%">
+          <div class="block" style="left:75.52083333333334%; width:21.666666666666668%"
+               title="The Long Voyage · preshow 22:05 · feature 22:25–01:13 · clear 01:33">
+            <div class="pre" style="width:9.615384615384617%"></div>
+            <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">22:10 · 168′ · PLF</div>
+              <div class="tm mono">22:05 · 168′ · PLF</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
         </div>
@@ -578,62 +580,62 @@
           
           <div class="block" style="left:1.5625%; width:15.0%"
                title="Harvest Moon · preshow 10:15 · feature 10:35–12:19 · clear 12:39">
-            <div class="pre" style="width:13.888888888888888%"></div>
+            <div class="pre" style="width:13.88888888888889%"></div>
             <div class="feat" style="width:72.22222222222221%">
               <div class="t">Harvest Moon</div>
               <div class="tm mono">10:15 · 104′</div>
             </div>
-            <div class="clean" style="width:13.888888888888888%"></div>
+            <div class="clean" style="width:13.88888888888889%"></div>
           </div>
           
-          <div class="block" style="left:19.270833333333336%; width:12.916666666666664%"
-               title="The Bee Kingdom · preshow 13:05 · feature 13:25–14:49 · clear 15:09">
+          <div class="block" style="left:16.666666666666664%; width:12.916666666666668%"
+               title="The Bee Kingdom · preshow 12:40 · feature 13:00–14:24 · clear 14:44">
             <div class="pre" style="width:16.129032258064516%"></div>
-            <div class="feat" style="width:67.74193548387099%">
+            <div class="feat" style="width:67.74193548387096%">
               <div class="t">The Bee Kingdom</div>
-              <div class="tm mono">13:05 · 84′ · 3D</div>
+              <div class="tm mono">12:40 · 84′ · 3D</div>
             </div>
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
           
-          <div class="block" style="left:35.41666666666667%; width:12.916666666666664%"
-               title="The Bee Kingdom · preshow 15:40 · feature 16:00–17:24 · clear 17:44">
+          <div class="block" style="left:30.729166666666668%; width:12.916666666666668%"
+               title="The Bee Kingdom · preshow 14:55 · feature 15:15–16:39 · clear 16:59">
             <div class="pre" style="width:16.129032258064516%"></div>
-            <div class="feat" style="width:67.74193548387099%">
+            <div class="feat" style="width:67.74193548387096%">
               <div class="t">The Bee Kingdom</div>
-              <div class="tm mono">15:40 · 84′ · 3D</div>
+              <div class="tm mono">14:55 · 84′ · 3D</div>
             </div>
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
           
-          <div class="block prime" style="left:48.4375%; width:13.75%"
-               title="Dead Signal · preshow 17:45 · feature 18:05–19:37 · clear 19:57">
-            <div class="pre" style="width:15.151515151515149%"></div>
-            <div class="feat" style="width:69.6969696969697%">
-              <div class="t">Dead Signal</div>
-              <div class="tm mono">17:45 · 92′</div>
-            </div>
-            <div class="clean" style="width:15.151515151515149%"></div>
-          </div>
-          
-          <div class="block prime" style="left:63.020833333333336%; width:15.0%"
-               title="Harvest Moon · preshow 20:05 · feature 20:25–22:09 · clear 22:29">
-            <div class="pre" style="width:13.888888888888888%"></div>
+          <div class="block prime" style="left:47.91666666666667%; width:15.0%"
+               title="Harvest Moon · preshow 17:40 · feature 18:00–19:44 · clear 20:04">
+            <div class="pre" style="width:13.88888888888889%"></div>
             <div class="feat" style="width:72.22222222222221%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">20:05 · 104′</div>
+              <div class="tm mono">17:40 · 104′</div>
             </div>
-            <div class="clean" style="width:13.888888888888888%"></div>
+            <div class="clean" style="width:13.88888888888889%"></div>
           </div>
           
-          <div class="block" style="left:78.125%; width:13.75%"
-               title="Dead Signal · preshow 22:30 · feature 22:50–00:22 · clear 00:42">
-            <div class="pre" style="width:15.151515151515149%"></div>
+          <div class="block prime" style="left:63.020833333333336%; width:13.750000000000002%"
+               title="Dead Signal · preshow 20:05 · feature 20:25–21:57 · clear 22:17">
+            <div class="pre" style="width:15.151515151515152%"></div>
             <div class="feat" style="width:69.6969696969697%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">22:30 · 92′</div>
+              <div class="tm mono">20:05 · 92′</div>
             </div>
-            <div class="clean" style="width:15.151515151515149%"></div>
+            <div class="clean" style="width:15.151515151515152%"></div>
+          </div>
+          
+          <div class="block" style="left:77.08333333333334%; width:13.750000000000002%"
+               title="Dead Signal · preshow 22:20 · feature 22:40–00:12 · clear 00:32">
+            <div class="pre" style="width:15.151515151515152%"></div>
+            <div class="feat" style="width:69.6969696969697%">
+              <div class="t">Dead Signal</div>
+              <div class="tm mono">22:20 · 92′</div>
+            </div>
+            <div class="clean" style="width:15.151515151515152%"></div>
           </div>
           
         </div>
@@ -648,7 +650,7 @@
           
           <div class="block" style="left:0.0%; width:14.479166666666668%"
                title="Harvest Moon · preshow 10:00 · feature 10:20–12:04 · clear 12:19">
-            <div class="pre" style="width:14.38848920863309%"></div>
+            <div class="pre" style="width:14.388489208633093%"></div>
             <div class="feat" style="width:74.82014388489209%">
               <div class="t">Harvest Moon</div>
               <div class="tm mono">10:00 · 104′</div>
@@ -659,51 +661,51 @@
           <div class="block" style="left:14.583333333333334%; width:16.25%"
                title="Atlas of Small Rooms · preshow 12:20 · feature 12:40–14:41 · clear 14:56">
             <div class="pre" style="width:12.82051282051282%"></div>
-            <div class="feat" style="width:77.56410256410255%">
+            <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
               <div class="tm mono">12:20 · 121′</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:31.25%; width:14.479166666666668%"
-               title="Harvest Moon · preshow 15:00 · feature 15:20–17:04 · clear 17:19">
-            <div class="pre" style="width:14.38848920863309%"></div>
+          <div class="block" style="left:31.770833333333332%; width:14.479166666666668%"
+               title="Harvest Moon · preshow 15:05 · feature 15:25–17:09 · clear 17:24">
+            <div class="pre" style="width:14.388489208633093%"></div>
             <div class="feat" style="width:74.82014388489209%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">15:00 · 104′</div>
+              <div class="tm mono">15:05 · 104′</div>
             </div>
             <div class="clean" style="width:10.79136690647482%"></div>
           </div>
           
-          <div class="block" style="left:46.35416666666667%; width:13.229166666666668%"
+          <div class="block" style="left:46.35416666666667%; width:13.229166666666666%"
                title="Dead Signal · preshow 17:25 · feature 17:45–19:17 · clear 19:32">
-            <div class="pre" style="width:15.748031496062989%"></div>
+            <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
               <div class="tm mono">17:25 · 92′</div>
             </div>
-            <div class="clean" style="width:11.811023622047243%"></div>
+            <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
-          <div class="block prime" style="left:60.416666666666664%; width:16.25%"
-               title="Atlas of Small Rooms · preshow 19:40 · feature 20:00–22:01 · clear 22:16">
+          <div class="block prime" style="left:61.458333333333336%; width:16.25%"
+               title="Atlas of Small Rooms · preshow 19:50 · feature 20:10–22:11 · clear 22:26">
             <div class="pre" style="width:12.82051282051282%"></div>
-            <div class="feat" style="width:77.56410256410255%">
+            <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
-              <div class="tm mono">19:40 · 121′</div>
+              <div class="tm mono">19:50 · 121′</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:77.08333333333334%; width:13.229166666666668%"
-               title="Dead Signal · preshow 22:20 · feature 22:40–00:12 · clear 00:27">
-            <div class="pre" style="width:15.748031496062989%"></div>
+          <div class="block" style="left:78.125%; width:13.229166666666666%"
+               title="Dead Signal · preshow 22:30 · feature 22:50–00:22 · clear 00:37">
+            <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">22:20 · 92′</div>
+              <div class="tm mono">22:30 · 92′</div>
             </div>
-            <div class="clean" style="width:11.811023622047243%"></div>
+            <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
         </div>
@@ -728,7 +730,7 @@
           <td class="num">1,280</td>
           <td class="num">649</td>
           <td class="num">—</td>
-          <td class="starts">10:35  15:10  18:40  22:10</td>
+          <td class="starts">11:00  14:45  18:15  22:05</td>
         </tr>
         
         <tr>
@@ -738,7 +740,7 @@
           <td class="num">552</td>
           <td class="num">398</td>
           <td class="num away">2</td>
-          <td class="starts">10:00  10:15  15:00  20:05</td>
+          <td class="starts">10:00  10:15  15:05  17:40</td>
         </tr>
         
         <tr>
@@ -748,7 +750,7 @@
           <td class="num">552</td>
           <td class="num">353</td>
           <td class="num">—</td>
-          <td class="starts">17:25  17:45  22:20  22:30</td>
+          <td class="starts">17:25  20:05  22:20  22:30</td>
         </tr>
         
         <tr>
@@ -758,7 +760,7 @@
           <td class="num">192</td>
           <td class="num">140</td>
           <td class="num">—</td>
-          <td class="starts">12:20  19:40</td>
+          <td class="starts">12:20  19:50</td>
         </tr>
         
         <tr>
@@ -768,7 +770,7 @@
           <td class="num">360</td>
           <td class="num">142</td>
           <td class="num">—</td>
-          <td class="starts">13:05  15:40</td>
+          <td class="starts">12:40  14:55</td>
         </tr>
         
         </tbody>
@@ -843,7 +845,7 @@
         
         <div>doors 10:00 · last start 22:30 · turnaround 20′</div>
         <div>last_start 22:30</div>
-        <div>solved in 5.813s · objective 1,681</div>
+        <div>solved in 3.597s · objective 1,681</div>
       </div>
     </div>
     
@@ -862,44 +864,44 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:3.6458333333333335%; width:21.666666666666664%"
-               title="The Long Voyage · preshow 10:35 · feature 10:55–13:43 · clear 14:03">
-            <div class="pre" style="width:9.615384615384615%"></div>
-            <div class="feat" style="width:80.76923076923079%">
+          <div class="block" style="left:4.6875%; width:21.666666666666668%"
+               title="The Long Voyage · preshow 10:45 · feature 11:05–13:53 · clear 14:13">
+            <div class="pre" style="width:9.615384615384617%"></div>
+            <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">10:35 · 168′ · PLF</div>
+              <div class="tm mono">10:45 · 168′ · PLF</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:27.083333333333332%; width:21.666666666666664%"
-               title="The Long Voyage · preshow 14:20 · feature 14:40–17:28 · clear 17:48">
-            <div class="pre" style="width:9.615384615384615%"></div>
-            <div class="feat" style="width:80.76923076923079%">
+          <div class="block" style="left:26.5625%; width:21.666666666666668%"
+               title="The Long Voyage · preshow 14:15 · feature 14:35–17:23 · clear 17:43">
+            <div class="pre" style="width:9.615384615384617%"></div>
+            <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">14:20 · 168′ · PLF</div>
+              <div class="tm mono">14:15 · 168′ · PLF</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block prime" style="left:48.95833333333333%; width:21.666666666666664%"
-               title="The Long Voyage · preshow 17:50 · feature 18:10–20:58 · clear 21:18">
-            <div class="pre" style="width:9.615384615384615%"></div>
-            <div class="feat" style="width:80.76923076923079%">
+          <div class="block prime" style="left:51.041666666666664%; width:21.666666666666668%"
+               title="The Long Voyage · preshow 18:10 · feature 18:30–21:18 · clear 21:38">
+            <div class="pre" style="width:9.615384615384617%"></div>
+            <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">17:50 · 168′ · PLF</div>
+              <div class="tm mono">18:10 · 168′ · PLF</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:75.0%; width:21.666666666666664%"
-               title="The Long Voyage · preshow 22:00 · feature 22:20–01:08 · clear 01:28">
-            <div class="pre" style="width:9.615384615384615%"></div>
-            <div class="feat" style="width:80.76923076923079%">
+          <div class="block" style="left:75.52083333333334%; width:21.666666666666668%"
+               title="The Long Voyage · preshow 22:05 · feature 22:25–01:13 · clear 01:33">
+            <div class="pre" style="width:9.615384615384617%"></div>
+            <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">22:00 · 168′ · PLF</div>
+              <div class="tm mono">22:05 · 168′ · PLF</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
         </div>
@@ -912,64 +914,64 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:1.0416666666666665%; width:15.0%"
-               title="Harvest Moon · preshow 10:10 · feature 10:30–12:14 · clear 12:34">
-            <div class="pre" style="width:13.888888888888888%"></div>
+          <div class="block" style="left:5.729166666666666%; width:15.0%"
+               title="Harvest Moon · preshow 10:55 · feature 11:15–12:59 · clear 13:19">
+            <div class="pre" style="width:13.88888888888889%"></div>
             <div class="feat" style="width:72.22222222222221%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">10:10 · 104′</div>
+              <div class="tm mono">10:55 · 104′</div>
             </div>
-            <div class="clean" style="width:13.888888888888888%"></div>
+            <div class="clean" style="width:13.88888888888889%"></div>
           </div>
           
-          <div class="block" style="left:21.354166666666664%; width:12.916666666666664%"
-               title="The Bee Kingdom · preshow 13:25 · feature 13:45–15:09 · clear 15:29">
+          <div class="block" style="left:20.833333333333336%; width:12.916666666666668%"
+               title="The Bee Kingdom · preshow 13:20 · feature 13:40–15:04 · clear 15:24">
             <div class="pre" style="width:16.129032258064516%"></div>
-            <div class="feat" style="width:67.74193548387099%">
+            <div class="feat" style="width:67.74193548387096%">
               <div class="t">The Bee Kingdom</div>
-              <div class="tm mono">13:25 · 84′ · 3D</div>
+              <div class="tm mono">13:20 · 84′ · 3D</div>
             </div>
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
           
-          <div class="block" style="left:34.375%; width:12.916666666666664%"
-               title="The Bee Kingdom · preshow 15:30 · feature 15:50–17:14 · clear 17:34">
+          <div class="block" style="left:33.85416666666667%; width:12.916666666666668%"
+               title="The Bee Kingdom · preshow 15:25 · feature 15:45–17:09 · clear 17:29">
             <div class="pre" style="width:16.129032258064516%"></div>
-            <div class="feat" style="width:67.74193548387099%">
+            <div class="feat" style="width:67.74193548387096%">
               <div class="t">The Bee Kingdom</div>
-              <div class="tm mono">15:30 · 84′ · 3D</div>
+              <div class="tm mono">15:25 · 84′ · 3D</div>
             </div>
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
           
-          <div class="block prime" style="left:47.39583333333333%; width:13.75%"
-               title="Dead Signal · preshow 17:35 · feature 17:55–19:27 · clear 19:47">
-            <div class="pre" style="width:15.151515151515149%"></div>
+          <div class="block prime" style="left:47.91666666666667%; width:13.750000000000002%"
+               title="Dead Signal · preshow 17:40 · feature 18:00–19:32 · clear 19:52">
+            <div class="pre" style="width:15.151515151515152%"></div>
             <div class="feat" style="width:69.6969696969697%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">17:35 · 92′</div>
+              <div class="tm mono">17:40 · 92′</div>
             </div>
-            <div class="clean" style="width:15.151515151515149%"></div>
+            <div class="clean" style="width:15.151515151515152%"></div>
           </div>
           
-          <div class="block prime" style="left:61.458333333333336%; width:15.0%"
-               title="Harvest Moon · preshow 19:50 · feature 20:10–21:54 · clear 22:14">
-            <div class="pre" style="width:13.888888888888888%"></div>
+          <div class="block prime" style="left:61.979166666666664%; width:15.0%"
+               title="Harvest Moon · preshow 19:55 · feature 20:15–21:59 · clear 22:19">
+            <div class="pre" style="width:13.88888888888889%"></div>
             <div class="feat" style="width:72.22222222222221%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">19:50 · 104′</div>
+              <div class="tm mono">19:55 · 104′</div>
             </div>
-            <div class="clean" style="width:13.888888888888888%"></div>
+            <div class="clean" style="width:13.88888888888889%"></div>
           </div>
           
-          <div class="block" style="left:76.5625%; width:13.75%"
-               title="Dead Signal · preshow 22:15 · feature 22:35–00:07 · clear 00:27">
-            <div class="pre" style="width:15.151515151515149%"></div>
+          <div class="block" style="left:77.08333333333334%; width:13.750000000000002%"
+               title="Dead Signal · preshow 22:20 · feature 22:40–00:12 · clear 00:32">
+            <div class="pre" style="width:15.151515151515152%"></div>
             <div class="feat" style="width:69.6969696969697%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">22:15 · 92′</div>
+              <div class="tm mono">22:20 · 92′</div>
             </div>
-            <div class="clean" style="width:15.151515151515149%"></div>
+            <div class="clean" style="width:15.151515151515152%"></div>
           </div>
           
         </div>
@@ -984,7 +986,7 @@
           
           <div class="block" style="left:0.0%; width:14.479166666666668%"
                title="Harvest Moon · preshow 10:00 · feature 10:20–12:04 · clear 12:19">
-            <div class="pre" style="width:14.38848920863309%"></div>
+            <div class="pre" style="width:14.388489208633093%"></div>
             <div class="feat" style="width:74.82014388489209%">
               <div class="t">Harvest Moon</div>
               <div class="tm mono">10:00 · 104′</div>
@@ -995,51 +997,51 @@
           <div class="block" style="left:14.583333333333334%; width:16.25%"
                title="Atlas of Small Rooms · preshow 12:20 · feature 12:40–14:41 · clear 14:56">
             <div class="pre" style="width:12.82051282051282%"></div>
-            <div class="feat" style="width:77.56410256410255%">
+            <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
               <div class="tm mono">12:20 · 121′</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:31.770833333333332%; width:14.479166666666668%"
-               title="Harvest Moon · preshow 15:05 · feature 15:25–17:09 · clear 17:24">
-            <div class="pre" style="width:14.38848920863309%"></div>
+          <div class="block" style="left:31.25%; width:14.479166666666668%"
+               title="Harvest Moon · preshow 15:00 · feature 15:20–17:04 · clear 17:19">
+            <div class="pre" style="width:14.388489208633093%"></div>
             <div class="feat" style="width:74.82014388489209%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">15:05 · 104′</div>
+              <div class="tm mono">15:00 · 104′</div>
             </div>
             <div class="clean" style="width:10.79136690647482%"></div>
           </div>
           
-          <div class="block" style="left:46.35416666666667%; width:13.229166666666668%"
-               title="Dead Signal · preshow 17:25 · feature 17:45–19:17 · clear 19:32">
-            <div class="pre" style="width:15.748031496062989%"></div>
+          <div class="block" style="left:45.83333333333333%; width:13.229166666666666%"
+               title="Dead Signal · preshow 17:20 · feature 17:40–19:12 · clear 19:27">
+            <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">17:25 · 92′</div>
+              <div class="tm mono">17:20 · 92′</div>
             </div>
-            <div class="clean" style="width:11.811023622047243%"></div>
+            <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
-          <div class="block prime" style="left:59.895833333333336%; width:16.25%"
-               title="Atlas of Small Rooms · preshow 19:35 · feature 19:55–21:56 · clear 22:11">
+          <div class="block prime" style="left:60.9375%; width:16.25%"
+               title="Atlas of Small Rooms · preshow 19:45 · feature 20:05–22:06 · clear 22:21">
             <div class="pre" style="width:12.82051282051282%"></div>
-            <div class="feat" style="width:77.56410256410255%">
+            <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
-              <div class="tm mono">19:35 · 121′</div>
+              <div class="tm mono">19:45 · 121′</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:77.60416666666666%; width:13.229166666666668%"
-               title="Dead Signal · preshow 22:25 · feature 22:45–00:17 · clear 00:32">
-            <div class="pre" style="width:15.748031496062989%"></div>
+          <div class="block" style="left:78.125%; width:13.229166666666666%"
+               title="Dead Signal · preshow 22:30 · feature 22:50–00:22 · clear 00:37">
+            <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">22:25 · 92′</div>
+              <div class="tm mono">22:30 · 92′</div>
             </div>
-            <div class="clean" style="width:11.811023622047243%"></div>
+            <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
         </div>
@@ -1064,7 +1066,7 @@
           <td class="num">1,280</td>
           <td class="num">649</td>
           <td class="num">—</td>
-          <td class="starts">10:35  14:20  17:50  22:00</td>
+          <td class="starts">10:45  14:15  18:10  22:05</td>
         </tr>
         
         <tr>
@@ -1074,7 +1076,7 @@
           <td class="num">552</td>
           <td class="num">398</td>
           <td class="num away">2</td>
-          <td class="starts">10:00  10:10  15:05  19:50</td>
+          <td class="starts">10:00  10:55  15:00  19:55</td>
         </tr>
         
         <tr>
@@ -1084,7 +1086,7 @@
           <td class="num">552</td>
           <td class="num">353</td>
           <td class="num">—</td>
-          <td class="starts">17:25  17:35  22:15  22:25</td>
+          <td class="starts">17:20  17:40  22:20  22:30</td>
         </tr>
         
         <tr>
@@ -1094,7 +1096,7 @@
           <td class="num">192</td>
           <td class="num">140</td>
           <td class="num">—</td>
-          <td class="starts">12:20  19:35</td>
+          <td class="starts">12:20  19:45</td>
         </tr>
         
         <tr>
@@ -1104,7 +1106,7 @@
           <td class="num">360</td>
           <td class="num">142</td>
           <td class="num">—</td>
-          <td class="starts">13:25  15:30</td>
+          <td class="starts">13:20  15:25</td>
         </tr>
         
         </tbody>
@@ -1179,7 +1181,7 @@
         
         <div>doors 11:00 · last start 21:30 · turnaround 20′</div>
         <div>open 11:00</div>
-        <div>solved in 3.615s · objective 1,553</div>
+        <div>solved in 3.901s · objective 1,553</div>
       </div>
     </div>
     
@@ -1198,40 +1200,40 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:0.0%; width:24.76190476190476%"
+          <div class="block" style="left:0.0%; width:24.761904761904763%"
                title="The Long Voyage · preshow 11:00 · feature 11:20–14:08 · clear 14:28">
             <div class="pre" style="width:9.615384615384617%"></div>
-            <div class="feat" style="width:80.76923076923079%">
+            <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
               <div class="tm mono">11:00 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:25.0%; width:24.76190476190476%"
+          <div class="block" style="left:25.0%; width:24.761904761904763%"
                title="The Long Voyage · preshow 14:30 · feature 14:50–17:38 · clear 17:58">
             <div class="pre" style="width:9.615384615384617%"></div>
-            <div class="feat" style="width:80.76923076923079%">
+            <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
               <div class="tm mono">14:30 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block prime" style="left:50.0%; width:24.76190476190476%"
+          <div class="block prime" style="left:50.0%; width:24.761904761904763%"
                title="The Long Voyage · preshow 18:00 · feature 18:20–21:08 · clear 21:28">
             <div class="pre" style="width:9.615384615384617%"></div>
-            <div class="feat" style="width:80.76923076923079%">
+            <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
               <div class="tm mono">18:00 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:75.0%; width:24.76190476190476%"
+          <div class="block" style="left:75.0%; width:24.761904761904763%"
                title="The Long Voyage · preshow 21:30 · feature 21:50–00:38 · clear 00:58">
             <div class="pre" style="width:9.615384615384617%"></div>
-            <div class="feat" style="width:80.76923076923079%">
+            <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
               <div class="tm mono">21:30 · 168′ · PLF</div>
             </div>
@@ -1248,22 +1250,22 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:1.7857142857142856%; width:14.761904761904763%"
-               title="The Bee Kingdom · preshow 11:15 · feature 11:35–12:59 · clear 13:19">
+          <div class="block" style="left:4.166666666666666%; width:14.761904761904763%"
+               title="The Bee Kingdom · preshow 11:35 · feature 11:55–13:19 · clear 13:39">
             <div class="pre" style="width:16.129032258064516%"></div>
             <div class="feat" style="width:67.74193548387096%">
               <div class="t">The Bee Kingdom</div>
-              <div class="tm mono">11:15 · 84′ · 3D</div>
+              <div class="tm mono">11:35 · 84′ · 3D</div>
             </div>
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
           
-          <div class="block" style="left:17.857142857142858%; width:17.142857142857142%"
-               title="Harvest Moon · preshow 13:30 · feature 13:50–15:34 · clear 15:54">
+          <div class="block" style="left:19.642857142857142%; width:17.142857142857142%"
+               title="Harvest Moon · preshow 13:45 · feature 14:05–15:49 · clear 16:09">
             <div class="pre" style="width:13.88888888888889%"></div>
-            <div class="feat" style="width:72.22222222222223%">
+            <div class="feat" style="width:72.22222222222221%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">13:30 · 104′</div>
+              <div class="tm mono">13:45 · 104′</div>
             </div>
             <div class="clean" style="width:13.88888888888889%"></div>
           </div>
@@ -1278,20 +1280,20 @@
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
           
-          <div class="block prime" style="left:52.976190476190474%; width:15.714285714285715%"
-               title="Dead Signal · preshow 18:25 · feature 18:45–20:17 · clear 20:37">
-            <div class="pre" style="width:15.151515151515149%"></div>
-            <div class="feat" style="width:69.69696969696969%">
+          <div class="block prime" style="left:52.38095238095239%; width:15.714285714285714%"
+               title="Dead Signal · preshow 18:20 · feature 18:40–20:12 · clear 20:32">
+            <div class="pre" style="width:15.151515151515152%"></div>
+            <div class="feat" style="width:69.6969696969697%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">18:25 · 92′</div>
+              <div class="tm mono">18:20 · 92′</div>
             </div>
-            <div class="clean" style="width:15.151515151515149%"></div>
+            <div class="clean" style="width:15.151515151515152%"></div>
           </div>
           
           <div class="block prime" style="left:69.04761904761905%; width:17.142857142857142%"
                title="Harvest Moon · preshow 20:40 · feature 21:00–22:44 · clear 23:04">
             <div class="pre" style="width:13.88888888888889%"></div>
-            <div class="feat" style="width:72.22222222222223%">
+            <div class="feat" style="width:72.22222222222221%">
               <div class="t">Harvest Moon</div>
               <div class="tm mono">20:40 · 104′</div>
             </div>
@@ -1308,54 +1310,54 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:2.976190476190476%; width:18.57142857142857%"
-               title="Atlas of Small Rooms · preshow 11:25 · feature 11:45–13:46 · clear 14:01">
-            <div class="pre" style="width:12.820512820512823%"></div>
+          <div class="block" style="left:2.380952380952381%; width:18.571428571428573%"
+               title="Atlas of Small Rooms · preshow 11:20 · feature 11:40–13:41 · clear 13:56">
+            <div class="pre" style="width:12.82051282051282%"></div>
             <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
-              <div class="tm mono">11:25 · 121′</div>
+              <div class="tm mono">11:20 · 121′</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:22.023809523809522%; width:16.547619047619047%"
-               title="Harvest Moon · preshow 14:05 · feature 14:25–16:09 · clear 16:24">
+          <div class="block" style="left:21.428571428571427%; width:16.547619047619047%"
+               title="Harvest Moon · preshow 14:00 · feature 14:20–16:04 · clear 16:19">
             <div class="pre" style="width:14.388489208633093%"></div>
             <div class="feat" style="width:74.82014388489209%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">14:05 · 104′</div>
+              <div class="tm mono">14:00 · 104′</div>
             </div>
             <div class="clean" style="width:10.79136690647482%"></div>
           </div>
           
-          <div class="block" style="left:38.69047619047619%; width:15.11904761904762%"
-               title="Dead Signal · preshow 16:25 · feature 16:45–18:17 · clear 18:32">
+          <div class="block" style="left:38.095238095238095%; width:15.119047619047619%"
+               title="Dead Signal · preshow 16:20 · feature 16:40–18:12 · clear 18:27">
             <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">16:25 · 92′</div>
+              <div class="tm mono">16:20 · 92′</div>
             </div>
-            <div class="clean" style="width:11.811023622047243%"></div>
+            <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
-          <div class="block prime" style="left:54.761904761904766%; width:18.57142857142857%"
-               title="Atlas of Small Rooms · preshow 18:40 · feature 19:00–21:01 · clear 21:16">
-            <div class="pre" style="width:12.820512820512823%"></div>
+          <div class="block prime" style="left:53.57142857142857%; width:18.571428571428573%"
+               title="Atlas of Small Rooms · preshow 18:30 · feature 18:50–20:51 · clear 21:06">
+            <div class="pre" style="width:12.82051282051282%"></div>
             <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
-              <div class="tm mono">18:40 · 121′</div>
+              <div class="tm mono">18:30 · 121′</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:73.80952380952381%; width:15.11904761904762%"
-               title="Dead Signal · preshow 21:20 · feature 21:40–23:12 · clear 23:27">
+          <div class="block" style="left:72.61904761904762%; width:15.119047619047619%"
+               title="Dead Signal · preshow 21:10 · feature 21:30–23:02 · clear 23:17">
             <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">21:20 · 92′</div>
+              <div class="tm mono">21:10 · 92′</div>
             </div>
-            <div class="clean" style="width:11.811023622047243%"></div>
+            <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
         </div>
@@ -1390,7 +1392,7 @@
           <td class="num">456</td>
           <td class="num">333</td>
           <td class="num away">2</td>
-          <td class="starts">13:30  14:05  20:40</td>
+          <td class="starts">13:45  14:00  20:40</td>
         </tr>
         
         <tr>
@@ -1400,7 +1402,7 @@
           <td class="num">372</td>
           <td class="num">288</td>
           <td class="num away">4</td>
-          <td class="starts">16:25  18:25  21:20</td>
+          <td class="starts">16:20  18:20  21:10</td>
         </tr>
         
         <tr>
@@ -1410,7 +1412,7 @@
           <td class="num">192</td>
           <td class="num">140</td>
           <td class="num">—</td>
-          <td class="starts">11:25  18:40</td>
+          <td class="starts">11:20  18:30</td>
         </tr>
         
         <tr>
@@ -1420,7 +1422,7 @@
           <td class="num">360</td>
           <td class="num">142</td>
           <td class="num">—</td>
-          <td class="starts">11:15  16:10</td>
+          <td class="starts">11:35  16:10</td>
         </tr>
         
         </tbody>
@@ -1495,7 +1497,7 @@
         
         <div>doors 10:00 · last start 21:30 · turnaround 20′</div>
         <div>The Long Voyage exclusive_screen false</div>
-        <div>solved in 0.408s · objective 1,609</div>
+        <div>solved in 0.467s · objective 1,609</div>
       </div>
     </div>
     
@@ -1514,32 +1516,32 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:2.7777777777777777%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 10:25 · feature 10:45–13:33 · clear 13:53">
+          <div class="block" style="left:3.3333333333333335%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 10:30 · feature 10:50–13:38 · clear 13:58">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">10:25 · 168′ · PLF</div>
+              <div class="tm mono">10:30 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:27.22222222222222%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 14:05 · feature 14:25–17:13 · clear 17:33">
+          <div class="block" style="left:26.666666666666668%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 14:00 · feature 14:20–17:08 · clear 17:28">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">14:05 · 168′ · PLF</div>
+              <div class="tm mono">14:00 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block prime" style="left:51.66666666666667%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 17:45 · feature 18:05–20:53 · clear 21:13">
+          <div class="block prime" style="left:50.55555555555556%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 17:35 · feature 17:55–20:43 · clear 21:03">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">17:45 · 168′ · PLF</div>
+              <div class="tm mono">17:35 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
@@ -1564,42 +1566,42 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:0.0%; width:13.777777777777779%"
-               title="The Bee Kingdom · preshow 10:00 · feature 10:20–11:44 · clear 12:04">
+          <div class="block" style="left:0.0%; width:16.0%"
+               title="Harvest Moon · preshow 10:00 · feature 10:20–12:04 · clear 12:24">
+            <div class="pre" style="width:13.88888888888889%"></div>
+            <div class="feat" style="width:72.22222222222221%">
+              <div class="t">Harvest Moon</div>
+              <div class="tm mono">10:00 · 104′</div>
+            </div>
+            <div class="clean" style="width:13.88888888888889%"></div>
+          </div>
+          
+          <div class="block" style="left:16.11111111111111%; width:13.777777777777779%"
+               title="The Bee Kingdom · preshow 12:25 · feature 12:45–14:09 · clear 14:29">
             <div class="pre" style="width:16.129032258064516%"></div>
             <div class="feat" style="width:67.74193548387096%">
               <div class="t">The Bee Kingdom</div>
-              <div class="tm mono">10:00 · 84′ · 3D</div>
+              <div class="tm mono">12:25 · 84′ · 3D</div>
             </div>
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
           
-          <div class="block" style="left:13.88888888888889%; width:16.0%"
-               title="Harvest Moon · preshow 12:05 · feature 12:25–14:09 · clear 14:29">
+          <div class="block" style="left:30.555555555555557%; width:16.0%"
+               title="Harvest Moon · preshow 14:35 · feature 14:55–16:39 · clear 16:59">
             <div class="pre" style="width:13.88888888888889%"></div>
             <div class="feat" style="width:72.22222222222221%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">12:05 · 104′</div>
+              <div class="tm mono">14:35 · 104′</div>
             </div>
             <div class="clean" style="width:13.88888888888889%"></div>
           </div>
           
-          <div class="block" style="left:30.0%; width:16.0%"
-               title="Harvest Moon · preshow 14:30 · feature 14:50–16:34 · clear 16:54">
-            <div class="pre" style="width:13.88888888888889%"></div>
-            <div class="feat" style="width:72.22222222222221%">
-              <div class="t">Harvest Moon</div>
-              <div class="tm mono">14:30 · 104′</div>
-            </div>
-            <div class="clean" style="width:13.88888888888889%"></div>
-          </div>
-          
-          <div class="block" style="left:46.111111111111114%; width:13.777777777777779%"
-               title="The Bee Kingdom · preshow 16:55 · feature 17:15–18:39 · clear 18:59">
+          <div class="block" style="left:46.666666666666664%; width:13.777777777777779%"
+               title="The Bee Kingdom · preshow 17:00 · feature 17:20–18:44 · clear 19:04">
             <div class="pre" style="width:16.129032258064516%"></div>
             <div class="feat" style="width:67.74193548387096%">
               <div class="t">The Bee Kingdom</div>
-              <div class="tm mono">16:55 · 84′ · 3D</div>
+              <div class="tm mono">17:00 · 84′ · 3D</div>
             </div>
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
@@ -1614,7 +1616,7 @@
             <div class="clean" style="width:13.88888888888889%"></div>
           </div>
           
-          <div class="block" style="left:76.66666666666667%; width:14.666666666666668%"
+          <div class="block" style="left:76.66666666666667%; width:14.666666666666666%"
                title="Dead Signal · preshow 21:30 · feature 21:50–23:22 · clear 23:42">
             <div class="pre" style="width:15.151515151515152%"></div>
             <div class="feat" style="width:69.6969696969697%">
@@ -1634,54 +1636,54 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:5.555555555555555%; width:15.444444444444445%"
-               title="Harvest Moon · preshow 10:50 · feature 11:10–12:54 · clear 13:09">
+          <div class="block" style="left:6.111111111111111%; width:15.444444444444445%"
+               title="Harvest Moon · preshow 10:55 · feature 11:15–12:59 · clear 13:14">
             <div class="pre" style="width:14.388489208633093%"></div>
             <div class="feat" style="width:74.82014388489209%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">10:50 · 104′</div>
+              <div class="tm mono">10:55 · 104′</div>
             </div>
             <div class="clean" style="width:10.79136690647482%"></div>
           </div>
           
-          <div class="block" style="left:22.77777777777778%; width:17.333333333333336%"
-               title="Atlas of Small Rooms · preshow 13:25 · feature 13:45–15:46 · clear 16:01">
+          <div class="block" style="left:21.666666666666668%; width:17.333333333333336%"
+               title="Atlas of Small Rooms · preshow 13:15 · feature 13:35–15:36 · clear 15:51">
             <div class="pre" style="width:12.82051282051282%"></div>
-            <div class="feat" style="width:77.56410256410255%">
+            <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
-              <div class="tm mono">13:25 · 121′</div>
+              <div class="tm mono">13:15 · 121′</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:40.55555555555556%; width:14.111111111111112%"
-               title="Dead Signal · preshow 16:05 · feature 16:25–17:57 · clear 18:12">
+          <div class="block" style="left:41.11111111111111%; width:14.11111111111111%"
+               title="Dead Signal · preshow 16:10 · feature 16:30–18:02 · clear 18:17">
             <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">16:05 · 92′</div>
+              <div class="tm mono">16:10 · 92′</div>
             </div>
             <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
-          <div class="block prime" style="left:56.111111111111114%; width:14.111111111111112%"
-               title="Dead Signal · preshow 18:25 · feature 18:45–20:17 · clear 20:32">
+          <div class="block prime" style="left:55.55555555555556%; width:14.11111111111111%"
+               title="Dead Signal · preshow 18:20 · feature 18:40–20:12 · clear 20:27">
             <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">18:25 · 92′</div>
+              <div class="tm mono">18:20 · 92′</div>
             </div>
             <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
-          <div class="block prime" style="left:70.55555555555556%; width:17.333333333333336%"
-               title="Atlas of Small Rooms · preshow 20:35 · feature 20:55–22:56 · clear 23:11">
+          <div class="block prime" style="left:71.11111111111111%; width:17.333333333333336%"
+               title="Atlas of Small Rooms · preshow 20:40 · feature 21:00–23:01 · clear 23:16">
             <div class="pre" style="width:12.82051282051282%"></div>
-            <div class="feat" style="width:77.56410256410255%">
+            <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
-              <div class="tm mono">20:35 · 121′</div>
+              <div class="tm mono">20:40 · 121′</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
         </div>
@@ -1706,7 +1708,7 @@
           <td class="num">1,280</td>
           <td class="num">649</td>
           <td class="num">—</td>
-          <td class="starts">10:25  14:05  17:45  21:15</td>
+          <td class="starts">10:30  14:00  17:35  21:15</td>
         </tr>
         
         <tr>
@@ -1716,7 +1718,7 @@
           <td class="num">636</td>
           <td class="num">399</td>
           <td class="num">—</td>
-          <td class="starts">10:50  12:05  14:30  19:05</td>
+          <td class="starts">10:00  10:55  14:35  19:05</td>
         </tr>
         
         <tr>
@@ -1726,7 +1728,7 @@
           <td class="num">372</td>
           <td class="num">279</td>
           <td class="num away">14</td>
-          <td class="starts">16:05  18:25  21:30</td>
+          <td class="starts">16:10  18:20  21:30</td>
         </tr>
         
         <tr>
@@ -1736,7 +1738,7 @@
           <td class="num">192</td>
           <td class="num">140</td>
           <td class="num">—</td>
-          <td class="starts">13:25  20:35</td>
+          <td class="starts">13:15  20:40</td>
         </tr>
         
         <tr>
@@ -1746,7 +1748,7 @@
           <td class="num">360</td>
           <td class="num">142</td>
           <td class="num">—</td>
-          <td class="starts">10:00  16:55</td>
+          <td class="starts">12:25  17:00</td>
         </tr>
         
         </tbody>
@@ -1819,7 +1821,7 @@
         
         <div>doors 10:00 · last start 21:30 · turnaround 20′</div>
         <div>The Long Voyage exclusive_screen false · The Bee Kingdom min_shows 3</div>
-        <div>solved in 1.368s · objective 1,455 after 120 paid to hold</div>
+        <div>solved in 2.872s · objective 1,455 after 120 paid to hold</div>
       </div>
     </div>
     
@@ -1838,32 +1840,32 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:2.7777777777777777%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 10:25 · feature 10:45–13:33 · clear 13:53">
+          <div class="block" style="left:3.3333333333333335%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 10:30 · feature 10:50–13:38 · clear 13:58">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">10:25 · 168′ · PLF</div>
+              <div class="tm mono">10:30 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:27.22222222222222%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 14:05 · feature 14:25–17:13 · clear 17:33">
+          <div class="block" style="left:26.666666666666668%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 14:00 · feature 14:20–17:08 · clear 17:28">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">14:05 · 168′ · PLF</div>
+              <div class="tm mono">14:00 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block prime" style="left:51.66666666666667%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 17:45 · feature 18:05–20:53 · clear 21:13">
+          <div class="block prime" style="left:50.55555555555556%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 17:35 · feature 17:55–20:43 · clear 21:03">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">17:45 · 168′ · PLF</div>
+              <div class="tm mono">17:35 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
@@ -1888,22 +1890,22 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:0.0%; width:13.777777777777779%"
-               title="The Bee Kingdom · preshow 10:00 · feature 10:20–11:44 · clear 12:04">
+          <div class="block" style="left:1.6666666666666667%; width:13.777777777777779%"
+               title="The Bee Kingdom · preshow 10:15 · feature 10:35–11:59 · clear 12:19">
             <div class="pre" style="width:16.129032258064516%"></div>
             <div class="feat" style="width:67.74193548387096%">
               <div class="t">The Bee Kingdom</div>
-              <div class="tm mono">10:00 · 84′ · 3D</div>
+              <div class="tm mono">10:15 · 84′ · 3D</div>
             </div>
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
           
-          <div class="block" style="left:16.666666666666664%; width:13.777777777777779%"
-               title="The Bee Kingdom · preshow 12:30 · feature 12:50–14:14 · clear 14:34">
+          <div class="block" style="left:15.555555555555555%; width:13.777777777777779%"
+               title="The Bee Kingdom · preshow 12:20 · feature 12:40–14:04 · clear 14:24">
             <div class="pre" style="width:16.129032258064516%"></div>
             <div class="feat" style="width:67.74193548387096%">
               <div class="t">The Bee Kingdom</div>
-              <div class="tm mono">12:30 · 84′ · 3D</div>
+              <div class="tm mono">12:20 · 84′ · 3D</div>
             </div>
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
@@ -1938,7 +1940,7 @@
             <div class="clean" style="width:13.88888888888889%"></div>
           </div>
           
-          <div class="block" style="left:76.66666666666667%; width:14.666666666666668%"
+          <div class="block" style="left:76.66666666666667%; width:14.666666666666666%"
                title="Dead Signal · preshow 21:30 · feature 21:50–23:22 · clear 23:42">
             <div class="pre" style="width:15.151515151515152%"></div>
             <div class="feat" style="width:69.6969696969697%">
@@ -1958,54 +1960,54 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:5.555555555555555%; width:15.444444444444445%"
-               title="Harvest Moon · preshow 10:50 · feature 11:10–12:54 · clear 13:09">
+          <div class="block" style="left:0.5555555555555556%; width:15.444444444444445%"
+               title="Harvest Moon · preshow 10:05 · feature 10:25–12:09 · clear 12:24">
             <div class="pre" style="width:14.388489208633093%"></div>
             <div class="feat" style="width:74.82014388489209%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">10:50 · 104′</div>
+              <div class="tm mono">10:05 · 104′</div>
             </div>
             <div class="clean" style="width:10.79136690647482%"></div>
           </div>
           
-          <div class="block" style="left:22.77777777777778%; width:17.333333333333336%"
-               title="Atlas of Small Rooms · preshow 13:25 · feature 13:45–15:46 · clear 16:01">
+          <div class="block" style="left:21.666666666666668%; width:17.333333333333336%"
+               title="Atlas of Small Rooms · preshow 13:15 · feature 13:35–15:36 · clear 15:51">
             <div class="pre" style="width:12.82051282051282%"></div>
-            <div class="feat" style="width:77.56410256410255%">
+            <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
-              <div class="tm mono">13:25 · 121′</div>
+              <div class="tm mono">13:15 · 121′</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:40.55555555555556%; width:14.111111111111112%"
-               title="Dead Signal · preshow 16:05 · feature 16:25–17:57 · clear 18:12">
+          <div class="block" style="left:41.11111111111111%; width:14.11111111111111%"
+               title="Dead Signal · preshow 16:10 · feature 16:30–18:02 · clear 18:17">
             <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">16:05 · 92′</div>
+              <div class="tm mono">16:10 · 92′</div>
             </div>
             <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
-          <div class="block prime" style="left:56.111111111111114%; width:14.111111111111112%"
-               title="Dead Signal · preshow 18:25 · feature 18:45–20:17 · clear 20:32">
+          <div class="block prime" style="left:55.55555555555556%; width:14.11111111111111%"
+               title="Dead Signal · preshow 18:20 · feature 18:40–20:12 · clear 20:27">
             <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">18:25 · 92′</div>
+              <div class="tm mono">18:20 · 92′</div>
             </div>
             <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
-          <div class="block prime" style="left:70.55555555555556%; width:17.333333333333336%"
-               title="Atlas of Small Rooms · preshow 20:35 · feature 20:55–22:56 · clear 23:11">
+          <div class="block prime" style="left:71.11111111111111%; width:17.333333333333336%"
+               title="Atlas of Small Rooms · preshow 20:40 · feature 21:00–23:01 · clear 23:16">
             <div class="pre" style="width:12.82051282051282%"></div>
-            <div class="feat" style="width:77.56410256410255%">
+            <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
-              <div class="tm mono">20:35 · 121′</div>
+              <div class="tm mono">20:40 · 121′</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
         </div>
@@ -2030,7 +2032,7 @@
           <td class="num">1,280</td>
           <td class="num">649</td>
           <td class="num">—</td>
-          <td class="starts">10:25  14:05  17:45  21:15</td>
+          <td class="starts">10:30  14:00  17:35  21:15</td>
         </tr>
         
         <tr>
@@ -2040,7 +2042,7 @@
           <td class="num">456</td>
           <td class="num">324</td>
           <td class="num away">11</td>
-          <td class="starts">10:50  16:40  19:05</td>
+          <td class="starts">10:05  16:40  19:05</td>
         </tr>
         
         <tr>
@@ -2050,7 +2052,7 @@
           <td class="num">372</td>
           <td class="num">279</td>
           <td class="num away">14</td>
-          <td class="starts">16:05  18:25  21:30</td>
+          <td class="starts">16:10  18:20  21:30</td>
         </tr>
         
         <tr>
@@ -2060,7 +2062,7 @@
           <td class="num">192</td>
           <td class="num">140</td>
           <td class="num">—</td>
-          <td class="starts">13:25  20:35</td>
+          <td class="starts">13:15  20:40</td>
         </tr>
         
         <tr>
@@ -2070,7 +2072,7 @@
           <td class="num">540</td>
           <td class="num">185</td>
           <td class="num">—</td>
-          <td class="starts">10:00  12:30  14:35</td>
+          <td class="starts">10:15  12:20  14:35</td>
         </tr>
         
         </tbody>
@@ -2143,7 +2145,7 @@
         
         <div>doors 10:00 · last start 21:30 · turnaround 20′</div>
         <div>The Long Voyage exclusive_screen false</div>
-        <div>solved in 0.415s · objective 1,609</div>
+        <div>solved in 0.359s · objective 1,609</div>
       </div>
     </div>
     
@@ -2162,32 +2164,32 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:2.7777777777777777%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 10:25 · feature 10:45–13:33 · clear 13:53">
+          <div class="block" style="left:3.3333333333333335%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 10:30 · feature 10:50–13:38 · clear 13:58">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">10:25 · 168′ · PLF</div>
+              <div class="tm mono">10:30 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:27.22222222222222%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 14:05 · feature 14:25–17:13 · clear 17:33">
+          <div class="block" style="left:26.666666666666668%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 14:00 · feature 14:20–17:08 · clear 17:28">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">14:05 · 168′ · PLF</div>
+              <div class="tm mono">14:00 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block prime" style="left:51.66666666666667%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 17:45 · feature 18:05–20:53 · clear 21:13">
+          <div class="block prime" style="left:50.55555555555556%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 17:35 · feature 17:55–20:43 · clear 21:03">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">17:45 · 168′ · PLF</div>
+              <div class="tm mono">17:35 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
@@ -2212,42 +2214,42 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:0.0%; width:13.777777777777779%"
-               title="The Bee Kingdom · preshow 10:00 · feature 10:20–11:44 · clear 12:04">
+          <div class="block" style="left:0.0%; width:16.0%"
+               title="Harvest Moon · preshow 10:00 · feature 10:20–12:04 · clear 12:24">
+            <div class="pre" style="width:13.88888888888889%"></div>
+            <div class="feat" style="width:72.22222222222221%">
+              <div class="t">Harvest Moon</div>
+              <div class="tm mono">10:00 · 104′</div>
+            </div>
+            <div class="clean" style="width:13.88888888888889%"></div>
+          </div>
+          
+          <div class="block" style="left:16.11111111111111%; width:13.777777777777779%"
+               title="The Bee Kingdom · preshow 12:25 · feature 12:45–14:09 · clear 14:29">
             <div class="pre" style="width:16.129032258064516%"></div>
             <div class="feat" style="width:67.74193548387096%">
               <div class="t">The Bee Kingdom</div>
-              <div class="tm mono">10:00 · 84′ · 3D</div>
+              <div class="tm mono">12:25 · 84′ · 3D</div>
             </div>
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
           
-          <div class="block" style="left:13.88888888888889%; width:16.0%"
-               title="Harvest Moon · preshow 12:05 · feature 12:25–14:09 · clear 14:29">
+          <div class="block" style="left:30.555555555555557%; width:16.0%"
+               title="Harvest Moon · preshow 14:35 · feature 14:55–16:39 · clear 16:59">
             <div class="pre" style="width:13.88888888888889%"></div>
             <div class="feat" style="width:72.22222222222221%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">12:05 · 104′</div>
+              <div class="tm mono">14:35 · 104′</div>
             </div>
             <div class="clean" style="width:13.88888888888889%"></div>
           </div>
           
-          <div class="block" style="left:30.0%; width:16.0%"
-               title="Harvest Moon · preshow 14:30 · feature 14:50–16:34 · clear 16:54">
-            <div class="pre" style="width:13.88888888888889%"></div>
-            <div class="feat" style="width:72.22222222222221%">
-              <div class="t">Harvest Moon</div>
-              <div class="tm mono">14:30 · 104′</div>
-            </div>
-            <div class="clean" style="width:13.88888888888889%"></div>
-          </div>
-          
-          <div class="block" style="left:46.111111111111114%; width:13.777777777777779%"
-               title="The Bee Kingdom · preshow 16:55 · feature 17:15–18:39 · clear 18:59">
+          <div class="block" style="left:46.666666666666664%; width:13.777777777777779%"
+               title="The Bee Kingdom · preshow 17:00 · feature 17:20–18:44 · clear 19:04">
             <div class="pre" style="width:16.129032258064516%"></div>
             <div class="feat" style="width:67.74193548387096%">
               <div class="t">The Bee Kingdom</div>
-              <div class="tm mono">16:55 · 84′ · 3D</div>
+              <div class="tm mono">17:00 · 84′ · 3D</div>
             </div>
             <div class="clean" style="width:16.129032258064516%"></div>
           </div>
@@ -2262,7 +2264,7 @@
             <div class="clean" style="width:13.88888888888889%"></div>
           </div>
           
-          <div class="block" style="left:76.66666666666667%; width:14.666666666666668%"
+          <div class="block" style="left:76.66666666666667%; width:14.666666666666666%"
                title="Dead Signal · preshow 21:30 · feature 21:50–23:22 · clear 23:42">
             <div class="pre" style="width:15.151515151515152%"></div>
             <div class="feat" style="width:69.6969696969697%">
@@ -2282,54 +2284,54 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:5.555555555555555%; width:15.444444444444445%"
-               title="Harvest Moon · preshow 10:50 · feature 11:10–12:54 · clear 13:09">
+          <div class="block" style="left:6.111111111111111%; width:15.444444444444445%"
+               title="Harvest Moon · preshow 10:55 · feature 11:15–12:59 · clear 13:14">
             <div class="pre" style="width:14.388489208633093%"></div>
             <div class="feat" style="width:74.82014388489209%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">10:50 · 104′</div>
+              <div class="tm mono">10:55 · 104′</div>
             </div>
             <div class="clean" style="width:10.79136690647482%"></div>
           </div>
           
-          <div class="block" style="left:22.77777777777778%; width:17.333333333333336%"
-               title="Atlas of Small Rooms · preshow 13:25 · feature 13:45–15:46 · clear 16:01">
+          <div class="block" style="left:21.666666666666668%; width:17.333333333333336%"
+               title="Atlas of Small Rooms · preshow 13:15 · feature 13:35–15:36 · clear 15:51">
             <div class="pre" style="width:12.82051282051282%"></div>
-            <div class="feat" style="width:77.56410256410255%">
+            <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
-              <div class="tm mono">13:25 · 121′</div>
+              <div class="tm mono">13:15 · 121′</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:40.55555555555556%; width:14.111111111111112%"
-               title="Dead Signal · preshow 16:05 · feature 16:25–17:57 · clear 18:12">
+          <div class="block" style="left:41.11111111111111%; width:14.11111111111111%"
+               title="Dead Signal · preshow 16:10 · feature 16:30–18:02 · clear 18:17">
             <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">16:05 · 92′</div>
+              <div class="tm mono">16:10 · 92′</div>
             </div>
             <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
-          <div class="block prime" style="left:56.111111111111114%; width:14.111111111111112%"
-               title="Dead Signal · preshow 18:25 · feature 18:45–20:17 · clear 20:32">
+          <div class="block prime" style="left:55.55555555555556%; width:14.11111111111111%"
+               title="Dead Signal · preshow 18:20 · feature 18:40–20:12 · clear 20:27">
             <div class="pre" style="width:15.748031496062993%"></div>
             <div class="feat" style="width:72.44094488188976%">
               <div class="t">Dead Signal</div>
-              <div class="tm mono">18:25 · 92′</div>
+              <div class="tm mono">18:20 · 92′</div>
             </div>
             <div class="clean" style="width:11.811023622047244%"></div>
           </div>
           
-          <div class="block prime" style="left:70.55555555555556%; width:17.333333333333336%"
-               title="Atlas of Small Rooms · preshow 20:35 · feature 20:55–22:56 · clear 23:11">
+          <div class="block prime" style="left:71.11111111111111%; width:17.333333333333336%"
+               title="Atlas of Small Rooms · preshow 20:40 · feature 21:00–23:01 · clear 23:16">
             <div class="pre" style="width:12.82051282051282%"></div>
-            <div class="feat" style="width:77.56410256410255%">
+            <div class="feat" style="width:77.56410256410257%">
               <div class="t">Atlas of Small Rooms</div>
-              <div class="tm mono">20:35 · 121′</div>
+              <div class="tm mono">20:40 · 121′</div>
             </div>
-            <div class="clean" style="width:9.615384615384615%"></div>
+            <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
         </div>
@@ -2354,7 +2356,7 @@
           <td class="num">1,280</td>
           <td class="num">649</td>
           <td class="num">—</td>
-          <td class="starts">10:25  14:05  17:45  21:15</td>
+          <td class="starts">10:30  14:00  17:35  21:15</td>
         </tr>
         
         <tr>
@@ -2364,7 +2366,7 @@
           <td class="num">636</td>
           <td class="num">399</td>
           <td class="num">—</td>
-          <td class="starts">10:50  12:05  14:30  19:05</td>
+          <td class="starts">10:00  10:55  14:35  19:05</td>
         </tr>
         
         <tr>
@@ -2374,7 +2376,7 @@
           <td class="num">372</td>
           <td class="num">279</td>
           <td class="num away">14</td>
-          <td class="starts">16:05  18:25  21:30</td>
+          <td class="starts">16:10  18:20  21:30</td>
         </tr>
         
         <tr>
@@ -2384,7 +2386,7 @@
           <td class="num">192</td>
           <td class="num">140</td>
           <td class="num">—</td>
-          <td class="starts">13:25  20:35</td>
+          <td class="starts">13:15  20:40</td>
         </tr>
         
         <tr>
@@ -2394,7 +2396,7 @@
           <td class="num">360</td>
           <td class="num">142</td>
           <td class="num">—</td>
-          <td class="starts">10:00  16:55</td>
+          <td class="starts">12:25  17:00</td>
         </tr>
         
         </tbody>

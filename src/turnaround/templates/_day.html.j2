@@ -31,6 +31,8 @@
   .row .name .cap { color:var(--grey); margin-top:6px; }
   .lane { position:relative; }
   .block { position:absolute; top:12px; height:50px; display:flex; }
+  .block > div { flex:none; }
+  .block .clean.over { border-left:1px dashed var(--ink); }
   .block .pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); border:1px solid var(--ink); border-right:0; }
   .block .feat { position:relative; background:var(--cream); border:1px solid var(--ink); padding:5px 7px; overflow:hidden; white-space:nowrap; }
   .block .feat::before { content:""; position:absolute; inset:0; background:var(--orange); opacity:.0; }
@@ -86,25 +88,25 @@
       <div class="row">
         <div class="name">
           <div class="n">{{ row.screen.label }}</div>
-          <div class="cap mono">{{ row.screen.capacity }} seats · {{ row.screen.formats|join("/") }} · {{ row.count }} shows</div>
+          <div class="cap mono">{{ row.screen.capacity }} seats · {{ row.screen.formats|join("/") }} · {{ row.count }} shows{% if row.hours %} · {{ row.hours }}{% endif %}</div>
         </div>
         <div class="lane">
           {% for b in row.blocks %}
-          <div class="block{% if b.prime %} prime{% endif %}" style="left:{{ b.left }}%; width:{{ b.pre_w + b.feat_w + b.clean_w }}%"
-               title="{{ b.film.title }} · preshow {{ b.s.start|hhmm }} · feature {{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }} · clear {{ b.s.clear|hhmm }}">
-            <div class="pre" style="width:{{ b.pre_w / (b.pre_w + b.feat_w + b.clean_w) * 100 }}%"></div>
-            <div class="feat" style="width:{{ b.feat_w / (b.pre_w + b.feat_w + b.clean_w) * 100 }}%">
+          <div class="block{% if b.prime %} prime{% endif %}" style="left:{{ b.left }}%; width:{{ b.w }}%"
+               title="{{ b.film.title }} · preshow {{ b.s.start|hhmm }} · feature {{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }}{% if b.over > 0 %} · turnaround from {{ b.turn_begin|hhmm }} over the credits{% endif %} · clear {{ b.s.clear|hhmm }}">
+            <div class="pre" style="width:{{ b.pre }}%"></div>
+            <div class="feat" style="width:{{ b.feat }}%">
               <div class="t">{{ b.film.title }}</div>
               <div class="tm mono">{{ b.s.start|hhmm }} · {{ b.film.runtime_min }}′{% if b.film.format != "2D" %} · {{ b.film.format }}{% endif %}</div>
             </div>
-            <div class="clean" style="width:{{ b.clean_w / (b.pre_w + b.feat_w + b.clean_w) * 100 }}%"></div>
+            <div class="clean{% if b.over > 0 %} over{% endif %}" style="width:{{ b.clean }}%{% if b.over > 0 %}; margin-left:-{{ b.over }}%{% endif %}"></div>
           </div>
           {% endfor %}
         </div>
       </div>
       {% endfor %}
     </div>
-    <div class="legend mono"><span><i class="pre"></i>preshow {{ brief.policy.preshow_min }}′</span><span><i class="feat"></i>feature</span><span><i class="clean"></i>turnaround</span><span>stagger ≥ {{ brief.policy.stagger_min }}′</span></div>
+    <div class="legend mono"><span><i class="pre"></i>{{ d.preshows }}</span><span><i class="feat"></i>feature</span><span><i class="clean"></i>turnaround{% if d.credits %} · from the credits{% endif %}</span><span>{{ d.stagger }}</span>{% if d.staff %}<span>{{ d.staff }}</span>{% endif %}</div>
   </div>
 {% endmacro %}
 

@@ -40,18 +40,51 @@ def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
         blocks = []
         for s in sessions:
             f = brief.film(s.film)
+            block = s.clear - s.start
+            turn_begin, _ = brief.turnaround_of(scr, f, s.start)
+            # Strip widths are percentages of the block. The turnaround strip is pulled
+            # left over the feature by the credits it overlaps, so the three still add up.
             blocks.append(
                 {
                     "film": f,
                     "s": s,
                     "left": (s.start - day_start) / span * 100,
-                    "pre_w": p.preshow_min / span * 100,
-                    "feat_w": f.runtime_min / span * 100,
-                    "clean_w": brief.clean_for(scr) / span * 100,
+                    "w": block / span * 100,
+                    "pre": brief.preshow_for(f) / block * 100,
+                    "feat": f.runtime_min / block * 100,
+                    "clean": (s.clear - turn_begin) / block * 100,
+                    "over": (s.feature_end - turn_begin) / block * 100,
+                    "turn_begin": turn_begin,
                     "prime": p.is_prime(s.start),
                 }
             )
-        rows.append({"screen": scr, "blocks": blocks, "count": len(sessions)})
+        own_hours = scr.open is not None or scr.last_start is not None
+        rows.append(
+            {
+                "screen": scr,
+                "blocks": blocks,
+                "count": len(sessions),
+                "hours": (
+                    f"{fmt_time(brief.open_for(scr))}–{fmt_time(brief.last_start_for(scr))}"
+                    if own_hours
+                    else None
+                ),
+            }
+        )
+    preshows = [f"preshow {p.preshow_min}′"] + [
+        f"{fmt} {mins}′" for fmt, mins in p.preshow_by_format.items() if mins != p.preshow_min
+    ]
+    stagger = (
+        f"stagger ≥ {p.stagger_min}′"
+        if p.max_starts_per_window == 1
+        else f"≤ {p.max_starts_per_window} starts in {p.stagger_min}′"
+    )
+    staff = (
+        f"floor clears {p.max_concurrent_turnarounds} "
+        f"room{'s' if p.max_concurrent_turnarounds != 1 else ''} at once"
+        if p.max_concurrent_turnarounds is not None
+        else None
+    )
     films = []
     seats_sold = {a.film: a for a in admissions(brief, grid)}
     for f in brief.films:
@@ -75,6 +108,10 @@ def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
         "span": span,
         "prime_left": (p.prime_start_min - day_start) / span * 100,
         "prime_w": (p.prime_end_min - p.prime_start_min) / span * 100,
+        "preshows": " · ".join(preshows),
+        "stagger": stagger,
+        "staff": staff,
+        "credits": any(brief.film(s.film).credits_min for s in grid.sessions),
         "seats": sum(brief.screen(s.screen).capacity for s in grid.sessions),
         "admissions": sum(a.admissions for a in seats_sold.values()),
         "turned_away": sum(a.turned_away for a in seats_sold.values()),
@@ -94,6 +131,10 @@ def _overrides(week: WeekBrief, i: int) -> list[str]:
         title = week.film_title(fid)
         for k, v in fields.items():
             out.append(f"{title} {k} {str(v).lower()}")
+    for sid, fields in d.screens.items():
+        label = next(s.label for s in week.screens if s.id == sid)
+        for k, v in fields.items():
+            out.append(f"{label} {k} {str(v).lower()}")
     return out
 
 
