@@ -126,11 +126,13 @@ Python 3.13+. The only heavy dependency is `ortools`.
 
 **Policy**: `open`, `last_start` (hours past 24 are fine: `"25:00"` is 1 a.m.), `preshow_min`, `clean_min`, `stagger_min`, `slot_min`, `school_holiday`, `assumed_admissions` (what a weight-1.0 title's first prime show draws when no demand is stated), and the `dayparts` with their weights (matinee / afternoon / prime / late by default).
 
+**The booth's realities** (Day 4): a film's `credits_min` lets the turnaround begin that many minutes before the feature ends, so the block shrinks and the room is clear at the later of feature end and turnaround end; `policy.preshow_by_format` gives 3D or PLF a longer preshow than the house figure; `policy.max_concurrent_turnarounds` is how many rooms the floor staff can clear at once (a cumulative in the model, a count in the checker); a screen may carry its own `open` and `last_start`; and the stagger is a window, `stagger_min` minutes wide with at most `max_starts_per_window` starts in it (the default is 1 in 10). In a week brief a day may also override a screen (`"screens": { "3": { "open": "12:00" } }`) so Screen 3 can open at noon on weekdays. `examples/booth.json` is the Regent with all of it.
+
 **A week** adds `days`: up to seven of `{ "name", "date", "policy": { … }, "terms": { film_id: { … } } }`, each carrying only what differs from the base. `hold_days` (default Mon–Thu) are the days a title should keep the same start times; `hold_penalty` is what the objective gives up per title that changes them. Every day is solved and checked on its own; the week sheet puts the by-title table across all seven days first and each day's grid on its own page.
 
 ## What it does not do yet
 
-This is Day 3 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: staff and credits-overlap realities (Day 4); week-scoped distributor terms (Day 5); the full print identity (Day 6); *why* each session is where it is (Day 7); scale benchmarks (Day 8); CSV/iCal in and out (Day 9); a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12).
+This is Day 4 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: week-scoped distributor terms (Day 5); the full print identity (Day 6); *why* each session is where it is (Day 7); scale benchmarks (Day 8); CSV/iCal in and out (Day 9); a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12).
 
 The design decisions and their reasons are in `DECISIONS.md`. The log of what each day shipped and what it left rough is in `docs/LOG.md`.
 

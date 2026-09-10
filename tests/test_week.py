@@ -141,3 +141,20 @@ def test_checker_rejects_a_week_with_the_wrong_number_of_grids(tiny: Brief) -> N
     rep = check_week(w, short)
     assert not rep.ok
     assert rep.week.checks[0].name == "days" and not rep.week.checks[0].ok
+
+
+def test_a_day_may_open_a_screen_later_than_the_week_does(tiny: Brief) -> None:
+    # Screen b opens at 15:00 on Tuesday only; every other day it keeps the house hours.
+    w = _week(
+        tiny,
+        days=[{"name": "Mon"}, {"name": "Tue", "screens": {"b": {"open": "15:00"}}}],
+    )
+    assert w.day(0).open_for(w.day(0).screen("b")) == 12 * 60
+    assert w.day(1).open_for(w.day(1).screen("b")) == 15 * 60
+    assert w.day(1).screen("b").capacity == 60  # untouched fields come from the base
+    with pytest.raises(ValidationError, match="unknown screens"):
+        _week(tiny, days=[{"name": "Mon", "screens": {"z": {"open": "15:00"}}}])
+    wg = solve_week(w, time_limit_s=10)
+    assert all(g.status in ("OPTIMAL", "FEASIBLE") for g in wg.grids)
+    assert all(s.start >= 15 * 60 for s in wg.grid("Tue").sessions if s.screen == "b")
+    assert check_week(w, wg).ok

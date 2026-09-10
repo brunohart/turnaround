@@ -554,6 +554,11 @@ class DayOverride(BaseModel):
         default_factory=dict,
         description="Per film id, the term fields that differ today, e.g. exclusive_screen",
     )
+    screens: dict[str, dict[str, Any]] = Field(
+        default_factory=dict,
+        description="Per screen id, the screen fields that differ today, e.g. open 12:00 on "
+        "a weekday",
+    )
 
 
 class WeekBrief(BaseModel):
@@ -589,10 +594,14 @@ class WeekBrief(BaseModel):
         if len(names) != len(set(names)):
             raise ValueError("day names must be unique")
         film_ids = {f.id for f in self.films}
+        screen_ids = {s.id for s in self.screens}
         for d in self.days:
             unknown = set(d.terms) - film_ids
             if unknown:
                 raise ValueError(f"day {d.name} sets terms for unknown films {sorted(unknown)}")
+            unknown = set(d.screens) - screen_ids
+            if unknown:
+                raise ValueError(f"day {d.name} sets hours for unknown screens {sorted(unknown)}")
             self.day(self.days.index(d))  # every day must be a valid Brief on its own
         return self
 
@@ -612,11 +621,15 @@ class WeekBrief(BaseModel):
                 films.append(f.model_copy(update={"terms": terms}))
             else:
                 films.append(f)
+        screens = [
+            Screen.model_validate({**s.model_dump(), **d.screens[s.id]}) if s.id in d.screens else s
+            for s in self.screens
+        ]
         return Brief(
             house=self.house,
             date=d.date,
             weekday=d.name if d.name in WEEKDAYS else None,
-            screens=self.screens,
+            screens=screens,
             films=films,
             policy=policy,
         )
