@@ -39,13 +39,14 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - Tests: raising a title's demand moves it to the bigger room; capping capacity leaves turned-away non-zero and reported.
 - *From Day 2:* `WeekBrief.hold_penalty` is in weighted seats (ADR-010); restate it in expected admissions with the new objective, and keep `Grid.objective` net of the penalty so the week's `held` count stays honest.
 
-## Day 4 — Wed 10 Sep — The booth's realities
+## Day 4 — Wed 10 Sep — The booth's realities ✅
 
 - Credits overlap: `film.credits_min` lets the clean start that many minutes before feature end. Block length adjusts; checker updated first, then solver.
 - Preshow by format (3D hands out glasses; PLF runs a longer reel) via `policy.preshow_by_format`.
 - Staff: `policy.max_concurrent_turnarounds` as a cumulative constraint over clean intervals (`add_cumulative`), because two ushers cannot clear three rooms.
 - Per-screen hours: `screen.open` / `screen.last_start` overrides (Screen 3 opens at noon on weekdays).
 - Generalise stagger to `max_starts_per_window` (e.g. at most 2 starts in any 15 minutes) with the 1-per-10 default preserved.
+- *Shipped besides:* a week day may override a screen's hours (`DayOverride.screens`). *Left for Day 6:* look at the credits-overlap hatch at print size. *Left for Day 8:* measure the staff cumulative's share of solve time.
 
 ## Day 5 — Thu 11 Sep — Distributor terms, fully
 
