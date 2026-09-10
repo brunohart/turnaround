@@ -32,6 +32,8 @@ def briefs(draw: st.DrawFn) -> Brief:
             "capacity": draw(st.integers(40, 300)),
             "formats": draw(st.sampled_from([["2D"], ["2D", "3D"]])),
             "clean_min": draw(st.one_of(st.none(), st.integers(5, 25))),
+            "open": draw(st.sampled_from([None, "14:00", "15:30"])),
+            "last_start": draw(st.sampled_from([None, "18:00", "19:30"])),
         }
         for i in range(n_screens)
     ]
@@ -52,6 +54,7 @@ def briefs(draw: st.DrawFn) -> Brief:
             "id": f"f{i}",
             "title": f"F{i}",
             "runtime_min": draw(st.integers(60, 150)),
+            "credits_min": draw(st.sampled_from([0, 0, 5, 12, 30])),
             "format": draw(st.sampled_from(FORMATS)),
             "weight": draw(st.floats(0.3, 2.5)),
             "terms": terms,
@@ -68,6 +71,8 @@ def briefs(draw: st.DrawFn) -> Brief:
         films.append(film)
     open_ = draw(st.sampled_from(["10:00", "12:00", "13:30"]))
     last = draw(st.sampled_from(["19:00", "20:30", "22:00"]))
+    preshow_by_format = {"3D": draw(st.integers(0, 35))} if draw(st.booleans()) else {}
+    staff = draw(st.sampled_from([None, 1, 2]))
     return Brief.model_validate(
         {
             "house": "Random",
@@ -79,8 +84,11 @@ def briefs(draw: st.DrawFn) -> Brief:
                 "last_start": last,
                 "school_holiday": draw(st.booleans()),
                 "preshow_min": draw(st.integers(0, 25)),
+                "preshow_by_format": preshow_by_format,
                 "clean_min": draw(st.integers(5, 30)),
+                "max_concurrent_turnarounds": staff,
                 "stagger_min": draw(st.integers(0, 15)),
+                "max_starts_per_window": draw(st.integers(1, 2)),
                 "slot_min": draw(st.sampled_from([15, 30])),
             },
         }
@@ -109,13 +117,17 @@ def brute(brief: Brief, grid: Grid) -> bool:
             return False
         scr, f = brief.screen(s.screen), brief.film(s.film)
         clean = scr.clean_min if scr.clean_min is not None else p.clean_min
-        if s.feature_start != s.start + p.preshow_min:
+        preshow = p.preshow_by_format.get(f.format, p.preshow_min)
+        if s.feature_start != s.start + preshow:
             return False
         if s.feature_end != s.feature_start + f.runtime_min:
             return False
-        if s.clear != s.feature_end + clean:
+        turn_end = s.feature_end - f.credits_min + clean
+        if s.clear != (turn_end if turn_end > s.feature_end else s.feature_end):
             return False
-        if s.start < p.open_min or s.start > p.last_start_min:
+        opens = parse_time(scr.open) if scr.open is not None else p.open_min
+        closes = parse_time(scr.last_start) if scr.last_start is not None else p.last_start_min
+        if s.start < opens or s.start > closes:
             return False
         if (s.start - p.open_min) % p.slot_min:
             return False
@@ -132,8 +144,24 @@ def brute(brief: Brief, grid: Grid) -> bool:
     for a, b in itertools.combinations(grid.sessions, 2):
         if a.screen == b.screen and a.start < b.clear and b.start < a.clear:
             return False
-        if abs(a.start - b.start) < p.stagger_min:
+    for a in grid.sessions:
+        # The window that starts at a's start, a itself included.
+        in_window = [b for b in grid.sessions if 0 <= b.start - a.start < p.stagger_min]
+        if len(in_window) > p.max_starts_per_window:
             return False
+    if p.max_concurrent_turnarounds is not None:
+        turns = []
+        for s in grid.sessions:
+            clean = brief.clean_for(brief.screen(s.screen))
+            begin = s.feature_end - brief.film(s.film).credits_min
+            end = max(s.feature_end, begin + clean)
+            if end > begin:
+                turns.append((begin, end))
+        for t in range(
+            min((a for a, _ in turns), default=0), max((b for _, b in turns), default=0)
+        ):
+            if sum(1 for a, b in turns if a <= t < b) > p.max_concurrent_turnarounds:
+                return False
     for f in brief.films:
         mine = [s for s in grid.sessions if s.film == f.id]
         t = f.terms
@@ -168,10 +196,11 @@ def briefs_with_hand_grids(draw: st.DrawFn) -> tuple[Brief, Grid]:
             start = p.open_min + draw(st.integers(0, 40)) * p.slot_min
         else:
             start = draw(st.integers(p.open_min - 60, p.last_start_min + 90))
-        fs = start + p.preshow_min
+        fs = start + brief.preshow_for(f)
         fe = fs + f.runtime_min
-        clean = scr.clean_min if scr.clean_min is not None else p.clean_min
-        clear = fe + clean + (draw(st.integers(-3, 3)) if draw(st.integers(0, 9)) == 0 else 0)
+        clear = brief.turnaround_of(scr, f, start)[1]
+        if draw(st.integers(0, 9)) == 0:  # now and then, the arithmetic is wrong on purpose
+            clear += draw(st.integers(-3, 3))
         sessions.append(
             Session(
                 screen=scr.id, film=f.id, start=start, feature_start=fs, feature_end=fe, clear=clear

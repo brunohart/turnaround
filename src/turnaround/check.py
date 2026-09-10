@@ -134,25 +134,41 @@ def check(brief: Brief, grid: Grid) -> Report:
     if bad:
         return r
 
-    # Timing arithmetic is internally consistent.
+    # Timing arithmetic is internally consistent: the preshow is the house's or the
+    # format's; the turnaround begins `credits_min` before the feature ends and the
+    # room is clear at the later of feature end and turnaround end.
     wrong = []
     for s in grid.sessions:
         scr = brief.screen(s.screen)
         f = brief.film(s.film)
-        preshow_ok = s.feature_start == s.start + p.preshow_min
+        preshow_ok = s.feature_start == s.start + brief.preshow_for(f)
         runtime_ok = s.feature_end == s.feature_start + f.runtime_min
-        clean_ok = s.clear == s.feature_end + brief.clean_for(scr)
+        turn_begin = s.feature_end - f.credits_min
+        clean_ok = s.clear == max(s.feature_end, turn_begin + brief.clean_for(scr))
         if not (preshow_ok and runtime_ok and clean_ok):
             wrong.append(s)
-    r.add("timing", not wrong, f"{len(wrong)} sessions with inconsistent preshow/runtime/clean")
+    overlapped = sum(1 for s in grid.sessions if brief.film(s.film).credits_min)
+    r.add(
+        "timing",
+        not wrong,
+        f"{len(wrong)} sessions with inconsistent preshow/runtime/clean"
+        + (f" · {overlapped} turn around over the credits" if overlapped else ""),
+    )
 
-    # Hours.
-    early = [s for s in grid.sessions if s.start < p.open_min]
-    late = [s for s in grid.sessions if s.start > p.last_start_min]
+    # Hours, per screen: a screen may open later or close earlier than the house.
+    early = [s for s in grid.sessions if s.start < brief.open_for(brief.screen(s.screen))]
+    late = [s for s in grid.sessions if s.start > brief.last_start_for(brief.screen(s.screen))]
+    own_hours = [
+        f"{scr.label} {fmt_time(brief.open_for(scr))}–{fmt_time(brief.last_start_for(scr))}"
+        for scr in brief.screens
+        if scr.open is not None or scr.last_start is not None
+    ]
     r.add(
         "hours",
         not early and not late,
-        f"open {p.open} · last start {p.last_start} · {len(early)} early · {len(late)} late",
+        f"open {p.open} · last start {p.last_start}"
+        + (f" · {', '.join(own_hours)}" if own_hours else "")
+        + f" · {len(early)} early · {len(late)} late",
     )
 
     # Slot alignment.
@@ -180,19 +196,54 @@ def check(brief: Brief, grid: Grid) -> Report:
                 )
     r.add("turnaround", not overlaps, "; ".join(overlaps) or "no screen double-booked")
 
-    # Stagger house-wide.
+    # Stagger house-wide: in any window of stagger_min, at most max_starts_per_window
+    # starts. Every window that matters begins at a start, so those are the ones counted.
     starts = sorted(s.start for s in grid.sessions)
-    crush = [(a, b) for a, b in zip(starts, starts[1:], strict=False) if 0 <= b - a < p.stagger_min]
+    cap = p.max_starts_per_window
+    crush: list[tuple[int, int]] = []
+    if p.stagger_min > 0:
+        for t0 in starts:
+            n = sum(1 for u in starts if t0 <= u < t0 + p.stagger_min)
+            if n > cap:
+                crush.append((t0, n))
+    rule = (
+        f"min gap {p.stagger_min} min"
+        if cap == 1
+        else f"at most {cap} starts in any {p.stagger_min} min"
+    )
     r.add(
         "stagger",
         not crush,
-        f"min gap {p.stagger_min} min; "
+        rule
+        + "; "
         + (
-            f"{len(crush)} pairs too close, first {fmt_time(crush[0][0])}/{fmt_time(crush[0][1])}"
+            f"{len(crush)} windows too busy, first {fmt_time(crush[0][0])} "
+            f"with {crush[0][1]} starts"
             if crush
             else "every start clears the lobby"
         ),
     )
+
+    # Staff: the floor can clear only so many rooms at once. Every turnaround is an
+    # interval; count how many are open at the moment each one begins.
+    if p.max_concurrent_turnarounds is not None:
+        turns = [
+            brief.turnaround_of(brief.screen(s.screen), brief.film(s.film), s.start)
+            for s in grid.sessions
+        ]
+        turns = [(begin, end) for begin, end in turns if end > begin]
+        busiest = 0
+        when = 0
+        for begin, _ in turns:
+            n = sum(1 for c, d in turns if c <= begin < d)
+            if n > busiest:
+                busiest, when = n, begin
+        r.add(
+            "staff",
+            busiest <= p.max_concurrent_turnarounds,
+            f"at most {p.max_concurrent_turnarounds} rooms clearing at once; "
+            + (f"busiest {busiest} at {fmt_time(when)}" if turns else "no turnarounds"),
+        )
 
     # Terms per film.
     by_film = grid.by_film()

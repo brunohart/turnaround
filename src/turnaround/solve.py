@@ -40,9 +40,10 @@ class Candidate:
     screen: str
     film: str
     start: int
-    block: int  # preshow + runtime + clean
+    block: int  # preshow + runtime + clean, less the credits the turnaround overlaps
     prime: bool
     daypart: str | None
+    turn: tuple[int, int]  # when the floor staff are in the room
 
 
 def candidates(brief: Brief) -> list[Candidate]:
@@ -53,15 +54,15 @@ def candidates(brief: Brief) -> list[Candidate]:
         for f in brief.films:
             if not brief.can_play(scr, f):
                 continue
-            lo = p.open_min
-            hi = p.last_start_min
+            lo = brief.open_for(scr)
+            hi = brief.last_start_for(scr)
             t = f.terms
             if t.earliest_start:
                 lo = max(lo, parse_time(t.earliest_start))
             if t.latest_start:
                 hi = min(hi, parse_time(t.latest_start))
             block = brief.block_len(scr, f)
-            # Align to the slot grid from opening time.
+            # Align to the slot grid from the house's opening time.
             first = lo + (-(lo - p.open_min) % p.slot_min)
             for start in range(first, hi + 1, p.slot_min):
                 dp = p.daypart_at(start)
@@ -73,6 +74,7 @@ def candidates(brief: Brief) -> list[Candidate]:
                         block=block,
                         prime=p.is_prime(start),
                         daypart=dp.name if dp else None,
+                        turn=brief.turnaround_of(scr, f, start),
                     )
                 )
     return out
@@ -154,10 +156,13 @@ def _build(
     for scr in brief.screens:
         mine_here = [c for c in cands if c.screen == scr.id]
         if mine_here:
-            day_len = p.last_start_min + max(c.block for c in mine_here) - p.open_min
+            day_len = (
+                brief.last_start_for(scr) + max(c.block for c in mine_here) - brief.open_for(scr)
+            )
             m.add(sum(c.block * mdl.x[c] for c in mine_here) <= day_len)
 
-    # Stagger: within any window of stagger_min, at most one start house-wide.
+    # Stagger: within any window of stagger_min, at most max_starts_per_window starts
+    # house-wide. The default is one in ten.
     if p.stagger_min > 0:
         starts = sorted({c.start for c in cands})
         by_start: dict[int, list[cp_model.IntVar]] = {}
@@ -165,8 +170,27 @@ def _build(
             by_start.setdefault(c.start, []).append(mdl.x[c])
         for s0 in starts:
             window = [v for s in starts if s0 <= s < s0 + p.stagger_min for v in by_start[s]]
-            if len(window) > 1:
-                m.add(sum(window) <= 1)
+            if len(window) > p.max_starts_per_window:
+                m.add(sum(window) <= p.max_starts_per_window)
+
+    # Staff: the floor can clear only so many rooms at once. Each candidate's turnaround
+    # is an optional interval of demand one under a cumulative with the staff as capacity.
+    # A cap the house's screens cannot exceed is left out; it could never bind.
+    cap = p.max_concurrent_turnarounds
+    if cap is not None and cap < len(brief.screens):
+        turns = [
+            m.new_optional_interval_var(
+                c.turn[0],
+                c.turn[1] - c.turn[0],
+                c.turn[1],
+                mdl.x[c],
+                f"turn[{c.screen},{c.film},{c.start}]",
+            )
+            for c in cands
+            if c.turn[1] > c.turn[0]
+        ]
+        if turns:
+            m.add_cumulative(turns, [1] * len(turns), cap)
 
     # Distributor terms, each under its own assumption literal.
     for f in brief.films:
@@ -369,7 +393,6 @@ def _grid(
     relaxed: list[TermRef],
     hold_penalty: float = 0.0,
 ) -> Grid:
-    p = brief.policy
     sessions: list[Session] = []
     admissions: float | None = None
     hold_paid = 0.0
@@ -378,9 +401,8 @@ def _grid(
         hold_paid = hold_penalty * sum(1 for d in mdl.differs if solver.value(d))
         for c in mdl.cands:
             if solver.value(mdl.x[c]):
-                scr = brief.screen(c.screen)
                 film = brief.film(c.film)
-                fs = c.start + p.preshow_min
+                fs = c.start + brief.preshow_for(film)
                 fe = fs + film.runtime_min
                 sessions.append(
                     Session(
@@ -389,7 +411,7 @@ def _grid(
                         start=c.start,
                         feature_start=fs,
                         feature_end=fe,
-                        clear=fe + brief.clean_for(scr),
+                        clear=c.turn[1],
                     )
                 )
     sessions.sort(key=lambda s: (s.screen, s.start))
@@ -522,6 +544,12 @@ def explain(brief: Brief, grid: Grid) -> str:
         f"the house has {len(brief.screens)} screen{'s' if len(brief.screens) != 1 else ''}"
         + (f" ({len(plf)} PLF)" if plf and len(plf) < len(brief.screens) else "")
         + f", doors {p.open} to last start {p.last_start}"
+        + (
+            f", {p.max_concurrent_turnarounds} room"
+            f"{'s' if p.max_concurrent_turnarounds != 1 else ''} clearing at once"
+            if p.max_concurrent_turnarounds is not None
+            else ""
+        )
         + f" and a {p.prime_start}–{p.prime_end} prime window"
     )
     return lead + " · ".join(parts) + " — " + house

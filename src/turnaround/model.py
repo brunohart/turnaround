@@ -57,10 +57,30 @@ class Screen(BaseModel):
     capacity: int = Field(gt=0)
     formats: list[str] = Field(default_factory=lambda: ["2D"])
     clean_min: int | None = Field(default=None, ge=0, description="Overrides policy.clean_min")
+    open: str | None = Field(
+        default=None, description="HH:MM; this screen's first possible start, overrides policy"
+    )
+    last_start: str | None = Field(
+        default=None, description="HH:MM; this screen's latest start, overrides policy"
+    )
 
     @property
     def label(self) -> str:
         return self.name or self.id
+
+    @model_validator(mode="after")
+    def _hours(self) -> Screen:
+        if self.open is not None:
+            parse_time(self.open)
+        if self.last_start is not None:
+            parse_time(self.last_start)
+        if (
+            self.open is not None
+            and self.last_start is not None
+            and parse_time(self.last_start) < parse_time(self.open)
+        ):
+            raise ValueError(f"screen {self.id}: last_start {self.last_start} is before open")
+        return self
 
 
 class Terms(BaseModel):
@@ -143,6 +163,12 @@ class Film(BaseModel):
     id: str
     title: str
     runtime_min: int = Field(gt=0, description="Feature running time, credits included")
+    credits_min: int = Field(
+        default=0,
+        ge=0,
+        description="Closing credits: the turnaround may begin this many minutes before the "
+        "feature ends, because the room empties while they roll",
+    )
     format: str = "2D"
     rating: str | None = None
     weight: float = Field(
@@ -161,6 +187,14 @@ class Film(BaseModel):
         "assumed_admissions stand in",
     )
     terms: Terms = Field(default_factory=Terms)
+
+    @model_validator(mode="after")
+    def _credits(self) -> Film:
+        if self.credits_min > self.runtime_min:
+            raise ValueError(
+                f"film {self.id}: credits_min {self.credits_min} is longer than the feature"
+            )
+        return self
 
 
 class Daypart(BaseModel):
@@ -196,11 +230,27 @@ class Policy(BaseModel):
     open: str = Field(default="10:00", description="First possible start")
     last_start: str = Field(default="21:30", description="Latest a session may start")
     preshow_min: int = Field(default=20, ge=0, description="Ads and trailers before the feature")
+    preshow_by_format: dict[str, int] = Field(
+        default_factory=dict,
+        description="Preshow per format where it differs, e.g. {'3D': 25, 'PLF': 30}: 3D hands "
+        "out glasses, PLF runs a longer reel",
+    )
     clean_min: int = Field(
         default=20, ge=0, description="Turnaround: credits out to next preshow in"
     )
+    max_concurrent_turnarounds: int | None = Field(
+        default=None,
+        ge=1,
+        description="Rooms the floor staff can clear at once. Two ushers cannot clear three",
+    )
     stagger_min: int = Field(
-        default=10, ge=0, description="Minimum gap between any two starts across the house"
+        default=10,
+        ge=0,
+        description="The stagger window: at most max_starts_per_window starts house-wide in any "
+        "run of this many minutes. The default, 1 in 10, keeps every two starts 10 apart",
+    )
+    max_starts_per_window: int = Field(
+        default=1, ge=1, description="Starts allowed house-wide within any stagger_min window"
     )
     slot_min: int = Field(default=5, gt=0, description="Start-time granularity")
     prime_start: str = "17:30"
@@ -249,6 +299,9 @@ class Policy(BaseModel):
     def _check(self) -> Policy:
         if self.last_start_min < self.open_min:
             raise ValueError("last_start is before open")
+        bad = {k: v for k, v in self.preshow_by_format.items() if v < 0}
+        if bad:
+            raise ValueError(f"preshow cannot be negative: {bad}")
         for d in self.dayparts:
             if d.end_min <= d.start_min:
                 raise ValueError(f"daypart {d.name} ends before it starts")
@@ -289,6 +342,12 @@ class Brief(BaseModel):
     @model_validator(mode="after")
     def _refs(self) -> Brief:
         screen_ids = {s.id for s in self.screens}
+        for s in self.screens:
+            if self.last_start_for(s) < self.open_for(s):
+                raise ValueError(
+                    f"screen {s.id}: last start {fmt_time(self.last_start_for(s))} is before "
+                    f"it opens at {fmt_time(self.open_for(s))}"
+                )
         for f in self.films:
             if f.terms.screens:
                 unknown = set(f.terms.screens) - screen_ids
@@ -357,9 +416,30 @@ class Brief(BaseModel):
     def clean_for(self, screen: Screen) -> int:
         return screen.clean_min if screen.clean_min is not None else self.policy.clean_min
 
+    def preshow_for(self, film: Film) -> int:
+        """Ads and trailers before this title: the house figure, or its format's."""
+        return self.policy.preshow_by_format.get(film.format, self.policy.preshow_min)
+
+    def open_for(self, screen: Screen) -> int:
+        return parse_time(screen.open) if screen.open is not None else self.policy.open_min
+
+    def last_start_for(self, screen: Screen) -> int:
+        if screen.last_start is not None:
+            return parse_time(screen.last_start)
+        return self.policy.last_start_min
+
+    def turnaround_of(self, screen: Screen, film: Film, start: int) -> tuple[int, int]:
+        """When the floor staff are in the room: from `credits_min` before the feature ends,
+        for the screen's clean time. The room is clear at the later of the feature's end
+        and the turnaround's; the next preshow never starts over the last reel."""
+        feature_end = start + self.preshow_for(film) + film.runtime_min
+        begin = feature_end - film.credits_min
+        return begin, max(feature_end, begin + self.clean_for(screen))
+
     def block_len(self, screen: Screen, film: Film) -> int:
-        """Minutes a session occupies the screen: preshow + feature + clean."""
-        return self.policy.preshow_min + film.runtime_min + self.clean_for(screen)
+        """Minutes a session occupies the screen: preshow + feature + clean, less the
+        credits the turnaround overlaps."""
+        return self.turnaround_of(screen, film, 0)[1]
 
     def can_play(self, screen: Screen, film: Film) -> bool:
         if film.format not in screen.formats:
@@ -380,7 +460,10 @@ class Session(BaseModel):
     start: int = Field(description="Minutes after midnight when the preshow begins")
     feature_start: int
     feature_end: int
-    clear: int = Field(description="Minutes after midnight when the screen is clean again")
+    clear: int = Field(
+        description="Minutes after midnight when the screen is clean again. The turnaround "
+        "may begin before feature_end where the title's credits allow"
+    )
 
     @property
     def start_hhmm(self) -> str:
