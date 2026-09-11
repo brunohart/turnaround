@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Regent — terms — 2026-09-16 — turnaround</title>
+<style>
+  :root {
+    --bg:#F0EDE6; --ink:#1A1A1A; --orange:#D4622B; --blue:#1B2D4F; --red:#C4391D;
+    --cream:#F5F0E1; --grey:#8A8578;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; background:var(--bg); color:var(--ink);
+    font-family: Inter, -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  body::after { content:""; position:fixed; inset:0; pointer-events:none; opacity:.06; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  .mono { font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:11px; }
+  .sheet { max-width:1240px; margin:0 auto; padding:40px 32px 64px; position:relative; }
+  .wash { position:absolute; width:46%; height:180px; top:-30px; right:-6%; background:var(--orange); opacity:.045; mix-blend-mode:multiply; transform:rotate(-2.2deg); pointer-events:none; }
+  header { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:end; margin-bottom:28px; }
+  h1 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:56px; line-height:.92; letter-spacing:-.03em; margin:0; position:relative; }
+  h1 .ghost { position:absolute; left:4px; top:3px; color:var(--orange); opacity:.09; pointer-events:none; }
+  .stamp { display:inline-block; border:1px solid var(--ink); padding:4px 8px; transform:rotate(-.8deg); margin-bottom:12px; }
+  .meta { text-align:right; color:var(--grey); line-height:1.7; }
+  .meta b { color:var(--ink); font-weight:500; }
+  .divider { height:1px; margin:22px 0; background:linear-gradient(90deg, var(--ink) 0 38%, transparent 38% 41%, var(--ink) 41% 77%, transparent 77% 80%, var(--ink) 80%); opacity:.55; }
+  .grid { position:relative; }
+  .ruler { position:relative; height:26px; margin-left:170px; border-bottom:1px solid var(--ink); }
+  .ruler .h { position:absolute; bottom:4px; transform:translateX(-50%); color:var(--grey); }
+  .ruler .h::after { content:""; position:absolute; left:50%; bottom:-5px; width:1px; height:4px; background:var(--ink); }
+  .lane { background:linear-gradient(90deg, transparent var(--pl), rgba(27,45,79,.06) var(--pl), rgba(27,45,79,.06) var(--pr), transparent var(--pr)); }
+  .ruler .prime-label { position:absolute; top:-2px; color:var(--blue); opacity:.75; transform:none; }
+  .row { display:grid; grid-template-columns:170px 1fr; min-height:74px; border-bottom:1px dashed rgba(26,26,26,.25); }
+  .row .name { padding:14px 12px 10px 0; }
+  .row .name .n { font-family:"Space Grotesk", Helvetica, Arial, sans-serif; font-weight:700; font-size:18px; letter-spacing:-.02em; line-height:1; }
+  .row .name .cap { color:var(--grey); margin-top:6px; }
+  .lane { position:relative; }
+  .block { position:absolute; top:12px; height:50px; display:flex; }
+  .block > div { flex:none; }
+  .block .clean.over { border-left:1px dashed var(--ink); }
+  .block .pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); border:1px solid var(--ink); border-right:0; }
+  .block .feat { position:relative; background:var(--cream); border:1px solid var(--ink); padding:5px 7px; overflow:hidden; white-space:nowrap; }
+  .block .feat::before { content:""; position:absolute; inset:0; background:var(--orange); opacity:.0; }
+  .block.prime .feat { background:#fff; }
+  .block .feat::after { content:""; position:absolute; left:6px; top:6px; right:-6px; bottom:-6px; border:1px solid var(--orange); opacity:.35; z-index:-1; }
+  .block .feat .t { font-family:"Space Grotesk", Helvetica, Arial, sans-serif; font-weight:700; font-size:13px; letter-spacing:-.02em; line-height:1.05; }
+  .block .feat .tm { color:var(--grey); margin-top:5px; }
+  .block .clean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); border:1px solid var(--ink); border-left:0; }
+  .block:hover { transform:translateY(-1px); }
+  .legend { display:flex; gap:22px; margin-top:16px; color:var(--grey); align-items:center; }
+  .legend i { display:inline-block; width:22px; height:12px; border:1px solid var(--ink); vertical-align:middle; margin-right:6px; }
+  .legend i.pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); }
+  .legend i.feat { background:var(--cream); }
+  .legend i.clean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); }
+  .cols { display:grid; grid-template-columns:1.15fr .85fr; gap:40px; margin-top:44px; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  th { text-align:left; font-weight:400; color:var(--grey); border-bottom:1px solid var(--ink); padding:6px 6px 8px; }
+  td { padding:8px 6px; border-bottom:1px dashed rgba(26,26,26,.2); vertical-align:top; }
+  td.starts { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:12px; letter-spacing:.02em; line-height:1.7; }
+  td.num { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:12px; text-align:right; white-space:nowrap; }
+  th.num { text-align:right; }
+  td.away { color:var(--red); }
+  tfoot td { border-bottom:0; border-top:1px solid var(--ink); font-weight:500; }
+  .ok { color:var(--blue); } .fail { color:var(--red); font-weight:600; }
+  .relaxed { display:inline-block; color:var(--red); border:1px solid var(--red); padding:1px 5px; margin-right:4px; transform:rotate(-1.2deg); font-size:10px; }
+  .given-up { color:var(--red); }
+  .proof td:first-child { white-space:nowrap; }
+  footer { margin-top:56px; color:var(--grey); display:flex; justify-content:space-between; }
+  .week-table th.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:11px; }
+  .week-table td.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11px; letter-spacing:.02em; line-height:1.6; white-space:nowrap; }
+  .week-table td.day.dark { color:var(--grey); }
+  .week-table td.day.hold { background:rgba(27,45,79,.05); }
+  .held { display:inline-block; border:1px solid var(--blue); color:var(--blue); padding:1px 5px; transform:rotate(-1.2deg); font-size:10px; }
+  .status-inf { color:var(--red); font-weight:600; }
+  .day-page { margin-top:64px; padding-top:28px; border-top:1px solid var(--ink); position:relative; }
+  .day-page h2 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:34px; line-height:.95; letter-spacing:-.03em; margin:0 0 6px; }
+  .day-page .stamp { margin-bottom:8px; }
+  .day-head { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:end; margin-bottom:18px; }
+  @media print {
+    .day-page { break-before:page; page-break-before:always; border-top:0; margin-top:0; padding-top:0; } body::after{display:none} .sheet{padding:12mm} h1{font-size:34px} .cols{grid-template-columns:1fr} }
+  @media (max-width:800px) { header,.cols{grid-template-columns:1fr} .meta{text-align:left} .row{grid-template-columns:110px 1fr} .ruler{margin-left:110px} h1{font-size:38px} }
+</style>
+
+<style>
+  .terms-page { position:relative; margin-top:56px; padding-top:28px; border-top:1px solid var(--ink); }
+  .terms-page:first-of-type { margin-top:0; padding-top:0; border-top:0; }
+  .terms-page h2 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:40px; line-height:.92; letter-spacing:-.03em; margin:0 0 8px; position:relative; }
+  .terms-page h2 .ghost { position:absolute; left:3px; top:3px; color:var(--orange); opacity:.09; pointer-events:none; }
+  .terms-head { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:end; margin-bottom:18px; }
+  table.terms { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11.5px; letter-spacing:.02em; }
+  table.terms th { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:10px; white-space:nowrap; }
+  table.terms td.term { white-space:nowrap; font-weight:500; }
+  table.terms td.scope { color:var(--grey); white-space:nowrap; }
+  table.terms td.verdict { white-space:nowrap; }
+  .honoured { color:var(--blue); }
+  .unmet { color:var(--red); font-weight:600; }
+  .given { display:inline-block; color:var(--red); border:1px solid var(--red); padding:1px 5px; transform:rotate(-1.2deg); font-size:10px; }
+  .sched { margin-top:26px; }
+  .sched .row { display:grid; grid-template-columns:150px 1fr; min-height:0; padding:7px 0; border-bottom:1px dashed rgba(26,26,26,.25); font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11.5px; letter-spacing:.02em; line-height:1.7; }
+  .sched .row .d { color:var(--grey); text-transform:uppercase; letter-spacing:.14em; font-size:10.5px; padding-top:2px; }
+  .sched .s { display:inline-block; margin-right:14px; white-space:nowrap; }
+  .sched .s i { font-style:normal; color:var(--grey); }
+  .sched .s.prime { border-bottom:2px solid var(--blue); }
+  .sched .dark { color:var(--grey); }
+  .verdict-stamp { display:inline-block; border:1.5px solid var(--blue); color:var(--blue); padding:5px 10px; transform:rotate(-2deg); font-size:12px; letter-spacing:.18em; }
+  .verdict-stamp.bad { border-color:var(--red); color:var(--red); }
+  @media print { .terms-page { break-before:page; page-break-before:always; border-top:0; margin-top:0; padding-top:0; } .terms-page:first-of-type { break-before:auto; page-break-before:auto; } }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="wash"></div>
+  <header>
+    <div>
+      <div class="stamp mono">Terms sheet · 5 titles</div>
+      <h1><span class="ghost" aria-hidden="true">The Regent</span>The Regent</h1>
+    </div>
+    <div class="meta mono">
+      <div><b>2026-09-16</b></div>
+      <div>what each booking asked · what the grid delivered · where in the week</div>
+      <div>verdicts by the independent checker, not the solver</div>
+    </div>
+  </header>
+  <div class="divider"></div>
+
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">odyssey · 3 terms</div>
+        <h2><span class="ghost" aria-hidden="true">The Long Voyage</span>The Long Voyage</h2>
+        <div class="mono" style="color:var(--grey)">168′ · PLF · M · credits 11′</div>
+      </div>
+      <div class="meta mono">
+        <div><b>4</b> sessions · 1 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>3</td>
+        <td>Wed 4</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">prime_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>Wed 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">exclusive_screen</td>
+        <td class="scope">each day</td>
+        <td>true</td>
+        <td>Wed 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-16</span></div>
+        <div><span class="s">10:05 <i>Screen 1</i></span><span class="s">14:10 <i>Screen 1</i></span><span class="s prime">17:55 <i>Screen 1</i></span><span class="s">21:25 <i>Screen 1</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">harvest · 1 term</div>
+        <h2><span class="ghost" aria-hidden="true">Harvest Moon</span>Harvest Moon</h2>
+        <div class="mono" style="color:var(--grey)">104′ · 2D · PG · credits 6′</div>
+      </div>
+      <div class="meta mono">
+        <div><b>4</b> sessions · 1 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>3</td>
+        <td>Wed 4</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-16</span></div>
+        <div><span class="s">12:00 <i>Screen 3</i></span><span class="s">12:05 <i>Screen 2</i></span><span class="s">14:15 <i>Screen 3</i></span><span class="s prime">19:10 <i>Screen 2</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">signal · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">Dead Signal</span>Dead Signal</h2>
+        <div class="mono" style="color:var(--grey)">92′ · 2D · R16 · credits 7′</div>
+      </div>
+      <div class="meta mono">
+        <div><b>3</b> sessions · 1 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>2</td>
+        <td>Wed 3</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">earliest_start</td>
+        <td class="scope">each day</td>
+        <td>16:00</td>
+        <td>Wed none</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-16</span></div>
+        <div><span class="s">16:30 <i>Screen 3</i></span><span class="s prime">18:40 <i>Screen 3</i></span><span class="s">21:30 <i>Screen 2</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">atlas · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">Atlas of Small Rooms</span>Atlas of Small Rooms</h2>
+        <div class="mono" style="color:var(--grey)">121′ · 2D · M · credits 5′</div>
+      </div>
+      <div class="meta mono">
+        <div><b>2</b> sessions · 1 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>2</td>
+        <td>Wed 2</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">prime_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>Wed 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-16</span></div>
+        <div><span class="s">16:30 <i>Screen 2</i></span><span class="s prime">20:40 <i>Screen 3</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">bees · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">The Bee Kingdom</span>The Bee Kingdom</h2>
+        <div class="mono" style="color:var(--grey)">84′ · 3D · G · credits 4′</div>
+      </div>
+      <div class="meta mono">
+        <div><b>2</b> sessions · 0 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>2</td>
+        <td>Wed 2</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">latest_start</td>
+        <td class="scope">each day</td>
+        <td>17:00</td>
+        <td>Wed none</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-16</span></div>
+        <div><span class="s">10:00 <i>Screen 2</i></span><span class="s">14:25 <i>Screen 2</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+
+  <footer class="mono">
+    <span>turnaround · the showtime grid, solved</span>
+    <span>every verdict re-derived by a checker that shares no code with the solver</span>
+  </footer>
+</div>
+</body>
+</html>

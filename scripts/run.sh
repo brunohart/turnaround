@@ -16,4 +16,5 @@ for b in examples/*.json; do
   elif [ "$rc" -ne 0 ]; then
     exit "$rc"
   fi
+  uv run turnaround terms "$b" "docs/grids/$n.json" --html "docs/grids/$n-terms.html"
 done

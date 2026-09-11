@@ -107,7 +107,8 @@ Python 3.13+. The only heavy dependency is `ortools`.
 | `turnaround plan brief.json [--out grid.json] [--html sheet.html]` | Solve a day, or a week if the brief has `days`; print the grid and its proof. Exit 2 if infeasible, 3 if the checker ever disagrees with the solver. `--relax` drops conflicting terms one at a time, out loud. |
 | `turnaround check brief.json grid.json` | Verify any grid — the solver's or one made by hand — against its brief. |
 | `turnaround render brief.json grid.json --html sheet.html` | Render an existing grid as the week sheet. |
-| `turnaround validate brief.json` | Validate and summarise a brief. |
+| `turnaround terms brief.json grid.json --html terms.html` | The terms sheets: one page per title, every term the booking carries, its scope, what the grid delivered day by day, and the checker's verdict — the document a programmer sends back to the distributor. |
+| `turnaround validate brief.json` | Validate and summarise a brief; refuse a bad one in sentences. |
 
 ## The brief
 
@@ -123,6 +124,11 @@ Python 3.13+. The only heavy dependency is `ortools`.
 | `earliest_start` / `latest_start` | Start window, `HH:MM` |
 | `screens` | Only these screen ids |
 | `min_capacity` | Only rooms at least this big |
+| `plf_lock` | Every session on a PLF room is this title's; no other title plays a PLF screen while it is booked |
+| `min_shows_per_week` / `prime_shows_per_week` | Across the week, at least (a week term; a day brief refuses it) |
+| `exclusive_until` | A day name: the exclusive holds through that day and lifts the day after (a week term) |
+
+A brief the tool cannot take is refused in sentences, not stack traces: *"Dead Signal: earliest_start 16:00 is after latest_start 15:00 — no session could start"*, *"The Long Voyage → terms: `min_show` is not a term a booking can carry — the fields are min_shows, max_shows, …"*, *"The Long Voyage: plf_lock asks for every PLF room and the house has none — the screens play 2D, 3D"*.
 
 **Policy**: `open`, `last_start` (hours past 24 are fine: `"25:00"` is 1 a.m.), `preshow_min`, `clean_min`, `stagger_min`, `slot_min`, `school_holiday`, `assumed_admissions` (what a weight-1.0 title's first prime show draws when no demand is stated), and the `dayparts` with their weights (matinee / afternoon / prime / late by default).
 
@@ -130,9 +136,13 @@ Python 3.13+. The only heavy dependency is `ortools`.
 
 **A week** adds `days`: up to seven of `{ "name", "date", "policy": { … }, "terms": { film_id: { … } } }`, each carrying only what differs from the base. `hold_days` (default Mon–Thu) are the days a title should keep the same start times; `hold_penalty` is what the objective gives up per title that changes them. Every day is solved and checked on its own; the week sheet puts the by-title table across all seven days first and each day's grid on its own page.
 
+**Week terms** (Day 5) live in the same `terms` block: `"exclusive_until": "Sun"` holds the opening exclusive through Sunday and lifts it Monday; `"min_shows_per_week": 28` and `"prime_shows_per_week": 7` are counted across the week. The week is still solved day by day: each day is asked for what the week term still owes after the days before and what the days after could carry, and the checker re-counts the week from the sessions alone. `turnaround terms` prints the terms sheets, one page per title.
+
+<img src="docs/grids/day-5-terms.png" alt="The Long Voyage's terms sheet: five terms, their scope, what was delivered day by day, every one honoured, and the sessions as delivered with the prime starts underlined" width="100%">
+
 ## What it does not do yet
 
-This is Day 4 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: week-scoped distributor terms (Day 5); the full print identity (Day 6); *why* each session is where it is (Day 7); scale benchmarks (Day 8); CSV/iCal in and out (Day 9); a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12).
+This is Day 5 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: the full print identity (Day 6); *why* each session is where it is (Day 7); scale benchmarks (Day 8); CSV/iCal in and out (Day 9); a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12).
 
 The design decisions and their reasons are in `DECISIONS.md`. The log of what each day shipped and what it left rough is in `docs/LOG.md`.
 

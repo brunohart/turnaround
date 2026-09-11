@@ -48,12 +48,13 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - Generalise stagger to `max_starts_per_window` (e.g. at most 2 starts in any 15 minutes) with the 1-per-10 default preserved.
 - *Shipped besides:* a week day may override a screen's hours (`DayOverride.screens`). *Left for Day 6:* look at the credits-overlap hatch at print size. *Left for Day 8:* measure the staff cumulative's share of solve time.
 
-## Day 5 — Thu 11 Sep — Distributor terms, fully
+## Day 5 — Thu 11 Sep — Distributor terms, fully ✅
 
 - Week-scoped terms: `min_shows_per_week`, `prime_shows_per_week`, `exclusive_until` (day index), `plf_lock` (every PLF session in the house belongs to this title while booked), `max_shows_per_day` already exists.
 - A printed *terms sheet* per title (mono, one page) showing each term, its scope, and where in the week it was honoured — the document the programmer would send back to the distributor.
 - Validation speaks the trade's language: unknown fields, impossible windows, a PLF term on a house with no PLF room, all as sentences.
 - Tests per term; the Regent week example gains real terms for the opening title.
+- *Shipped besides:* a day brief refuses a week term in a sentence; `validation_sentences` translates every pydantic error. *Left for Day 7:* a week term's floor is a necessary bound, not a spread — the what-if is where "spread the 28 over the week" belongs. *Left for Day 8:* `day_bound` re-enumerates candidates per film per day; measure it on sixteen screens.
 
 ## Day 6 — Fri 12 Sep — The sheet, properly
 

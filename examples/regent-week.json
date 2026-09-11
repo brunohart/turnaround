@@ -40,7 +40,9 @@
       "terms": {
         "min_shows": 3,
         "prime_shows": 1,
-        "exclusive_screen": true
+        "exclusive_until": "Sun",
+        "min_shows_per_week": 28,
+        "prime_shows_per_week": 7
       }
     },
     {
@@ -141,20 +143,12 @@
     },
     {
       "name": "Mon",
-      "date": "2026-09-14",
-      "terms": {
-        "odyssey": {
-          "exclusive_screen": false
-        }
-      }
+      "date": "2026-09-14"
     },
     {
       "name": "Tue",
       "date": "2026-09-15",
       "terms": {
-        "odyssey": {
-          "exclusive_screen": false
-        },
         "bees": {
           "min_shows": 3
         }
@@ -162,12 +156,7 @@
     },
     {
       "name": "Wed",
-      "date": "2026-09-16",
-      "terms": {
-        "odyssey": {
-          "exclusive_screen": false
-        }
-      }
+      "date": "2026-09-16"
     }
   ],
   "hold_days": [

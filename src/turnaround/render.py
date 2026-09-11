@@ -228,8 +228,10 @@ def _delivered(name: str, day_checks: list[tuple[str, Check]]) -> str:
             ev = "none" if ev.startswith("0 ") else ev
         elif name == "plf_lock":
             ev = ev.split(": ", 1)[-1]
-        out.append(f"{d} {ev}")
-    return " · ".join(out)
+        out.append((d, ev))
+    if len(out) > 2 and len({ev for _, ev in out}) == 1:
+        return f"every day {out[0][1]}"
+    return " · ".join(f"{d} {ev}" for d, ev in out)
 
 
 def terms_context(

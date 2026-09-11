@@ -20,7 +20,7 @@
           "A second show in the same daypart draws 55% of the first: the audience is there for the format and picks one."
         ]
       },
-      "terms": { "min_shows": 3, "prime_shows": 1, "exclusive_screen": true }
+      "terms": { "min_shows": 3, "prime_shows": 1, "plf_lock": true }
     },
     {
       "id": "harvest", "title": "Harvest Moon", "runtime_min": 104, "format": "2D", "rating": "PG",
@@ -96,9 +96,9 @@
     { "name": "Fri", "date": "2026-10-02", "policy": { "last_start": "22:30" } },
     { "name": "Sat", "date": "2026-10-03", "policy": { "last_start": "22:30" } },
     { "name": "Sun", "date": "2026-10-04", "policy": { "open": "11:00" } },
-    { "name": "Mon", "date": "2026-10-05", "terms": { "odyssey": { "exclusive_screen": false } } },
-    { "name": "Tue", "date": "2026-10-06", "terms": { "odyssey": { "exclusive_screen": false }, "bees": { "min_shows": 3 } } },
-    { "name": "Wed", "date": "2026-10-07", "terms": { "odyssey": { "exclusive_screen": false } } }
+    { "name": "Mon", "date": "2026-10-05" },
+    { "name": "Tue", "date": "2026-10-06", "terms": { "bees": { "min_shows": 3 } } },
+    { "name": "Wed", "date": "2026-10-07" }
   ],
   "hold_days": ["Mon", "Tue", "Wed", "Thu"],
   "hold_penalty": 40
