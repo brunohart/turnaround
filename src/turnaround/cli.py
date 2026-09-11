@@ -7,14 +7,15 @@ from pathlib import Path
 from typing import Annotated
 
 import typer
+from pydantic import ValidationError
 from rich.console import Console
 from rich.table import Table
 
 from . import __version__
 from .check import WeekReport, admissions, check_week
 from .check import check as run_check
-from .model import Brief, Grid, WeekBrief, WeekGrid, fmt_time
-from .render import render_html, render_week_html
+from .model import Brief, Grid, WeekBrief, WeekGrid, fmt_time, validation_sentences
+from .render import render_html, render_terms_html, render_week_html, render_week_terms_html
 from .solve import explain, relax, solve, solve_week
 
 app = typer.Typer(add_completion=False, no_args_is_help=True, help=__doc__)
@@ -27,12 +28,30 @@ def _is_week(path: Path) -> bool:
     return isinstance(head, dict) and ("days" in head or "grids" in head)
 
 
+def _refuse(err: ValidationError, raw: object, path: Path) -> None:
+    """A brief the tool will not take, and why, in sentences. Exit 1."""
+    console.print(f"[red bold]{path} is not a brief the tool can take[/red bold]")
+    for line in validation_sentences(err, raw):
+        console.print(f"  [red]✗[/red] {line}")
+    raise typer.Exit(code=1)
+
+
 def _load_brief(path: Path) -> Brief:
-    return Brief.model_validate_json(path.read_text())
+    raw = json.loads(path.read_text())
+    try:
+        return Brief.model_validate(raw)
+    except ValidationError as e:
+        _refuse(e, raw, path)
+        raise  # unreachable; _refuse exits
 
 
 def _load_week(path: Path) -> WeekBrief:
-    return WeekBrief.model_validate_json(path.read_text())
+    raw = json.loads(path.read_text())
+    try:
+        return WeekBrief.model_validate(raw)
+    except ValidationError as e:
+        _refuse(e, raw, path)
+        raise
 
 
 def _load_grid(path: Path) -> Grid:
@@ -140,8 +159,13 @@ def _print_week_report(week: WeekBrief, wg: WeekGrid) -> WeekReport:
     t.add_column("Day")
     t.add_column("Evidence")
     for c in rep.week.checks:
-        mark = "[blue]✓[/blue]" if c.ok else "[red bold]✗[/red bold]"
-        t.add_row(mark, c.name, c.evidence)
+        if c.relaxed:
+            mark, evidence = "[red bold]✗[/red bold]", f"[red]relaxed[/red] · {c.evidence}"
+        elif c.ok:
+            mark, evidence = "[blue]✓[/blue]", c.evidence
+        else:
+            mark, evidence = "[red bold]✗[/red bold]", c.evidence
+        t.add_row(mark, c.name + (f" {week.film_title(c.film)}" if c.film else ""), evidence)
     for d, r in zip(rep.days, rep.reports, strict=True):
         green = sum(1 for c in r.checks if c.ok)
         mark = "[blue]✓[/blue]" if r.ok else "[red bold]✗[/red bold]"
@@ -299,8 +323,29 @@ def render(
 
 
 @app.command()
+def terms(
+    brief_path: Annotated[Path, typer.Argument()],
+    grid_path: Annotated[Path, typer.Argument()],
+    html: Annotated[Path, typer.Option("--html")],
+) -> None:
+    """The terms sheets: one page per title, every term the booking carries, what the
+    grid delivered day by day, and the checker's verdict. The document a programmer
+    sends back to the distributor."""
+    if _is_week(brief_path):
+        week = _load_week(brief_path)
+        wg = _load_week_grid(grid_path)
+        html.write_text(render_week_terms_html(week, wg, check_week(week, wg)))
+    else:
+        brief = _load_brief(brief_path)
+        grid = _load_grid(grid_path)
+        html.write_text(render_terms_html(brief, grid, run_check(brief, grid)))
+    console.print(f"terms → {html}")
+
+
+@app.command()
 def validate(brief_path: Annotated[Path, typer.Argument()]) -> None:
-    """Validate a brief, or a week brief, and summarise it."""
+    """Validate a brief, or a week brief, and summarise it. A brief the tool cannot
+    take is refused in sentences: which title, which term, and why."""
     if _is_week(brief_path):
         week = _load_week(brief_path)
         console.print_json(

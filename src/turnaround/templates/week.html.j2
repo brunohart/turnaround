@@ -49,7 +49,7 @@
       <table class="proof">
         <thead><tr><th>Check</th><th>Evidence</th></tr></thead>
         <tbody>
-        {% for c in week_report.week.checks %}<tr><td class="{{ 'ok' if c.ok else 'fail' }}">{{ '✓' if c.ok else '✗' }} {{ c.name }}</td><td>{{ c.evidence }}</td></tr>{% endfor %}
+        {% for c in week_report.week.checks %}<tr><td class="{{ 'ok' if c.ok else 'fail' }}">{{ '✓' if c.ok else '✗' }} {{ c.name }}{% if c.film %} <span style="color:var(--grey);font-weight:400">{{ week.film_title(c.film) }}</span>{% endif %}</td><td>{% if c.relaxed %}<span class="relaxed mono">relaxed</span> {% endif %}{{ c.evidence }}</td></tr>{% endfor %}
         {% for dd in days %}<tr><td class="{{ 'ok' if dd.report.ok else 'fail' }}">{{ '✓' if dd.report.ok else '✗' }} {{ dd.name }}</td><td>{{ dd.grid.status }} · {{ dd.grid.sessions|length }} sessions · {{ dd.report.checks|selectattr('ok')|list|length }} of {{ dd.report.checks|length }} checks green{% if dd.report.relaxations %} · {{ dd.report.relaxations|length }} relaxed{% endif %}{% if dd.report.failures %} · {{ dd.report.failures|length }} failed{% endif %}</td></tr>{% endfor %}
         </tbody>
       </table>

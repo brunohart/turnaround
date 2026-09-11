@@ -44,8 +44,8 @@ def briefs(draw: st.DrawFn) -> Brief:
             "prime_shows": draw(st.integers(0, 1)),
             "exclusive_screen": draw(st.booleans()) if n_screens > 1 else False,
         }
-        if draw(st.booleans()):
-            terms["max_shows"] = draw(st.integers(1, 4))
+        if draw(st.booleans()):  # a brief with min_shows above max_shows is refused
+            terms["max_shows"] = draw(st.integers(max(1, int(terms["min_shows"])), 4))
         if draw(st.booleans()):
             terms["earliest_start"] = draw(st.sampled_from(["12:00", "14:00", "16:00"]))
         if draw(st.booleans()):

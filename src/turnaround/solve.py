@@ -30,9 +30,22 @@ from ortools.sat.python import cp_model
 from .model import Brief, Film, Grid, Session, TermRef, WeekBrief, WeekGrid, parse_time
 
 # Relaxation order: the term with the smallest key goes first.
-# exclusive_screen is always last; otherwise the lightest film first,
-# and within a film prime_shows before max_shows before min_shows.
-_TERM_RANK = {"prime_shows": 0, "max_shows": 1, "min_shows": 2, "exclusive_screen": 3}
+# exclusive_screen and plf_lock are always last; otherwise the lightest film first,
+# and within a film the day's terms before the week's: prime_shows, max_shows,
+# min_shows, then prime_shows_per_week, then min_shows_per_week.
+_TERM_RANK = {
+    "prime_shows": 0,
+    "max_shows": 1,
+    "min_shows": 2,
+    "prime_shows_per_week": 3,
+    "min_shows_per_week": 4,
+    "exclusive_screen": 5,
+    "plf_lock": 6,
+}
+
+Owed = dict[str, dict[str, int]]
+"""Per film id, what a week term still requires of *this* day: the floor the days
+before did not meet and the days after could not. Computed by solve_week."""
 
 
 @dataclass(frozen=True)
@@ -92,7 +105,41 @@ def terms_of(film: Film) -> list[TermRef]:
         out.append(TermRef(film=film.id, term="prime_shows", value=str(t.prime_shows)))
     if t.exclusive_screen:
         out.append(TermRef(film=film.id, term="exclusive_screen"))
+    if t.plf_lock:
+        out.append(TermRef(film=film.id, term="plf_lock"))
+    if t.min_shows_per_week > 0:
+        out.append(
+            TermRef(film=film.id, term="min_shows_per_week", value=str(t.min_shows_per_week))
+        )
+    if t.prime_shows_per_week > 0:
+        out.append(
+            TermRef(film=film.id, term="prime_shows_per_week", value=str(t.prime_shows_per_week))
+        )
     return out
+
+
+def day_bound(brief: Brief, film: Film) -> tuple[int, int]:
+    """The most sessions, and the most prime sessions, a title could have on this day:
+    per eligible screen, how many of its blocks fit between its first and last allowed
+    start, capped by max_shows. An upper bound, not a plan; it is what a week term can
+    still hope for from a day not yet solved."""
+    shows = 0
+    prime = 0
+    cands = [c for c in candidates(brief) if c.film == film.id]
+    for scr in brief.screens:
+        mine = [c for c in cands if c.screen == scr.id]
+        if not mine:
+            continue
+        block = brief.block_len(scr, film)
+        starts = [c.start for c in mine]
+        shows += (max(starts) - min(starts)) // block + 1
+        ps = [c.start for c in mine if c.prime]
+        if ps:
+            prime += (max(ps) - min(ps)) // block + 1
+    if film.terms.max_shows is not None:
+        shows = min(shows, film.terms.max_shows)
+        prime = min(prime, film.terms.max_shows)
+    return shows, min(prime, shows)
 
 
 @dataclass
@@ -125,13 +172,17 @@ def _build(
     feasibility_only: bool = False,
     hold: Hold | None = None,
     hold_penalty: float = 0.0,
+    owed: Owed | None = None,
 ) -> _Model:
     """The model. Terms in `dropped` are not enforced; every other term is guarded.
     A feasibility-only model has no objective: a probe stops at the first grid it finds.
     `hold` is the soft term: a title whose set of starts today differs from the set it
     had on the anchor day costs `hold_penalty` expected admissions. Nothing is forced; a
-    day whose hours cannot carry the anchor's starts simply pays."""
+    day whose hours cannot carry the anchor's starts simply pays. `owed` is what the
+    week's terms still require of this day (solve_week works it out); a week term with
+    nothing owed today is carried for the record and constrains nothing."""
     p = brief.policy
+    owed = owed or {}
     cands = candidates(brief)
     m = cp_model.CpModel()
     mdl = _Model(m=m, cands=cands, x={})
@@ -200,8 +251,32 @@ def _build(
         for ref in terms_of(f):
             if (ref.film, ref.term) in dropped:
                 continue
+            due = owed.get(f.id, {}).get(ref.term, 0)
+            if ref.term in ("min_shows_per_week", "prime_shows_per_week"):
+                # The week's floor for today, named so a conflict says what was owed. A
+                # week term that asks nothing of today is not in the model at all.
+                if not due:
+                    continue
+                ref = TermRef(film=ref.film, term=ref.term, value=f"{ref.value} · {due} owed today")
             a = mdl.guard(ref)
-            if ref.term == "min_shows":
+            if ref.term == "min_shows_per_week":
+                if due and vs:
+                    m.add(sum(vs) >= due).only_enforce_if(a)
+                elif due:
+                    m.add(a == 0)
+            elif ref.term == "prime_shows_per_week":
+                pv = [mdl.x[c] for c in mine if c.prime]
+                if due and pv:
+                    m.add(sum(pv) >= due).only_enforce_if(a)
+                elif due:
+                    m.add(a == 0)
+            elif ref.term == "plf_lock":
+                # No other title on any PLF room today. A dark PLF room is allowed.
+                plf = {scr.id for scr in brief.screens if "PLF" in scr.formats}
+                for c in cands:
+                    if c.screen in plf and c.film != f.id:
+                        m.add_implication(a, mdl.x[c].negated())
+            elif ref.term == "min_shows":
                 if vs:
                     m.add(sum(vs) >= t.min_shows).only_enforce_if(a)
                 else:  # no screen can play it: the term is false on its own
@@ -326,10 +401,11 @@ def _seed_core(
     *,
     time_limit_s: float,
     workers: int,
+    owed: Owed | None = None,
 ) -> list[TermRef]:
     """A first, possibly loose, set of culprits from the solver's own unsat core. If the
     solver cannot prove it in time, every term is a suspect."""
-    mdl = _build(brief, dropped, feasibility_only=True)
+    mdl = _build(brief, dropped, feasibility_only=True, owed=owed)
     mdl.m.add_assumptions([mdl.assumptions[r] for r in terms])
     solver = _solver(time_limit_s, workers)
     if solver.solve(mdl.m) != cp_model.INFEASIBLE:
@@ -346,12 +422,13 @@ def _alone(
     *,
     time_limit_s: float,
     workers: int,
+    owed: Owed | None = None,
 ) -> list[TermRef]:
     """The blamed terms that fail on their own: each is a conflict of size one, and
     no explanation is smaller than that."""
     out = []
     for ref in core:
-        mdl = _build(brief, dropped, feasibility_only=True)
+        mdl = _build(brief, dropped, feasibility_only=True, owed=owed)
         _pin(mdl, [ref])
         if _solver(time_limit_s, workers).solve(mdl.m) == cp_model.INFEASIBLE:
             out.append(ref)
@@ -365,6 +442,7 @@ def _minimise(
     *,
     time_limit_s: float,
     workers: int,
+    owed: Owed | None = None,
 ) -> list[TermRef]:
     """Deletion pass: drop each blamed term in turn; if the rest still conflict, it was
     never needed. A probe that runs out of time keeps its term (never blame less
@@ -374,7 +452,7 @@ def _minimise(
         trial = [r for r in kept if r != ref]
         if not trial:
             break
-        mdl = _build(brief, dropped, feasibility_only=True)
+        mdl = _build(brief, dropped, feasibility_only=True, owed=owed)
         _pin(mdl, trial)
         st = _solver(time_limit_s, workers).solve(mdl.m)
         if st == cp_model.INFEASIBLE:
@@ -439,10 +517,13 @@ def solve(
     minimise: bool = True,
     hold: Hold | None = None,
     hold_penalty: float = 0.0,
+    owed: Owed | None = None,
 ) -> Grid:
-    """Solve one day. On INFEASIBLE the grid carries the conflicting terms."""
+    """Solve one day. On INFEASIBLE the grid carries the conflicting terms. `owed` is
+    what the week's terms still require of this day; a day solved on its own owes
+    nothing."""
     t0 = time.perf_counter()
-    mdl = _build(brief, dropped, hold=hold, hold_penalty=hold_penalty)
+    mdl = _build(brief, dropped, hold=hold, hold_penalty=hold_penalty, owed=owed)
     terms = list(mdl.assumptions)
     _pin(mdl, terms)
     solver = _solver(time_limit_s, workers)
@@ -452,14 +533,16 @@ def solve(
     if status == cp_model.INFEASIBLE:
         probe = min(time_limit_s, 5.0)
         # Smallest first: any term that fails by itself is a conflict of size one.
-        solo = _alone(brief, dropped, terms, time_limit_s=probe, workers=workers)
+        solo = _alone(brief, dropped, terms, time_limit_s=probe, workers=workers, owed=owed)
         if solo:
             conflict, alone = solo, True
         else:
-            conflict = _seed_core(brief, dropped, terms, time_limit_s=probe, workers=workers)
+            conflict = _seed_core(
+                brief, dropped, terms, time_limit_s=probe, workers=workers, owed=owed
+            )
             if minimise and len(conflict) > 1:
                 conflict = _minimise(
-                    brief, dropped, conflict, time_limit_s=time_limit_s, workers=workers
+                    brief, dropped, conflict, time_limit_s=time_limit_s, workers=workers, owed=owed
                 )
     elapsed = time.perf_counter() - t0
     relaxed = [r for f in brief.films for r in terms_of(f) if (r.film, r.term) in dropped]
@@ -481,7 +564,7 @@ def relax_key(brief: Brief, ref: TermRef) -> tuple[int, float, int]:
     """Which term to give up first: never the exclusive while anything else will do,
     then the lightest film, then prime before max before min."""
     return (
-        1 if ref.term == "exclusive_screen" else 0,
+        1 if ref.term in ("exclusive_screen", "plf_lock") else 0,
         brief.film(ref.film).weight,
         _TERM_RANK.get(ref.term, 99),
     )
@@ -494,6 +577,7 @@ def relax(
     workers: int = 8,
     hold: Hold | None = None,
     hold_penalty: float = 0.0,
+    owed: Owed | None = None,
 ) -> Grid:
     """Drop terms one at a time, from the conflict, in relax_key order, until a grid
     exists. The grid lists every term dropped. Nothing is dropped that the
@@ -508,6 +592,7 @@ def relax(
             dropped=dropped,
             hold=hold,
             hold_penalty=hold_penalty,
+            owed=owed,
         )
         if grid.status != "INFEASIBLE" or not grid.conflict:
             break
@@ -555,6 +640,36 @@ def explain(brief: Brief, grid: Grid) -> str:
     return lead + " · ".join(parts) + " — " + house
 
 
+def _owed_today(
+    week: WeekBrief, done: list[Grid], bounds: list[dict[str, tuple[int, int]]], i: int
+) -> Owed:
+    """What each week term still requires of day i: the term less what the days before
+    delivered, less the most the days after could deliver. That is the weakest floor
+    under which the week can still be met; the week is solved day by day (ADR-010)
+    and this is how a week term reaches a day."""
+    out: Owed = {}
+    later = range(i + 1, len(week.days))
+    for f in week.films:
+        t = f.terms
+        mine: dict[str, int] = {}
+        if t.min_shows_per_week:
+            had = sum(len([s for s in g.sessions if s.film == f.id]) for g in done)
+            could = sum(bounds[j][f.id][0] for j in later)
+            mine["min_shows_per_week"] = max(0, t.min_shows_per_week - had - could)
+        if t.prime_shows_per_week:
+            had = sum(
+                1
+                for j, g in enumerate(done)
+                for s in g.sessions
+                if s.film == f.id and week.day(j).policy.is_prime(s.start)
+            )
+            could = sum(bounds[j][f.id][1] for j in later)
+            mine["prime_shows_per_week"] = max(0, t.prime_shows_per_week - had - could)
+        if mine:
+            out[f.id] = mine
+    return out
+
+
 def _starts(grid: Grid) -> Hold:
     out: dict[str, set[int]] = {}
     for s in grid.sessions:
@@ -578,13 +693,21 @@ def solve_week(
     grids: list[Grid] = []
     anchor: Hold | None = None
     hold_set = set(week.hold_indices)
+    briefs = week.briefs()
+    bounds = [{f.id: day_bound(b, f) for f in b.films} for b in briefs]
     for i in range(len(week.days)):
-        brief = week.day(i)
+        brief = briefs[i]
         hold = anchor if i in hold_set else None
         penalty = week.hold_penalty if hold else 0.0
+        owed = _owed_today(week, grids, bounds, i)
         run = relax if relax_terms else solve
         grid = run(
-            brief, time_limit_s=time_limit_s, workers=workers, hold=hold, hold_penalty=penalty
+            brief,
+            time_limit_s=time_limit_s,
+            workers=workers,
+            hold=hold,
+            hold_penalty=penalty,
+            owed=owed,
         )
         grids.append(grid)
         if i in hold_set and anchor is None and grid.status in ("OPTIMAL", "FEASIBLE"):

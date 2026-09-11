@@ -20,7 +20,14 @@ import re
 from datetime import date
 from typing import Annotated, Any
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    ValidationInfo,
+    field_validator,
+    model_validator,
+)
 
 _TIME = re.compile(r"^(\d{1,2}):(\d{2})$")
 
@@ -106,6 +113,58 @@ class Terms(BaseModel):
     latest_start: str | None = Field(default=None, description="HH:MM")
     screens: list[str] | None = Field(default=None, description="Only these screen ids")
     min_capacity: int | None = Field(default=None, ge=0, description="Only screens this big")
+    plf_lock: bool = Field(
+        default=False,
+        description="Every session on a PLF room belongs to this title: no other title plays a "
+        "PLF screen while this one is booked",
+    )
+    min_shows_per_week: int = Field(
+        default=0,
+        ge=0,
+        description="At least this many sessions across the week. A week term: a day brief "
+        "refuses it",
+    )
+    prime_shows_per_week: int = Field(
+        default=0,
+        ge=0,
+        description="At least this many sessions starting in prime across the week. A week term",
+    )
+    exclusive_until: str | None = Field(
+        default=None,
+        description="A day name: exclusive_screen holds on every day of the week up to and "
+        "including this one, then lifts. A week term",
+    )
+
+
+WEEK_TERMS = ("min_shows_per_week", "prime_shows_per_week", "exclusive_until")
+"""Terms that mean nothing on one day. A day brief refuses them; a week unfolds them."""
+
+TERM_SCOPE = {
+    "min_shows": "day",
+    "max_shows": "day",
+    "prime_shows": "day",
+    "exclusive_screen": "day",
+    "earliest_start": "day",
+    "latest_start": "day",
+    "screens": "day",
+    "min_capacity": "day",
+    "plf_lock": "day",
+    "min_shows_per_week": "week",
+    "prime_shows_per_week": "week",
+    "exclusive_until": "week",
+}
+
+
+def week_terms_set(t: Terms) -> list[tuple[str, str]]:
+    """The week-scoped terms this booking carries, as (name, value as written)."""
+    out = []
+    if t.min_shows_per_week:
+        out.append(("min_shows_per_week", str(t.min_shows_per_week)))
+    if t.prime_shows_per_week:
+        out.append(("prime_shows_per_week", str(t.prime_shows_per_week)))
+    if t.exclusive_until:
+        out.append(("exclusive_until", t.exclusive_until))
+    return out
 
 
 DEFAULT_DECAY = 0.6
@@ -340,7 +399,12 @@ class Brief(BaseModel):
         return v
 
     @model_validator(mode="after")
-    def _refs(self) -> Brief:
+    def _refs(self, info: ValidationInfo) -> Brief:
+        """Every reference resolves and every term could be met by *some* grid. A term
+        that cannot is refused here, in the trade's words, rather than found INFEASIBLE
+        later. A brief unfolded from a week (validation context `in_week`) may carry
+        week-scoped terms; a brief that is one day may not."""
+        in_week = bool((info.context or {}).get("in_week"))
         screen_ids = {s.id for s in self.screens}
         for s in self.screens:
             if self.last_start_for(s) < self.open_for(s):
@@ -348,15 +412,54 @@ class Brief(BaseModel):
                     f"screen {s.id}: last start {fmt_time(self.last_start_for(s))} is before "
                     f"it opens at {fmt_time(self.open_for(s))}"
                 )
+        doors = min(self.open_for(s) for s in self.screens)
+        last = max(self.last_start_for(s) for s in self.screens)
+        plf_rooms = [s for s in self.screens if "PLF" in s.formats]
         for f in self.films:
-            if f.terms.screens:
-                unknown = set(f.terms.screens) - screen_ids
+            t = f.terms
+            if t.screens:
+                unknown = set(t.screens) - screen_ids
                 if unknown:
                     raise ValueError(f"film {f.id} names unknown screens {sorted(unknown)}")
-            if f.terms.earliest_start:
-                parse_time(f.terms.earliest_start)
-            if f.terms.latest_start:
-                parse_time(f.terms.latest_start)
+            lo = parse_time(t.earliest_start) if t.earliest_start else None
+            hi = parse_time(t.latest_start) if t.latest_start else None
+            if lo is not None and hi is not None and lo > hi:
+                raise ValueError(
+                    f"{f.title}: earliest_start {t.earliest_start} is after latest_start "
+                    f"{t.latest_start} — no session could start"
+                )
+            if hi is not None and hi < doors:
+                raise ValueError(
+                    f"{f.title}: latest_start {t.latest_start} is before the house opens at "
+                    f"{fmt_time(doors)} — no session could start"
+                )
+            if lo is not None and lo > last:
+                raise ValueError(
+                    f"{f.title}: earliest_start {t.earliest_start} is after the last start "
+                    f"{fmt_time(last)} — no session could start"
+                )
+            if t.max_shows is not None and t.min_shows > t.max_shows:
+                raise ValueError(
+                    f"{f.title}: min_shows {t.min_shows} is more than max_shows {t.max_shows} "
+                    "— no day could carry both"
+                )
+            if t.max_shows is not None and t.prime_shows > t.max_shows:
+                raise ValueError(
+                    f"{f.title}: prime_shows {t.prime_shows} is more than max_shows "
+                    f"{t.max_shows} — no day could carry both"
+                )
+            if t.plf_lock and not plf_rooms:
+                played = sorted({fmt for s in self.screens for fmt in s.formats})
+                raise ValueError(
+                    f"{f.title}: plf_lock asks for every PLF room and the house has none — "
+                    f"the screens play {', '.join(played)}"
+                )
+            if not in_week:
+                for name, value in week_terms_set(t):
+                    raise ValueError(
+                        f"{f.title}: {name} {value} is a week term and this brief is one day "
+                        "— put it in a week brief, under days"
+                    )
             if f.demand is not None:
                 names = {d.name for d in self.policy.dayparts}
                 missing = sorted(set(f.demand.per_session) - names)
@@ -595,6 +698,13 @@ class WeekBrief(BaseModel):
             raise ValueError("day names must be unique")
         film_ids = {f.id for f in self.films}
         screen_ids = {s.id for s in self.screens}
+        for f in self.films:
+            until = f.terms.exclusive_until
+            if until is not None and until not in names:
+                raise ValueError(
+                    f"{f.title}: exclusive_until {until} names a day the week does not have "
+                    f"— the days are {', '.join(names)}"
+                )
         for d in self.days:
             unknown = set(d.terms) - film_ids
             if unknown:
@@ -616,23 +726,37 @@ class WeekBrief(BaseModel):
         policy = Policy.model_validate({**self.policy.model_dump(), **d.policy})
         films = []
         for f in self.films:
-            if f.id in d.terms:
-                terms = Terms.model_validate({**f.terms.model_dump(), **d.terms[f.id]})
-                films.append(f.model_copy(update={"terms": terms}))
+            base = f.terms.model_dump()
+            until = f.terms.exclusive_until
+            if until is not None:
+                # The exclusive holds through the named day and lifts the day after.
+                base["exclusive_screen"] = f.terms.exclusive_screen or i <= self.day_index(until)
+            override = d.terms.get(f.id, {})
+            if until is not None or override:
+                films.append(
+                    f.model_copy(update={"terms": Terms.model_validate({**base, **override})})
+                )
             else:
                 films.append(f)
         screens = [
             Screen.model_validate({**s.model_dump(), **d.screens[s.id]}) if s.id in d.screens else s
             for s in self.screens
         ]
-        return Brief(
-            house=self.house,
-            date=d.date,
-            weekday=d.name if d.name in WEEKDAYS else None,
-            screens=screens,
-            films=films,
-            policy=policy,
+        return Brief.model_validate(
+            {
+                "house": self.house,
+                "date": d.date,
+                "weekday": d.name if d.name in WEEKDAYS else None,
+                "screens": screens,
+                "films": films,
+                "policy": policy,
+            },
+            context={"in_week": True},
         )
+
+    def day_index(self, name: str) -> int:
+        """Position of a day in the week, by the name the booth calls it."""
+        return [d.name for d in self.days].index(name)
 
     def briefs(self) -> list[Brief]:
         return [self.day(i) for i in range(len(self.days))]
@@ -676,3 +800,76 @@ class WeekGrid(BaseModel):
 
     def grid(self, name: str) -> Grid:
         return self.grids[self.days.index(name)]
+
+
+_MODEL_AT: dict[str, type[BaseModel]] = {
+    "terms": Terms,
+    "films": Film,
+    "screens": Screen,
+    "policy": Policy,
+    "demand": Demand,
+    "dayparts": Daypart,
+    "days": DayOverride,
+}
+
+
+def validation_sentences(err: Exception, raw: Any, *, week: bool | None = None) -> list[str]:
+    """A pydantic error in the trade's words: which title or screen, which field, what
+    was wrong, and — for a field the booking cannot carry — what it can. `raw` is the
+    parsed JSON, so a film can be named by its title rather than its index."""
+    from pydantic import ValidationError
+
+    if not isinstance(err, ValidationError):
+        return [str(err)]
+    if week is None:
+        week = isinstance(raw, dict) and "days" in raw
+    out: list[str] = []
+    for e in err.errors():
+        loc = [x for x in e["loc"] if x != "__root__"]
+        # Walk the path, naming things as the booth would.
+        node: Any = raw
+        words: list[str] = []
+        model: type[BaseModel] = WeekBrief if week else Brief
+        last_key: str | None = None
+        for part in loc:
+            if isinstance(part, int):
+                node = node[part] if isinstance(node, list) and part < len(node) else None
+                name = None
+                if isinstance(node, dict):
+                    name = node.get("title") or node.get("name") or node.get("id")
+                words.append(str(name) if name else f"#{part + 1}")
+            else:
+                node = node.get(part) if isinstance(node, dict) else None
+                last_key = str(part)
+                if part in _MODEL_AT:
+                    model = _MODEL_AT[part]
+                    if part not in ("terms", "policy", "demand"):
+                        continue  # "films → The Long Voyage", not "films → films"
+                words.append(str(part))
+        where = " → ".join(words)
+        kind = e["type"]
+        msg = e["msg"]
+        if kind == "extra_forbidden":
+            field = words.pop() if words else str(last_key)
+            where = " → ".join(words)
+            allowed = ", ".join(model.model_fields)
+            noun = {
+                "Terms": "a term a booking can carry",
+                "Film": "something a title can carry",
+                "Screen": "something a screen can carry",
+                "Policy": "a house policy",
+                "Demand": "part of a demand block",
+                "DayOverride": "something a day can override",
+                "Daypart": "part of a daypart",
+            }.get(model.__name__, "a field of the brief")
+            out.append(
+                (f"{where}: " if where else "")
+                + f"`{field}` is not {noun} — the fields are {allowed}"
+            )
+        elif kind == "value_error":
+            text = msg.removeprefix("Value error, ")
+            out.append(f"{where}: {text}" if where and where not in text else text)
+        else:
+            got = e.get("input")
+            out.append(f"{where}: {msg}" + (f" (got {got!r})" if got is not None else ""))
+    return out

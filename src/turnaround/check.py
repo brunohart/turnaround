@@ -11,7 +11,17 @@ from dataclasses import dataclass, field
 
 from .model import Brief, Daypart, Grid, Session, Terms, WeekBrief, WeekGrid, fmt_time, parse_time
 
-RELAXABLE = ("min_shows", "max_shows", "prime_shows", "exclusive_screen")
+RELAXABLE = (
+    "min_shows",
+    "max_shows",
+    "prime_shows",
+    "exclusive_screen",
+    "plf_lock",
+    "min_shows_per_week",
+    "prime_shows_per_week",
+)
+"""Terms a grid may declare it gave up. `exclusive_until` is not here: it unfolds to
+`exclusive_screen` on each day it covers, and that is the term a day gives up."""
 
 
 @dataclass
@@ -290,6 +300,22 @@ def check(brief: Brief, grid: Grid) -> Report:
                 f.id,
                 "exclusive_screen" in gave_up,
             )
+        if t.plf_lock:
+            # Every session on a PLF room is this title's. A dark PLF room is fine.
+            plf = [scr.id for scr in brief.screens if "PLF" in scr.formats]
+            others = [s for s in grid.sessions if s.screen in plf and s.film != f.id]
+            r.add(
+                "plf_lock",
+                not others,
+                f"PLF room{'s' if len(plf) != 1 else ''} {', '.join(plf)}: "
+                + (
+                    f"{len(others)} session{'s' if len(others) != 1 else ''} by other titles"
+                    if others
+                    else "no other title"
+                ),
+                f.id,
+                "plf_lock" in gave_up,
+            )
 
     # The objective, re-counted. The solver claims expected admissions; count them again
     # from the brief and the sessions, and hold the claim to within a cent a session.
@@ -414,4 +440,63 @@ def check_week(week: WeekBrief, wg: WeekGrid) -> WeekReport:
         not wrong,
         f"{owed:,.0f} admissions paid to hold times" + ("; " + "; ".join(wrong) if wrong else ""),
     )
+    # The week-scoped terms, counted across the days from the sessions alone. A day
+    # that did not solve counts for nothing, which is the honest reading: the term was
+    # not met that day. A relaxation declared on any day's grid covers the week term.
+    grids = list(wg.grids)
+    given_up = {(t.film, t.term) for g in grids for t in g.relaxed}
+    for f in week.films:
+        t = f.terms
+        per_day = [len([s for s in g.sessions if s.film == f.id]) for g in grids]
+        if t.min_shows_per_week:
+            n = sum(per_day)
+            w.add(
+                "min_shows_per_week",
+                n >= t.min_shows_per_week,
+                f"{n} ≥ {t.min_shows_per_week} · "
+                + " ".join(f"{d} {k}" for d, k in zip(names, per_day, strict=False)),
+                f.id,
+                (f.id, "min_shows_per_week") in given_up,
+            )
+        if t.prime_shows_per_week:
+            primes = [
+                sum(
+                    1 for s in g.sessions if s.film == f.id and week.day(i).policy.is_prime(s.start)
+                )
+                for i, g in enumerate(grids)
+            ]
+            n = sum(primes)
+            w.add(
+                "prime_shows_per_week",
+                n >= t.prime_shows_per_week,
+                f"{n} ≥ {t.prime_shows_per_week} in prime · "
+                + " ".join(f"{d} {k}" for d, k in zip(names, primes, strict=False)),
+                f.id,
+                (f.id, "prime_shows_per_week") in given_up,
+            )
+        if t.exclusive_until is not None and t.exclusive_until in names:
+            through = names.index(t.exclusive_until)
+            owned: list[str] = []
+            broken: list[str] = []
+            for i in range(through + 1):
+                if i >= len(grids):
+                    broken.append(names[i])
+                    continue
+                own = [
+                    sid
+                    for sid, ss in grids[i].by_screen().items()
+                    if ss and all(s.film == f.id for s in ss)
+                ]
+                (owned if own else broken).append(
+                    f"{names[i]} {','.join(own)}" if own else names[i]
+                )
+            w.add(
+                "exclusive_until",
+                not broken,
+                f"own screen through {t.exclusive_until}: "
+                + (" · ".join(owned) if owned else "none")
+                + (f"; not on {', '.join(broken)}" if broken else ""),
+                f.id,
+                (f.id, "exclusive_screen") in given_up,
+            )
     return WeekReport(days=names, reports=reports, week=w)
