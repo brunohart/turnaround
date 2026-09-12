@@ -14,7 +14,7 @@ from typing import Any
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from .check import Check, Report, WeekReport, admissions, term_is_set
+from .check import Check, Report, WeekReport, admissions, term_is_set, whys
 from .model import TERM_SCOPE, Brief, Film, Grid, WeekBrief, WeekGrid, fmt_time, week_terms_set
 
 _TEMPLATES = Path(__file__).parent / "templates"
@@ -35,12 +35,14 @@ def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
     day_end = latest_clear + (60 - latest_clear % 60) % 60
     span = max(day_end - day_start, 60)
     hours = list(range(day_start, day_end + 1, 60))
+    why_of = {(w.session.screen, w.session.start): w for w in whys(brief, grid)}
     rows = []
     for scr in brief.screens:
         sessions = grid.by_screen().get(scr.id, [])
         blocks = []
         for i, s in enumerate(sessions):
             f = brief.film(s.film)
+            w = why_of[(s.screen, s.start)]
             block = s.clear - s.start
             turn_begin, _ = brief.turnaround_of(scr, f, s.start)
             # Strip widths are percentages of the block. The turnaround strip is pulled
@@ -63,6 +65,8 @@ def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
                     "clean_min": s.clear - turn_begin,
                     "over_min": s.feature_end - turn_begin,
                     "gap": (nxt.start - s.clear) if nxt else None,
+                    "why": w.sentence,
+                    "forced": s.forced,
                 }
             )
         own_hours = scr.open is not None or scr.last_start is not None
@@ -104,12 +108,45 @@ def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
             {
                 "film": f,
                 "starts": [fmt_time(s.start) for s in ss],
+                "whys": [
+                    {
+                        "start": fmt_time(s.start),
+                        "screen": s.screen,
+                        "sold": why_of[(s.screen, s.start)].admissions,
+                        "short": why_of[(s.screen, s.start)].expected
+                        - why_of[(s.screen, s.start)].admissions
+                        >= 0.5,
+                        "forced": s.forced,
+                        "why": why_of[(s.screen, s.start)].sentence,
+                    }
+                    for s in ss
+                ],
                 "prime": sum(1 for s in ss if p.is_prime(s.start)),
                 "seats": a.offered,
                 "admissions": a.admissions,
                 "turned_away": a.turned_away,
             }
         )
+    # the proof table's forced column: per (check, film) the sessions a term forces, and
+    # for the objective row the sessions the objective forces
+    probed = any(s.forced for s in grid.sessions)
+    forced_by: dict[tuple[str, str | None], list[str]] = {}
+    for s in grid.sessions:
+        if not s.forced:
+            continue
+        if s.forced.by == "terms":
+            for t in s.forced.terms:
+                forced_by.setdefault((t.term, t.film), []).append(s.key)
+        elif s.forced.by == "objective":
+            forced_by.setdefault(("objective", None), []).append(f"{s.key} −{s.forced.delta:,.0f}")
+    # the objective row would list every session the objective forces; say how many and name
+    # the three that cost the most without them
+    wanted = [s for s in grid.sessions if s.forced and s.forced.by == "objective"]
+    if wanted:
+        top = sorted(wanted, key=lambda s: -(s.forced.delta if s.forced else 0.0))[:3]
+        forced_by[("objective", None)] = [f"{len(wanted)} sessions"] + [
+            f"{s.key} −{s.forced.delta:,.0f}" for s in top if s.forced
+        ]
     return {
         "rows": rows,
         "films": films,
@@ -125,6 +162,11 @@ def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
         "seats": sum(brief.screen(s.screen).capacity for s in grid.sessions),
         "admissions": sum(a.admissions for a in seats_sold.values()),
         "turned_away": sum(a.turned_away for a in seats_sold.values()),
+        "probed": probed,
+        "forced_by": forced_by,
+        "forced_count": sum(1 for s in grid.sessions if s.forced and s.forced.by == "terms"),
+        "objective_count": sum(1 for s in grid.sessions if s.forced and s.forced.by == "objective"),
+        "free_count": sum(1 for s in grid.sessions if s.forced and s.forced.by == "free"),
     }
 
 

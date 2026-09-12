@@ -60,10 +60,12 @@
   .legend i { display:inline-block; width:22px; height:12px; border:1px solid var(--ink); vertical-align:middle; margin-right:6px; }
   .legend i.pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); }
   .legend i.feat { background:var(--cream); }
+  .legend i.forced-i { position:relative; } .legend i.forced-i::after, .legend i.wanted-i::after { content:""; position:absolute; right:0; bottom:0; border-style:solid; border-width:0 0 7px 7px; border-color:transparent transparent var(--blue) transparent; }
+  .legend i.wanted-i { position:relative; } .legend i.wanted-i::after { border-color:transparent transparent rgba(26,26,26,.45) transparent; }
   .legend i.clean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); }
   /* below the fold: two panels, pinned a little off true; hover straightens one */
   .cols { display:grid; grid-template-columns:1.15fr .85fr; gap:40px; margin-top:44px; position:relative; }
-  .cols > .panel { position:relative; }
+  .cols > .panel { position:relative; min-width:0; }
   .cols > .panel:first-of-type { transform:rotate(-.3deg); transform-origin:0 0; }
   .cols > .panel:last-of-type { transform:rotate(.35deg); transform-origin:100% 0; }
   .cols > .panel:hover { transform:none; }
@@ -80,6 +82,19 @@
   .relaxed { display:inline-block; color:var(--red); border:1px solid var(--red); padding:1px 5px; margin-right:4px; transform:rotate(-1.2deg); font-size:10px; }
   .given-up { color:var(--red); }
   .proof td:first-child { white-space:nowrap; }
+  .proof td.forced-col { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11px; color:var(--blue); line-height:1.6; }
+  .proof td.forced-col span { display:block; white-space:nowrap; }
+  td.title b { white-space:nowrap; }
+  .probed { color:var(--grey); margin:10px 0 0; }
+  td.starts .st { display:inline-block; margin-right:10px; white-space:nowrap; }
+  td.starts .st i { font-style:normal; color:var(--grey); }
+  td.starts .st i.short { color:var(--red); }
+  td.starts .st b.fx { font-weight:500; color:var(--blue); border:1px solid var(--blue); padding:0 4px; font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+  td.starts .st b.fo { font-weight:500; color:var(--blue); font-size:11px; }
+  /* a session the terms force gets a navy corner; one the objective forces, an ink one. The orange
+     stays on the turnaround (DESIGN.md), so the objective's mark is the ink at less than half strength */
+  .block .feat.forced::before, .block .feat.wanted::before { content:""; position:absolute; right:0; bottom:0; width:0; height:0; border-style:solid; border-width:0 0 9px 9px; border-color:transparent transparent var(--blue) transparent; }
+  .block .feat.wanted::before { border-color:transparent transparent rgba(26,26,26,.45) transparent; }
   footer { margin-top:56px; color:var(--grey); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
   .week-table th.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:11px; }
   .week-table td.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11px; letter-spacing:.02em; line-height:1.6; white-space:nowrap; }
@@ -265,17 +280,17 @@
       
       <div class="row">
         <div class="d">Thu <span style="letter-spacing:.06em">09-10</span></div>
-        <div><span class="s">10:30 <i>Screen 1</i></span><span class="s">14:00 <i>Screen 1</i></span><span class="s prime">17:30 <i>Screen 1</i></span><span class="s">21:20 <i>Screen 1</i></span></div>
+        <div><span class="s">10:25 <i>Screen 1</i></span><span class="s">14:00 <i>Screen 1</i></span><span class="s prime">17:35 <i>Screen 1</i></span><span class="s">21:10 <i>Screen 1</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Fri <span style="letter-spacing:.06em">09-11</span></div>
-        <div><span class="s">10:25 <i>Screen 1</i></span><span class="s">14:05 <i>Screen 1</i></span><span class="s prime">17:50 <i>Screen 1</i></span><span class="s">21:20 <i>Screen 1</i></span></div>
+        <div><span class="s">10:15 <i>Screen 1</i></span><span class="s">14:05 <i>Screen 1</i></span><span class="s prime">17:40 <i>Screen 1</i></span><span class="s">21:10 <i>Screen 1</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Sat <span style="letter-spacing:.06em">09-12</span></div>
-        <div><span class="s">10:20 <i>Screen 1</i></span><span class="s">14:05 <i>Screen 1</i></span><span class="s prime">17:35 <i>Screen 1</i></span><span class="s">21:10 <i>Screen 1</i></span></div>
+        <div><span class="s">10:45 <i>Screen 1</i></span><span class="s">14:25 <i>Screen 1</i></span><span class="s prime">17:55 <i>Screen 1</i></span><span class="s">22:05 <i>Screen 1</i></span></div>
       </div>
       
       <div class="row">
@@ -285,17 +300,17 @@
       
       <div class="row">
         <div class="d">Mon <span style="letter-spacing:.06em">09-14</span></div>
-        <div><span class="s">10:30 <i>Screen 1</i></span><span class="s">14:00 <i>Screen 1</i></span><span class="s prime">17:30 <i>Screen 1</i></span><span class="s">21:20 <i>Screen 1</i></span></div>
+        <div><span class="s">10:25 <i>Screen 1</i></span><span class="s">14:00 <i>Screen 1</i></span><span class="s prime">17:35 <i>Screen 1</i></span><span class="s">21:10 <i>Screen 1</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Tue <span style="letter-spacing:.06em">09-15</span></div>
-        <div><span class="s">10:30 <i>Screen 1</i></span><span class="s">14:00 <i>Screen 1</i></span><span class="s prime">17:30 <i>Screen 1</i></span><span class="s">21:20 <i>Screen 1</i></span></div>
+        <div><span class="s">10:25 <i>Screen 1</i></span><span class="s">14:00 <i>Screen 1</i></span><span class="s prime">17:35 <i>Screen 1</i></span><span class="s">21:10 <i>Screen 1</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Wed <span style="letter-spacing:.06em">09-16</span></div>
-        <div><span class="s">10:30 <i>Screen 1</i></span><span class="s">14:00 <i>Screen 1</i></span><span class="s prime">17:30 <i>Screen 1</i></span><span class="s">21:20 <i>Screen 1</i></span></div>
+        <div><span class="s">10:25 <i>Screen 1</i></span><span class="s">14:00 <i>Screen 1</i></span><span class="s prime">17:35 <i>Screen 1</i></span><span class="s">21:10 <i>Screen 1</i></span></div>
       </div>
       
       <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
@@ -335,37 +350,37 @@
       
       <div class="row">
         <div class="d">Thu <span style="letter-spacing:.06em">09-10</span></div>
-        <div><span class="s">10:10 <i>Screen 3</i></span><span class="s">12:05 <i>Screen 2</i></span><span class="s">16:40 <i>Screen 2</i></span><span class="s prime">19:05 <i>Screen 2</i></span></div>
+        <div><span class="s">10:00 <i>Screen 2</i></span><span class="s">13:30 <i>Screen 3</i></span><span class="s">16:40 <i>Screen 2</i></span><span class="s prime">19:05 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Fri <span style="letter-spacing:.06em">09-11</span></div>
-        <div><span class="s">10:50 <i>Screen 2</i></span><span class="s">12:45 <i>Screen 3</i></span><span class="s">15:05 <i>Screen 3</i></span><span class="s prime">20:00 <i>Screen 2</i></span></div>
+        <div><span class="s">10:30 <i>Screen 2</i></span><span class="s">12:45 <i>Screen 3</i></span><span class="s">15:05 <i>Screen 3</i></span><span class="s prime">20:05 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Sat <span style="letter-spacing:.06em">09-12</span></div>
-        <div><span class="s">10:05 <i>Screen 3</i></span><span class="s">10:50 <i>Screen 2</i></span><span class="s">15:05 <i>Screen 3</i></span><span class="s prime">20:05 <i>Screen 2</i></span></div>
+        <div><span class="s">10:00 <i>Screen 3</i></span><span class="s">10:20 <i>Screen 2</i></span><span class="s">15:05 <i>Screen 3</i></span><span class="s prime">17:40 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Sun <span style="letter-spacing:.06em">09-13</span></div>
-        <div><span class="s">13:30 <i>Screen 2</i></span><span class="s">14:10 <i>Screen 3</i></span><span class="s prime">18:10 <i>Screen 2</i></span></div>
+        <div><span class="s">13:35 <i>Screen 2</i></span><span class="s">14:10 <i>Screen 3</i></span><span class="s prime">20:40 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Mon <span style="letter-spacing:.06em">09-14</span></div>
-        <div><span class="s">10:10 <i>Screen 3</i></span><span class="s">12:05 <i>Screen 2</i></span><span class="s">16:40 <i>Screen 2</i></span><span class="s prime">19:05 <i>Screen 2</i></span></div>
+        <div><span class="s">10:00 <i>Screen 2</i></span><span class="s">13:30 <i>Screen 3</i></span><span class="s">16:40 <i>Screen 2</i></span><span class="s prime">19:05 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Tue <span style="letter-spacing:.06em">09-15</span></div>
-        <div><span class="s">10:10 <i>Screen 3</i></span><span class="s">14:15 <i>Screen 2</i></span><span class="s prime">19:05 <i>Screen 2</i></span></div>
+        <div><span class="s">13:30 <i>Screen 3</i></span><span class="s">16:40 <i>Screen 2</i></span><span class="s prime">19:05 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Wed <span style="letter-spacing:.06em">09-16</span></div>
-        <div><span class="s">10:10 <i>Screen 3</i></span><span class="s">12:05 <i>Screen 2</i></span><span class="s">16:40 <i>Screen 2</i></span><span class="s prime">19:05 <i>Screen 2</i></span></div>
+        <div><span class="s">10:00 <i>Screen 2</i></span><span class="s">13:30 <i>Screen 3</i></span><span class="s">16:40 <i>Screen 2</i></span><span class="s prime">19:05 <i>Screen 2</i></span></div>
       </div>
       
       <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
@@ -418,17 +433,17 @@
       
       <div class="row">
         <div class="d">Fri <span style="letter-spacing:.06em">09-11</span></div>
-        <div><span class="s">17:25 <i>Screen 3</i></span><span class="s prime">17:35 <i>Screen 2</i></span><span class="s">22:20 <i>Screen 3</i></span><span class="s">22:30 <i>Screen 2</i></span></div>
+        <div><span class="s">17:25 <i>Screen 3</i></span><span class="s prime">17:50 <i>Screen 2</i></span><span class="s">22:20 <i>Screen 3</i></span><span class="s">22:30 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Sat <span style="letter-spacing:.06em">09-12</span></div>
-        <div><span class="s">17:25 <i>Screen 3</i></span><span class="s prime">17:50 <i>Screen 2</i></span><span class="s">22:15 <i>Screen 3</i></span><span class="s">22:30 <i>Screen 2</i></span></div>
+        <div><span class="s">17:25 <i>Screen 3</i></span><span class="s prime">20:15 <i>Screen 2</i></span><span class="s">22:15 <i>Screen 3</i></span><span class="s">22:30 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Sun <span style="letter-spacing:.06em">09-13</span></div>
-        <div><span class="s">16:30 <i>Screen 3</i></span><span class="s prime">20:35 <i>Screen 2</i></span><span class="s">21:20 <i>Screen 3</i></span></div>
+        <div><span class="s">16:30 <i>Screen 3</i></span><span class="s prime">18:10 <i>Screen 2</i></span><span class="s">21:20 <i>Screen 3</i></span></div>
       </div>
       
       <div class="row">
@@ -491,7 +506,7 @@
       
       <div class="row">
         <div class="d">Thu <span style="letter-spacing:.06em">09-10</span></div>
-        <div><span class="s">12:45 <i>Screen 3</i></span><span class="s prime">20:40 <i>Screen 3</i></span></div>
+        <div><span class="s">10:10 <i>Screen 3</i></span><span class="s prime">20:40 <i>Screen 3</i></span></div>
       </div>
       
       <div class="row">
@@ -511,17 +526,17 @@
       
       <div class="row">
         <div class="d">Mon <span style="letter-spacing:.06em">09-14</span></div>
-        <div><span class="s">12:45 <i>Screen 3</i></span><span class="s prime">20:40 <i>Screen 3</i></span></div>
+        <div><span class="s">10:10 <i>Screen 3</i></span><span class="s prime">20:40 <i>Screen 3</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Tue <span style="letter-spacing:.06em">09-15</span></div>
-        <div><span class="s">12:45 <i>Screen 3</i></span><span class="s prime">20:40 <i>Screen 3</i></span></div>
+        <div><span class="s">10:10 <i>Screen 3</i></span><span class="s prime">20:40 <i>Screen 3</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Wed <span style="letter-spacing:.06em">09-16</span></div>
-        <div><span class="s">12:45 <i>Screen 3</i></span><span class="s prime">20:40 <i>Screen 3</i></span></div>
+        <div><span class="s">10:10 <i>Screen 3</i></span><span class="s prime">20:40 <i>Screen 3</i></span></div>
       </div>
       
       <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
@@ -569,37 +584,37 @@
       
       <div class="row">
         <div class="d">Thu <span style="letter-spacing:.06em">09-10</span></div>
-        <div><span class="s">10:00 <i>Screen 2</i></span><span class="s">14:30 <i>Screen 2</i></span></div>
+        <div><span class="s">12:30 <i>Screen 2</i></span><span class="s">14:35 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Fri <span style="letter-spacing:.06em">09-11</span></div>
-        <div><span class="s">13:15 <i>Screen 2</i></span><span class="s">15:25 <i>Screen 2</i></span></div>
+        <div><span class="s">13:20 <i>Screen 2</i></span><span class="s">15:25 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Sat <span style="letter-spacing:.06em">09-12</span></div>
-        <div><span class="s">13:40 <i>Screen 2</i></span><span class="s">15:45 <i>Screen 2</i></span></div>
+        <div><span class="s">13:10 <i>Screen 2</i></span><span class="s">15:20 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Sun <span style="letter-spacing:.06em">09-13</span></div>
-        <div><span class="s">11:15 <i>Screen 2</i></span><span class="s">15:55 <i>Screen 2</i></span></div>
+        <div><span class="s">11:15 <i>Screen 2</i></span><span class="s">16:05 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Mon <span style="letter-spacing:.06em">09-14</span></div>
-        <div><span class="s">10:00 <i>Screen 2</i></span><span class="s">14:30 <i>Screen 2</i></span></div>
+        <div><span class="s">12:30 <i>Screen 2</i></span><span class="s">14:35 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Tue <span style="letter-spacing:.06em">09-15</span></div>
-        <div><span class="s">10:00 <i>Screen 2</i></span><span class="s">12:05 <i>Screen 2</i></span><span class="s">17:00 <i>Screen 2</i></span></div>
+        <div><span class="s">10:00 <i>Screen 2</i></span><span class="s">12:10 <i>Screen 2</i></span><span class="s">14:35 <i>Screen 2</i></span></div>
       </div>
       
       <div class="row">
         <div class="d">Wed <span style="letter-spacing:.06em">09-16</span></div>
-        <div><span class="s">10:00 <i>Screen 2</i></span><span class="s">14:30 <i>Screen 2</i></span></div>
+        <div><span class="s">12:30 <i>Screen 2</i></span><span class="s">14:35 <i>Screen 2</i></span></div>
       </div>
       
       <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>

@@ -17,15 +17,16 @@
       "objective": 1608.6,
       "admissions": 1608.6,
       "hold_paid": 0.0,
-      "solve_seconds": 6.042,
+      "solve_seconds": 4.859,
       "sessions": [
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 630,
-          "feature_start": 650,
-          "feature_end": 818,
-          "clear": 838
+          "start": 625,
+          "feature_start": 645,
+          "feature_end": 813,
+          "clear": 833,
+          "forced": null
         },
         {
           "screen": "1",
@@ -33,47 +34,53 @@
           "start": 840,
           "feature_start": 860,
           "feature_end": 1028,
-          "clear": 1048
+          "clear": 1048,
+          "forced": null
         },
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 1050,
-          "feature_start": 1070,
-          "feature_end": 1238,
-          "clear": 1258
+          "start": 1055,
+          "feature_start": 1075,
+          "feature_end": 1243,
+          "clear": 1263,
+          "forced": null
         },
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 1280,
-          "feature_start": 1300,
-          "feature_end": 1468,
-          "clear": 1488
-        },
-        {
-          "screen": "2",
-          "film": "bees",
-          "start": 600,
-          "feature_start": 620,
-          "feature_end": 704,
-          "clear": 724
+          "start": 1270,
+          "feature_start": 1290,
+          "feature_end": 1458,
+          "clear": 1478,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "harvest",
-          "start": 725,
-          "feature_start": 745,
-          "feature_end": 849,
-          "clear": 869
+          "start": 600,
+          "feature_start": 620,
+          "feature_end": 724,
+          "clear": 744,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "bees",
-          "start": 870,
-          "feature_start": 890,
-          "feature_end": 974,
-          "clear": 994
+          "start": 750,
+          "feature_start": 770,
+          "feature_end": 854,
+          "clear": 874,
+          "forced": null
+        },
+        {
+          "screen": "2",
+          "film": "bees",
+          "start": 875,
+          "feature_start": 895,
+          "feature_end": 979,
+          "clear": 999,
+          "forced": null
         },
         {
           "screen": "2",
@@ -81,7 +88,8 @@
           "start": 1000,
           "feature_start": 1020,
           "feature_end": 1124,
-          "clear": 1144
+          "clear": 1144,
+          "forced": null
         },
         {
           "screen": "2",
@@ -89,7 +97,8 @@
           "start": 1145,
           "feature_start": 1165,
           "feature_end": 1269,
-          "clear": 1289
+          "clear": 1289,
+          "forced": null
         },
         {
           "screen": "2",
@@ -97,23 +106,26 @@
           "start": 1290,
           "feature_start": 1310,
           "feature_end": 1402,
-          "clear": 1422
-        },
-        {
-          "screen": "3",
-          "film": "harvest",
-          "start": 610,
-          "feature_start": 630,
-          "feature_end": 734,
-          "clear": 749
+          "clear": 1422,
+          "forced": null
         },
         {
           "screen": "3",
           "film": "atlas",
-          "start": 765,
-          "feature_start": 785,
-          "feature_end": 906,
-          "clear": 921
+          "start": 610,
+          "feature_start": 630,
+          "feature_end": 751,
+          "clear": 766,
+          "forced": null
+        },
+        {
+          "screen": "3",
+          "film": "harvest",
+          "start": 810,
+          "feature_start": 830,
+          "feature_end": 934,
+          "clear": 949,
+          "forced": null
         },
         {
           "screen": "3",
@@ -121,7 +133,8 @@
           "start": 960,
           "feature_start": 980,
           "feature_end": 1072,
-          "clear": 1087
+          "clear": 1087,
+          "forced": null
         },
         {
           "screen": "3",
@@ -129,7 +142,8 @@
           "start": 1095,
           "feature_start": 1115,
           "feature_end": 1207,
-          "clear": 1222
+          "clear": 1222,
+          "forced": null
         },
         {
           "screen": "3",
@@ -137,7 +151,8 @@
           "start": 1240,
           "feature_start": 1260,
           "feature_end": 1381,
-          "clear": 1396
+          "clear": 1396,
+          "forced": null
         }
       ],
       "conflict": [],
@@ -151,15 +166,16 @@
       "objective": 1681.16,
       "admissions": 1681.16,
       "hold_paid": 0.0,
-      "solve_seconds": 5.671,
+      "solve_seconds": 4.261,
       "sessions": [
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 625,
-          "feature_start": 645,
-          "feature_end": 813,
-          "clear": 833
+          "start": 615,
+          "feature_start": 635,
+          "feature_end": 803,
+          "clear": 823,
+          "forced": null
         },
         {
           "screen": "1",
@@ -167,39 +183,44 @@
           "start": 845,
           "feature_start": 865,
           "feature_end": 1033,
-          "clear": 1053
+          "clear": 1053,
+          "forced": null
         },
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 1070,
-          "feature_start": 1090,
-          "feature_end": 1258,
-          "clear": 1278
+          "start": 1060,
+          "feature_start": 1080,
+          "feature_end": 1248,
+          "clear": 1268,
+          "forced": null
         },
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 1280,
-          "feature_start": 1300,
-          "feature_end": 1468,
-          "clear": 1488
+          "start": 1270,
+          "feature_start": 1290,
+          "feature_end": 1458,
+          "clear": 1478,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "harvest",
-          "start": 650,
-          "feature_start": 670,
-          "feature_end": 774,
-          "clear": 794
+          "start": 630,
+          "feature_start": 650,
+          "feature_end": 754,
+          "clear": 774,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "bees",
-          "start": 795,
-          "feature_start": 815,
-          "feature_end": 899,
-          "clear": 919
+          "start": 800,
+          "feature_start": 820,
+          "feature_end": 904,
+          "clear": 924,
+          "forced": null
         },
         {
           "screen": "2",
@@ -207,23 +228,26 @@
           "start": 925,
           "feature_start": 945,
           "feature_end": 1029,
-          "clear": 1049
+          "clear": 1049,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "signal",
-          "start": 1055,
-          "feature_start": 1075,
-          "feature_end": 1167,
-          "clear": 1187
+          "start": 1070,
+          "feature_start": 1090,
+          "feature_end": 1182,
+          "clear": 1202,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "harvest",
-          "start": 1200,
-          "feature_start": 1220,
-          "feature_end": 1324,
-          "clear": 1344
+          "start": 1205,
+          "feature_start": 1225,
+          "feature_end": 1329,
+          "clear": 1349,
+          "forced": null
         },
         {
           "screen": "2",
@@ -231,7 +255,8 @@
           "start": 1350,
           "feature_start": 1370,
           "feature_end": 1462,
-          "clear": 1482
+          "clear": 1482,
+          "forced": null
         },
         {
           "screen": "3",
@@ -239,7 +264,8 @@
           "start": 605,
           "feature_start": 625,
           "feature_end": 746,
-          "clear": 761
+          "clear": 761,
+          "forced": null
         },
         {
           "screen": "3",
@@ -247,7 +273,8 @@
           "start": 765,
           "feature_start": 785,
           "feature_end": 889,
-          "clear": 904
+          "clear": 904,
+          "forced": null
         },
         {
           "screen": "3",
@@ -255,7 +282,8 @@
           "start": 905,
           "feature_start": 925,
           "feature_end": 1029,
-          "clear": 1044
+          "clear": 1044,
+          "forced": null
         },
         {
           "screen": "3",
@@ -263,7 +291,8 @@
           "start": 1045,
           "feature_start": 1065,
           "feature_end": 1157,
-          "clear": 1172
+          "clear": 1172,
+          "forced": null
         },
         {
           "screen": "3",
@@ -271,7 +300,8 @@
           "start": 1180,
           "feature_start": 1200,
           "feature_end": 1321,
-          "clear": 1336
+          "clear": 1336,
+          "forced": null
         },
         {
           "screen": "3",
@@ -279,7 +309,8 @@
           "start": 1340,
           "feature_start": 1360,
           "feature_end": 1452,
-          "clear": 1467
+          "clear": 1467,
+          "forced": null
         }
       ],
       "conflict": [],
@@ -293,79 +324,88 @@
       "objective": 1681.16,
       "admissions": 1681.16,
       "hold_paid": 0.0,
-      "solve_seconds": 11.028,
+      "solve_seconds": 5.942,
       "sessions": [
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 620,
-          "feature_start": 640,
-          "feature_end": 808,
-          "clear": 828
+          "start": 645,
+          "feature_start": 665,
+          "feature_end": 833,
+          "clear": 853,
+          "forced": null
         },
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 845,
-          "feature_start": 865,
-          "feature_end": 1033,
-          "clear": 1053
+          "start": 865,
+          "feature_start": 885,
+          "feature_end": 1053,
+          "clear": 1073,
+          "forced": null
         },
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 1055,
-          "feature_start": 1075,
-          "feature_end": 1243,
-          "clear": 1263
+          "start": 1075,
+          "feature_start": 1095,
+          "feature_end": 1263,
+          "clear": 1283,
+          "forced": null
         },
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 1270,
-          "feature_start": 1290,
-          "feature_end": 1458,
-          "clear": 1478
+          "start": 1325,
+          "feature_start": 1345,
+          "feature_end": 1513,
+          "clear": 1533,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "harvest",
-          "start": 650,
-          "feature_start": 670,
-          "feature_end": 774,
-          "clear": 794
+          "start": 620,
+          "feature_start": 640,
+          "feature_end": 744,
+          "clear": 764,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "bees",
-          "start": 820,
-          "feature_start": 840,
-          "feature_end": 924,
-          "clear": 944
+          "start": 790,
+          "feature_start": 810,
+          "feature_end": 894,
+          "clear": 914,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "bees",
-          "start": 945,
-          "feature_start": 965,
-          "feature_end": 1049,
-          "clear": 1069
+          "start": 920,
+          "feature_start": 940,
+          "feature_end": 1024,
+          "clear": 1044,
+          "forced": null
+        },
+        {
+          "screen": "2",
+          "film": "harvest",
+          "start": 1060,
+          "feature_start": 1080,
+          "feature_end": 1184,
+          "clear": 1204,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "signal",
-          "start": 1070,
-          "feature_start": 1090,
-          "feature_end": 1182,
-          "clear": 1202
-        },
-        {
-          "screen": "2",
-          "film": "harvest",
-          "start": 1205,
-          "feature_start": 1225,
-          "feature_end": 1329,
-          "clear": 1349
+          "start": 1215,
+          "feature_start": 1235,
+          "feature_end": 1327,
+          "clear": 1347,
+          "forced": null
         },
         {
           "screen": "2",
@@ -373,15 +413,17 @@
           "start": 1350,
           "feature_start": 1370,
           "feature_end": 1462,
-          "clear": 1482
+          "clear": 1482,
+          "forced": null
         },
         {
           "screen": "3",
           "film": "harvest",
-          "start": 605,
-          "feature_start": 625,
-          "feature_end": 729,
-          "clear": 744
+          "start": 600,
+          "feature_start": 620,
+          "feature_end": 724,
+          "clear": 739,
+          "forced": null
         },
         {
           "screen": "3",
@@ -389,7 +431,8 @@
           "start": 745,
           "feature_start": 765,
           "feature_end": 886,
-          "clear": 901
+          "clear": 901,
+          "forced": null
         },
         {
           "screen": "3",
@@ -397,7 +440,8 @@
           "start": 905,
           "feature_start": 925,
           "feature_end": 1029,
-          "clear": 1044
+          "clear": 1044,
+          "forced": null
         },
         {
           "screen": "3",
@@ -405,7 +449,8 @@
           "start": 1045,
           "feature_start": 1065,
           "feature_end": 1157,
-          "clear": 1172
+          "clear": 1172,
+          "forced": null
         },
         {
           "screen": "3",
@@ -413,7 +458,8 @@
           "start": 1175,
           "feature_start": 1195,
           "feature_end": 1316,
-          "clear": 1331
+          "clear": 1331,
+          "forced": null
         },
         {
           "screen": "3",
@@ -421,7 +467,8 @@
           "start": 1335,
           "feature_start": 1355,
           "feature_end": 1447,
-          "clear": 1462
+          "clear": 1462,
+          "forced": null
         }
       ],
       "conflict": [],
@@ -435,7 +482,7 @@
       "objective": 1552.65,
       "admissions": 1552.65,
       "hold_paid": 0.0,
-      "solve_seconds": 2.994,
+      "solve_seconds": 2.875,
       "sessions": [
         {
           "screen": "1",
@@ -443,7 +490,8 @@
           "start": 660,
           "feature_start": 680,
           "feature_end": 848,
-          "clear": 868
+          "clear": 868,
+          "forced": null
         },
         {
           "screen": "1",
@@ -451,7 +499,8 @@
           "start": 870,
           "feature_start": 890,
           "feature_end": 1058,
-          "clear": 1078
+          "clear": 1078,
+          "forced": null
         },
         {
           "screen": "1",
@@ -459,7 +508,8 @@
           "start": 1080,
           "feature_start": 1100,
           "feature_end": 1268,
-          "clear": 1288
+          "clear": 1288,
+          "forced": null
         },
         {
           "screen": "1",
@@ -467,7 +517,8 @@
           "start": 1290,
           "feature_start": 1310,
           "feature_end": 1478,
-          "clear": 1498
+          "clear": 1498,
+          "forced": null
         },
         {
           "screen": "2",
@@ -475,39 +526,44 @@
           "start": 675,
           "feature_start": 695,
           "feature_end": 779,
-          "clear": 799
+          "clear": 799,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "harvest",
-          "start": 810,
-          "feature_start": 830,
-          "feature_end": 934,
-          "clear": 954
+          "start": 815,
+          "feature_start": 835,
+          "feature_end": 939,
+          "clear": 959,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "bees",
-          "start": 955,
-          "feature_start": 975,
-          "feature_end": 1059,
-          "clear": 1079
-        },
-        {
-          "screen": "2",
-          "film": "harvest",
-          "start": 1090,
-          "feature_start": 1110,
-          "feature_end": 1214,
-          "clear": 1234
+          "start": 965,
+          "feature_start": 985,
+          "feature_end": 1069,
+          "clear": 1089,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "signal",
-          "start": 1235,
-          "feature_start": 1255,
-          "feature_end": 1347,
-          "clear": 1367
+          "start": 1090,
+          "feature_start": 1110,
+          "feature_end": 1202,
+          "clear": 1222,
+          "forced": null
+        },
+        {
+          "screen": "2",
+          "film": "harvest",
+          "start": 1240,
+          "feature_start": 1260,
+          "feature_end": 1364,
+          "clear": 1384,
+          "forced": null
         },
         {
           "screen": "3",
@@ -515,7 +571,8 @@
           "start": 685,
           "feature_start": 705,
           "feature_end": 826,
-          "clear": 841
+          "clear": 841,
+          "forced": null
         },
         {
           "screen": "3",
@@ -523,7 +580,8 @@
           "start": 850,
           "feature_start": 870,
           "feature_end": 974,
-          "clear": 989
+          "clear": 989,
+          "forced": null
         },
         {
           "screen": "3",
@@ -531,7 +589,8 @@
           "start": 990,
           "feature_start": 1010,
           "feature_end": 1102,
-          "clear": 1117
+          "clear": 1117,
+          "forced": null
         },
         {
           "screen": "3",
@@ -539,7 +598,8 @@
           "start": 1120,
           "feature_start": 1140,
           "feature_end": 1261,
-          "clear": 1276
+          "clear": 1276,
+          "forced": null
         },
         {
           "screen": "3",
@@ -547,7 +607,8 @@
           "start": 1280,
           "feature_start": 1300,
           "feature_end": 1392,
-          "clear": 1407
+          "clear": 1407,
+          "forced": null
         }
       ],
       "conflict": [],
@@ -561,15 +622,16 @@
       "objective": 1608.6,
       "admissions": 1608.6,
       "hold_paid": 0.0,
-      "solve_seconds": 0.892,
+      "solve_seconds": 0.55,
       "sessions": [
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 630,
-          "feature_start": 650,
-          "feature_end": 818,
-          "clear": 838
+          "start": 625,
+          "feature_start": 645,
+          "feature_end": 813,
+          "clear": 833,
+          "forced": null
         },
         {
           "screen": "1",
@@ -577,47 +639,53 @@
           "start": 840,
           "feature_start": 860,
           "feature_end": 1028,
-          "clear": 1048
+          "clear": 1048,
+          "forced": null
         },
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 1050,
-          "feature_start": 1070,
-          "feature_end": 1238,
-          "clear": 1258
+          "start": 1055,
+          "feature_start": 1075,
+          "feature_end": 1243,
+          "clear": 1263,
+          "forced": null
         },
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 1280,
-          "feature_start": 1300,
-          "feature_end": 1468,
-          "clear": 1488
-        },
-        {
-          "screen": "2",
-          "film": "bees",
-          "start": 600,
-          "feature_start": 620,
-          "feature_end": 704,
-          "clear": 724
+          "start": 1270,
+          "feature_start": 1290,
+          "feature_end": 1458,
+          "clear": 1478,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "harvest",
-          "start": 725,
-          "feature_start": 745,
-          "feature_end": 849,
-          "clear": 869
+          "start": 600,
+          "feature_start": 620,
+          "feature_end": 724,
+          "clear": 744,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "bees",
-          "start": 870,
-          "feature_start": 890,
-          "feature_end": 974,
-          "clear": 994
+          "start": 750,
+          "feature_start": 770,
+          "feature_end": 854,
+          "clear": 874,
+          "forced": null
+        },
+        {
+          "screen": "2",
+          "film": "bees",
+          "start": 875,
+          "feature_start": 895,
+          "feature_end": 979,
+          "clear": 999,
+          "forced": null
         },
         {
           "screen": "2",
@@ -625,7 +693,8 @@
           "start": 1000,
           "feature_start": 1020,
           "feature_end": 1124,
-          "clear": 1144
+          "clear": 1144,
+          "forced": null
         },
         {
           "screen": "2",
@@ -633,7 +702,8 @@
           "start": 1145,
           "feature_start": 1165,
           "feature_end": 1269,
-          "clear": 1289
+          "clear": 1289,
+          "forced": null
         },
         {
           "screen": "2",
@@ -641,23 +711,26 @@
           "start": 1290,
           "feature_start": 1310,
           "feature_end": 1402,
-          "clear": 1422
-        },
-        {
-          "screen": "3",
-          "film": "harvest",
-          "start": 610,
-          "feature_start": 630,
-          "feature_end": 734,
-          "clear": 749
+          "clear": 1422,
+          "forced": null
         },
         {
           "screen": "3",
           "film": "atlas",
-          "start": 765,
-          "feature_start": 785,
-          "feature_end": 906,
-          "clear": 921
+          "start": 610,
+          "feature_start": 630,
+          "feature_end": 751,
+          "clear": 766,
+          "forced": null
+        },
+        {
+          "screen": "3",
+          "film": "harvest",
+          "start": 810,
+          "feature_start": 830,
+          "feature_end": 934,
+          "clear": 949,
+          "forced": null
         },
         {
           "screen": "3",
@@ -665,7 +738,8 @@
           "start": 960,
           "feature_start": 980,
           "feature_end": 1072,
-          "clear": 1087
+          "clear": 1087,
+          "forced": null
         },
         {
           "screen": "3",
@@ -673,7 +747,8 @@
           "start": 1095,
           "feature_start": 1115,
           "feature_end": 1207,
-          "clear": 1222
+          "clear": 1222,
+          "forced": null
         },
         {
           "screen": "3",
@@ -681,7 +756,8 @@
           "start": 1240,
           "feature_start": 1260,
           "feature_end": 1381,
-          "clear": 1396
+          "clear": 1396,
+          "forced": null
         }
       ],
       "conflict": [],
@@ -695,15 +771,16 @@
       "objective": 1455.24,
       "admissions": 1575.24,
       "hold_paid": 120.0,
-      "solve_seconds": 1.279,
+      "solve_seconds": 1.091,
       "sessions": [
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 630,
-          "feature_start": 650,
-          "feature_end": 818,
-          "clear": 838
+          "start": 625,
+          "feature_start": 645,
+          "feature_end": 813,
+          "clear": 833,
+          "forced": null
         },
         {
           "screen": "1",
@@ -711,23 +788,26 @@
           "start": 840,
           "feature_start": 860,
           "feature_end": 1028,
-          "clear": 1048
+          "clear": 1048,
+          "forced": null
         },
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 1050,
-          "feature_start": 1070,
-          "feature_end": 1238,
-          "clear": 1258
+          "start": 1055,
+          "feature_start": 1075,
+          "feature_end": 1243,
+          "clear": 1263,
+          "forced": null
         },
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 1280,
-          "feature_start": 1300,
-          "feature_end": 1468,
-          "clear": 1488
+          "start": 1270,
+          "feature_start": 1290,
+          "feature_end": 1458,
+          "clear": 1478,
+          "forced": null
         },
         {
           "screen": "2",
@@ -735,31 +815,35 @@
           "start": 600,
           "feature_start": 620,
           "feature_end": 704,
-          "clear": 724
+          "clear": 724,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "bees",
-          "start": 725,
-          "feature_start": 745,
-          "feature_end": 829,
-          "clear": 849
+          "start": 730,
+          "feature_start": 750,
+          "feature_end": 834,
+          "clear": 854,
+          "forced": null
+        },
+        {
+          "screen": "2",
+          "film": "bees",
+          "start": 875,
+          "feature_start": 895,
+          "feature_end": 979,
+          "clear": 999,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "harvest",
-          "start": 855,
-          "feature_start": 875,
-          "feature_end": 979,
-          "clear": 999
-        },
-        {
-          "screen": "2",
-          "film": "bees",
-          "start": 1020,
-          "feature_start": 1040,
+          "start": 1000,
+          "feature_start": 1020,
           "feature_end": 1124,
-          "clear": 1144
+          "clear": 1144,
+          "forced": null
         },
         {
           "screen": "2",
@@ -767,7 +851,8 @@
           "start": 1145,
           "feature_start": 1165,
           "feature_end": 1269,
-          "clear": 1289
+          "clear": 1289,
+          "forced": null
         },
         {
           "screen": "2",
@@ -775,23 +860,26 @@
           "start": 1290,
           "feature_start": 1310,
           "feature_end": 1402,
-          "clear": 1422
-        },
-        {
-          "screen": "3",
-          "film": "harvest",
-          "start": 610,
-          "feature_start": 630,
-          "feature_end": 734,
-          "clear": 749
+          "clear": 1422,
+          "forced": null
         },
         {
           "screen": "3",
           "film": "atlas",
-          "start": 765,
-          "feature_start": 785,
-          "feature_end": 906,
-          "clear": 921
+          "start": 610,
+          "feature_start": 630,
+          "feature_end": 751,
+          "clear": 766,
+          "forced": null
+        },
+        {
+          "screen": "3",
+          "film": "harvest",
+          "start": 810,
+          "feature_start": 830,
+          "feature_end": 934,
+          "clear": 949,
+          "forced": null
         },
         {
           "screen": "3",
@@ -799,7 +887,8 @@
           "start": 960,
           "feature_start": 980,
           "feature_end": 1072,
-          "clear": 1087
+          "clear": 1087,
+          "forced": null
         },
         {
           "screen": "3",
@@ -807,7 +896,8 @@
           "start": 1095,
           "feature_start": 1115,
           "feature_end": 1207,
-          "clear": 1222
+          "clear": 1222,
+          "forced": null
         },
         {
           "screen": "3",
@@ -815,7 +905,8 @@
           "start": 1240,
           "feature_start": 1260,
           "feature_end": 1381,
-          "clear": 1396
+          "clear": 1396,
+          "forced": null
         }
       ],
       "conflict": [],
@@ -829,15 +920,16 @@
       "objective": 1608.6,
       "admissions": 1608.6,
       "hold_paid": 0.0,
-      "solve_seconds": 0.806,
+      "solve_seconds": 0.95,
       "sessions": [
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 630,
-          "feature_start": 650,
-          "feature_end": 818,
-          "clear": 838
+          "start": 625,
+          "feature_start": 645,
+          "feature_end": 813,
+          "clear": 833,
+          "forced": null
         },
         {
           "screen": "1",
@@ -845,47 +937,53 @@
           "start": 840,
           "feature_start": 860,
           "feature_end": 1028,
-          "clear": 1048
+          "clear": 1048,
+          "forced": null
         },
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 1050,
-          "feature_start": 1070,
-          "feature_end": 1238,
-          "clear": 1258
+          "start": 1055,
+          "feature_start": 1075,
+          "feature_end": 1243,
+          "clear": 1263,
+          "forced": null
         },
         {
           "screen": "1",
           "film": "odyssey",
-          "start": 1280,
-          "feature_start": 1300,
-          "feature_end": 1468,
-          "clear": 1488
-        },
-        {
-          "screen": "2",
-          "film": "bees",
-          "start": 600,
-          "feature_start": 620,
-          "feature_end": 704,
-          "clear": 724
+          "start": 1270,
+          "feature_start": 1290,
+          "feature_end": 1458,
+          "clear": 1478,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "harvest",
-          "start": 725,
-          "feature_start": 745,
-          "feature_end": 849,
-          "clear": 869
+          "start": 600,
+          "feature_start": 620,
+          "feature_end": 724,
+          "clear": 744,
+          "forced": null
         },
         {
           "screen": "2",
           "film": "bees",
-          "start": 870,
-          "feature_start": 890,
-          "feature_end": 974,
-          "clear": 994
+          "start": 750,
+          "feature_start": 770,
+          "feature_end": 854,
+          "clear": 874,
+          "forced": null
+        },
+        {
+          "screen": "2",
+          "film": "bees",
+          "start": 875,
+          "feature_start": 895,
+          "feature_end": 979,
+          "clear": 999,
+          "forced": null
         },
         {
           "screen": "2",
@@ -893,7 +991,8 @@
           "start": 1000,
           "feature_start": 1020,
           "feature_end": 1124,
-          "clear": 1144
+          "clear": 1144,
+          "forced": null
         },
         {
           "screen": "2",
@@ -901,7 +1000,8 @@
           "start": 1145,
           "feature_start": 1165,
           "feature_end": 1269,
-          "clear": 1289
+          "clear": 1289,
+          "forced": null
         },
         {
           "screen": "2",
@@ -909,23 +1009,26 @@
           "start": 1290,
           "feature_start": 1310,
           "feature_end": 1402,
-          "clear": 1422
-        },
-        {
-          "screen": "3",
-          "film": "harvest",
-          "start": 610,
-          "feature_start": 630,
-          "feature_end": 734,
-          "clear": 749
+          "clear": 1422,
+          "forced": null
         },
         {
           "screen": "3",
           "film": "atlas",
-          "start": 765,
-          "feature_start": 785,
-          "feature_end": 906,
-          "clear": 921
+          "start": 610,
+          "feature_start": 630,
+          "feature_end": 751,
+          "clear": 766,
+          "forced": null
+        },
+        {
+          "screen": "3",
+          "film": "harvest",
+          "start": 810,
+          "feature_start": 830,
+          "feature_end": 934,
+          "clear": 949,
+          "forced": null
         },
         {
           "screen": "3",
@@ -933,7 +1036,8 @@
           "start": 960,
           "feature_start": 980,
           "feature_end": 1072,
-          "clear": 1087
+          "clear": 1087,
+          "forced": null
         },
         {
           "screen": "3",
@@ -941,7 +1045,8 @@
           "start": 1095,
           "feature_start": 1115,
           "feature_end": 1207,
-          "clear": 1222
+          "clear": 1222,
+          "forced": null
         },
         {
           "screen": "3",
@@ -949,7 +1054,8 @@
           "start": 1240,
           "feature_start": 1260,
           "feature_end": 1381,
-          "clear": 1396
+          "clear": 1396,
+          "forced": null
         }
       ],
       "conflict": [],
@@ -968,5 +1074,5 @@
     "signal",
     "atlas"
   ],
-  "solve_seconds": 28.902
+  "solve_seconds": 20.713
 }

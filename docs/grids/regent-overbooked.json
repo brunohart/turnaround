@@ -5,15 +5,16 @@
   "objective": 1573.21,
   "admissions": 1573.21,
   "hold_paid": 0.0,
-  "solve_seconds": 22.756,
+  "solve_seconds": 21.855,
   "sessions": [
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 640,
-      "feature_start": 660,
-      "feature_end": 828,
-      "clear": 848
+      "start": 635,
+      "feature_start": 655,
+      "feature_end": 823,
+      "clear": 843,
+      "forced": null
     },
     {
       "screen": "1",
@@ -21,15 +22,17 @@
       "start": 855,
       "feature_start": 875,
       "feature_end": 1043,
-      "clear": 1063
+      "clear": 1063,
+      "forced": null
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 1065,
-      "feature_start": 1085,
-      "feature_end": 1253,
-      "clear": 1273
+      "start": 1070,
+      "feature_start": 1090,
+      "feature_end": 1258,
+      "clear": 1278,
+      "forced": null
     },
     {
       "screen": "1",
@@ -37,7 +40,8 @@
       "start": 1280,
       "feature_start": 1300,
       "feature_end": 1468,
-      "clear": 1488
+      "clear": 1488,
+      "forced": null
     },
     {
       "screen": "2",
@@ -45,15 +49,17 @@
       "start": 625,
       "feature_start": 645,
       "feature_end": 749,
-      "clear": 769
+      "clear": 769,
+      "forced": null
     },
     {
       "screen": "2",
       "film": "bees",
-      "start": 840,
-      "feature_start": 860,
-      "feature_end": 944,
-      "clear": 964
+      "start": 845,
+      "feature_start": 865,
+      "feature_end": 949,
+      "clear": 969,
+      "forced": null
     },
     {
       "screen": "2",
@@ -61,7 +67,8 @@
       "start": 970,
       "feature_start": 990,
       "feature_end": 1082,
-      "clear": 1102
+      "clear": 1102,
+      "forced": null
     },
     {
       "screen": "2",
@@ -69,7 +76,8 @@
       "start": 1105,
       "feature_start": 1125,
       "feature_end": 1217,
-      "clear": 1237
+      "clear": 1237,
+      "forced": null
     },
     {
       "screen": "2",
@@ -77,7 +85,8 @@
       "start": 1240,
       "feature_start": 1260,
       "feature_end": 1364,
-      "clear": 1384
+      "clear": 1384,
+      "forced": null
     },
     {
       "screen": "3",
@@ -85,7 +94,8 @@
       "start": 600,
       "feature_start": 620,
       "feature_end": 724,
-      "clear": 739
+      "clear": 739,
+      "forced": null
     },
     {
       "screen": "3",
@@ -93,7 +103,8 @@
       "start": 740,
       "feature_start": 760,
       "feature_end": 864,
-      "clear": 879
+      "clear": 879,
+      "forced": null
     },
     {
       "screen": "3",
@@ -101,7 +112,8 @@
       "start": 880,
       "feature_start": 900,
       "feature_end": 1004,
-      "clear": 1019
+      "clear": 1019,
+      "forced": null
     },
     {
       "screen": "3",
@@ -109,7 +121,8 @@
       "start": 1020,
       "feature_start": 1040,
       "feature_end": 1132,
-      "clear": 1147
+      "clear": 1147,
+      "forced": null
     },
     {
       "screen": "3",
@@ -117,7 +130,8 @@
       "start": 1150,
       "feature_start": 1170,
       "feature_end": 1274,
-      "clear": 1289
+      "clear": 1289,
+      "forced": null
     },
     {
       "screen": "3",
@@ -125,7 +139,8 @@
       "start": 1290,
       "feature_start": 1310,
       "feature_end": 1402,
-      "clear": 1417
+      "clear": 1417,
+      "forced": null
     }
   ],
   "conflict": [],

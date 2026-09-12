@@ -55,10 +55,12 @@
   .legend i { display:inline-block; width:22px; height:12px; border:1px solid var(--ink); vertical-align:middle; margin-right:6px; }
   .legend i.pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); }
   .legend i.feat { background:var(--cream); }
+  .legend i.forced-i { position:relative; } .legend i.forced-i::after, .legend i.wanted-i::after { content:""; position:absolute; right:0; bottom:0; border-style:solid; border-width:0 0 7px 7px; border-color:transparent transparent var(--blue) transparent; }
+  .legend i.wanted-i { position:relative; } .legend i.wanted-i::after { border-color:transparent transparent rgba(26,26,26,.45) transparent; }
   .legend i.clean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); }
   /* below the fold: two panels, pinned a little off true; hover straightens one */
   .cols { display:grid; grid-template-columns:1.15fr .85fr; gap:40px; margin-top:44px; position:relative; }
-  .cols > .panel { position:relative; }
+  .cols > .panel { position:relative; min-width:0; }
   .cols > .panel:first-of-type { transform:rotate(-.3deg); transform-origin:0 0; }
   .cols > .panel:last-of-type { transform:rotate(.35deg); transform-origin:100% 0; }
   .cols > .panel:hover { transform:none; }
@@ -75,6 +77,19 @@
   .relaxed { display:inline-block; color:var(--red); border:1px solid var(--red); padding:1px 5px; margin-right:4px; transform:rotate(-1.2deg); font-size:10px; }
   .given-up { color:var(--red); }
   .proof td:first-child { white-space:nowrap; }
+  .proof td.forced-col { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11px; color:var(--blue); line-height:1.6; }
+  .proof td.forced-col span { display:block; white-space:nowrap; }
+  td.title b { white-space:nowrap; }
+  .probed { color:var(--grey); margin:10px 0 0; }
+  td.starts .st { display:inline-block; margin-right:10px; white-space:nowrap; }
+  td.starts .st i { font-style:normal; color:var(--grey); }
+  td.starts .st i.short { color:var(--red); }
+  td.starts .st b.fx { font-weight:500; color:var(--blue); border:1px solid var(--blue); padding:0 4px; font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+  td.starts .st b.fo { font-weight:500; color:var(--blue); font-size:11px; }
+  /* a session the terms force gets a navy corner; one the objective forces, an ink one. The orange
+     stays on the turnaround (DESIGN.md), so the objective's mark is the ink at less than half strength */
+  .block .feat.forced::before, .block .feat.wanted::before { content:""; position:absolute; right:0; bottom:0; width:0; height:0; border-style:solid; border-width:0 0 9px 9px; border-color:transparent transparent var(--blue) transparent; }
+  .block .feat.wanted::before { border-color:transparent transparent rgba(26,26,26,.45) transparent; }
   footer { margin-top:56px; color:var(--grey); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
   .week-table th.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:11px; }
   .week-table td.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11px; letter-spacing:.02em; line-height:1.6; white-space:nowrap; }
@@ -164,9 +179,10 @@
         <div class="lane">
           {% for b in row.blocks %}
           <div class="block{% if b.prime %} prime{% endif %}" style="left:{{ b.left }}%; width:{{ b.w }}%"
-               title="{{ b.film.title }} · preshow {{ b.s.start|hhmm }} · feature {{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }}{% if b.over > 0 %} · turnaround from {{ b.turn_begin|hhmm }} over the credits{% endif %} · clear {{ b.s.clear|hhmm }}">
+               title="{{ b.film.title }} · preshow {{ b.s.start|hhmm }} · feature {{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }}{% if b.over > 0 %} · turnaround from {{ b.turn_begin|hhmm }} over the credits{% endif %} · clear {{ b.s.clear|hhmm }}
+why: {{ b.why }}">
             <div class="pre" style="width:{{ b.pre }}%"></div>
-            <div class="feat" style="width:{{ b.feat }}%">
+            <div class="feat{% if b.forced and b.forced.by == 'terms' %} forced{% elif b.forced and b.forced.by == 'objective' %} wanted{% endif %}" style="width:{{ b.feat }}%">
               <div class="t">{{ b.film.title }}</div>
               <div class="tm mono">{{ b.s.start|hhmm }} · {{ b.film.runtime_min }}′{% if b.film.format != "2D" %} · {{ b.film.format }}{% endif %}</div>
             </div>
@@ -177,7 +193,7 @@
       </div>
       {% endfor %}
     </div>
-    <div class="legend mono"><span><i class="pre"></i>{{ d.preshows }}</span><span><i class="feat"></i>feature</span><span><i class="clean"></i>turnaround{% if d.credits %} · from the credits{% endif %}</span><span>{{ d.stagger }}</span>{% if d.staff %}<span>{{ d.staff }}</span>{% endif %}</div>
+    <div class="legend mono"><span><i class="pre"></i>{{ d.preshows }}</span><span><i class="feat"></i>feature</span><span><i class="clean"></i>turnaround{% if d.credits %} · from the credits{% endif %}</span><span>{{ d.stagger }}</span>{% if d.staff %}<span>{{ d.staff }}</span>{% endif %}{% if d.probed %}<span><i class="feat forced-i"></i>forced by the terms</span><span><i class="feat wanted-i"></i>by the objective</span>{% endif %}</div>
   </div>
 {% endmacro %}
 
@@ -219,17 +235,17 @@
     <div class="panel">
       <div class="stamp mono">By title</div>
       <div class="scroll"><table>
-        <thead><tr><th>Title</th><th>Shows</th><th>Prime</th><th>Seats</th><th>Expected</th><th>Turned away</th><th>Starts</th></tr></thead>
+        <thead><tr><th>Title</th><th>Shows</th><th>Prime</th><th>Seats</th><th>Expected</th><th>Turned away</th><th>Starts · sells{% if d.probed %} · forced{% endif %}</th></tr></thead>
         <tbody>
         {% for f in d.films %}
         <tr>
-          <td><b>{{ f.film.title }}</b><br><span class="mono" style="color:var(--grey)">{{ f.film.runtime_min }}′ · {{ f.film.format }}{% if f.film.rating %} · {{ f.film.rating }}{% endif %} · {{ "demand stated" if f.film.demand else "w" ~ f.film.weight }}</span></td>
+          <td class="title"><b>{{ f.film.title }}</b><br><span class="mono" style="color:var(--grey)">{{ f.film.runtime_min }}′ · {{ f.film.format }}{% if f.film.rating %} · {{ f.film.rating }}{% endif %} · {{ "demand stated" if f.film.demand else "w" ~ f.film.weight }}</span></td>
           <td>{{ f.starts|length }}{% if f.film.terms.min_shows %}<span class="mono" style="color:var(--grey)"> /{{ f.film.terms.min_shows }} min</span>{% endif %}</td>
           <td>{{ f.prime }}{% if f.film.terms.prime_shows %}<span class="mono" style="color:var(--grey)"> /{{ f.film.terms.prime_shows }}</span>{% endif %}</td>
           <td class="num">{{ "{:,}".format(f.seats) }}</td>
           <td class="num">{{ "{:,.0f}".format(f.admissions) }}</td>
           <td class="num{% if f.turned_away >= 0.5 %} away{% endif %}">{{ "{:,.0f}".format(f.turned_away) if f.turned_away >= 0.5 else "—" }}</td>
-          <td class="starts">{{ f.starts|join("  ") }}</td>
+          <td class="starts">{% for w in f.whys %}<span class="st" title="{{ w.why }}">{{ w.start }} <i{% if w.short %} class="short"{% endif %}>{{ "{:,.0f}".format(w.sold) }}</i>{% if w.forced and w.forced.by == "terms" %} <b class="fx">forced</b>{% elif w.forced and w.forced.by == "objective" %} <b class="fo">−{{ "{:,.0f}".format(w.forced.delta) }}</b>{% endif %}</span>{% endfor %}</td>
         </tr>
         {% endfor %}
         </tbody>
@@ -240,13 +256,14 @@
       <div class="stamp mono">Proof</div>
       {% if report %}
       <div class="scroll"><table class="proof">
-        <thead><tr><th>Check</th><th>Title</th><th>Evidence</th></tr></thead>
+        <thead><tr><th>Check</th><th>Title</th><th>Evidence</th>{% if d.probed %}<th>Forced</th>{% endif %}</tr></thead>
         <tbody>
         {% for c in report.checks %}
-        <tr><td class="{{ 'ok' if c.ok else 'fail' }}">{{ '✓' if c.ok else '✗' }} {{ c.name }}</td><td>{{ c.film or '' }}</td><td>{% if c.relaxed %}<span class="relaxed mono">relaxed</span> {% endif %}{{ c.evidence }}</td></tr>
+        <tr><td class="{{ 'ok' if c.ok else 'fail' }}">{{ '✓' if c.ok else '✗' }} {{ c.name }}</td><td>{{ c.film or '' }}</td><td>{% if c.relaxed %}<span class="relaxed mono">relaxed</span> {% endif %}{{ c.evidence }}</td>{% if d.probed %}<td class="forced-col">{% for k in d.forced_by.get((c.name, c.film), []) %}<span>{{ k }}</span>{% endfor %}</td>{% endif %}</tr>
         {% endfor %}
         </tbody>
       </table></div>
+      {% if d.probed %}<p class="mono probed">{{ d.rows|sum(attribute="count") }} sessions probed · {{ d.forced_count }} forced by the terms · {{ d.objective_count }} by the objective · {{ d.free_count }} free — the solver's claim, not the checker's</p>{% endif %}
       {% else %}<p class="mono" style="color:var(--grey)">no check run</p>{% endif %}
     </div>
   </div>

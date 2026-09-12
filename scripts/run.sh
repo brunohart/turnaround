@@ -10,7 +10,9 @@ mkdir -p docs/grids
 for b in examples/*.json; do
   n=$(basename "$b" .json)
   rc=0
-  uv run turnaround plan "$b" --out "docs/grids/$n.json" --html "docs/grids/$n.html" --quiet || rc=$?
+  why=""
+  [ "$n" = "regent" ] && why="--why"  # the hero sheet carries every session's why (one solve per session)
+  uv run turnaround plan "$b" --out "docs/grids/$n.json" --html "docs/grids/$n.html" --quiet $why || rc=$?
   if [ "$rc" -eq 2 ]; then
     uv run turnaround plan "$b" --relax --out "docs/grids/$n.json" --html "docs/grids/$n.html" --quiet
   elif [ "$rc" -ne 0 ]; then
