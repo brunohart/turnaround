@@ -64,7 +64,10 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - Screenshot desktop, print preview (Chrome `--print-to-pdf`), and a phone width. Look at all three before committing.
 - *Shipped besides:* `scripts/shot.py`, screenshots over the DevTools protocol with device emulation, because headless Chrome clamps the window near 500px and a `--window-size=390` shot is a crop. *Run on Sat 13 Sep:* the Friday slot did not fire. *Left for Day 12:* the hatches as SVG pattern fills for print (the A3 PDF is 33 MB as CSS gradients) — the board ports the block anyway. *Left open:* a per-screen week strip for small houses; whether the sheet should link fonts.
 
-## Day 7 — Sat 13 Sep — Explain
+## Day 7 — Sat 13 Sep — Explain ✅
+
+- *Shipped besides:* `what-if --set key=value` for a policy change; `plan --why`; ADR-015 (the why is the checker's, forced is the solver's claim, a show is a title in a room in a daypart). *Left for Day 8:* a probe budget — one solve per session is a minute on three screens. *Left for Day 11:* the what-if prints the two days side by side and writes no diff. *Left open (from Day 5):* a week what-if, "spread the 28 over the week"; `what_if` takes a day.
+
 
 - Every session carries a `why`: the terms it satisfies (`min_shows 3/3`, `prime 1/1`), its objective contribution, and whether it is *forced* (present in every optimal grid — probe by forbidding it and re-solving; report the objective delta or `INFEASIBLE`).
 - `turnaround explain grid.json --session 1@17:30` prints that session's why. `turnaround what-if brief.json --drop bees` re-solves without a title and reports what the freed slots went to.
