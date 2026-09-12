@@ -56,12 +56,13 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - Tests per term; the Regent week example gains real terms for the opening title.
 - *Shipped besides:* a day brief refuses a week term in a sentence; `validation_sentences` translates every pydantic error. *Left for Day 7:* a week term's floor is a necessary bound, not a spread — the what-if is where "spread the 28 over the week" belongs. *Left for Day 8:* `day_bound` re-enumerates candidates per film per day; measure it on sixteen screens.
 
-## Day 6 — Fri 12 Sep — The sheet, properly
+## Day 6 — Fri 12 Sep — The sheet, properly ✅
 
 - Full identity pass against `digital-design-taste.md`: misregistered title pass, rubber-stamp labels, grain, offset shadows, a colour wash bleeding off-frame, the broken divider; nothing level.
 - Print: A3 landscape pin-up and A4 portrait per screen (the *booth strip*: one screen, its sessions in mono, the turnarounds called out) — printable from the same HTML with `@page` rules.
 - Mobile: the grid becomes a per-screen list with the same three-strip block turned vertical.
 - Screenshot desktop, print preview (Chrome `--print-to-pdf`), and a phone width. Look at all three before committing.
+- *Shipped besides:* `scripts/shot.py`, screenshots over the DevTools protocol with device emulation, because headless Chrome clamps the window near 500px and a `--window-size=390` shot is a crop. *Run on Sat 13 Sep:* the Friday slot did not fire. *Left for Day 12:* the hatches as SVG pattern fills for print (the A3 PDF is 33 MB as CSS gradients) — the board ports the block anyway. *Left open:* a per-screen week strip for small houses; whether the sheet should link fonts.
 
 ## Day 7 — Sat 13 Sep — Explain
 

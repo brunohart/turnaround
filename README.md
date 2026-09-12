@@ -4,7 +4,7 @@
 
 <img src="docs/grids/regent.png" alt="The Regent's week sheet: three screens, fifteen sessions, the prime window washed in navy, every proof check green" width="100%">
 
-*The Regent — 3 screens, 5 titles, one PLF exclusive with a prime guarantee, a kids' 3D title that must start by 17:00, a horror title held to 16:00 or later. Solved `OPTIMAL` in 4.4 s for 1,609 expected admissions of 2,840 seats on offer. Every check green.*
+*The Regent — 3 screens, 5 titles, one PLF exclusive with a prime guarantee, a kids' 3D title that must start by 17:00, a horror title held to 16:00 or later. Solved `OPTIMAL` in 7.5 s for 1,609 expected admissions of 2,840 seats on offer. Every check green.*
 
 ---
 
@@ -140,9 +140,15 @@ A brief the tool cannot take is refused in sentences, not stack traces: *"Dead S
 
 <img src="docs/grids/day-5-terms.png" alt="The Long Voyage's terms sheet: five terms, their scope, what was delivered day by day, every one honoured, and the sessions as delivered with the prime starts underlined" width="100%">
 
+**The sheet prints** (Day 6) from the same HTML: an A3 landscape pin-up with the grid and both tables, then an A4 portrait *booth strip* per screen — the three-strip block turned vertical, the turnaround called out with when it begins and when the room is clear. On a phone the strips replace the grid. `scripts/shot.py` takes the screenshots at a real device width.
+
+<img src="docs/grids/day-6-print-a3.png" alt="The A3 pin-up as printed: the Regent's grid with the credits-overlap hatch, the by-title table and the proof on one sheet" width="100%">
+
+<p><img src="docs/grids/day-6-print-strip.png" alt="Screen 1's A4 booth strip: four sessions of The Long Voyage as vertical three-strip blocks, doors, feature, turnaround over the credits, clear, and the dark minutes between" width="48%"> <img src="docs/grids/day-6-phone.png" alt="The sheet on a phone: the booth strips in place of the grid, then the tables" width="48%"></p>
+
 ## What it does not do yet
 
-This is Day 5 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: the full print identity (Day 6); *why* each session is where it is (Day 7); scale benchmarks (Day 8); CSV/iCal in and out (Day 9); a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12).
+This is Day 6 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: *why* each session is where it is (Day 7); scale benchmarks (Day 8); CSV/iCal in and out (Day 9); a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12).
 
 The design decisions and their reasons are in `DECISIONS.md`. The log of what each day shipped and what it left rough is in `docs/LOG.md`.
 

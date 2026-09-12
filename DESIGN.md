@@ -16,6 +16,10 @@ The output of this tool is a **week sheet**: the thing a programmer prints on We
 
 **What it is not.** No dark mode (paper does not have one). No gradients, no glass, no rounded pills. No colour per film; the sheet is read by position and type, and a fourteen-film house would otherwise become a paint chart. Motion is limited to a 1px lift on hover, because hovering a schedule is a high-frequency act and should not perform.
 
-**Print.** `@media print` drops the grain, tightens the type, stacks the columns. An A3 landscape sheet should be legible from the booth door.
+**Print.** Two pages from one HTML. The pin-up is A3 landscape (`@page pinup`): the grid, the by-title table and the proof on one sheet, legible from the booth door; the grain and the washes are dropped, the rotations are straightened, the hatches print. The **booth strip** is A4 portrait (`@page strip`), one per screen: the screen's name in poster type, its doors and last start under it, then the three-strip block turned vertical — doors and preshow on the ink hatch, the feature in cream (white in prime), the turnaround on the orange hatch with when it begins and when the room is clear — and the dark minutes between sessions. The terms sheet is a letter (`@page letter`, A4 portrait). Every page-opening section has 3px of air above it so a rotated stamp stays on its page.
 
-Source of truth for the identity: `digital-design-taste.md` in the designedbybruno workspace. Day 6 is the full pass against it.
+**Phone.** Under 800px the grid is not shrunk; it is replaced by the booth strips, one screen after another, before the tables. Wide tables scroll sideways inside their own box. Nothing rotates.
+
+**Offsets, continued.** Rubber stamps carry a navy offset (3px, 18%) behind them. A second colour field, navy, bleeds off the bottom-left behind the by-title table. The meta block and the legend are pinned a fraction off level; the two panels below the fold sit at −0.3° and +0.35° and straighten on hover. The grid stays level: a block's position is data.
+
+Source of truth for the identity: `digital-design-taste.md` in the designedbybruno workspace. Day 6 was the full pass against it (ADR-014).
