@@ -12,11 +12,11 @@ from rich.console import Console
 from rich.table import Table
 
 from . import __version__
-from .check import WeekReport, admissions, check_week
+from .check import WeekReport, admissions, check_week, whys
 from .check import check as run_check
-from .model import Brief, Grid, WeekBrief, WeekGrid, fmt_time, validation_sentences
+from .model import Brief, Grid, Session, WeekBrief, WeekGrid, fmt_time, validation_sentences
 from .render import render_html, render_terms_html, render_week_html, render_week_terms_html
-from .solve import explain, relax, solve, solve_week
+from .solve import explain, probe, probe_all, relax, solve, solve_week, what_if
 
 app = typer.Typer(add_completion=False, no_args_is_help=True, help=__doc__)
 console = Console()
@@ -107,6 +107,59 @@ def _print_report(brief: Brief, grid: Grid) -> bool:
         t.add_row(mark, c.name, c.film or "", evidence)
     console.print(t)
     return rep.ok
+
+
+def _print_whys(brief: Brief, grid: Grid, only: Session | None = None) -> None:
+    """One row per session: the terms it helps satisfy, what it sells, and whether the
+    solver found it forced."""
+    probed = any(s.forced for s in grid.sessions)
+    t = Table(title="Why", show_lines=False)
+    t.add_column("Session", style="bold")
+    t.add_column("Title")
+    t.add_column("Terms")
+    t.add_column("Sells", justify="right")
+    if probed:
+        t.add_column("Forced")
+    for w in whys(brief, grid):
+        s = w.session
+        if only and (s.screen, s.start) != (only.screen, only.start):
+            continue
+        sold = f"{w.admissions:,.0f}"
+        if w.expected - w.admissions >= 0.5:
+            sold += f" [red]of {w.expected:,.0f}[/red]"
+        sold += f" [dim]{w.daypart or ''} #{w.rank + 1}[/dim]"
+        row = [s.key, brief.film(s.film).title, " · ".join(w.terms) or "[dim]none[/dim]", sold]
+        if probed:
+            f = s.forced
+            if f is None:
+                row.append("[dim]not probed[/dim]")
+            elif f.by == "terms":
+                row.append("[red bold]" + str(f) + "[/red bold]")
+            elif f.by == "objective":
+                row.append("[blue]" + str(f) + "[/blue]")
+            elif f.by == "free":
+                row.append("[dim]" + str(f) + "[/dim]")
+            else:
+                row.append("[red]" + str(f) + "[/red]")
+        t.add_row(*row)
+    console.print(t)
+
+
+def _find_session(brief: Brief, grid: Grid, key: str) -> Session:
+    """`1@17:30` → the session on screen 1 whose preshow begins at 17:30."""
+    if "@" not in key:
+        console.print(f"[red]a session is named screen@start, e.g. 1@17:30 — not {key!r}[/red]")
+        raise typer.Exit(code=1)
+    sid, hhmm = key.split("@", 1)
+    for s in grid.sessions:
+        if s.screen == sid and fmt_time(s.start) == hhmm:
+            return s
+    on = ", ".join(x.key for x in grid.by_screen().get(sid, []))
+    console.print(
+        f"[red]no session {key} on the grid[/red]"
+        + (f" — {brief.screen(sid).label} has {on}" if on else f" — screen {sid} is dark")
+    )
+    raise typer.Exit(code=1)
 
 
 def _say_relaxed(brief: Brief, grid: Grid, prefix: str = "") -> None:
@@ -246,9 +299,20 @@ def plan(
         ),
     ] = False,
     quiet: bool = False,
+    why: Annotated[
+        bool,
+        typer.Option(
+            "--why",
+            help="Probe every session: forbid it, solve again, and record whether the terms "
+            "or the objective force it. One solve per session; a day only.",
+        ),
+    ] = False,
 ) -> None:
     """Solve a day, or a week, and print the grid with its proof. Exit 2 if the terms conflict."""
     if _is_week(brief_path):
+        if why:
+            console.print("[red]--why probes a day; run explain on one day of the week[/red]")
+            raise typer.Exit(code=1)
         _plan_week(brief_path, out, html, time_limit, relax_terms, quiet)
         return
     brief = _load_brief(brief_path)
@@ -270,6 +334,11 @@ def plan(
         _print_grid(brief, grid)
     _say_relaxed(brief, grid)
     ok = _print_report(brief, grid) if not quiet else run_check(brief, grid).ok
+    if why:
+        probe_all(brief, grid, time_limit_s=min(time_limit, 10.0))
+        if not quiet:
+            _print_whys(brief, grid)
+        _say_forced(grid)
     if out:
         out.write_text(grid.model_dump_json(indent=2))
         console.print(f"grid → {out}")
@@ -280,6 +349,192 @@ def plan(
         console.print(
             "[red bold]the solver produced a grid the checker rejects — this is a bug[/red bold]"
         )
+        raise typer.Exit(code=3)
+
+
+def _say_forced(grid: Grid) -> None:
+    """One line: how many sessions the terms force, the objective forces, and are free."""
+    kinds = {"terms": 0, "objective": 0, "free": 0, "unknown": 0}
+    for s in grid.sessions:
+        if s.forced:
+            kinds[s.forced.by] += 1
+    probed = sum(kinds.values())
+    seconds = sum(s.forced.seconds for s in grid.sessions if s.forced)
+    line = (
+        f"{probed} sessions probed in {seconds:,.1f}s · "
+        f"[red bold]{kinds['terms']} forced by the terms[/red bold] · "
+        f"[blue]{kinds['objective']} by the objective[/blue] · {kinds['free']} free"
+    )
+    if kinds["unknown"]:
+        line += f" · [red]{kinds['unknown']} unknown[/red]"
+    console.print(line)
+
+
+@app.command("explain")
+def explain_cmd(
+    brief_path: Annotated[Path, typer.Argument(help="Brief JSON")],
+    grid_path: Annotated[Path, typer.Argument(help="Grid JSON")],
+    session: Annotated[
+        str | None, typer.Option("--session", "-s", help="One session, as screen@start: 1@17:30")
+    ] = None,
+    do_probe: Annotated[
+        bool,
+        typer.Option(
+            "--probe/--no-probe",
+            help="Forbid the session and solve again to learn whether it is forced. "
+            "On by default for one session; with no --session, every session is probed.",
+        ),
+    ] = True,
+    out: Annotated[
+        Path | None, typer.Option("--out", "-o", help="Write the grid back with `forced` set")
+    ] = None,
+    time_limit: Annotated[float, typer.Option(help="Seconds per probe")] = 10.0,
+) -> None:
+    """Why a session is where it is: the terms it helps satisfy, what it sells, and —
+    by forbidding it and solving again — whether the terms or the objective force it."""
+    if _is_week(brief_path):
+        console.print("[red]explain takes a day's brief and grid; pick a day of the week[/red]")
+        raise typer.Exit(code=1)
+    brief = _load_brief(brief_path)
+    grid = _load_grid(grid_path)
+    only = _find_session(brief, grid, session) if session else None
+    if do_probe:
+        if only:
+            only.forced = probe(brief, grid, only, time_limit_s=time_limit)
+        else:
+            probe_all(brief, grid, time_limit_s=time_limit)
+    _print_whys(brief, grid, only)
+    if only:
+        w = next(x for x in whys(brief, grid) if x.session is only)
+        console.print(f"{brief.film(only.film).title} {only.key}: {w.sentence}")
+    elif do_probe:
+        _say_forced(grid)
+    if out:
+        out.write_text(grid.model_dump_json(indent=2))
+        console.print(f"grid → {out}")
+
+
+def _print_what_if(base_brief: Brief, base: Grid, brief: Brief, grid: Grid) -> None:
+    """The day as it was beside the day as it would be: per title, shows and admissions
+    before and after; the sessions that appeared; where the freed slots went."""
+    t = Table(title=f"What if · {grid.status} · {grid.solve_seconds}s", show_lines=False)
+    t.add_column("Title", style="bold")
+    t.add_column("Shows")
+    t.add_column("Expected", justify="right")
+    t.add_column("Starts")
+    was = {a.film: a for a in admissions(base_brief, base)}
+    now = {a.film: a for a in admissions(brief, grid)}
+    for f in base_brief.films:
+        a = was[f.id]
+        b = now.get(f.id)
+        if b is None:
+            t.add_row(
+                f"[dim]{f.title}[/dim]",
+                f"{a.shows} → [red]dropped[/red]",
+                f"{a.admissions:,.0f} → —",
+                "",
+            )
+            continue
+        old_starts = {(s.screen, s.start) for s in base.sessions if s.film == f.id}
+        new_starts = {(s.screen, s.start) for s in grid.sessions if s.film == f.id}
+        starts = []
+        for s in sorted(grid.by_film().get(f.id, []), key=lambda x: x.start):
+            k = (s.screen, s.start)
+            starts.append(f"[blue]{s.key}[/blue]" if k not in old_starts else s.key)
+        for scr, st in sorted(old_starts - new_starts, key=lambda k: k[1]):
+            starts.append(f"[dim strike]{scr}@{fmt_time(st)}[/dim strike]")
+        shows = f"{a.shows} → {b.shows}" if a.shows != b.shows else str(b.shows)
+        delta = b.admissions - a.admissions
+        exp = f"{b.admissions:,.0f}" + (
+            f" [{'blue' if delta > 0 else 'red'}]({delta:+,.0f})[/{'blue' if delta > 0 else 'red'}]"
+            if abs(delta) >= 0.5
+            else ""
+        )
+        t.add_row(f.title, shows, exp, " ".join(starts))
+    console.print(t)
+    gone = [s for s in base.sessions if s.film not in {f.id for f in brief.films}]
+    if gone:
+        freed = []
+        for s in gone:
+            taker = [
+                x
+                for x in grid.sessions
+                if x.screen == s.screen and x.start < s.clear and x.clear > s.start
+            ]
+            if taker:
+                x = min(taker, key=lambda y: abs(y.start - s.start))
+                freed.append(f"{s.key} → {brief.film(x.film).title} {fmt_time(x.start)}")
+            else:
+                freed.append(f"{s.key} → dark")
+        console.print("freed slots: " + " · ".join(freed))
+    d = grid.objective - base.objective
+    console.print(
+        f"objective {base.objective:,.1f} → [bold]{grid.objective:,.1f}[/bold] "
+        f"({d:+,.1f} expected admissions) · new starts in blue, gone ones struck"
+    )
+
+
+@app.command("what-if")
+def what_if_cmd(
+    brief_path: Annotated[Path, typer.Argument(help="Brief JSON")],
+    drop: Annotated[
+        list[str] | None, typer.Option("--drop", help="A title id to leave out; repeatable")
+    ] = None,
+    set_: Annotated[
+        list[str] | None,
+        typer.Option(
+            "--set", help="A policy field to change, key=value: max_concurrent_turnarounds=3"
+        ),
+    ] = None,
+    against: Annotated[
+        Path | None,
+        typer.Option("--against", help="The day's grid as it stands; solved afresh if omitted"),
+    ] = None,
+    out: Annotated[Path | None, typer.Option("--out", "-o", help="Write the what-if grid")] = None,
+    html: Annotated[Path | None, typer.Option("--html", help="Write its sheet")] = None,
+    time_limit: Annotated[float, typer.Option(help="Solver time limit, seconds")] = 30.0,
+) -> None:
+    """The day without a title, or under a changed policy, beside the day as it stands:
+    what the freed slots went to and what the objective gained or lost. Terms are never
+    relaxed; a what-if that cannot hold them says INFEASIBLE."""
+    if _is_week(brief_path):
+        console.print("[red]what-if takes a day's brief; pick a day of the week[/red]")
+        raise typer.Exit(code=1)
+    if not drop and not set_:
+        console.print("[red]nothing to ask: give --drop TITLE or --set KEY=VALUE[/red]")
+        raise typer.Exit(code=1)
+    brief = _load_brief(brief_path)
+    policy: dict[str, object] = {}
+    for kv in set_ or []:
+        if "=" not in kv:
+            console.print(f"[red]--set wants key=value, not {kv!r}[/red]")
+            raise typer.Exit(code=1)
+        k, v = kv.split("=", 1)
+        policy[k] = int(v) if v.isdigit() else v
+    try:
+        changed, grid = what_if(brief, drop=drop, policy=policy, time_limit_s=time_limit)
+    except (ValueError, ValidationError) as e:
+        lines = validation_sentences(e, None) if isinstance(e, ValidationError) else [str(e)]
+        for line in lines:
+            console.print(f"  [red]✗[/red] {line}")
+        raise typer.Exit(code=1) from None
+    base = _load_grid(against) if against else solve(brief, time_limit_s=time_limit)
+    if grid.status not in ("OPTIMAL", "FEASIBLE"):
+        if grid.status == "INFEASIBLE":
+            console.print(f"[red bold]INFEASIBLE[/red bold] — {explain(changed, grid)}")
+        else:
+            console.print(f"[red bold]{grid.status}[/red bold] — no grid within {time_limit}s")
+        raise typer.Exit(code=2)
+    _print_what_if(brief, base, changed, grid)
+    rep = run_check(changed, grid)
+    if out:
+        out.write_text(grid.model_dump_json(indent=2))
+        console.print(f"grid → {out}")
+    if html:
+        html.write_text(render_html(changed, grid, rep))
+        console.print(f"sheet → {html}")
+    if not rep.ok:
+        console.print("[red bold]the what-if grid fails its own check — this is a bug[/red bold]")
         raise typer.Exit(code=3)
 
 

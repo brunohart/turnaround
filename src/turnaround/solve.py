@@ -27,7 +27,18 @@ from dataclasses import dataclass, field
 
 from ortools.sat.python import cp_model
 
-from .model import Brief, Film, Grid, Session, TermRef, WeekBrief, WeekGrid, parse_time
+from .model import (
+    Brief,
+    Film,
+    Forced,
+    Grid,
+    Session,
+    TermRef,
+    WeekBrief,
+    WeekGrid,
+    fmt_time,
+    parse_time,
+)
 
 # Relaxation order: the term with the smallest key goes first.
 # exclusive_screen and plf_lock are always last; otherwise the lightest film first,
@@ -165,6 +176,10 @@ Hold = dict[str, frozenset[int]]
 """Per film id, the start times it had on the anchor day of the week."""
 
 
+Forbid = frozenset[tuple[str, str, int]]
+"""(screen, film, start) candidates a probe rules out."""
+
+
 def _build(
     brief: Brief,
     dropped: frozenset[tuple[str, str]] = frozenset(),
@@ -173,6 +188,7 @@ def _build(
     hold: Hold | None = None,
     hold_penalty: float = 0.0,
     owed: Owed | None = None,
+    forbid: Forbid = frozenset(),
 ) -> _Model:
     """The model. Terms in `dropped` are not enforced; every other term is guarded.
     A feasibility-only model has no objective: a probe stops at the first grid it finds.
@@ -191,6 +207,8 @@ def _build(
     for c in cands:
         v = m.new_bool_var(f"x[{c.screen},{c.film},{c.start}]")
         mdl.x[c] = v
+        if (c.screen, c.film, c.start) in forbid:
+            m.add(v == 0)  # a probe asks: what does the day look like without this one?
         iv = m.new_optional_interval_var(
             c.start, c.block, c.start + c.block, v, f"iv[{c.screen},{c.film},{c.start}]"
         )
@@ -402,10 +420,11 @@ def _seed_core(
     time_limit_s: float,
     workers: int,
     owed: Owed | None = None,
+    forbid: Forbid = frozenset(),
 ) -> list[TermRef]:
     """A first, possibly loose, set of culprits from the solver's own unsat core. If the
     solver cannot prove it in time, every term is a suspect."""
-    mdl = _build(brief, dropped, feasibility_only=True, owed=owed)
+    mdl = _build(brief, dropped, feasibility_only=True, owed=owed, forbid=forbid)
     mdl.m.add_assumptions([mdl.assumptions[r] for r in terms])
     solver = _solver(time_limit_s, workers)
     if solver.solve(mdl.m) != cp_model.INFEASIBLE:
@@ -423,12 +442,13 @@ def _alone(
     time_limit_s: float,
     workers: int,
     owed: Owed | None = None,
+    forbid: Forbid = frozenset(),
 ) -> list[TermRef]:
     """The blamed terms that fail on their own: each is a conflict of size one, and
     no explanation is smaller than that."""
     out = []
     for ref in core:
-        mdl = _build(brief, dropped, feasibility_only=True, owed=owed)
+        mdl = _build(brief, dropped, feasibility_only=True, owed=owed, forbid=forbid)
         _pin(mdl, [ref])
         if _solver(time_limit_s, workers).solve(mdl.m) == cp_model.INFEASIBLE:
             out.append(ref)
@@ -443,6 +463,7 @@ def _minimise(
     time_limit_s: float,
     workers: int,
     owed: Owed | None = None,
+    forbid: Forbid = frozenset(),
 ) -> list[TermRef]:
     """Deletion pass: drop each blamed term in turn; if the rest still conflict, it was
     never needed. A probe that runs out of time keeps its term (never blame less
@@ -452,7 +473,7 @@ def _minimise(
         trial = [r for r in kept if r != ref]
         if not trial:
             break
-        mdl = _build(brief, dropped, feasibility_only=True, owed=owed)
+        mdl = _build(brief, dropped, feasibility_only=True, owed=owed, forbid=forbid)
         _pin(mdl, trial)
         st = _solver(time_limit_s, workers).solve(mdl.m)
         if st == cp_model.INFEASIBLE:
@@ -518,12 +539,14 @@ def solve(
     hold: Hold | None = None,
     hold_penalty: float = 0.0,
     owed: Owed | None = None,
+    forbid: Forbid = frozenset(),
 ) -> Grid:
     """Solve one day. On INFEASIBLE the grid carries the conflicting terms. `owed` is
     what the week's terms still require of this day; a day solved on its own owes
-    nothing."""
+    nothing. `forbid` rules candidates out; a probe uses it to ask what the day looks
+    like without one session."""
     t0 = time.perf_counter()
-    mdl = _build(brief, dropped, hold=hold, hold_penalty=hold_penalty, owed=owed)
+    mdl = _build(brief, dropped, hold=hold, hold_penalty=hold_penalty, owed=owed, forbid=forbid)
     terms = list(mdl.assumptions)
     _pin(mdl, terms)
     solver = _solver(time_limit_s, workers)
@@ -533,16 +556,24 @@ def solve(
     if status == cp_model.INFEASIBLE:
         probe = min(time_limit_s, 5.0)
         # Smallest first: any term that fails by itself is a conflict of size one.
-        solo = _alone(brief, dropped, terms, time_limit_s=probe, workers=workers, owed=owed)
+        solo = _alone(
+            brief, dropped, terms, time_limit_s=probe, workers=workers, owed=owed, forbid=forbid
+        )
         if solo:
             conflict, alone = solo, True
         else:
             conflict = _seed_core(
-                brief, dropped, terms, time_limit_s=probe, workers=workers, owed=owed
+                brief, dropped, terms, time_limit_s=probe, workers=workers, owed=owed, forbid=forbid
             )
             if minimise and len(conflict) > 1:
                 conflict = _minimise(
-                    brief, dropped, conflict, time_limit_s=time_limit_s, workers=workers, owed=owed
+                    brief,
+                    dropped,
+                    conflict,
+                    time_limit_s=time_limit_s,
+                    workers=workers,
+                    owed=owed,
+                    forbid=forbid,
                 )
     elapsed = time.perf_counter() - t0
     relaxed = [r for f in brief.films for r in terms_of(f) if (r.film, r.term) in dropped]
@@ -603,6 +634,127 @@ def relax(
             dropped = dropped | {(victim.film, victim.term)}
     grid.solve_seconds = round(time.perf_counter() - t0, 3)
     return grid
+
+
+def _dp_name(brief: Brief, start: int) -> str | None:
+    dp = brief.policy.daypart_at(start)
+    return dp.name if dp else None
+
+
+def _instead(brief: Brief, session: Session, before: Grid, without: Grid) -> str:
+    """What the grid without a show did with its room and hour, in one clause."""
+    dp = _dp_name(brief, session.start)
+    same_title = [
+        s
+        for s in without.sessions
+        if s.film == session.film and _dp_name(brief, s.start) == dp and s.screen != session.screen
+    ]
+    if same_title:
+        nearest = min(same_title, key=lambda s: abs(s.start - session.start))
+        clause = f"moves to {brief.screen(nearest.screen).label} {fmt_time(nearest.start)}"
+    else:
+        taker = [
+            s
+            for s in without.sessions
+            if s.screen == session.screen and s.start < session.clear and s.clear > session.start
+        ]
+        if taker:
+            t = min(taker, key=lambda s: abs(s.start - session.start))
+            if t.film == session.film:  # the same title, from the neighbouring daypart
+                clause = (
+                    f"shifts to {fmt_time(t.start)}, {_dp_name(brief, t.start) or 'no daypart'}"
+                )
+            else:
+                clause = f"the slot goes to {brief.film(t.film).title} {fmt_time(t.start)}"
+        else:
+            clause = "the slot goes dark"
+    had = sum(1 for s in before.sessions if s.film == session.film)
+    has = sum(1 for s in without.sessions if s.film == session.film)
+    if has < had:
+        clause += f" · {had - has} show{'s' if had - has != 1 else ''} fewer"
+    return clause
+
+
+def show_of(brief: Brief, session: Session) -> Forbid:
+    """The *show* a session is: this title, in this room, in this daypart. On a 5-minute
+    grid forbidding one start only nudges it; forbidding the show asks the question the
+    programmer means."""
+    dp = _dp_name(brief, session.start)
+    return frozenset(
+        (c.screen, c.film, c.start)
+        for c in candidates(brief)
+        if c.screen == session.screen and c.film == session.film and c.daypart == dp
+    )
+
+
+def probe(
+    brief: Brief,
+    grid: Grid,
+    session: Session,
+    *,
+    time_limit_s: float = 10.0,
+    workers: int = 8,
+) -> Forced:
+    """Is this show in every grid? Forbid it — the title, in this room, in this daypart —
+    and solve the day again, honouring whatever the grid already declares relaxed.
+    INFEASIBLE means the terms force it, and the conflict says which; a lower objective
+    means the objective forces it, by that much; an equally good grid means it is free,
+    and the probe says what that grid did with the room instead. A probe that runs out of
+    time says so."""
+    t0 = time.perf_counter()
+    dropped = frozenset((r.film, r.term) for r in grid.relaxed)
+    without = solve(
+        brief,
+        time_limit_s=time_limit_s,
+        workers=workers,
+        dropped=dropped,
+        forbid=show_of(brief, session),
+    )
+    seconds = round(time.perf_counter() - t0, 3)
+    if without.status == "INFEASIBLE":
+        return Forced(by="terms", terms=without.conflict, seconds=seconds)
+    if without.status not in ("OPTIMAL", "FEASIBLE"):
+        return Forced(by="unknown", seconds=seconds)
+    delta = round(grid.objective - without.objective, 2)
+    instead = _instead(brief, session, grid, without)
+    if delta <= 0.005:
+        return Forced(by="free", delta=max(delta, 0.0), instead=instead, seconds=seconds)
+    if without.status == "FEASIBLE":
+        # a worse grid was found but not proven best: the delta is an upper bound
+        return Forced(by="unknown", delta=delta, instead=instead, seconds=seconds)
+    return Forced(by="objective", delta=delta, instead=instead, seconds=seconds)
+
+
+def probe_all(brief: Brief, grid: Grid, *, time_limit_s: float = 10.0, workers: int = 8) -> Grid:
+    """Every session probed; the grid returned with `forced` set on each."""
+    for s in grid.sessions:
+        s.forced = probe(brief, grid, s, time_limit_s=time_limit_s, workers=workers)
+    return grid
+
+
+def what_if(
+    brief: Brief,
+    *,
+    drop: list[str] | None = None,
+    policy: dict[str, object] | None = None,
+    time_limit_s: float = 30.0,
+    workers: int = 8,
+) -> tuple[Brief, Grid]:
+    """The day without some titles, or under a different policy: the brief as changed
+    and its grid. Terms are never relaxed here (ADR-002); a what-if that cannot hold
+    its terms says INFEASIBLE like any other day."""
+    raw = brief.model_dump(mode="json")
+    gone = set(drop or [])
+    unknown = gone - {f["id"] for f in raw["films"]}
+    if unknown:
+        raise ValueError(f"no such title: {', '.join(sorted(unknown))}")
+    raw["films"] = [f for f in raw["films"] if f["id"] not in gone]
+    if not raw["films"]:
+        raise ValueError("a what-if needs at least one title left")
+    if policy:
+        raw["policy"] = {**raw["policy"], **policy}
+    changed = Brief.model_validate(raw)
+    return changed, solve(changed, time_limit_s=time_limit_s, workers=workers)
 
 
 def explain(brief: Brief, grid: Grid) -> str:

@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import re
 from datetime import date
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 
 from pydantic import (
     BaseModel,
@@ -553,6 +553,52 @@ class Brief(BaseModel):
         return not (t.min_capacity is not None and screen.capacity < t.min_capacity)
 
 
+class TermRef(BaseModel):
+    """One distributor term on one film: the unit the solver can name or give up."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    film: str
+    term: str = Field(description="A field of Terms: min_shows, prime_shows, exclusive_screen…")
+    value: str = Field(default="", description="The term's value as written, for the record")
+
+    def __str__(self) -> str:
+        return f"{self.film} {self.term}{' ' + self.value if self.value else ''}"
+
+
+class Forced(BaseModel):
+    """What the solver found when it forbade one show — this title, in this room, in
+    this daypart — and solved the day again. A claim the checker cannot re-derive
+    without solving, and labelled as one."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    by: Literal["terms", "objective", "free", "unknown"] = Field(
+        description="terms: no grid honours the terms without this show (the conflict is "
+        "named); objective: every grid without it sells fewer seats; free: an equally good "
+        "grid does without it; unknown: the probe ran out of time"
+    )
+    delta: float = Field(
+        default=0.0, description="Expected admissions the best grid without it gives up"
+    )
+    terms: list[TermRef] = Field(
+        default_factory=list, description="On `terms`: the terms that cannot hold without it"
+    )
+    instead: str = Field(default="", description="What the grid without it did with the slot")
+    seconds: float = 0.0
+
+    def __str__(self) -> str:
+        if self.by == "terms":
+            return "forced by " + " · ".join(str(t) for t in self.terms)
+        if self.by == "objective":
+            return f"forced by the objective · −{self.delta:,.0f} without it" + (
+                f" · {self.instead}" if self.instead else ""
+            )
+        if self.by == "free":
+            return "free" + (f" · {self.instead}" if self.instead else "")
+        return "unknown · the probe ran out of time"
+
+
 class Session(BaseModel):
     """One session on the grid."""
 
@@ -567,6 +613,15 @@ class Session(BaseModel):
         description="Minutes after midnight when the screen is clean again. The turnaround "
         "may begin before feature_end where the title's credits allow"
     )
+    forced: Forced | None = Field(
+        default=None,
+        description="Set by a probe (plan --why, explain): is this session in every grid?",
+    )
+
+    @property
+    def key(self) -> str:
+        """How the CLI names a session: screen@start, e.g. 1@17:30."""
+        return f"{self.screen}@{fmt_time(self.start)}"
 
     @property
     def start_hhmm(self) -> str:
@@ -579,19 +634,6 @@ class Session(BaseModel):
     @property
     def feature_end_hhmm(self) -> str:
         return fmt_time(self.feature_end)
-
-
-class TermRef(BaseModel):
-    """One distributor term on one film: the unit the solver can name or give up."""
-
-    model_config = ConfigDict(extra="forbid", frozen=True)
-
-    film: str
-    term: str = Field(description="A field of Terms: min_shows, prime_shows, exclusive_screen…")
-    value: str = Field(default="", description="The term's value as written, for the record")
-
-    def __str__(self) -> str:
-        return f"{self.film} {self.term}{' ' + self.value if self.value else ''}"
 
 
 class Grid(BaseModel):

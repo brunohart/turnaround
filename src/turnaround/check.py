@@ -39,35 +39,124 @@ class TitleAdmissions:
         return self.demand - self.admissions
 
 
+@dataclass
+class Ranked:
+    """One session at its rank: the k-th of its title in its daypart, biggest room first."""
+
+    session: Session
+    daypart: str | None
+    rank: int
+    expected: float  # who would come to this one
+    sold: float  # who gets a seat: min(expected, capacity)
+
+
+def ranked(brief: Brief, grid: Grid, film_id: str) -> list[Ranked]:
+    """A title's sessions with the rank each holds in its daypart. Within a daypart the
+    first session draws the most and each further one decays, and the biggest room takes
+    the first rank: a room can only sell the seats it has, so no other assignment sells
+    more. Written here without the solver; `admissions` and `whys` both count from it."""
+    f = brief.film(film_id)
+    by_dp: dict[str | None, list[tuple[Daypart | None, Session]]] = {}
+    for s in grid.sessions:
+        if s.film != film_id:
+            continue
+        dp = brief.policy.daypart_at(s.start)
+        by_dp.setdefault(dp.name if dp else None, []).append((dp, s))
+    out: list[Ranked] = []
+    for name, group in by_dp.items():
+        group.sort(key=lambda x: -brief.screen(x[1].screen).capacity)
+        for rank, (dp, s) in enumerate(group):
+            e = brief.expected(f, dp, rank)
+            out.append(Ranked(s, name, rank, e, min(float(brief.screen(s.screen).capacity), e)))
+    return out
+
+
 def admissions(brief: Brief, grid: Grid) -> list[TitleAdmissions]:
-    """Re-count expected admissions from the brief and the grid alone. Within a title's
-    sessions in one daypart the first draws the most and each further one decays, and
-    the biggest room takes the first rank: a room can only sell the seats it has, so
-    no other assignment sells more. Written here without the solver."""
+    """Re-count expected admissions from the brief and the grid alone, title by title."""
     out: list[TitleAdmissions] = []
     for f in brief.films:
-        mine = [s for s in grid.sessions if s.film == f.id]
-        by_dp: dict[str | None, list[tuple[Daypart | None, Session]]] = {}
-        for s in mine:
-            dp = brief.policy.daypart_at(s.start)
-            by_dp.setdefault(dp.name if dp else None, []).append((dp, s))
-        demand = 0.0
-        sold = 0.0
-        for group in by_dp.values():
-            group.sort(key=lambda x: -brief.screen(x[1].screen).capacity)
-            for rank, (dp, s) in enumerate(group):
-                e = brief.expected(f, dp, rank)
-                demand += e
-                sold += min(float(brief.screen(s.screen).capacity), e)
+        rows = ranked(brief, grid, f.id)
         out.append(
             TitleAdmissions(
                 film=f.id,
-                shows=len(mine),
-                offered=sum(brief.screen(s.screen).capacity for s in mine),
-                demand=demand,
-                admissions=sold,
+                shows=len(rows),
+                offered=sum(brief.screen(r.session.screen).capacity for r in rows),
+                demand=sum(r.expected for r in rows),
+                admissions=sum(r.sold for r in rows),
             )
         )
+    return out
+
+
+@dataclass
+class Why:
+    """Why a session is where it is, as far as the brief and the grid alone can say:
+    the terms it helps satisfy, and what it sells. Whether it is *forced* — present in
+    every grid — needs the solver, and lives on the session as the solver's claim."""
+
+    session: Session
+    terms: list[str]  # "min_shows 4/3", "prime_shows 1/1", "exclusive_screen", …
+    daypart: str | None
+    rank: int  # 0 is the first show of its title in its daypart
+    expected: float
+    admissions: float
+
+    @property
+    def key(self) -> str:
+        return self.session.key
+
+    @property
+    def sentence(self) -> str:
+        bits = list(self.terms) or ["no term asks for it"]
+        rank = f"{self.daypart or 'the day'} · show {self.rank + 1}"
+        sold = (
+            f"{self.admissions:,.0f} of {self.expected:,.0f} expected"
+            if self.expected - self.admissions >= 0.5
+            else f"{self.admissions:,.0f} expected"
+        )
+        forced = f" · {self.session.forced}" if self.session.forced else ""
+        return " · ".join(bits) + f" · {rank} · {sold}" + forced
+
+
+def whys(brief: Brief, grid: Grid) -> list[Why]:
+    """One `Why` per session, in grid order. Re-derived from the brief and the grid; the
+    same arithmetic as `admissions`, so the whys of a title sum to its admissions."""
+    p = brief.policy
+    by_film = grid.by_film()
+    by_screen = grid.by_screen()
+    plf = {scr.id for scr in brief.screens if "PLF" in scr.formats}
+    rank_of: dict[tuple[str, int], Ranked] = {}
+    for f in brief.films:
+        for r in ranked(brief, grid, f.id):
+            rank_of[(r.session.screen, r.session.start)] = r
+    out: list[Why] = []
+    for s in grid.sessions:
+        f = brief.film(s.film)
+        t = f.terms
+        mine = by_film.get(f.id, [])
+        n = len(mine)
+        terms: list[str] = []
+        if t.min_shows:
+            terms.append(f"min_shows {n}/{t.min_shows}")
+        if t.max_shows is not None:
+            terms.append(f"max_shows {n}/{t.max_shows}")
+        if t.prime_shows and p.is_prime(s.start):
+            pn = sum(1 for x in mine if p.is_prime(x.start))
+            terms.append(f"prime_shows {pn}/{t.prime_shows}")
+        if t.min_shows_per_week:
+            terms.append(f"min_shows_per_week {t.min_shows_per_week} · {n} today")
+        if t.prime_shows_per_week and p.is_prime(s.start):
+            terms.append(f"prime_shows_per_week {t.prime_shows_per_week}")
+        if t.exclusive_screen and all(x.film == f.id for x in by_screen.get(s.screen, [])):
+            terms.append(f"exclusive_screen {s.screen}")
+        if t.plf_lock and s.screen in plf:
+            terms.append(f"plf_lock {s.screen}")
+        if t.earliest_start:
+            terms.append(f"earliest_start ≥ {t.earliest_start}")
+        if t.latest_start:
+            terms.append(f"latest_start ≤ {t.latest_start}")
+        r = rank_of[(s.screen, s.start)]
+        out.append(Why(s, terms, r.daypart, r.rank, r.expected, r.sold))
     return out
 
 
