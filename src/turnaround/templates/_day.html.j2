@@ -1,4 +1,4 @@
-{# Shared pieces of the sheet: the style block, the grid for one day, the two tables. #}
+{# Shared pieces of the sheet: the style block, the grid for one day, the booth strips, the two tables. #}
 {% macro style() %}<style>
   :root {
     --bg:#F0EDE6; --ink:#1A1A1A; --orange:#D4622B; --blue:#1B2D4F; --red:#C4391D;
@@ -7,17 +7,25 @@
   * { box-sizing:border-box; }
   html,body { margin:0; background:var(--bg); color:var(--ink);
     font-family: Inter, -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  body { overflow-x:hidden; }
+  /* paper grain: a 6% noise pass over everything, dropped in print */
   body::after { content:""; position:fixed; inset:0; pointer-events:none; opacity:.06; mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
   .mono { font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:11px; }
-  .sheet { max-width:1240px; margin:0 auto; padding:40px 32px 64px; position:relative; }
-  .wash { position:absolute; width:46%; height:180px; top:-30px; right:-6%; background:var(--orange); opacity:.045; mix-blend-mode:multiply; transform:rotate(-2.2deg); pointer-events:none; }
+  .sheet { max-width:1240px; margin:0 auto; padding:40px 32px 64px; position:relative; page:pinup; }
+  /* colour washes: flat fields that do not respect the margin */
+  .wash { position:absolute; width:46%; height:180px; top:-30px; right:-9%; background:var(--orange); opacity:.045; mix-blend-mode:multiply; transform:rotate(-2.2deg); pointer-events:none; }
+  .wash.blue { width:34%; height:240px; top:auto; bottom:-60px; right:auto; left:-11%; background:var(--blue); opacity:.04; transform:rotate(1.6deg); }
   header { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:end; margin-bottom:28px; }
   h1 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:56px; line-height:.92; letter-spacing:-.03em; margin:0; position:relative; }
-  h1 .ghost { position:absolute; left:4px; top:3px; color:var(--orange); opacity:.09; pointer-events:none; }
-  .stamp { display:inline-block; border:1px solid var(--ink); padding:4px 8px; transform:rotate(-.8deg); margin-bottom:12px; }
-  .meta { text-align:right; color:var(--grey); line-height:1.7; }
+  /* the misregistered pass: one plate did not align */
+  .ghost { position:absolute; left:4px; top:3px; color:var(--orange); opacity:.09; pointer-events:none; }
+  /* rubber stamps: not pressed level, with the pad's offset shadow behind */
+  .stamp { display:inline-block; position:relative; border:1px solid var(--ink); padding:4px 8px; transform:rotate(-.8deg); margin-bottom:12px; background:var(--bg); }
+  .stamp::after { content:""; position:absolute; left:3px; top:3px; right:-3px; bottom:-3px; border:1px solid var(--blue); opacity:.18; z-index:-1; pointer-events:none; }
+  .meta { text-align:right; color:var(--grey); line-height:1.7; transform:rotate(.4deg); transform-origin:100% 100%; }
   .meta b { color:var(--ink); font-weight:500; }
+  /* the broken divider: a stroke that ran out of ink twice */
   .divider { height:1px; margin:22px 0; background:linear-gradient(90deg, var(--ink) 0 38%, transparent 38% 41%, var(--ink) 41% 77%, transparent 77% 80%, var(--ink) 80%); opacity:.55; }
   .grid { position:relative; }
   .ruler { position:relative; height:26px; margin-left:170px; border-bottom:1px solid var(--ink); }
@@ -34,20 +42,27 @@
   .block > div { flex:none; }
   .block .clean.over { border-left:1px dashed var(--ink); }
   .block .pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); border:1px solid var(--ink); border-right:0; }
-  .block .feat { position:relative; background:var(--cream); border:1px solid var(--ink); padding:5px 7px; overflow:hidden; white-space:nowrap; }
-  .block .feat::before { content:""; position:absolute; inset:0; background:var(--orange); opacity:.0; }
+  /* the feature is a print; its second, orange pass is off by 5px */
+  .block .feat { position:relative; z-index:0; background:var(--cream); border:1px solid var(--ink); padding:5px 7px; white-space:nowrap; }
+  .block .feat > div { overflow:hidden; }
   .block.prime .feat { background:#fff; }
-  .block .feat::after { content:""; position:absolute; left:6px; top:6px; right:-6px; bottom:-6px; border:1px solid var(--orange); opacity:.35; z-index:-1; }
+  .block .feat::after { content:""; position:absolute; left:5px; top:4px; right:-5px; bottom:-4px; border:1px solid var(--orange); opacity:.35; z-index:-1; pointer-events:none; }
   .block .feat .t { font-family:"Space Grotesk", Helvetica, Arial, sans-serif; font-weight:700; font-size:13px; letter-spacing:-.02em; line-height:1.05; }
   .block .feat .tm { color:var(--grey); margin-top:5px; }
   .block .clean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); border:1px solid var(--ink); border-left:0; }
   .block:hover { transform:translateY(-1px); }
-  .legend { display:flex; gap:22px; margin-top:16px; color:var(--grey); align-items:center; }
+  .legend { display:flex; flex-wrap:wrap; gap:14px 22px; margin-top:16px; color:var(--grey); align-items:center; transform:rotate(-.3deg); transform-origin:0 50%; }
   .legend i { display:inline-block; width:22px; height:12px; border:1px solid var(--ink); vertical-align:middle; margin-right:6px; }
   .legend i.pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); }
   .legend i.feat { background:var(--cream); }
   .legend i.clean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); }
-  .cols { display:grid; grid-template-columns:1.15fr .85fr; gap:40px; margin-top:44px; }
+  /* below the fold: two panels, pinned a little off true; hover straightens one */
+  .cols { display:grid; grid-template-columns:1.15fr .85fr; gap:40px; margin-top:44px; position:relative; }
+  .cols > .panel { position:relative; }
+  .cols > .panel:first-of-type { transform:rotate(-.3deg); transform-origin:0 0; }
+  .cols > .panel:last-of-type { transform:rotate(.35deg); transform-origin:100% 0; }
+  .cols > .panel:hover { transform:none; }
+  .scroll { overflow-x:auto; }
   table { border-collapse:collapse; width:100%; font-size:13px; }
   th { text-align:left; font-weight:400; color:var(--grey); border-bottom:1px solid var(--ink); padding:6px 6px 8px; }
   td { padding:8px 6px; border-bottom:1px dashed rgba(26,26,26,.2); vertical-align:top; }
@@ -60,7 +75,7 @@
   .relaxed { display:inline-block; color:var(--red); border:1px solid var(--red); padding:1px 5px; margin-right:4px; transform:rotate(-1.2deg); font-size:10px; }
   .given-up { color:var(--red); }
   .proof td:first-child { white-space:nowrap; }
-  footer { margin-top:56px; color:var(--grey); display:flex; justify-content:space-between; }
+  footer { margin-top:56px; color:var(--grey); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
   .week-table th.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:11px; }
   .week-table td.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11px; letter-spacing:.02em; line-height:1.6; white-space:nowrap; }
   .week-table td.day.dark { color:var(--grey); }
@@ -68,12 +83,68 @@
   .held { display:inline-block; border:1px solid var(--blue); color:var(--blue); padding:1px 5px; transform:rotate(-1.2deg); font-size:10px; }
   .status-inf { color:var(--red); font-weight:600; }
   .day-page { margin-top:64px; padding-top:28px; border-top:1px solid var(--ink); position:relative; }
-  .day-page h2 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:34px; line-height:.95; letter-spacing:-.03em; margin:0 0 6px; }
+  .day-page h2 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:34px; line-height:.95; letter-spacing:-.03em; margin:0 0 6px; position:relative; }
   .day-page .stamp { margin-bottom:8px; }
   .day-head { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:end; margin-bottom:18px; }
+  /* the booth strips: one screen, its sessions in mono, the three-strip block turned vertical.
+     Hidden on a desk; the phone shows them instead of the grid; print puts each on its own A4 */
+  .strips { display:none; }
+  .strip-page { page:strip; position:relative; margin-top:40px; padding-top:22px; border-top:1px solid var(--ink); }
+  .strip-head { display:grid; grid-template-columns:1fr auto; gap:16px; align-items:end; margin-bottom:16px; }
+  .strip-head .n { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:34px; line-height:.92; letter-spacing:-.03em; position:relative; }
+  .strip-head .cap { color:var(--grey); margin-top:8px; }
+  .strip-head .meta { transform:rotate(.6deg); }
+  .vblock { position:relative; margin:0 0 4px; max-width:420px; }
+  .vblock > div { border:1px solid var(--ink); }
+  .vblock .vpre, .vblock .vclean { flex-wrap:wrap; letter-spacing:.1em; }
+  .vblock .vpre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); border-bottom:0; padding:5px 9px; color:var(--ink); display:flex; justify-content:space-between; gap:12px; }
+  .vblock .vfeat { position:relative; z-index:0; background:var(--cream); padding:9px 10px 8px; }
+  .vblock.prime .vfeat { background:#fff; }
+  .vblock .vfeat::after { content:""; position:absolute; left:5px; top:4px; right:-5px; bottom:-4px; border:1px solid var(--orange); opacity:.35; z-index:-1; pointer-events:none; }
+  .vblock .vfeat .t { font-family:"Space Grotesk", Helvetica, Arial, sans-serif; font-weight:700; font-size:17px; letter-spacing:-.02em; line-height:1; }
+  .vblock .vfeat .tm { color:var(--grey); margin-top:6px; }
+  .vblock .vclean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); border-top:0; padding:5px 9px; color:var(--ink); display:flex; justify-content:space-between; gap:12px; }
+  .vblock .vclean.over { border-top:1px dashed var(--ink); margin-top:-1px; }
+  .vblock .vclean b, .vblock .vpre b { font-weight:500; background:var(--bg); padding:0 3px; }
+  .vgap { color:var(--grey); padding:6px 0 10px 10px; max-width:420px; }
+  .vgap i { display:inline-block; width:1px; height:14px; background:var(--grey); vertical-align:middle; margin-right:10px; }
+  @page pinup { size:A3 landscape; margin:10mm 12mm; }
+  @page strip { size:A4 portrait; margin:14mm 16mm; }
   @media print {
-    .day-page { break-before:page; page-break-before:always; border-top:0; margin-top:0; padding-top:0; } body::after{display:none} .sheet{padding:12mm} h1{font-size:34px} .cols{grid-template-columns:1fr} }
-  @media (max-width:800px) { header,.cols{grid-template-columns:1fr} .meta{text-align:left} .row{grid-template-columns:110px 1fr} .ruler{margin-left:110px} h1{font-size:38px} }
+    * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    body::after { display:none; } .wash { display:none; }
+    /* 3px of air at every page top: a stamp rotated -.8° otherwise pokes above the page and
+       Chrome paints that sliver at the foot of the page before */
+    .sheet { max-width:none; padding:3px 0 0; }
+    h1 { font-size:44px; } .mono { font-size:10px; }
+    .cols { margin-top:28px; gap:32px; }
+    .cols > .panel, .legend, .meta { transform:none; }
+    .grid, .strip-page, tr { break-inside:avoid; }
+    table { break-inside:auto; }
+    .cols table { font-size:11.5px; } .cols td { padding:5px 6px; } .cols th { padding:4px 6px 6px; }
+    .day-page { break-before:page; page-break-before:always; border-top:0; margin-top:0; padding-top:3px; }
+    .strips { display:block; }
+    .strip-page { break-before:page; page-break-before:always; margin-top:0; padding-top:3px; border-top:0; }
+    .vblock { max-width:none; }
+    .vgap { max-width:none; }
+    .block:hover { transform:none; }
+    footer { page:strip; margin-top:32px; }
+  }
+  @media screen and (max-width:800px) {
+    .sheet { padding:24px 16px 48px; }
+    .sheet, .day-page { display:flex; flex-direction:column; }
+    header, .divider, .day-head { order:-2; }
+    .strips { display:block; order:-1; }
+    .grid { display:none; }
+    header, .cols, .day-head { grid-template-columns:1fr; display:grid; }
+    .meta { text-align:left; transform:none; }
+    .cols > .panel { transform:none; }
+    h1 { font-size:38px; }
+    .strip-page { margin-top:28px; padding-top:18px; }
+    .strip-head .n { font-size:26px; }
+    .vblock, .vgap { max-width:none; }
+    footer { flex-direction:column; }
+  }
 </style>
 {% endmacro %}
 
@@ -110,11 +181,44 @@
   </div>
 {% endmacro %}
 
+{% macro strips(brief, d, day_label) %}
+  <div class="strips">
+    {% for row in d.rows %}
+    <section class="strip-page">
+      <div class="strip-head">
+        <div>
+          <div class="stamp mono">Booth strip · {{ day_label }}</div>
+          <div class="n"><span class="ghost" aria-hidden="true">{{ row.screen.label }}</span>{{ row.screen.label }}</div>
+          <div class="cap mono">{{ row.screen.capacity }} seats · {{ row.screen.formats|join("/") }} · doors {{ row.open }} · last start {{ row.last_start }} · turnaround {{ row.clean_min }}′</div>
+        </div>
+        <div class="meta mono">
+          <div><b>{{ row.count }}</b> show{{ 's' if row.count != 1 }}</div>
+          <div>{{ brief.house }}</div>
+        </div>
+      </div>
+      {% if not row.blocks %}<p class="mono" style="color:var(--grey)">dark all day</p>{% endif %}
+      {% for b in row.blocks %}
+      <div class="vblock{% if b.prime %} prime{% endif %}">
+        <div class="vpre mono"><span><b>{{ b.s.start|hhmm }}</b> doors</span><span>preshow {{ b.pre_min }}′</span></div>
+        <div class="vfeat">
+          <div class="t">{{ b.film.title }}</div>
+          <div class="tm mono">{{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }} · {{ b.film.runtime_min }}′{% if b.film.format != "2D" %} · {{ b.film.format }}{% endif %}{% if b.prime %} · prime{% endif %}</div>
+        </div>
+        <div class="vclean mono{% if b.over_min > 0 %} over{% endif %}"><span>turnaround {{ b.turn_begin|hhmm }}{% if b.over_min > 0 %} over the credits{% endif %}</span><span>clear <b>{{ b.s.clear|hhmm }}</b></span></div>
+      </div>
+      {% if b.gap is not none %}<div class="vgap mono"><i></i>{% if b.gap > 0 %}dark {{ b.gap }}′{% else %}back to back{% endif %}</div>{% endif %}
+      {% endfor %}
+    </section>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
 {% macro tables(d, report) %}
   <div class="cols">
-    <div>
+    <div class="wash blue"></div>
+    <div class="panel">
       <div class="stamp mono">By title</div>
-      <table>
+      <div class="scroll"><table>
         <thead><tr><th>Title</th><th>Shows</th><th>Prime</th><th>Seats</th><th>Expected</th><th>Turned away</th><th>Starts</th></tr></thead>
         <tbody>
         {% for f in d.films %}
@@ -130,19 +234,19 @@
         {% endfor %}
         </tbody>
         <tfoot><tr><td class="mono" style="color:var(--grey)">the day</td><td>{{ d.rows|sum(attribute="count") }}</td><td></td><td class="num">{{ "{:,}".format(d.seats) }}</td><td class="num">{{ "{:,.0f}".format(d.admissions) }}</td><td class="num{% if d.turned_away >= 0.5 %} away{% endif %}">{{ "{:,.0f}".format(d.turned_away) if d.turned_away >= 0.5 else "—" }}</td><td></td></tr></tfoot>
-      </table>
+      </table></div>
     </div>
-    <div>
+    <div class="panel">
       <div class="stamp mono">Proof</div>
       {% if report %}
-      <table class="proof">
+      <div class="scroll"><table class="proof">
         <thead><tr><th>Check</th><th>Title</th><th>Evidence</th></tr></thead>
         <tbody>
         {% for c in report.checks %}
         <tr><td class="{{ 'ok' if c.ok else 'fail' }}">{{ '✓' if c.ok else '✗' }} {{ c.name }}</td><td>{{ c.film or '' }}</td><td>{% if c.relaxed %}<span class="relaxed mono">relaxed</span> {% endif %}{{ c.evidence }}</td></tr>
         {% endfor %}
         </tbody>
-      </table>
+      </table></div>
       {% else %}<p class="mono" style="color:var(--grey)">no check run</p>{% endif %}
     </div>
   </div>

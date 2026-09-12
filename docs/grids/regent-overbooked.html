@@ -12,17 +12,25 @@
   * { box-sizing:border-box; }
   html,body { margin:0; background:var(--bg); color:var(--ink);
     font-family: Inter, -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  body { overflow-x:hidden; }
+  /* paper grain: a 6% noise pass over everything, dropped in print */
   body::after { content:""; position:fixed; inset:0; pointer-events:none; opacity:.06; mix-blend-mode:multiply;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
   .mono { font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:11px; }
-  .sheet { max-width:1240px; margin:0 auto; padding:40px 32px 64px; position:relative; }
-  .wash { position:absolute; width:46%; height:180px; top:-30px; right:-6%; background:var(--orange); opacity:.045; mix-blend-mode:multiply; transform:rotate(-2.2deg); pointer-events:none; }
+  .sheet { max-width:1240px; margin:0 auto; padding:40px 32px 64px; position:relative; page:pinup; }
+  /* colour washes: flat fields that do not respect the margin */
+  .wash { position:absolute; width:46%; height:180px; top:-30px; right:-9%; background:var(--orange); opacity:.045; mix-blend-mode:multiply; transform:rotate(-2.2deg); pointer-events:none; }
+  .wash.blue { width:34%; height:240px; top:auto; bottom:-60px; right:auto; left:-11%; background:var(--blue); opacity:.04; transform:rotate(1.6deg); }
   header { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:end; margin-bottom:28px; }
   h1 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:56px; line-height:.92; letter-spacing:-.03em; margin:0; position:relative; }
-  h1 .ghost { position:absolute; left:4px; top:3px; color:var(--orange); opacity:.09; pointer-events:none; }
-  .stamp { display:inline-block; border:1px solid var(--ink); padding:4px 8px; transform:rotate(-.8deg); margin-bottom:12px; }
-  .meta { text-align:right; color:var(--grey); line-height:1.7; }
+  /* the misregistered pass: one plate did not align */
+  .ghost { position:absolute; left:4px; top:3px; color:var(--orange); opacity:.09; pointer-events:none; }
+  /* rubber stamps: not pressed level, with the pad's offset shadow behind */
+  .stamp { display:inline-block; position:relative; border:1px solid var(--ink); padding:4px 8px; transform:rotate(-.8deg); margin-bottom:12px; background:var(--bg); }
+  .stamp::after { content:""; position:absolute; left:3px; top:3px; right:-3px; bottom:-3px; border:1px solid var(--blue); opacity:.18; z-index:-1; pointer-events:none; }
+  .meta { text-align:right; color:var(--grey); line-height:1.7; transform:rotate(.4deg); transform-origin:100% 100%; }
   .meta b { color:var(--ink); font-weight:500; }
+  /* the broken divider: a stroke that ran out of ink twice */
   .divider { height:1px; margin:22px 0; background:linear-gradient(90deg, var(--ink) 0 38%, transparent 38% 41%, var(--ink) 41% 77%, transparent 77% 80%, var(--ink) 80%); opacity:.55; }
   .grid { position:relative; }
   .ruler { position:relative; height:26px; margin-left:170px; border-bottom:1px solid var(--ink); }
@@ -39,20 +47,27 @@
   .block > div { flex:none; }
   .block .clean.over { border-left:1px dashed var(--ink); }
   .block .pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); border:1px solid var(--ink); border-right:0; }
-  .block .feat { position:relative; background:var(--cream); border:1px solid var(--ink); padding:5px 7px; overflow:hidden; white-space:nowrap; }
-  .block .feat::before { content:""; position:absolute; inset:0; background:var(--orange); opacity:.0; }
+  /* the feature is a print; its second, orange pass is off by 5px */
+  .block .feat { position:relative; z-index:0; background:var(--cream); border:1px solid var(--ink); padding:5px 7px; white-space:nowrap; }
+  .block .feat > div { overflow:hidden; }
   .block.prime .feat { background:#fff; }
-  .block .feat::after { content:""; position:absolute; left:6px; top:6px; right:-6px; bottom:-6px; border:1px solid var(--orange); opacity:.35; z-index:-1; }
+  .block .feat::after { content:""; position:absolute; left:5px; top:4px; right:-5px; bottom:-4px; border:1px solid var(--orange); opacity:.35; z-index:-1; pointer-events:none; }
   .block .feat .t { font-family:"Space Grotesk", Helvetica, Arial, sans-serif; font-weight:700; font-size:13px; letter-spacing:-.02em; line-height:1.05; }
   .block .feat .tm { color:var(--grey); margin-top:5px; }
   .block .clean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); border:1px solid var(--ink); border-left:0; }
   .block:hover { transform:translateY(-1px); }
-  .legend { display:flex; gap:22px; margin-top:16px; color:var(--grey); align-items:center; }
+  .legend { display:flex; flex-wrap:wrap; gap:14px 22px; margin-top:16px; color:var(--grey); align-items:center; transform:rotate(-.3deg); transform-origin:0 50%; }
   .legend i { display:inline-block; width:22px; height:12px; border:1px solid var(--ink); vertical-align:middle; margin-right:6px; }
   .legend i.pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); }
   .legend i.feat { background:var(--cream); }
   .legend i.clean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); }
-  .cols { display:grid; grid-template-columns:1.15fr .85fr; gap:40px; margin-top:44px; }
+  /* below the fold: two panels, pinned a little off true; hover straightens one */
+  .cols { display:grid; grid-template-columns:1.15fr .85fr; gap:40px; margin-top:44px; position:relative; }
+  .cols > .panel { position:relative; }
+  .cols > .panel:first-of-type { transform:rotate(-.3deg); transform-origin:0 0; }
+  .cols > .panel:last-of-type { transform:rotate(.35deg); transform-origin:100% 0; }
+  .cols > .panel:hover { transform:none; }
+  .scroll { overflow-x:auto; }
   table { border-collapse:collapse; width:100%; font-size:13px; }
   th { text-align:left; font-weight:400; color:var(--grey); border-bottom:1px solid var(--ink); padding:6px 6px 8px; }
   td { padding:8px 6px; border-bottom:1px dashed rgba(26,26,26,.2); vertical-align:top; }
@@ -65,7 +80,7 @@
   .relaxed { display:inline-block; color:var(--red); border:1px solid var(--red); padding:1px 5px; margin-right:4px; transform:rotate(-1.2deg); font-size:10px; }
   .given-up { color:var(--red); }
   .proof td:first-child { white-space:nowrap; }
-  footer { margin-top:56px; color:var(--grey); display:flex; justify-content:space-between; }
+  footer { margin-top:56px; color:var(--grey); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
   .week-table th.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:11px; }
   .week-table td.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11px; letter-spacing:.02em; line-height:1.6; white-space:nowrap; }
   .week-table td.day.dark { color:var(--grey); }
@@ -73,12 +88,68 @@
   .held { display:inline-block; border:1px solid var(--blue); color:var(--blue); padding:1px 5px; transform:rotate(-1.2deg); font-size:10px; }
   .status-inf { color:var(--red); font-weight:600; }
   .day-page { margin-top:64px; padding-top:28px; border-top:1px solid var(--ink); position:relative; }
-  .day-page h2 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:34px; line-height:.95; letter-spacing:-.03em; margin:0 0 6px; }
+  .day-page h2 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:34px; line-height:.95; letter-spacing:-.03em; margin:0 0 6px; position:relative; }
   .day-page .stamp { margin-bottom:8px; }
   .day-head { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:end; margin-bottom:18px; }
+  /* the booth strips: one screen, its sessions in mono, the three-strip block turned vertical.
+     Hidden on a desk; the phone shows them instead of the grid; print puts each on its own A4 */
+  .strips { display:none; }
+  .strip-page { page:strip; position:relative; margin-top:40px; padding-top:22px; border-top:1px solid var(--ink); }
+  .strip-head { display:grid; grid-template-columns:1fr auto; gap:16px; align-items:end; margin-bottom:16px; }
+  .strip-head .n { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:34px; line-height:.92; letter-spacing:-.03em; position:relative; }
+  .strip-head .cap { color:var(--grey); margin-top:8px; }
+  .strip-head .meta { transform:rotate(.6deg); }
+  .vblock { position:relative; margin:0 0 4px; max-width:420px; }
+  .vblock > div { border:1px solid var(--ink); }
+  .vblock .vpre, .vblock .vclean { flex-wrap:wrap; letter-spacing:.1em; }
+  .vblock .vpre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); border-bottom:0; padding:5px 9px; color:var(--ink); display:flex; justify-content:space-between; gap:12px; }
+  .vblock .vfeat { position:relative; z-index:0; background:var(--cream); padding:9px 10px 8px; }
+  .vblock.prime .vfeat { background:#fff; }
+  .vblock .vfeat::after { content:""; position:absolute; left:5px; top:4px; right:-5px; bottom:-4px; border:1px solid var(--orange); opacity:.35; z-index:-1; pointer-events:none; }
+  .vblock .vfeat .t { font-family:"Space Grotesk", Helvetica, Arial, sans-serif; font-weight:700; font-size:17px; letter-spacing:-.02em; line-height:1; }
+  .vblock .vfeat .tm { color:var(--grey); margin-top:6px; }
+  .vblock .vclean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); border-top:0; padding:5px 9px; color:var(--ink); display:flex; justify-content:space-between; gap:12px; }
+  .vblock .vclean.over { border-top:1px dashed var(--ink); margin-top:-1px; }
+  .vblock .vclean b, .vblock .vpre b { font-weight:500; background:var(--bg); padding:0 3px; }
+  .vgap { color:var(--grey); padding:6px 0 10px 10px; max-width:420px; }
+  .vgap i { display:inline-block; width:1px; height:14px; background:var(--grey); vertical-align:middle; margin-right:10px; }
+  @page pinup { size:A3 landscape; margin:10mm 12mm; }
+  @page strip { size:A4 portrait; margin:14mm 16mm; }
   @media print {
-    .day-page { break-before:page; page-break-before:always; border-top:0; margin-top:0; padding-top:0; } body::after{display:none} .sheet{padding:12mm} h1{font-size:34px} .cols{grid-template-columns:1fr} }
-  @media (max-width:800px) { header,.cols{grid-template-columns:1fr} .meta{text-align:left} .row{grid-template-columns:110px 1fr} .ruler{margin-left:110px} h1{font-size:38px} }
+    * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    body::after { display:none; } .wash { display:none; }
+    /* 3px of air at every page top: a stamp rotated -.8° otherwise pokes above the page and
+       Chrome paints that sliver at the foot of the page before */
+    .sheet { max-width:none; padding:3px 0 0; }
+    h1 { font-size:44px; } .mono { font-size:10px; }
+    .cols { margin-top:28px; gap:32px; }
+    .cols > .panel, .legend, .meta { transform:none; }
+    .grid, .strip-page, tr { break-inside:avoid; }
+    table { break-inside:auto; }
+    .cols table { font-size:11.5px; } .cols td { padding:5px 6px; } .cols th { padding:4px 6px 6px; }
+    .day-page { break-before:page; page-break-before:always; border-top:0; margin-top:0; padding-top:3px; }
+    .strips { display:block; }
+    .strip-page { break-before:page; page-break-before:always; margin-top:0; padding-top:3px; border-top:0; }
+    .vblock { max-width:none; }
+    .vgap { max-width:none; }
+    .block:hover { transform:none; }
+    footer { page:strip; margin-top:32px; }
+  }
+  @media screen and (max-width:800px) {
+    .sheet { padding:24px 16px 48px; }
+    .sheet, .day-page { display:flex; flex-direction:column; }
+    header, .divider, .day-head { order:-2; }
+    .strips { display:block; order:-1; }
+    .grid { display:none; }
+    header, .cols, .day-head { grid-template-columns:1fr; display:grid; }
+    .meta { text-align:left; transform:none; }
+    .cols > .panel { transform:none; }
+    h1 { font-size:38px; }
+    .strip-page { margin-top:28px; padding-top:18px; }
+    .strip-head .n { font-size:26px; }
+    .vblock, .vgap { max-width:none; }
+    footer { flex-direction:column; }
+  }
 </style>
 
 </head>
@@ -97,7 +168,7 @@
       <div><b>1,573</b> expected admissions · 2,756 seats on offer</div>
       <div class="given-up">6 turned away at capacity</div>
       <div>doors 10:00 · last start 21:30 · turnaround 20′ · Fri</div>
-      <div>solved in 21.041s</div>
+      <div>solved in 22.756s</div>
     </div>
   </header>
   <div class="divider"></div>
@@ -117,22 +188,22 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:3.888888888888889%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 10:35 · feature 10:55–13:43 · clear 14:03">
+          <div class="block" style="left:4.444444444444445%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 10:40 · feature 11:00–13:48 · clear 14:08">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">10:35 · 168′ · PLF</div>
+              <div class="tm mono">10:40 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
           
-          <div class="block" style="left:27.77777777777778%; width:23.11111111111111%"
-               title="The Long Voyage · preshow 14:10 · feature 14:30–17:18 · clear 17:38">
+          <div class="block" style="left:28.333333333333332%; width:23.11111111111111%"
+               title="The Long Voyage · preshow 14:15 · feature 14:35–17:23 · clear 17:43">
             <div class="pre" style="width:9.615384615384617%"></div>
             <div class="feat" style="width:80.76923076923077%">
               <div class="t">The Long Voyage</div>
-              <div class="tm mono">14:10 · 168′ · PLF</div>
+              <div class="tm mono">14:15 · 168′ · PLF</div>
             </div>
             <div class="clean" style="width:9.615384615384617%"></div>
           </div>
@@ -167,12 +238,12 @@
         </div>
         <div class="lane">
           
-          <div class="block" style="left:2.2222222222222223%; width:16.0%"
-               title="Harvest Moon · preshow 10:20 · feature 10:40–12:24 · clear 12:44">
+          <div class="block" style="left:2.7777777777777777%; width:16.0%"
+               title="Harvest Moon · preshow 10:25 · feature 10:45–12:29 · clear 12:49">
             <div class="pre" style="width:13.88888888888889%"></div>
             <div class="feat" style="width:72.22222222222221%">
               <div class="t">Harvest Moon</div>
-              <div class="tm mono">10:20 · 104′</div>
+              <div class="tm mono">10:25 · 104′</div>
             </div>
             <div class="clean" style="width:13.88888888888889%"></div>
           </div>
@@ -296,9 +367,10 @@
 
   
   <div class="cols">
-    <div>
+    <div class="wash blue"></div>
+    <div class="panel">
       <div class="stamp mono">By title</div>
-      <table>
+      <div class="scroll"><table>
         <thead><tr><th>Title</th><th>Shows</th><th>Prime</th><th>Seats</th><th>Expected</th><th>Turned away</th><th>Starts</th></tr></thead>
         <tbody>
         
@@ -309,7 +381,7 @@
           <td class="num">1,280</td>
           <td class="num">649</td>
           <td class="num">—</td>
-          <td class="starts">10:35  14:10  17:45  21:20</td>
+          <td class="starts">10:40  14:15  17:45  21:20</td>
         </tr>
         
         <tr>
@@ -319,7 +391,7 @@
           <td class="num">744</td>
           <td class="num">514</td>
           <td class="num away">2</td>
-          <td class="starts">10:00  10:20  12:20  14:40  19:10  20:40</td>
+          <td class="starts">10:00  10:25  12:20  14:40  19:10  20:40</td>
         </tr>
         
         <tr>
@@ -354,12 +426,12 @@
         
         </tbody>
         <tfoot><tr><td class="mono" style="color:var(--grey)">the day</td><td>15</td><td></td><td class="num">2,756</td><td class="num">1,573</td><td class="num away">6</td><td></td></tr></tfoot>
-      </table>
+      </table></div>
     </div>
-    <div>
+    <div class="panel">
       <div class="stamp mono">Proof</div>
       
-      <table class="proof">
+      <div class="scroll"><table class="proof">
         <thead><tr><th>Check</th><th>Title</th><th>Evidence</th></tr></thead>
         <tbody>
         
@@ -406,9 +478,212 @@
         <tr><td class="ok">✓ objective</td><td></td><td>1,573.2 = 1,573.2 admissions</td></tr>
         
         </tbody>
-      </table>
+      </table></div>
       
     </div>
+  </div>
+
+  
+  <div class="strips">
+    
+    <section class="strip-page">
+      <div class="strip-head">
+        <div>
+          <div class="stamp mono">Booth strip · Fri 2026-09-11</div>
+          <div class="n"><span class="ghost" aria-hidden="true">Screen 1</span>Screen 1</div>
+          <div class="cap mono">320 seats · 2D/PLF · doors 10:00 · last start 21:30 · turnaround 20′</div>
+        </div>
+        <div class="meta mono">
+          <div><b>4</b> shows</div>
+          <div>The Regent</div>
+        </div>
+      </div>
+      
+      
+      <div class="vblock">
+        <div class="vpre mono"><span><b>10:40</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">The Long Voyage</div>
+          <div class="tm mono">11:00–13:48 · 168′ · PLF</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 13:48</span><span>clear <b>14:08</b></span></div>
+      </div>
+      <div class="vgap mono"><i></i>dark 7′</div>
+      
+      <div class="vblock">
+        <div class="vpre mono"><span><b>14:15</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">The Long Voyage</div>
+          <div class="tm mono">14:35–17:23 · 168′ · PLF</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 17:23</span><span>clear <b>17:43</b></span></div>
+      </div>
+      <div class="vgap mono"><i></i>dark 2′</div>
+      
+      <div class="vblock prime">
+        <div class="vpre mono"><span><b>17:45</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">The Long Voyage</div>
+          <div class="tm mono">18:05–20:53 · 168′ · PLF · prime</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 20:53</span><span>clear <b>21:13</b></span></div>
+      </div>
+      <div class="vgap mono"><i></i>dark 7′</div>
+      
+      <div class="vblock">
+        <div class="vpre mono"><span><b>21:20</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">The Long Voyage</div>
+          <div class="tm mono">21:40–00:28 · 168′ · PLF</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 00:28</span><span>clear <b>00:48</b></span></div>
+      </div>
+      
+      
+    </section>
+    
+    <section class="strip-page">
+      <div class="strip-head">
+        <div>
+          <div class="stamp mono">Booth strip · Fri 2026-09-11</div>
+          <div class="n"><span class="ghost" aria-hidden="true">Screen 2</span>Screen 2</div>
+          <div class="cap mono">180 seats · 2D/3D · doors 10:00 · last start 21:30 · turnaround 20′</div>
+        </div>
+        <div class="meta mono">
+          <div><b>5</b> shows</div>
+          <div>The Regent</div>
+        </div>
+      </div>
+      
+      
+      <div class="vblock">
+        <div class="vpre mono"><span><b>10:25</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">Harvest Moon</div>
+          <div class="tm mono">10:45–12:29 · 104′</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 12:29</span><span>clear <b>12:49</b></span></div>
+      </div>
+      <div class="vgap mono"><i></i>dark 71′</div>
+      
+      <div class="vblock">
+        <div class="vpre mono"><span><b>14:00</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">The Bee Kingdom</div>
+          <div class="tm mono">14:20–15:44 · 84′ · 3D</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 15:44</span><span>clear <b>16:04</b></span></div>
+      </div>
+      <div class="vgap mono"><i></i>dark 6′</div>
+      
+      <div class="vblock">
+        <div class="vpre mono"><span><b>16:10</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">Dead Signal</div>
+          <div class="tm mono">16:30–18:02 · 92′</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 18:02</span><span>clear <b>18:22</b></span></div>
+      </div>
+      <div class="vgap mono"><i></i>dark 3′</div>
+      
+      <div class="vblock prime">
+        <div class="vpre mono"><span><b>18:25</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">Dead Signal</div>
+          <div class="tm mono">18:45–20:17 · 92′ · prime</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 20:17</span><span>clear <b>20:37</b></span></div>
+      </div>
+      <div class="vgap mono"><i></i>dark 3′</div>
+      
+      <div class="vblock prime">
+        <div class="vpre mono"><span><b>20:40</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">Harvest Moon</div>
+          <div class="tm mono">21:00–22:44 · 104′ · prime</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 22:44</span><span>clear <b>23:04</b></span></div>
+      </div>
+      
+      
+    </section>
+    
+    <section class="strip-page">
+      <div class="strip-head">
+        <div>
+          <div class="stamp mono">Booth strip · Fri 2026-09-11</div>
+          <div class="n"><span class="ghost" aria-hidden="true">Screen 3</span>Screen 3</div>
+          <div class="cap mono">96 seats · 2D · doors 10:00 · last start 21:30 · turnaround 15′</div>
+        </div>
+        <div class="meta mono">
+          <div><b>6</b> shows</div>
+          <div>The Regent</div>
+        </div>
+      </div>
+      
+      
+      <div class="vblock">
+        <div class="vpre mono"><span><b>10:00</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">Harvest Moon</div>
+          <div class="tm mono">10:20–12:04 · 104′</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 12:04</span><span>clear <b>12:19</b></span></div>
+      </div>
+      <div class="vgap mono"><i></i>dark 1′</div>
+      
+      <div class="vblock">
+        <div class="vpre mono"><span><b>12:20</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">Harvest Moon</div>
+          <div class="tm mono">12:40–14:24 · 104′</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 14:24</span><span>clear <b>14:39</b></span></div>
+      </div>
+      <div class="vgap mono"><i></i>dark 1′</div>
+      
+      <div class="vblock">
+        <div class="vpre mono"><span><b>14:40</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">Harvest Moon</div>
+          <div class="tm mono">15:00–16:44 · 104′</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 16:44</span><span>clear <b>16:59</b></span></div>
+      </div>
+      <div class="vgap mono"><i></i>dark 1′</div>
+      
+      <div class="vblock">
+        <div class="vpre mono"><span><b>17:00</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">Dead Signal</div>
+          <div class="tm mono">17:20–18:52 · 92′</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 18:52</span><span>clear <b>19:07</b></span></div>
+      </div>
+      <div class="vgap mono"><i></i>dark 3′</div>
+      
+      <div class="vblock prime">
+        <div class="vpre mono"><span><b>19:10</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">Harvest Moon</div>
+          <div class="tm mono">19:30–21:14 · 104′ · prime</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 21:14</span><span>clear <b>21:29</b></span></div>
+      </div>
+      <div class="vgap mono"><i></i>dark 1′</div>
+      
+      <div class="vblock">
+        <div class="vpre mono"><span><b>21:30</b> doors</span><span>preshow 20′</span></div>
+        <div class="vfeat">
+          <div class="t">Dead Signal</div>
+          <div class="tm mono">21:50–23:22 · 92′</div>
+        </div>
+        <div class="vclean mono"><span>turnaround 23:22</span><span>clear <b>23:37</b></span></div>
+      </div>
+      
+      
+    </section>
+    
   </div>
 
 

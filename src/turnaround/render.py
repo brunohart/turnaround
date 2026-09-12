@@ -27,7 +27,8 @@ def _env() -> Environment:
 
 
 def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
-    """Everything the grid macro needs to draw one day: rows of blocks on a ruler."""
+    """Everything the grid macro needs to draw one day: rows of blocks on a ruler. The
+    same rows feed the booth strips (one screen, its sessions in mono, turned vertical)."""
     p = brief.policy
     day_start = p.open_min - (p.open_min % 60)
     latest_clear = max((s.clear for s in grid.sessions), default=p.last_start_min + 120)
@@ -38,12 +39,14 @@ def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
     for scr in brief.screens:
         sessions = grid.by_screen().get(scr.id, [])
         blocks = []
-        for s in sessions:
+        for i, s in enumerate(sessions):
             f = brief.film(s.film)
             block = s.clear - s.start
             turn_begin, _ = brief.turnaround_of(scr, f, s.start)
             # Strip widths are percentages of the block. The turnaround strip is pulled
             # left over the feature by the credits it overlaps, so the three still add up.
+            # The minutes beside them are what the booth strip prints, turned vertical.
+            nxt = sessions[i + 1] if i + 1 < len(sessions) else None
             blocks.append(
                 {
                     "film": f,
@@ -56,6 +59,10 @@ def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
                     "over": (s.feature_end - turn_begin) / block * 100,
                     "turn_begin": turn_begin,
                     "prime": p.is_prime(s.start),
+                    "pre_min": brief.preshow_for(f),
+                    "clean_min": s.clear - turn_begin,
+                    "over_min": s.feature_end - turn_begin,
+                    "gap": (nxt.start - s.clear) if nxt else None,
                 }
             )
         own_hours = scr.open is not None or scr.last_start is not None
@@ -69,6 +76,9 @@ def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
                     if own_hours
                     else None
                 ),
+                "open": fmt_time(brief.open_for(scr)),
+                "last_start": fmt_time(brief.last_start_for(scr)),
+                "clean_min": brief.clean_for(scr),
             }
         )
     preshows = [f"preshow {p.preshow_min}′"] + [

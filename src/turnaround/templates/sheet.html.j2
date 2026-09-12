@@ -28,6 +28,7 @@
 
   {{ day.grid(brief, d) }}
   {{ day.tables(d, report) }}
+  {{ day.strips(brief, d, (brief.day_name ~ " " if brief.day_name else "") ~ (brief.date or "the day")) }}
 
   <footer class="mono">
     <span>turnaround · the showtime grid, solved</span>

@@ -5,31 +5,31 @@
   "objective": 1625.1,
   "admissions": 1625.1,
   "hold_paid": 0.0,
-  "solve_seconds": 2.888,
+  "solve_seconds": 2.603,
   "sessions": [
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 605,
-      "feature_start": 635,
-      "feature_end": 803,
-      "clear": 812
+      "start": 630,
+      "feature_start": 660,
+      "feature_end": 828,
+      "clear": 837
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 850,
-      "feature_start": 880,
-      "feature_end": 1048,
-      "clear": 1057
+      "start": 840,
+      "feature_start": 870,
+      "feature_end": 1038,
+      "clear": 1047
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 1075,
-      "feature_start": 1105,
-      "feature_end": 1273,
-      "clear": 1282
+      "start": 1070,
+      "feature_start": 1100,
+      "feature_end": 1268,
+      "clear": 1277
     },
     {
       "screen": "1",
@@ -98,18 +98,18 @@
     {
       "screen": "3",
       "film": "harvest",
-      "start": 855,
-      "feature_start": 875,
-      "feature_end": 979,
-      "clear": 988
+      "start": 860,
+      "feature_start": 880,
+      "feature_end": 984,
+      "clear": 993
     },
     {
       "screen": "3",
       "film": "signal",
-      "start": 990,
-      "feature_start": 1010,
-      "feature_end": 1102,
-      "clear": 1110
+      "start": 1000,
+      "feature_start": 1020,
+      "feature_end": 1112,
+      "clear": 1120
     },
     {
       "screen": "3",

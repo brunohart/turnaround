@@ -27,7 +27,7 @@
   <div class="divider"></div>
 
   <div class="stamp mono">By title, the week</div>
-  <table class="week-table">
+  <div class="scroll"><table class="week-table">
     <thead><tr><th>Title</th>{% for dd in days %}<th class="day">{{ dd.name }}{% if dd.brief.date %}<br><span style="color:var(--grey);letter-spacing:.06em">{{ dd.brief.date[5:] }}</span>{% endif %}</th>{% endfor %}<th>Shows</th><th class="num">Expected</th><th class="num">Turned away</th><th>Holds</th></tr></thead>
     <tbody>
     {% for row in title_rows %}
@@ -41,10 +41,10 @@
     </tr>
     {% endfor %}
     </tbody>
-  </table>
+  </table></div>
   {% if week_report %}
   <div class="cols" style="margin-top:28px">
-    <div>
+    <div class="panel">
       <div class="stamp mono">The week's proof</div>
       <table class="proof">
         <thead><tr><th>Check</th><th>Evidence</th></tr></thead>
@@ -54,7 +54,7 @@
         </tbody>
       </table>
     </div>
-    <div></div>
+    <div class="panel"></div>
   </div>
   {% endif %}
 
@@ -63,7 +63,7 @@
     <div class="day-head">
       <div>
         <div class="stamp mono">{{ dd.name }} · {{ dd.grid.status }}{% if dd.grid.relaxed %} · relaxed{% endif %}{% if dd.hold %} · hold day{% endif %}</div>
-        <h2>{{ dd.name }}{% if dd.brief.date %} <span style="color:var(--grey);font-weight:400">{{ dd.brief.date }}</span>{% endif %}</h2>
+        <h2><span class="ghost" aria-hidden="true">{{ dd.name }}</span>{{ dd.name }}{% if dd.brief.date %} <span style="color:var(--grey);font-weight:400">{{ dd.brief.date }}</span>{% endif %}</h2>
       </div>
       <div class="meta mono">
         <div>{{ dd.grid.sessions|length }} sessions · <b>{{ "{:,.0f}".format(dd.d.admissions) }}</b> expected admissions · {{ "{:,}".format(dd.d.seats) }} seats on offer</div>
@@ -77,6 +77,7 @@
     {% if dd.grid.status in ("OPTIMAL", "FEASIBLE") %}
     {{ day.grid(dd.brief, dd.d) }}
     {{ day.tables(dd.d, dd.report) }}
+    {{ day.strips(dd.brief, dd.d, dd.name ~ (" " ~ dd.brief.date if dd.brief.date else "")) }}
     {% else %}
     <p class="status-inf">{{ dd.grid.status }}{% if dd.explain %} — {{ dd.explain }}{% endif %}</p>
     {% endif %}

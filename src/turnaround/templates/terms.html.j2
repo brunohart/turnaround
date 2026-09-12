@@ -28,7 +28,12 @@
   .sched .dark { color:var(--grey); }
   .verdict-stamp { display:inline-block; border:1.5px solid var(--blue); color:var(--blue); padding:5px 10px; transform:rotate(-2deg); font-size:12px; letter-spacing:.18em; }
   .verdict-stamp.bad { border-color:var(--red); color:var(--red); }
-  @media print { .terms-page { break-before:page; page-break-before:always; border-top:0; margin-top:0; padding-top:0; } .terms-page:first-of-type { break-before:auto; page-break-before:auto; } }
+  /* the terms sheet is a letter to the distributor: A4 portrait, one title per page */
+  @page letter { size:A4 portrait; margin:14mm 16mm; }
+  .sheet { page:letter; }
+  table.terms td { vertical-align:top; }
+  @media print { footer { page:letter; } .terms-page { break-before:page; page-break-before:always; border-top:0; margin-top:0; padding-top:3px; } .terms-page:first-of-type { break-before:auto; page-break-before:auto; } h1 { font-size:34px; } .terms-page h2 { font-size:30px; } .sched .row { grid-template-columns:110px 1fr; } }
+  @media screen and (max-width:800px) { .terms-head { grid-template-columns:1fr; } .sched .row { grid-template-columns:1fr; } .sched .row .d { padding-bottom:4px; } }
 </style>
 </head>
 <body>
@@ -61,7 +66,7 @@
       </div>
     </div>
     {% if sh.rows %}
-    <table class="terms">
+    <div class="scroll"><table class="terms">
       <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
       <tbody>
       {% for r in sh.rows %}
@@ -74,7 +79,7 @@
       </tr>
       {% endfor %}
       </tbody>
-    </table>
+    </table></div>
     {% else %}<p class="mono" style="color:var(--grey)">no terms booked — plays where the grid wants it</p>{% endif %}
     <div class="sched">
       <div class="stamp mono">As delivered</div>
