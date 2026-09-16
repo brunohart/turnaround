@@ -1,0 +1,1957 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Palladium — terms — Thu 2026-09-17 → Wed 2026-09-23 — turnaround</title>
+<style>
+  :root {
+    --bg:#F0EDE6; --ink:#1A1A1A; --orange:#D4622B; --blue:#1B2D4F; --red:#C4391D;
+    --cream:#F5F0E1; --grey:#8A8578;
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; background:var(--bg); color:var(--ink);
+    font-family: Inter, -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  body { overflow-x:hidden; }
+  /* paper grain: a 6% noise pass over everything, dropped in print */
+  body::after { content:""; position:fixed; inset:0; pointer-events:none; opacity:.06; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  .mono { font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:11px; }
+  .sheet { max-width:1240px; margin:0 auto; padding:40px 32px 64px; position:relative; page:pinup; }
+  /* colour washes: flat fields that do not respect the margin */
+  .wash { position:absolute; width:46%; height:180px; top:-30px; right:-9%; background:var(--orange); opacity:.045; mix-blend-mode:multiply; transform:rotate(-2.2deg); pointer-events:none; }
+  .wash.blue { width:34%; height:240px; top:auto; bottom:-60px; right:auto; left:-11%; background:var(--blue); opacity:.04; transform:rotate(1.6deg); }
+  header { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:end; margin-bottom:28px; }
+  h1 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:56px; line-height:.92; letter-spacing:-.03em; margin:0; position:relative; }
+  /* the misregistered pass: one plate did not align */
+  .ghost { position:absolute; left:4px; top:3px; color:var(--orange); opacity:.09; pointer-events:none; }
+  /* rubber stamps: not pressed level, with the pad's offset shadow behind */
+  .stamp { display:inline-block; position:relative; border:1px solid var(--ink); padding:4px 8px; transform:rotate(-.8deg); margin-bottom:12px; background:var(--bg); }
+  .stamp::after { content:""; position:absolute; left:3px; top:3px; right:-3px; bottom:-3px; border:1px solid var(--blue); opacity:.18; z-index:-1; pointer-events:none; }
+  .meta { text-align:right; color:var(--grey); line-height:1.7; transform:rotate(.4deg); transform-origin:100% 100%; }
+  .meta b { color:var(--ink); font-weight:500; }
+  /* the broken divider: a stroke that ran out of ink twice */
+  .divider { height:1px; margin:22px 0; background:linear-gradient(90deg, var(--ink) 0 38%, transparent 38% 41%, var(--ink) 41% 77%, transparent 77% 80%, var(--ink) 80%); opacity:.55; }
+  .grid { position:relative; }
+  .ruler { position:relative; height:26px; margin-left:170px; border-bottom:1px solid var(--ink); }
+  .ruler .h { position:absolute; bottom:4px; transform:translateX(-50%); color:var(--grey); }
+  .ruler .h::after { content:""; position:absolute; left:50%; bottom:-5px; width:1px; height:4px; background:var(--ink); }
+  .lane { background:linear-gradient(90deg, transparent var(--pl), rgba(27,45,79,.06) var(--pl), rgba(27,45,79,.06) var(--pr), transparent var(--pr)); }
+  .ruler .prime-label { position:absolute; top:-2px; color:var(--blue); opacity:.75; transform:none; }
+  .row { display:grid; grid-template-columns:170px 1fr; min-height:74px; border-bottom:1px dashed rgba(26,26,26,.25); }
+  .row .name { padding:14px 12px 10px 0; }
+  .row .name .n { font-family:"Space Grotesk", Helvetica, Arial, sans-serif; font-weight:700; font-size:18px; letter-spacing:-.02em; line-height:1; }
+  .row .name .cap { color:var(--grey); margin-top:6px; }
+  .lane { position:relative; }
+  .block { position:absolute; top:12px; height:50px; display:flex; }
+  .block > div { flex:none; }
+  .block .clean.over { border-left:1px dashed var(--ink); }
+  .block .pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); border:1px solid var(--ink); border-right:0; }
+  /* the feature is a print; its second, orange pass is off by 5px */
+  .block .feat { position:relative; z-index:0; background:var(--cream); border:1px solid var(--ink); padding:5px 7px; white-space:nowrap; }
+  .block .feat > div { overflow:hidden; }
+  .block.prime .feat { background:#fff; }
+  .block .feat::after { content:""; position:absolute; left:5px; top:4px; right:-5px; bottom:-4px; border:1px solid var(--orange); opacity:.35; z-index:-1; pointer-events:none; }
+  .block .feat .t { font-family:"Space Grotesk", Helvetica, Arial, sans-serif; font-weight:700; font-size:13px; letter-spacing:-.02em; line-height:1.05; }
+  .block .feat .tm { color:var(--grey); margin-top:5px; }
+  .block .clean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); border:1px solid var(--ink); border-left:0; }
+  .block:hover { transform:translateY(-1px); }
+  .legend { display:flex; flex-wrap:wrap; gap:14px 22px; margin-top:16px; color:var(--grey); align-items:center; transform:rotate(-.3deg); transform-origin:0 50%; }
+  .legend i { display:inline-block; width:22px; height:12px; border:1px solid var(--ink); vertical-align:middle; margin-right:6px; }
+  .legend i.pre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); }
+  .legend i.feat { background:var(--cream); }
+  .legend i.forced-i { position:relative; } .legend i.forced-i::after, .legend i.wanted-i::after { content:""; position:absolute; right:0; bottom:0; border-style:solid; border-width:0 0 7px 7px; border-color:transparent transparent var(--blue) transparent; }
+  .legend i.wanted-i { position:relative; } .legend i.wanted-i::after { border-color:transparent transparent rgba(26,26,26,.45) transparent; }
+  .legend i.clean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); }
+  /* below the fold: two panels, pinned a little off true; hover straightens one */
+  .cols { display:grid; grid-template-columns:1.15fr .85fr; gap:40px; margin-top:44px; position:relative; }
+  .cols > .panel { position:relative; min-width:0; }
+  .cols > .panel:first-of-type { transform:rotate(-.3deg); transform-origin:0 0; }
+  .cols > .panel:last-of-type { transform:rotate(.35deg); transform-origin:100% 0; }
+  .cols > .panel:hover { transform:none; }
+  .scroll { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  th { text-align:left; font-weight:400; color:var(--grey); border-bottom:1px solid var(--ink); padding:6px 6px 8px; }
+  td { padding:8px 6px; border-bottom:1px dashed rgba(26,26,26,.2); vertical-align:top; }
+  td.starts { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:12px; letter-spacing:.02em; line-height:1.7; }
+  td.num { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:12px; text-align:right; white-space:nowrap; }
+  th.num { text-align:right; }
+  td.away { color:var(--red); }
+  tfoot td { border-bottom:0; border-top:1px solid var(--ink); font-weight:500; }
+  .ok { color:var(--blue); } .fail { color:var(--red); font-weight:600; }
+  .relaxed { display:inline-block; color:var(--red); border:1px solid var(--red); padding:1px 5px; margin-right:4px; transform:rotate(-1.2deg); font-size:10px; }
+  .given-up { color:var(--red); }
+  .proof td:first-child { white-space:nowrap; }
+  .proof td.forced-col { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11px; color:var(--blue); line-height:1.6; }
+  .proof td.forced-col span { display:block; white-space:nowrap; }
+  td.title b { white-space:nowrap; }
+  .probed { color:var(--grey); margin:10px 0 0; }
+  td.starts .st { display:inline-block; margin-right:10px; white-space:nowrap; }
+  td.starts .st i { font-style:normal; color:var(--grey); }
+  td.starts .st i.short { color:var(--red); }
+  td.starts .st b.fx { font-weight:500; color:var(--blue); border:1px solid var(--blue); padding:0 4px; font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+  td.starts .st b.fo { font-weight:500; color:var(--blue); font-size:11px; }
+  /* a session the terms force gets a navy corner; one the objective forces, an ink one. The orange
+     stays on the turnaround (DESIGN.md), so the objective's mark is the ink at less than half strength */
+  .block .feat.forced::before, .block .feat.wanted::before { content:""; position:absolute; right:0; bottom:0; width:0; height:0; border-style:solid; border-width:0 0 9px 9px; border-color:transparent transparent var(--blue) transparent; }
+  .block .feat.wanted::before { border-color:transparent transparent rgba(26,26,26,.45) transparent; }
+  footer { margin-top:56px; color:var(--grey); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .week-table th.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:11px; }
+  .week-table td.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11px; letter-spacing:.02em; line-height:1.6; white-space:nowrap; }
+  .week-table td.day.dark { color:var(--grey); }
+  .week-table td.day.hold { background:rgba(27,45,79,.05); }
+  .held { display:inline-block; border:1px solid var(--blue); color:var(--blue); padding:1px 5px; transform:rotate(-1.2deg); font-size:10px; }
+  .status-inf { color:var(--red); font-weight:600; }
+  .day-page { margin-top:64px; padding-top:28px; border-top:1px solid var(--ink); position:relative; }
+  .day-page h2 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:34px; line-height:.95; letter-spacing:-.03em; margin:0 0 6px; position:relative; }
+  .day-page .stamp { margin-bottom:8px; }
+  .day-head { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:end; margin-bottom:18px; }
+  /* the booth strips: one screen, its sessions in mono, the three-strip block turned vertical.
+     Hidden on a desk; the phone shows them instead of the grid; print puts each on its own A4 */
+  .strips { display:none; }
+  .strip-page { page:strip; position:relative; margin-top:40px; padding-top:22px; border-top:1px solid var(--ink); }
+  .strip-head { display:grid; grid-template-columns:1fr auto; gap:16px; align-items:end; margin-bottom:16px; }
+  .strip-head .n { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:34px; line-height:.92; letter-spacing:-.03em; position:relative; }
+  .strip-head .cap { color:var(--grey); margin-top:8px; }
+  .strip-head .meta { transform:rotate(.6deg); }
+  .vblock { position:relative; margin:0 0 4px; max-width:420px; }
+  .vblock > div { border:1px solid var(--ink); }
+  .vblock .vpre, .vblock .vclean { flex-wrap:wrap; letter-spacing:.1em; }
+  .vblock .vpre { background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.28) 3px 4px); border-bottom:0; padding:5px 9px; color:var(--ink); display:flex; justify-content:space-between; gap:12px; }
+  .vblock .vfeat { position:relative; z-index:0; background:var(--cream); padding:9px 10px 8px; }
+  .vblock.prime .vfeat { background:#fff; }
+  .vblock .vfeat::after { content:""; position:absolute; left:5px; top:4px; right:-5px; bottom:-4px; border:1px solid var(--orange); opacity:.35; z-index:-1; pointer-events:none; }
+  .vblock .vfeat .t { font-family:"Space Grotesk", Helvetica, Arial, sans-serif; font-weight:700; font-size:17px; letter-spacing:-.02em; line-height:1; }
+  .vblock .vfeat .tm { color:var(--grey); margin-top:6px; }
+  .vblock .vclean { background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.55) 2px 3px); border-top:0; padding:5px 9px; color:var(--ink); display:flex; justify-content:space-between; gap:12px; }
+  .vblock .vclean.over { border-top:1px dashed var(--ink); margin-top:-1px; }
+  .vblock .vclean b, .vblock .vpre b { font-weight:500; background:var(--bg); padding:0 3px; }
+  .vgap { color:var(--grey); padding:6px 0 10px 10px; max-width:420px; }
+  .vgap i { display:inline-block; width:1px; height:14px; background:var(--grey); vertical-align:middle; margin-right:10px; }
+  @page pinup { size:A3 landscape; margin:10mm 12mm; }
+  @page strip { size:A4 portrait; margin:14mm 16mm; }
+  @media print {
+    * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    body::after { display:none; } .wash { display:none; }
+    /* 3px of air at every page top: a stamp rotated -.8° otherwise pokes above the page and
+       Chrome paints that sliver at the foot of the page before */
+    .sheet { max-width:none; padding:3px 0 0; }
+    h1 { font-size:44px; } .mono { font-size:10px; }
+    .cols { margin-top:28px; gap:32px; }
+    .cols > .panel, .legend, .meta { transform:none; }
+    .grid, .strip-page, tr { break-inside:avoid; }
+    table { break-inside:auto; }
+    .cols table { font-size:11.5px; } .cols td { padding:5px 6px; } .cols th { padding:4px 6px 6px; }
+    .day-page { break-before:page; page-break-before:always; border-top:0; margin-top:0; padding-top:3px; }
+    .strips { display:block; }
+    .strip-page { break-before:page; page-break-before:always; margin-top:0; padding-top:3px; border-top:0; }
+    .vblock { max-width:none; }
+    .vgap { max-width:none; }
+    .block:hover { transform:none; }
+    footer { page:strip; margin-top:32px; }
+  }
+  @media screen and (max-width:800px) {
+    .sheet { padding:24px 16px 48px; }
+    .sheet, .day-page { display:flex; flex-direction:column; }
+    header, .divider, .day-head { order:-2; }
+    .strips { display:block; order:-1; }
+    .grid { display:none; }
+    header, .cols, .day-head { grid-template-columns:1fr; display:grid; }
+    .meta { text-align:left; transform:none; }
+    .cols > .panel { transform:none; }
+    h1 { font-size:38px; }
+    .strip-page { margin-top:28px; padding-top:18px; }
+    .strip-head .n { font-size:26px; }
+    .vblock, .vgap { max-width:none; }
+    footer { flex-direction:column; }
+  }
+</style>
+
+<style>
+  .terms-page { position:relative; margin-top:56px; padding-top:28px; border-top:1px solid var(--ink); }
+  .terms-page:first-of-type { margin-top:0; padding-top:0; border-top:0; }
+  .terms-page h2 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:40px; line-height:.92; letter-spacing:-.03em; margin:0 0 8px; position:relative; }
+  .terms-page h2 .ghost { position:absolute; left:3px; top:3px; color:var(--orange); opacity:.09; pointer-events:none; }
+  .terms-head { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; align-items:end; margin-bottom:18px; }
+  table.terms { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11.5px; letter-spacing:.02em; }
+  table.terms th { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:10px; white-space:nowrap; }
+  table.terms td.term { white-space:nowrap; font-weight:500; }
+  table.terms td.scope { color:var(--grey); white-space:nowrap; }
+  table.terms td.verdict { white-space:nowrap; }
+  .honoured { color:var(--blue); }
+  .unmet { color:var(--red); font-weight:600; }
+  .given { display:inline-block; color:var(--red); border:1px solid var(--red); padding:1px 5px; transform:rotate(-1.2deg); font-size:10px; }
+  .sched { margin-top:26px; }
+  .sched .row { display:grid; grid-template-columns:150px 1fr; min-height:0; padding:7px 0; border-bottom:1px dashed rgba(26,26,26,.25); font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11.5px; letter-spacing:.02em; line-height:1.7; }
+  .sched .row .d { color:var(--grey); text-transform:uppercase; letter-spacing:.14em; font-size:10.5px; padding-top:2px; }
+  .sched .s { display:inline-block; margin-right:14px; white-space:nowrap; }
+  .sched .s i { font-style:normal; color:var(--grey); }
+  .sched .s.prime { border-bottom:2px solid var(--blue); }
+  .sched .dark { color:var(--grey); }
+  .verdict-stamp { display:inline-block; border:1.5px solid var(--blue); color:var(--blue); padding:5px 10px; transform:rotate(-2deg); font-size:12px; letter-spacing:.18em; }
+  .verdict-stamp.bad { border-color:var(--red); color:var(--red); }
+  /* the terms sheet is a letter to the distributor: A4 portrait, one title per page */
+  @page letter { size:A4 portrait; margin:14mm 16mm; }
+  .sheet { page:letter; }
+  table.terms td { vertical-align:top; }
+  @media print { footer { page:letter; } .terms-page { break-before:page; page-break-before:always; border-top:0; margin-top:0; padding-top:3px; } .terms-page:first-of-type { break-before:auto; page-break-before:auto; } h1 { font-size:34px; } .terms-page h2 { font-size:30px; } .sched .row { grid-template-columns:110px 1fr; } }
+  @media screen and (max-width:800px) { .terms-head { grid-template-columns:1fr; } .sched .row { grid-template-columns:1fr; } .sched .row .d { padding-bottom:4px; } }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="wash"></div>
+  <header>
+    <div>
+      <div class="stamp mono">Terms sheet · 22 titles · 7 days</div>
+      <h1><span class="ghost" aria-hidden="true">The Palladium</span>The Palladium</h1>
+    </div>
+    <div class="meta mono">
+      <div><b>Thu 2026-09-17 → Wed 2026-09-23</b></div>
+      <div>what each booking asked · what the grid delivered · where in the week</div>
+      <div>verdicts by the independent checker, not the solver</div>
+    </div>
+  </header>
+  <div class="divider"></div>
+
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">tide · 5 terms</div>
+        <h2><span class="ghost" aria-hidden="true">The Iron Tide</span>The Iron Tide</h2>
+        <div class="mono" style="color:var(--grey)">158′ · PLF · M</div>
+      </div>
+      <div class="meta mono">
+        <div><b>38</b> sessions · 14 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>4</td>
+        <td>Thu 6 · Fri 6 · Sat 6 · Sun 5 · Mon 5 · Tue 5 · Wed 5</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">prime_shows</td>
+        <td class="scope">each day</td>
+        <td>2</td>
+        <td>every day 2</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">min_shows_per_week</td>
+        <td class="scope">the week</td>
+        <td>28</td>
+        <td>38 ≥ 28 · Thu 6 Fri 6 Sat 6 Sun 5 Mon 5 Tue 5 Wed 5</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">prime_shows_per_week</td>
+        <td class="scope">the week</td>
+        <td>7</td>
+        <td>14 ≥ 7 in prime · Thu 2 Fri 2 Sat 2 Sun 2 Mon 2 Tue 2 Wed 2</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">exclusive_until</td>
+        <td class="scope">the week</td>
+        <td>through Sun</td>
+        <td>own screen through Sun: Thu 1 · Fri 1 · Sat 1 · Sun 2</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">10:30 <i>Screen 1</i></span><span class="s">14:00 <i>Screen 2</i></span><span class="s">14:10 <i>Screen 1</i></span><span class="s prime">17:40 <i>Screen 1</i></span><span class="s prime">20:40 <i>Screen 2</i></span><span class="s">21:40 <i>Screen 1</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">10:50 <i>Screen 1</i></span><span class="s">14:00 <i>Screen 2</i></span><span class="s">14:20 <i>Screen 1</i></span><span class="s prime">18:00 <i>Screen 1</i></span><span class="s prime">20:40 <i>Screen 2</i></span><span class="s">21:30 <i>Screen 1</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">10:50 <i>Screen 1</i></span><span class="s">14:00 <i>Screen 2</i></span><span class="s">14:20 <i>Screen 1</i></span><span class="s prime">18:20 <i>Screen 1</i></span><span class="s prime">20:40 <i>Screen 2</i></span><span class="s">22:00 <i>Screen 1</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">11:00 <i>Screen 2</i></span><span class="s">14:30 <i>Screen 2</i></span><span class="s prime">18:00 <i>Screen 2</i></span><span class="s prime">20:40 <i>Screen 1</i></span><span class="s">21:30 <i>Screen 2</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">10:30 <i>Screen 2</i></span><span class="s">14:10 <i>Screen 2</i></span><span class="s prime">17:40 <i>Screen 2</i></span><span class="s prime">20:40 <i>Screen 1</i></span><span class="s">21:40 <i>Screen 2</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">10:30 <i>Screen 2</i></span><span class="s">14:10 <i>Screen 2</i></span><span class="s prime">17:40 <i>Screen 2</i></span><span class="s prime">20:40 <i>Screen 1</i></span><span class="s">21:40 <i>Screen 2</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">10:30 <i>Screen 2</i></span><span class="s">14:10 <i>Screen 2</i></span><span class="s prime">17:40 <i>Screen 2</i></span><span class="s prime">20:40 <i>Screen 1</i></span><span class="s">21:40 <i>Screen 2</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">lantern · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">Paper Lantern</span>Paper Lantern</h2>
+        <div class="mono" style="color:var(--grey)">131′ · PLF · PG</div>
+      </div>
+      <div class="meta mono">
+        <div><b>18</b> sessions · 7 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>2</td>
+        <td>Thu 2 · Fri 2 · Sat 2 · Sun 3 · Mon 3 · Tue 3 · Wed 3</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">prime_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>every day 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">10:50 <i>Screen 2</i></span><span class="s prime">17:30 <i>Screen 2</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">10:10 <i>Screen 2</i></span><span class="s prime">17:30 <i>Screen 2</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">10:30 <i>Screen 2</i></span><span class="s prime">17:30 <i>Screen 2</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">11:10 <i>Screen 1</i></span><span class="s">14:20 <i>Screen 1</i></span><span class="s prime">17:30 <i>Screen 1</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">10:50 <i>Screen 1</i></span><span class="s">14:20 <i>Screen 1</i></span><span class="s prime">17:30 <i>Screen 1</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">10:50 <i>Screen 1</i></span><span class="s">14:20 <i>Screen 1</i></span><span class="s prime">17:30 <i>Screen 1</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">10:50 <i>Screen 1</i></span><span class="s">14:20 <i>Screen 1</i></span><span class="s prime">17:30 <i>Screen 1</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">orchard · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">The Orchard Keepers</span>The Orchard Keepers</h2>
+        <div class="mono" style="color:var(--grey)">96′ · 3D · G</div>
+      </div>
+      <div class="meta mono">
+        <div><b>51</b> sessions · 7 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>3 · Tue 4</td>
+        <td>Thu 7 · Fri 8 · Sat 8 · Sun 6 · Mon 8 · Tue 7 · Wed 7</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">latest_start</td>
+        <td class="scope">each day</td>
+        <td>18:00</td>
+        <td>every day none</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">10:10 <i>Screen 5</i></span><span class="s">10:20 <i>Screen 4</i></span><span class="s">12:50 <i>Screen 3</i></span><span class="s">12:50 <i>Screen 4</i></span><span class="s">15:20 <i>Screen 3</i></span><span class="s">15:20 <i>Screen 4</i></span><span class="s prime">18:00 <i>Screen 3</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">10:10 <i>Screen 5</i></span><span class="s">10:20 <i>Screen 3</i></span><span class="s">12:50 <i>Screen 3</i></span><span class="s">12:50 <i>Screen 4</i></span><span class="s">15:20 <i>Screen 4</i></span><span class="s">15:30 <i>Screen 3</i></span><span class="s">17:10 <i>Screen 5</i></span><span class="s prime">17:50 <i>Screen 4</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">10:00 <i>Screen 5</i></span><span class="s">10:20 <i>Screen 3</i></span><span class="s">10:30 <i>Screen 4</i></span><span class="s">12:50 <i>Screen 3</i></span><span class="s">14:50 <i>Screen 5</i></span><span class="s">15:20 <i>Screen 3</i></span><span class="s">17:20 <i>Screen 5</i></span><span class="s prime">18:00 <i>Screen 4</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">11:10 <i>Screen 3</i></span><span class="s">11:30 <i>Screen 5</i></span><span class="s">13:20 <i>Screen 4</i></span><span class="s">14:00 <i>Screen 5</i></span><span class="s">17:20 <i>Screen 5</i></span><span class="s prime">17:50 <i>Screen 4</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">10:10 <i>Screen 5</i></span><span class="s">10:20 <i>Screen 3</i></span><span class="s">12:50 <i>Screen 3</i></span><span class="s">12:50 <i>Screen 4</i></span><span class="s">15:20 <i>Screen 3</i></span><span class="s">15:20 <i>Screen 4</i></span><span class="s">17:20 <i>Screen 5</i></span><span class="s prime">18:00 <i>Screen 4</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">10:10 <i>Screen 5</i></span><span class="s">10:20 <i>Screen 3</i></span><span class="s">12:50 <i>Screen 3</i></span><span class="s">12:50 <i>Screen 4</i></span><span class="s">15:20 <i>Screen 3</i></span><span class="s">15:20 <i>Screen 4</i></span><span class="s prime">18:00 <i>Screen 4</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">10:10 <i>Screen 5</i></span><span class="s">10:20 <i>Screen 3</i></span><span class="s">12:50 <i>Screen 3</i></span><span class="s">12:50 <i>Screen 4</i></span><span class="s">15:20 <i>Screen 3</i></span><span class="s">15:20 <i>Screen 4</i></span><span class="s prime">18:00 <i>Screen 4</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">hollow · 3 terms</div>
+        <h2><span class="ghost" aria-hidden="true">Hollow Creek</span>Hollow Creek</h2>
+        <div class="mono" style="color:var(--grey)">101′ · 2D · R16</div>
+      </div>
+      <div class="meta mono">
+        <div><b>35</b> sessions · 14 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>3</td>
+        <td>every day 5</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">prime_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>every day 2</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">earliest_start</td>
+        <td class="scope">each day</td>
+        <td>15:00</td>
+        <td>every day none</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">15:40 <i>Screen 6</i></span><span class="s prime">17:50 <i>Screen 4</i></span><span class="s prime">20:20 <i>Screen 6</i></span><span class="s">21:10 <i>Screen 5</i></span><span class="s">21:30 <i>Screen 14</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">15:40 <i>Screen 6</i></span><span class="s prime">18:10 <i>Screen 3</i></span><span class="s prime">20:20 <i>Screen 6</i></span><span class="s">22:20 <i>Screen 14</i></span><span class="s">22:50 <i>Screen 5</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">15:40 <i>Screen 6</i></span><span class="s prime">18:00 <i>Screen 3</i></span><span class="s prime">19:40 <i>Screen 9</i></span><span class="s">22:20 <i>Screen 14</i></span><span class="s">22:50 <i>Screen 10</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">16:20 <i>Screen 14</i></span><span class="s prime">18:50 <i>Screen 15</i></span><span class="s prime">19:00 <i>Screen 7</i></span><span class="s">21:30 <i>Screen 11</i></span><span class="s">21:40 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">16:20 <i>Screen 14</i></span><span class="s prime">18:10 <i>Screen 6</i></span><span class="s prime">18:50 <i>Screen 15</i></span><span class="s">21:30 <i>Screen 10</i></span><span class="s">21:40 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">15:50 <i>Screen 14</i></span><span class="s prime">18:50 <i>Screen 9</i></span><span class="s prime">19:00 <i>Screen 15</i></span><span class="s">20:50 <i>Screen 16</i></span><span class="s">21:30 <i>Screen 10</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">17:00 <i>Screen 15</i></span><span class="s prime">18:50 <i>Screen 9</i></span><span class="s prime">19:20 <i>Screen 15</i></span><span class="s">21:30 <i>Screen 13</i></span><span class="s">21:40 <i>Screen 15</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">meridian · 3 terms</div>
+        <h2><span class="ghost" aria-hidden="true">Meridian</span>Meridian</h2>
+        <div class="mono" style="color:var(--grey)">143′ · 2D · M</div>
+      </div>
+      <div class="meta mono">
+        <div><b>53</b> sessions · 14 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>4</td>
+        <td>Thu 8 · Fri 8 · Sat 8 · Sun 7 · Mon 7 · Tue 8 · Wed 7</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">prime_shows</td>
+        <td class="scope">each day</td>
+        <td>2</td>
+        <td>every day 2</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">min_shows_per_week</td>
+        <td class="scope">the week</td>
+        <td>21</td>
+        <td>53 ≥ 21 · Thu 8 Fri 8 Sat 8 Sun 7 Mon 7 Tue 8 Wed 7</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">10:00 <i>Screen 8</i></span><span class="s">10:10 <i>Screen 9</i></span><span class="s">16:00 <i>Screen 11</i></span><span class="s">16:00 <i>Screen 7</i></span><span class="s prime">20:30 <i>Screen 4</i></span><span class="s prime">20:40 <i>Screen 12</i></span><span class="s">21:00 <i>Screen 16</i></span><span class="s">21:40 <i>Screen 11</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">10:30 <i>Screen 7</i></span><span class="s">10:50 <i>Screen 9</i></span><span class="s">14:00 <i>Screen 11</i></span><span class="s">14:10 <i>Screen 7</i></span><span class="s prime">20:30 <i>Screen 4</i></span><span class="s prime">20:40 <i>Screen 12</i></span><span class="s">22:30 <i>Screen 11</i></span><span class="s">22:40 <i>Screen 9</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">10:40 <i>Screen 7</i></span><span class="s">10:50 <i>Screen 9</i></span><span class="s">14:00 <i>Screen 11</i></span><span class="s">16:50 <i>Screen 7</i></span><span class="s prime">19:50 <i>Screen 5</i></span><span class="s prime">20:40 <i>Screen 12</i></span><span class="s">22:30 <i>Screen 11</i></span><span class="s">22:40 <i>Screen 9</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">11:10 <i>Screen 9</i></span><span class="s">11:40 <i>Screen 10</i></span><span class="s">14:20 <i>Screen 13</i></span><span class="s">14:30 <i>Screen 6</i></span><span class="s prime">19:50 <i>Screen 13</i></span><span class="s prime">20:10 <i>Screen 5</i></span><span class="s">21:40 <i>Screen 9</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">10:30 <i>Screen 7</i></span><span class="s">10:40 <i>Screen 11</i></span><span class="s">14:20 <i>Screen 13</i></span><span class="s">14:50 <i>Screen 6</i></span><span class="s prime">18:20 <i>Screen 10</i></span><span class="s prime">20:20 <i>Screen 5</i></span><span class="s">21:30 <i>Screen 9</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">10:00 <i>Screen 7</i></span><span class="s">10:40 <i>Screen 11</i></span><span class="s">14:10 <i>Screen 13</i></span><span class="s">14:50 <i>Screen 6</i></span><span class="s prime">18:20 <i>Screen 10</i></span><span class="s prime">20:30 <i>Screen 4</i></span><span class="s">21:20 <i>Screen 9</i></span><span class="s">21:30 <i>Screen 14</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">10:30 <i>Screen 7</i></span><span class="s">10:40 <i>Screen 12</i></span><span class="s">15:00 <i>Screen 11</i></span><span class="s">15:40 <i>Screen 9</i></span><span class="s prime">20:30 <i>Screen 4</i></span><span class="s prime">20:40 <i>Screen 10</i></span><span class="s">21:20 <i>Screen 9</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">stitch · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">Stitch and Bone</span>Stitch and Bone</h2>
+        <div class="mono" style="color:var(--grey)">118′ · 2D · M</div>
+      </div>
+      <div class="meta mono">
+        <div><b>41</b> sessions · 13 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>3</td>
+        <td>Thu 6 · Fri 6 · Sat 7 · Sun 5 · Mon 6 · Tue 5 · Wed 6</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">prime_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>Thu 2 · Fri 2 · Sat 2 · Sun 1 · Mon 2 · Tue 2 · Wed 2</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">13:20 <i>Screen 11</i></span><span class="s">13:40 <i>Screen 9</i></span><span class="s">14:20 <i>Screen 13</i></span><span class="s prime">17:40 <i>Screen 13</i></span><span class="s prime">20:20 <i>Screen 13</i></span><span class="s">21:40 <i>Screen 9</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">10:10 <i>Screen 13</i></span><span class="s">15:00 <i>Screen 13</i></span><span class="s">17:20 <i>Screen 7</i></span><span class="s prime">17:40 <i>Screen 13</i></span><span class="s prime">20:20 <i>Screen 13</i></span><span class="s">22:50 <i>Screen 6</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">10:10 <i>Screen 13</i></span><span class="s">12:50 <i>Screen 6</i></span><span class="s">14:10 <i>Screen 7</i></span><span class="s">15:00 <i>Screen 13</i></span><span class="s prime">17:40 <i>Screen 13</i></span><span class="s prime">20:20 <i>Screen 13</i></span><span class="s">22:40 <i>Screen 8</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">11:20 <i>Screen 14</i></span><span class="s">11:50 <i>Screen 6</i></span><span class="s">14:20 <i>Screen 9</i></span><span class="s prime">19:00 <i>Screen 9</i></span><span class="s">21:30 <i>Screen 10</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">10:00 <i>Screen 14</i></span><span class="s">12:10 <i>Screen 6</i></span><span class="s">15:00 <i>Screen 8</i></span><span class="s prime">18:50 <i>Screen 9</i></span><span class="s prime">20:40 <i>Screen 6</i></span><span class="s">21:40 <i>Screen 11</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">10:50 <i>Screen 6</i></span><span class="s">15:00 <i>Screen 8</i></span><span class="s prime">18:00 <i>Screen 6</i></span><span class="s prime">20:40 <i>Screen 6</i></span><span class="s">21:40 <i>Screen 11</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">10:10 <i>Screen 8</i></span><span class="s">14:50 <i>Screen 16</i></span><span class="s">15:10 <i>Screen 8</i></span><span class="s prime">18:00 <i>Screen 6</i></span><span class="s prime">18:50 <i>Screen 7</i></span><span class="s">21:40 <i>Screen 11</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">brass · 1 term</div>
+        <h2><span class="ghost" aria-hidden="true">Brass Sunday</span>Brass Sunday</h2>
+        <div class="mono" style="color:var(--grey)">109′ · 2D · PG</div>
+      </div>
+      <div class="meta mono">
+        <div><b>37</b> sessions · 10 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>2</td>
+        <td>Thu 4 · Fri 6 · Sat 6 · Sun 5 · Mon 5 · Tue 5 · Wed 6</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">10:10 <i>Screen 15</i></span><span class="s">10:50 <i>Screen 7</i></span><span class="s">15:30 <i>Screen 8</i></span><span class="s prime">18:00 <i>Screen 8</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">10:00 <i>Screen 10</i></span><span class="s">13:00 <i>Screen 15</i></span><span class="s">14:10 <i>Screen 14</i></span><span class="s">15:40 <i>Screen 8</i></span><span class="s prime">19:40 <i>Screen 9</i></span><span class="s prime">20:30 <i>Screen 15</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">12:10 <i>Screen 10</i></span><span class="s">13:00 <i>Screen 15</i></span><span class="s">14:10 <i>Screen 14</i></span><span class="s">15:40 <i>Screen 8</i></span><span class="s prime">18:10 <i>Screen 6</i></span><span class="s prime">20:30 <i>Screen 15</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">11:00 <i>Screen 7</i></span><span class="s">11:30 <i>Screen 15</i></span><span class="s">15:00 <i>Screen 10</i></span><span class="s">16:20 <i>Screen 15</i></span><span class="s prime">18:00 <i>Screen 3</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">10:10 <i>Screen 8</i></span><span class="s">13:10 <i>Screen 9</i></span><span class="s">14:00 <i>Screen 15</i></span><span class="s">16:20 <i>Screen 7</i></span><span class="s prime">18:10 <i>Screen 3</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">10:10 <i>Screen 8</i></span><span class="s">13:10 <i>Screen 9</i></span><span class="s">16:20 <i>Screen 15</i></span><span class="s">16:20 <i>Screen 7</i></span><span class="s prime">18:20 <i>Screen 3</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">10:00 <i>Screen 6</i></span><span class="s">13:10 <i>Screen 9</i></span><span class="s">15:30 <i>Screen 14</i></span><span class="s">16:20 <i>Screen 7</i></span><span class="s prime">18:20 <i>Screen 3</i></span><span class="s prime">20:10 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">glasshouse · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">The Glasshouse</span>The Glasshouse</h2>
+        <div class="mono" style="color:var(--grey)">127′ · 2D · M</div>
+      </div>
+      <div class="meta mono">
+        <div><b>22</b> sessions · 7 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>2</td>
+        <td>Thu 3 · Fri 4 · Sat 3 · Sun 3 · Mon 3 · Tue 3 · Wed 3</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">prime_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>every day 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">12:30 <i>Screen 12</i></span><span class="s">14:40 <i>Screen 10</i></span><span class="s prime">18:10 <i>Screen 5</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">10:40 <i>Screen 11</i></span><span class="s">16:40 <i>Screen 10</i></span><span class="s prime">20:00 <i>Screen 5</i></span><span class="s">23:00 <i>Screen 13</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">10:40 <i>Screen 11</i></span><span class="s">16:40 <i>Screen 10</i></span><span class="s prime">20:30 <i>Screen 4</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">12:00 <i>Screen 16</i></span><span class="s">14:50 <i>Screen 8</i></span><span class="s prime">18:20 <i>Screen 11</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">12:00 <i>Screen 16</i></span><span class="s">16:00 <i>Screen 9</i></span><span class="s prime">18:50 <i>Screen 11</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">12:30 <i>Screen 10</i></span><span class="s">16:00 <i>Screen 9</i></span><span class="s prime">20:30 <i>Screen 13</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">12:30 <i>Screen 10</i></span><span class="s">14:40 <i>Screen 6</i></span><span class="s prime">18:10 <i>Screen 11</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">kites · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">Kites Over Halden</span>Kites Over Halden</h2>
+        <div class="mono" style="color:var(--grey)">88′ · 3D · G</div>
+      </div>
+      <div class="meta mono">
+        <div><b>14</b> sessions · 0 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>2</td>
+        <td>every day 2</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">latest_start</td>
+        <td class="scope">each day</td>
+        <td>17:00</td>
+        <td>every day none</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">12:40 <i>Screen 5</i></span><span class="s">15:00 <i>Screen 5</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">10:30 <i>Screen 4</i></span><span class="s">14:50 <i>Screen 5</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">13:10 <i>Screen 4</i></span><span class="s">15:40 <i>Screen 4</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">11:00 <i>Screen 4</i></span><span class="s">15:40 <i>Screen 3</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">12:40 <i>Screen 5</i></span><span class="s">15:00 <i>Screen 5</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">12:40 <i>Screen 5</i></span><span class="s">15:00 <i>Screen 5</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">12:40 <i>Screen 5</i></span><span class="s">15:00 <i>Screen 5</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">salt · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">Salt Road</span>Salt Road</h2>
+        <div class="mono" style="color:var(--grey)">152′ · 2D · M</div>
+      </div>
+      <div class="meta mono">
+        <div><b>40</b> sessions · 14 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>3</td>
+        <td>Thu 5 · Fri 6 · Sat 6 · Sun 5 · Mon 6 · Tue 6 · Wed 6</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">prime_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>every day 2</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">10:50 <i>Screen 14</i></span><span class="s">16:20 <i>Screen 9</i></span><span class="s prime">17:30 <i>Screen 10</i></span><span class="s prime">20:40 <i>Screen 3</i></span><span class="s">21:30 <i>Screen 7</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">10:20 <i>Screen 14</i></span><span class="s">16:20 <i>Screen 9</i></span><span class="s prime">19:30 <i>Screen 10</i></span><span class="s prime">20:40 <i>Screen 3</i></span><span class="s">22:40 <i>Screen 7</i></span><span class="s">23:00 <i>Screen 10</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">10:20 <i>Screen 14</i></span><span class="s">16:20 <i>Screen 9</i></span><span class="s prime">19:30 <i>Screen 10</i></span><span class="s prime">20:30 <i>Screen 3</i></span><span class="s">22:40 <i>Screen 7</i></span><span class="s">23:00 <i>Screen 5</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">14:40 <i>Screen 12</i></span><span class="s prime">20:30 <i>Screen 8</i></span><span class="s prime">20:40 <i>Screen 4</i></span><span class="s">21:10 <i>Screen 14</i></span><span class="s">21:20 <i>Screen 3</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">10:40 <i>Screen 15</i></span><span class="s">14:40 <i>Screen 12</i></span><span class="s prime">20:10 <i>Screen 8</i></span><span class="s prime">20:40 <i>Screen 3</i></span><span class="s">21:10 <i>Screen 14</i></span><span class="s">21:20 <i>Screen 4</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">10:30 <i>Screen 15</i></span><span class="s">14:40 <i>Screen 12</i></span><span class="s prime">17:30 <i>Screen 5</i></span><span class="s prime">20:40 <i>Screen 8</i></span><span class="s">21:10 <i>Screen 5</i></span><span class="s">21:20 <i>Screen 15</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">10:50 <i>Screen 15</i></span><span class="s">14:00 <i>Screen 12</i></span><span class="s prime">17:30 <i>Screen 5</i></span><span class="s prime">20:40 <i>Screen 6</i></span><span class="s">21:10 <i>Screen 14</i></span><span class="s">21:10 <i>Screen 5</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">ninth · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">The Ninth Floor</span>The Ninth Floor</h2>
+        <div class="mono" style="color:var(--grey)">97′ · 2D · R13</div>
+      </div>
+      <div class="meta mono">
+        <div><b>31</b> sessions · 14 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>2</td>
+        <td>Thu 4 · Fri 4 · Sat 5 · Sun 5 · Mon 5 · Tue 4 · Wed 4</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">earliest_start</td>
+        <td class="scope">each day</td>
+        <td>14:00</td>
+        <td>every day none</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">15:30 <i>Screen 15</i></span><span class="s prime">18:20 <i>Screen 12</i></span><span class="s prime">19:10 <i>Screen 14</i></span><span class="s">21:00 <i>Screen 10</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">15:30 <i>Screen 15</i></span><span class="s prime">17:50 <i>Screen 15</i></span><span class="s prime">18:20 <i>Screen 12</i></span><span class="s">22:40 <i>Screen 8</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">14:00 <i>Screen 9</i></span><span class="s">15:30 <i>Screen 15</i></span><span class="s prime">17:50 <i>Screen 15</i></span><span class="s prime">18:20 <i>Screen 12</i></span><span class="s">23:00 <i>Screen 13</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">14:00 <i>Screen 15</i></span><span class="s">17:20 <i>Screen 16</i></span><span class="s prime">17:30 <i>Screen 13</i></span><span class="s prime">17:40 <i>Screen 8</i></span><span class="s">21:20 <i>Screen 15</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">14:00 <i>Screen 7</i></span><span class="s">16:30 <i>Screen 15</i></span><span class="s prime">17:40 <i>Screen 8</i></span><span class="s prime">20:30 <i>Screen 13</i></span><span class="s">21:10 <i>Screen 15</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">14:00 <i>Screen 7</i></span><span class="s prime">18:10 <i>Screen 8</i></span><span class="s prime">19:20 <i>Screen 11</i></span><span class="s">21:40 <i>Screen 3</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">14:00 <i>Screen 7</i></span><span class="s prime">19:10 <i>Screen 13</i></span><span class="s prime">20:20 <i>Screen 8</i></span><span class="s">21:10 <i>Screen 3</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">tango · 1 term</div>
+        <h2><span class="ghost" aria-hidden="true">Last Tango in Timaru</span>Last Tango in Timaru</h2>
+        <div class="mono" style="color:var(--grey)">104′ · 2D · M</div>
+      </div>
+      <div class="meta mono">
+        <div><b>25</b> sessions · 9 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>2</td>
+        <td>Thu 3 · Fri 5 · Sat 5 · Sun 3 · Mon 3 · Tue 3 · Wed 3</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">10:00 <i>Screen 12</i></span><span class="s">14:50 <i>Screen 16</i></span><span class="s prime">19:10 <i>Screen 11</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">10:00 <i>Screen 12</i></span><span class="s">15:10 <i>Screen 16</i></span><span class="s prime">20:00 <i>Screen 11</i></span><span class="s prime">20:30 <i>Screen 16</i></span><span class="s">22:50 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">10:00 <i>Screen 12</i></span><span class="s">15:10 <i>Screen 16</i></span><span class="s prime">17:30 <i>Screen 16</i></span><span class="s prime">19:50 <i>Screen 11</i></span><span class="s">22:50 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">13:20 <i>Screen 11</i></span><span class="s">15:50 <i>Screen 11</i></span><span class="s prime">18:00 <i>Screen 6</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">13:50 <i>Screen 11</i></span><span class="s">16:20 <i>Screen 11</i></span><span class="s prime">19:00 <i>Screen 7</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">10:10 <i>Screen 14</i></span><span class="s">16:50 <i>Screen 11</i></span><span class="s prime">19:00 <i>Screen 7</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">10:10 <i>Screen 14</i></span><span class="s">14:00 <i>Screen 13</i></span><span class="s prime">17:50 <i>Screen 8</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">wren · 1 term</div>
+        <h2><span class="ghost" aria-hidden="true">Wren</span>Wren</h2>
+        <div class="mono" style="color:var(--grey)">92′ · 2D · PG</div>
+      </div>
+      <div class="meta mono">
+        <div><b>27</b> sessions · 7 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>Thu 5 · Fri 5 · Sat 3 · Sun 3 · Mon 3 · Tue 4 · Wed 4</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">13:10 <i>Screen 8</i></span><span class="s">13:20 <i>Screen 6</i></span><span class="s">13:20 <i>Screen 7</i></span><span class="s">17:00 <i>Screen 14</i></span><span class="s prime">19:10 <i>Screen 7</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">10:20 <i>Screen 8</i></span><span class="s">13:20 <i>Screen 6</i></span><span class="s">14:00 <i>Screen 9</i></span><span class="s">16:40 <i>Screen 14</i></span><span class="s prime">20:20 <i>Screen 8</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">13:20 <i>Screen 8</i></span><span class="s">16:40 <i>Screen 14</i></span><span class="s prime">20:20 <i>Screen 8</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">12:20 <i>Screen 8</i></span><span class="s">14:00 <i>Screen 14</i></span><span class="s prime">18:10 <i>Screen 12</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">12:40 <i>Screen 8</i></span><span class="s">14:00 <i>Screen 14</i></span><span class="s prime">18:00 <i>Screen 12</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">10:00 <i>Screen 10</i></span><span class="s">12:40 <i>Screen 8</i></span><span class="s">14:00 <i>Screen 15</i></span><span class="s prime">18:00 <i>Screen 12</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">10:00 <i>Screen 10</i></span><span class="s">12:50 <i>Screen 8</i></span><span class="s">14:30 <i>Screen 15</i></span><span class="s prime">18:20 <i>Screen 10</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">cartographer · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">The Cartographer's Daughter</span>The Cartographer's Daughter</h2>
+        <div class="mono" style="color:var(--grey)">139′ · 2D · M</div>
+      </div>
+      <div class="meta mono">
+        <div><b>21</b> sessions · 7 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>Thu 3 · Fri 3 · Sat 4 · Sun 2 · Mon 3 · Tue 3 · Wed 3</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">prime_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>every day 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">10:20 <i>Screen 6</i></span><span class="s">15:20 <i>Screen 12</i></span><span class="s prime">17:30 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">12:40 <i>Screen 8</i></span><span class="s">15:20 <i>Screen 12</i></span><span class="s prime">17:30 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">10:20 <i>Screen 8</i></span><span class="s">15:20 <i>Screen 12</i></span><span class="s prime">19:50 <i>Screen 16</i></span><span class="s">22:50 <i>Screen 6</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">11:20 <i>Screen 13</i></span><span class="s prime">20:30 <i>Screen 12</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">10:20 <i>Screen 13</i></span><span class="s">15:20 <i>Screen 10</i></span><span class="s prime">17:30 <i>Screen 13</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">10:20 <i>Screen 13</i></span><span class="s">15:20 <i>Screen 10</i></span><span class="s prime">17:30 <i>Screen 13</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">10:20 <i>Screen 13</i></span><span class="s">15:20 <i>Screen 10</i></span><span class="s prime">17:30 <i>Screen 12</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">static · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">Static</span>Static</h2>
+        <div class="mono" style="color:var(--grey)">84′ · 2D · R16</div>
+      </div>
+      <div class="meta mono">
+        <div><b>13</b> sessions · 7 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>Thu 2 · Fri 2 · Sat 2 · Sun 1 · Mon 2 · Tue 2 · Wed 2</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">earliest_start</td>
+        <td class="scope">each day</td>
+        <td>18:00</td>
+        <td>every day none</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s prime">18:10 <i>Screen 6</i></span><span class="s">21:30 <i>Screen 15</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s prime">18:10 <i>Screen 6</i></span><span class="s">23:00 <i>Screen 15</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s prime">20:40 <i>Screen 6</i></span><span class="s">23:00 <i>Screen 15</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s prime">19:40 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s prime">18:10 <i>Screen 16</i></span><span class="s">21:30 <i>Screen 7</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s prime">18:10 <i>Screen 16</i></span><span class="s">21:30 <i>Screen 7</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s prime">18:10 <i>Screen 16</i></span><span class="s">21:30 <i>Screen 7</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">harbour · 1 term</div>
+        <h2><span class="ghost" aria-hidden="true">Harbour Lights</span>Harbour Lights</h2>
+        <div class="mono" style="color:var(--grey)">115′ · 2D · PG</div>
+      </div>
+      <div class="meta mono">
+        <div><b>19</b> sessions · 7 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>Thu 3 · Fri 3 · Sat 3 · Sun 2 · Mon 2 · Tue 3 · Wed 3</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">10:00 <i>Screen 10</i></span><span class="s">14:00 <i>Screen 14</i></span><span class="s prime">20:30 <i>Screen 8</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">12:30 <i>Screen 12</i></span><span class="s">17:10 <i>Screen 11</i></span><span class="s prime">20:00 <i>Screen 7</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">12:30 <i>Screen 12</i></span><span class="s">17:10 <i>Screen 11</i></span><span class="s prime">20:00 <i>Screen 7</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">16:20 <i>Screen 7</i></span><span class="s prime">18:40 <i>Screen 14</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">12:00 <i>Screen 12</i></span><span class="s prime">18:40 <i>Screen 14</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">12:00 <i>Screen 12</i></span><span class="s">14:10 <i>Screen 11</i></span><span class="s prime">19:00 <i>Screen 14</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">12:00 <i>Screen 11</i></span><span class="s">16:30 <i>Screen 13</i></span><span class="s prime">18:00 <i>Screen 14</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">quarry · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">Quarry</span>Quarry</h2>
+        <div class="mono" style="color:var(--grey)">123′ · 2D · M</div>
+      </div>
+      <div class="meta mono">
+        <div><b>8</b> sessions · 1 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>Thu 1 · Fri 1 · Sat 1 · Sun 2 · Mon 1 · Tue 1 · Wed 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">min_capacity</td>
+        <td class="scope">each day</td>
+        <td>120</td>
+        <td>Thu 11 · Fri 6 · Sat 6 · Sun 6, 7 · Mon 9 · Tue 9 · Wed 9</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">10:20 <i>Screen 11</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">10:30 <i>Screen 6</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">10:00 <i>Screen 6</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">13:30 <i>Screen 7</i></span><span class="s prime">20:30 <i>Screen 6</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">10:20 <i>Screen 9</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">10:20 <i>Screen 9</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">10:20 <i>Screen 9</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">anthem · 1 term</div>
+        <h2><span class="ghost" aria-hidden="true">Anthem for the Small Hours</span>Anthem for the Small Hours</h2>
+        <div class="mono" style="color:var(--grey)">76′ · 2D · E</div>
+      </div>
+      <div class="meta mono">
+        <div><b>20</b> sessions · 3 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>Thu 2 · Fri 4 · Sat 4 · Sun 3 · Mon 3 · Tue 2 · Wed 2</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">12:40 <i>Screen 10</i></span><span class="s prime">19:40 <i>Screen 9</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">12:40 <i>Screen 10</i></span><span class="s">13:00 <i>Screen 13</i></span><span class="s">14:40 <i>Screen 10</i></span><span class="s prime">18:10 <i>Screen 8</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">10:10 <i>Screen 10</i></span><span class="s">13:00 <i>Screen 13</i></span><span class="s">14:40 <i>Screen 10</i></span><span class="s prime">18:10 <i>Screen 8</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">11:20 <i>Screen 11</i></span><span class="s">15:50 <i>Screen 4</i></span><span class="s">17:00 <i>Screen 9</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">10:00 <i>Screen 10</i></span><span class="s">10:00 <i>Screen 12</i></span><span class="s">10:10 <i>Screen 6</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">10:00 <i>Screen 12</i></span><span class="s">14:50 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">10:00 <i>Screen 11</i></span><span class="s">12:30 <i>Screen 6</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">ledger · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">The Ledger</span>The Ledger</h2>
+        <div class="mono" style="color:var(--grey)">134′ · 2D · M</div>
+      </div>
+      <div class="meta mono">
+        <div><b>7</b> sessions · 0 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>every day 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">max_shows</td>
+        <td class="scope">each day</td>
+        <td>2</td>
+        <td>every day 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">12:40 <i>Screen 15</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">10:00 <i>Screen 15</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">10:10 <i>Screen 15</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">11:40 <i>Screen 12</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">12:10 <i>Screen 10</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">12:40 <i>Screen 14</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">12:40 <i>Screen 14</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">reef · 2 terms</div>
+        <h2><span class="ghost" aria-hidden="true">Reef</span>Reef</h2>
+        <div class="mono" style="color:var(--grey)">68′ · 3D · G</div>
+      </div>
+      <div class="meta mono">
+        <div><b>7</b> sessions · 0 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>every day 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">latest_start</td>
+        <td class="scope">each day</td>
+        <td>16:00</td>
+        <td>every day none</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">10:30 <i>Screen 3</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">12:40 <i>Screen 5</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">12:50 <i>Screen 5</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">13:40 <i>Screen 3</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">10:30 <i>Screen 4</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">10:30 <i>Screen 4</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">10:30 <i>Screen 4</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">pilgrim · 3 terms</div>
+        <h2><span class="ghost" aria-hidden="true">The Pilgrim Years</span>The Pilgrim Years</h2>
+        <div class="mono" style="color:var(--grey)">171′ · 2D · M</div>
+      </div>
+      <div class="meta mono">
+        <div><b>9</b> sessions · 7 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>Thu 2 · Fri 1 · Sat 1 · Sun 2 · Mon 1 · Tue 1 · Wed 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">max_shows</td>
+        <td class="scope">each day</td>
+        <td>2</td>
+        <td>Thu 2 · Fri 1 · Sat 1 · Sun 2 · Mon 1 · Tue 1 · Wed 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">prime_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>every day 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">10:40 <i>Screen 13</i></span><span class="s prime">18:00 <i>Screen 15</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s prime">18:50 <i>Screen 14</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s prime">18:50 <i>Screen 14</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s prime">17:40 <i>Screen 10</i></span><span class="s">21:40 <i>Screen 7</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s prime">20:30 <i>Screen 12</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s prime">20:30 <i>Screen 12</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s prime">20:30 <i>Screen 12</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+  <section class="terms-page">
+    <div class="terms-head">
+      <div>
+        <div class="stamp mono">reel · 3 terms</div>
+        <h2><span class="ghost" aria-hidden="true">Reel Twelve</span>Reel Twelve</h2>
+        <div class="mono" style="color:var(--grey)">111′ · 2D · M</div>
+      </div>
+      <div class="meta mono">
+        <div><b>7</b> sessions · 0 in prime</div>
+        <div style="margin-top:8px"><span class="verdict-stamp">every term honoured</span></div>
+      </div>
+    </div>
+    
+    <div class="scroll"><table class="terms">
+      <thead><tr><th>Term</th><th>Scope</th><th>As booked</th><th>As delivered</th><th>Verdict</th></tr></thead>
+      <tbody>
+      
+      <tr>
+        <td class="term">min_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>every day 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">max_shows</td>
+        <td class="scope">each day</td>
+        <td>1</td>
+        <td>every day 1</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      <tr>
+        <td class="term">screens</td>
+        <td class="scope">each day</td>
+        <td>14, 15, 16</td>
+        <td>Thu 16 · Fri 16 · Sat 16 · Sun 16 · Mon 16 · Tue 16 · Wed 16</td>
+        <td class="verdict"><span class="honoured">✓ honoured</span></td>
+      </tr>
+      
+      </tbody>
+    </table></div>
+    
+    <div class="sched">
+      <div class="stamp mono">As delivered</div>
+      
+      <div class="row">
+        <div class="d">Thu <span style="letter-spacing:.06em">09-17</span></div>
+        <div><span class="s">12:20 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Fri <span style="letter-spacing:.06em">09-18</span></div>
+        <div><span class="s">12:00 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sat <span style="letter-spacing:.06em">09-19</span></div>
+        <div><span class="s">12:10 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Sun <span style="letter-spacing:.06em">09-20</span></div>
+        <div><span class="s">14:50 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Mon <span style="letter-spacing:.06em">09-21</span></div>
+        <div><span class="s">14:50 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Tue <span style="letter-spacing:.06em">09-22</span></div>
+        <div><span class="s">12:20 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="row">
+        <div class="d">Wed <span style="letter-spacing:.06em">09-23</span></div>
+        <div><span class="s">12:20 <i>Screen 16</i></span></div>
+      </div>
+      
+      <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
+    </div>
+  </section>
+  
+
+  <footer class="mono">
+    <span>turnaround · the showtime grid, solved</span>
+    <span>every verdict re-derived by a checker that shares no code with the solver</span>
+  </footer>
+</div>
+</body>
+</html>

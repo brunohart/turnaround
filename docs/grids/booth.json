@@ -5,33 +5,33 @@
   "objective": 1625.1,
   "admissions": 1625.1,
   "hold_paid": 0.0,
-  "solve_seconds": 2.068,
+  "solve_seconds": 2.877,
   "sessions": [
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 605,
-      "feature_start": 635,
-      "feature_end": 803,
-      "clear": 812,
+      "start": 620,
+      "feature_start": 650,
+      "feature_end": 818,
+      "clear": 827,
       "forced": null
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 845,
-      "feature_start": 875,
-      "feature_end": 1043,
-      "clear": 1052,
+      "start": 850,
+      "feature_start": 880,
+      "feature_end": 1048,
+      "clear": 1057,
       "forced": null
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 1055,
-      "feature_start": 1085,
-      "feature_end": 1253,
-      "clear": 1262,
+      "start": 1065,
+      "feature_start": 1095,
+      "feature_end": 1263,
+      "clear": 1272,
       "forced": null
     },
     {
@@ -136,14 +136,28 @@
     {
       "screen": "3",
       "film": "atlas",
-      "start": 1240,
-      "feature_start": 1260,
-      "feature_end": 1381,
-      "clear": 1391,
+      "start": 1235,
+      "feature_start": 1255,
+      "feature_end": 1376,
+      "clear": 1386,
       "forced": null
     }
   ],
   "conflict": [],
   "conflict_alone": false,
-  "relaxed": []
+  "relaxed": [],
+  "stats": {
+    "candidates": 1211,
+    "booleans": 1385,
+    "rank_literals": 165,
+    "constraints": 3066,
+    "slot_min": 5,
+    "slot_asked": 5,
+    "slot_reason": null,
+    "first_feasible_s": 0.197,
+    "bound": 1625.1,
+    "gap": 0.0,
+    "hinted": 0,
+    "symmetry_groups": 0
+  }
 }
