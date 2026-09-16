@@ -12,6 +12,12 @@ A *week brief* is seven briefs that share a house and a slate: each day may
 override the policy (Friday's late show) and a film's terms (the opening
 exclusive lifts on Monday). It unfolds into one plain `Brief` per day, so the
 solver and the checker never learn what a week is.
+
+A *festival brief* is the second profile (Day 10): many titles that screen once or
+twice, several venues, strands, a guest's availability window, the time a print or
+DCP needs to move between venues, and a wish that titles in the same strand not
+clash. It unfolds the same way: one plain `Brief` per day, venues as screens, the
+festival's own terms reaching each day as a debt the way a week's do.
 """
 
 from __future__ import annotations
@@ -90,6 +96,48 @@ class Screen(BaseModel):
         return self
 
 
+class Guest(BaseModel):
+    """A festival guest — the director, a lead — and when they are in town. The screening
+    they attend must start on one of their days, inside their hours. A hard term: a
+    guest who is not there cannot take the stage."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    name: str | None = None
+    days: list[str] = Field(min_length=1, description="Festival day names the guest can attend")
+    earliest: str = Field(
+        default="00:00", description="HH:MM; the screening they attend starts no earlier"
+    )
+    latest: str = Field(default="30:00", description="HH:MM; and no later")
+
+    @model_validator(mode="after")
+    def _window(self) -> Guest:
+        if parse_time(self.latest) < parse_time(self.earliest):
+            raise ValueError(f"guest: latest {self.latest} is before earliest {self.earliest}")
+        return self
+
+    @property
+    def earliest_min(self) -> int:
+        return parse_time(self.earliest)
+
+    @property
+    def latest_min(self) -> int:
+        return parse_time(self.latest)
+
+    def covers(self, start: int) -> bool:
+        return self.earliest_min <= start <= self.latest_min
+
+    @property
+    def window(self) -> str:
+        """`Fri 9/Sat 10 18:00–21:00`, as the sheet and a conflict name it."""
+        hours = (
+            ""
+            if (self.earliest, self.latest) == ("00:00", "30:00")
+            else (f" {self.earliest}–{self.latest}")
+        )
+        return "/".join(self.days) + hours
+
+
 class Terms(BaseModel):
     """What the distributor's booking says this film must get today.
 
@@ -134,10 +182,31 @@ class Terms(BaseModel):
         description="A day name: exclusive_screen holds on every day of the week up to and "
         "including this one, then lifts. A week term",
     )
+    screenings: int | None = Field(
+        default=None,
+        ge=1,
+        description="Exactly this many screenings across the festival: a festival title "
+        "screens once or twice. A festival term: a day brief refuses it",
+    )
+    guest: Guest | None = Field(
+        default=None,
+        description="A guest's availability: at least one screening starts on one of their "
+        "days inside their hours. A festival term",
+    )
+    available: list[str] | None = Field(
+        default=None,
+        min_length=1,
+        description="Festival day names the print or DCP is in town: the title screens on "
+        "no other day. A festival term",
+    )
 
 
 WEEK_TERMS = ("min_shows_per_week", "prime_shows_per_week", "exclusive_until")
 """Terms that mean nothing on one day. A day brief refuses them; a week unfolds them."""
+
+FESTIVAL_TERMS = ("screenings", "guest", "available")
+"""Terms that mean nothing on one day either. A festival unfolds them; a day or a week
+brief refuses them."""
 
 TERM_SCOPE = {
     "min_shows": "day",
@@ -152,6 +221,9 @@ TERM_SCOPE = {
     "min_shows_per_week": "week",
     "prime_shows_per_week": "week",
     "exclusive_until": "week",
+    "screenings": "festival",
+    "guest": "festival",
+    "available": "festival",
 }
 
 
@@ -164,6 +236,18 @@ def week_terms_set(t: Terms) -> list[tuple[str, str]]:
         out.append(("prime_shows_per_week", str(t.prime_shows_per_week)))
     if t.exclusive_until:
         out.append(("exclusive_until", t.exclusive_until))
+    return out
+
+
+def festival_terms_set(t: Terms) -> list[tuple[str, str]]:
+    """The festival-scoped terms this booking carries, as (name, value as written)."""
+    out = []
+    if t.screenings is not None:
+        out.append(("screenings", str(t.screenings)))
+    if t.guest is not None:
+        out.append(("guest", t.guest.window))
+    if t.available is not None:
+        out.append(("available", "/".join(t.available)))
     return out
 
 
@@ -230,6 +314,12 @@ class Film(BaseModel):
     )
     format: str = "2D"
     rating: str | None = None
+    strand: str | None = Field(
+        default=None,
+        description="A festival strand (Competition, Documentary…): titles in the same "
+        "strand share an audience, and the objective pays policy.clash_penalty when "
+        "two of them run at once",
+    )
     weight: float = Field(
         default=1.0,
         gt=0,
@@ -312,6 +402,19 @@ class Policy(BaseModel):
         default=1, ge=1, description="Starts allowed house-wide within any stagger_min window"
     )
     slot_min: int = Field(default=5, gt=0, description="Start-time granularity")
+    move_min: int = Field(
+        default=0,
+        ge=0,
+        description="Minutes a print or DCP needs to move between venues: the same title "
+        "at another screen starts no sooner than this after its feature ends. 0 is off",
+    )
+    clash_penalty: float = Field(
+        default=0.0,
+        ge=0,
+        description="Expected admissions the objective gives up per hour that two titles of "
+        "the same strand run at once at different screens, counted on the start grid. "
+        "Soft: an audience should not have to choose. 0 is off",
+    )
     prime_start: str = "17:30"
     prime_end: str = "20:45"
     dayparts: list[Daypart] = Field(default_factory=lambda: list(DEFAULT_DAYPARTS))
@@ -405,6 +508,7 @@ class Brief(BaseModel):
         later. A brief unfolded from a week (validation context `in_week`) may carry
         week-scoped terms; a brief that is one day may not."""
         in_week = bool((info.context or {}).get("in_week"))
+        in_festival = bool((info.context or {}).get("in_festival"))
         screen_ids = {s.id for s in self.screens}
         for s in self.screens:
             if self.last_start_for(s) < self.open_for(s):
@@ -459,6 +563,12 @@ class Brief(BaseModel):
                     raise ValueError(
                         f"{f.title}: {name} {value} is a week term and this brief is one day "
                         "— put it in a week brief, under days"
+                    )
+            if not in_festival:
+                for name, value in festival_terms_set(t):
+                    raise ValueError(
+                        f"{f.title}: {name} {value} is a festival term and this brief is "
+                        f"{'a week' if in_week else 'one day'} — put it in a festival brief"
                     )
             if f.demand is not None:
                 names = {d.name for d in self.policy.dayparts}
@@ -676,7 +786,8 @@ class Grid(BaseModel):
     date: str | None = None
     status: str
     objective: float = Field(
-        description="What the solver maximised: expected admissions less the hold penalty"
+        description="What the solver maximised: expected admissions less the hold and "
+        "clash penalties"
     )
     admissions: float | None = Field(
         default=None,
@@ -685,6 +796,12 @@ class Grid(BaseModel):
     )
     hold_paid: float = Field(
         default=0.0, ge=0, description="Hold penalty this day paid, in expected admissions"
+    )
+    clash_paid: float = Field(
+        default=0.0,
+        ge=0,
+        description="Clash penalty this day paid, in expected admissions: same-strand titles "
+        "running at once, at policy.clash_penalty an hour",
     )
     solve_seconds: float
     sessions: list[Session]
@@ -878,6 +995,157 @@ class WeekGrid(BaseModel):
         return self.grids[self.days.index(name)]
 
 
+class FestivalBrief(BaseModel):
+    """The second profile: a festival. Many titles that screen once or twice, several
+    venues, ten days or so. It unfolds like a week — one plain `Brief` per day, venues as
+    screens — so the solver and the checker never learn what a festival is either. The
+    festival's own terms (`screenings`, a `guest` window) reach a day as a debt the way a
+    week's minimums do; the print move and the clash penalty are day policy."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    festival: str
+    venues: list[Screen] = Field(min_length=1)
+    films: list[Film] = Field(min_length=1)
+    policy: Policy = Field(default_factory=Policy)
+    days: list[DayOverride] = Field(min_length=1, max_length=21)
+
+    @property
+    def house(self) -> str:
+        return self.festival
+
+    @property
+    def screens(self) -> list[Screen]:
+        return self.venues
+
+    @property
+    def hold_days(self) -> list[str]:
+        """A festival holds nothing day to day: every title screens once or twice."""
+        return []
+
+    @property
+    def hold_indices(self) -> list[int]:
+        return []
+
+    @property
+    def hold_penalty(self) -> float:
+        return 0.0
+
+    @property
+    def strands(self) -> list[str]:
+        return sorted({f.strand for f in self.films if f.strand})
+
+    @field_validator("venues")
+    @classmethod
+    def _unique_venues(cls, v: list[Screen]) -> list[Screen]:
+        ids = [s.id for s in v]
+        if len(ids) != len(set(ids)):
+            raise ValueError("venue ids must be unique")
+        return v
+
+    @model_validator(mode="after")
+    def _check(self) -> FestivalBrief:
+        names = [d.name for d in self.days]
+        if len(names) != len(set(names)):
+            raise ValueError("day names must be unique")
+        film_ids = {f.id for f in self.films}
+        venue_ids = {s.id for s in self.venues}
+        for f in self.films:
+            g = f.terms.guest
+            if g is not None:
+                unknown = [d for d in g.days if d not in names]
+                if unknown:
+                    raise ValueError(
+                        f"{f.title}: guest days {', '.join(unknown)} are not festival days "
+                        f"— the days are {', '.join(names)}"
+                    )
+            avail = f.terms.available
+            if avail is not None:
+                unknown = [d for d in avail if d not in names]
+                if unknown:
+                    raise ValueError(
+                        f"{f.title}: available {', '.join(unknown)} are not festival days "
+                        f"— the days are {', '.join(names)}"
+                    )
+                if g is not None and not set(g.days) & set(avail):
+                    raise ValueError(
+                        f"{f.title}: the guest is there {'/'.join(g.days)} but the print is "
+                        f"only available {'/'.join(avail)}"
+                    )
+            days_open = len(avail) if avail is not None else len(self.days)
+            cap = f.terms.max_shows
+            if (
+                f.terms.screenings is not None
+                and cap is not None
+                and cap * days_open < f.terms.screenings
+            ):
+                raise ValueError(
+                    f"{f.title}: screenings {f.terms.screenings} cannot fit under "
+                    f"max_shows {cap} a day over {days_open} days"
+                )
+        for d in self.days:
+            odd_films = set(d.terms) - film_ids
+            if odd_films:
+                raise ValueError(f"day {d.name} sets terms for unknown films {sorted(odd_films)}")
+            odd_venues = set(d.screens) - venue_ids
+            if odd_venues:
+                raise ValueError(f"day {d.name} sets hours for unknown venues {sorted(odd_venues)}")
+            self.day(self.days.index(d))
+        return self
+
+    def day(self, i: int) -> Brief:
+        """The plain brief for day i: the venues as screens, the overrides applied, and a
+        guest kept only on the days they are there, so the day's terms say whether a
+        guest screening is possible today and the window it has."""
+        d = self.days[i]
+        policy = Policy.model_validate({**self.policy.model_dump(), **d.policy})
+        films = []
+        for f in self.films:
+            base = f.terms.model_dump()
+            g = f.terms.guest
+            changed = False
+            if g is not None and d.name not in g.days:
+                base["guest"] = None
+                changed = True
+            if f.terms.available is not None and d.name not in f.terms.available:
+                base["max_shows"] = 0  # the print is not in town: nothing today
+                changed = True
+            override = d.terms.get(f.id, {})
+            if override or changed:
+                films.append(
+                    f.model_copy(update={"terms": Terms.model_validate({**base, **override})})
+                )
+            else:
+                films.append(f)
+        screens = [
+            Screen.model_validate({**s.model_dump(), **d.screens[s.id]}) if s.id in d.screens else s
+            for s in self.venues
+        ]
+        return Brief.model_validate(
+            {
+                "house": self.festival,
+                "date": d.date,
+                "weekday": d.name if d.name in WEEKDAYS else None,
+                "screens": screens,
+                "films": films,
+                "policy": policy,
+            },
+            context={"in_festival": True},
+        )
+
+    def day_index(self, name: str) -> int:
+        return [d.name for d in self.days].index(name)
+
+    def briefs(self) -> list[Brief]:
+        return [self.day(i) for i in range(len(self.days))]
+
+    def film_title(self, film_id: str) -> str:
+        for f in self.films:
+            if f.id == film_id:
+                return f.title
+        raise KeyError(film_id)
+
+
 _MODEL_AT: dict[str, type[BaseModel]] = {
     "terms": Terms,
     "films": Film,
@@ -886,6 +1154,8 @@ _MODEL_AT: dict[str, type[BaseModel]] = {
     "demand": Demand,
     "dayparts": Daypart,
     "days": DayOverride,
+    "venues": Screen,
+    "guest": Guest,
 }
 
 
@@ -897,15 +1167,16 @@ def validation_sentences(err: Exception, raw: Any, *, week: bool | None = None) 
 
     if not isinstance(err, ValidationError):
         return [str(err)]
+    festival = isinstance(raw, dict) and "festival" in raw
     if week is None:
-        week = isinstance(raw, dict) and "days" in raw
+        week = isinstance(raw, dict) and "days" in raw and not festival
     out: list[str] = []
     for e in err.errors():
         loc = [x for x in e["loc"] if x != "__root__"]
         # Walk the path, naming things as the booth would.
         node: Any = raw
         words: list[str] = []
-        model: type[BaseModel] = WeekBrief if week else Brief
+        model: type[BaseModel] = FestivalBrief if festival else WeekBrief if week else Brief
         last_key: str | None = None
         for part in loc:
             if isinstance(part, int):
@@ -919,7 +1190,7 @@ def validation_sentences(err: Exception, raw: Any, *, week: bool | None = None) 
                 last_key = str(part)
                 if part in _MODEL_AT:
                     model = _MODEL_AT[part]
-                    if part not in ("terms", "policy", "demand"):
+                    if part not in ("terms", "policy", "demand", "guest"):
                         continue  # "films → The Long Voyage", not "films → films"
                 words.append(str(part))
         where = " → ".join(words)
@@ -937,6 +1208,8 @@ def validation_sentences(err: Exception, raw: Any, *, week: bool | None = None) 
                 "Demand": "part of a demand block",
                 "DayOverride": "something a day can override",
                 "Daypart": "part of a daypart",
+                "Guest": "something a guest can carry",
+                "FestivalBrief": "a field of a festival brief",
             }.get(model.__name__, "a field of the brief")
             out.append(
                 (f"{where}: " if where else "")

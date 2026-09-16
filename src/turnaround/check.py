@@ -9,7 +9,18 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from .model import Brief, Daypart, Grid, Session, Terms, WeekBrief, WeekGrid, fmt_time, parse_time
+from .model import (
+    Brief,
+    Daypart,
+    FestivalBrief,
+    Grid,
+    Session,
+    Terms,
+    WeekBrief,
+    WeekGrid,
+    fmt_time,
+    parse_time,
+)
 
 RELAXABLE = (
     "min_shows",
@@ -19,6 +30,8 @@ RELAXABLE = (
     "plf_lock",
     "min_shows_per_week",
     "prime_shows_per_week",
+    "screenings",
+    "guest",
 )
 """Terms a grid may declare it gave up. `exclusive_until` is not here: it unfolds to
 `exclusive_screen` on each day it covers, and that is the term a day gives up."""
@@ -151,6 +164,10 @@ def whys(brief: Brief, grid: Grid) -> list[Why]:
             terms.append(f"exclusive_screen {s.screen}")
         if t.plf_lock and s.screen in plf:
             terms.append(f"plf_lock {s.screen}")
+        if t.screenings is not None:
+            terms.append(f"screenings {t.screenings} · {n} today")
+        if t.guest is not None and t.guest.covers(s.start):
+            terms.append(f"guest {t.guest.window}")
         if t.earliest_start:
             terms.append(f"earliest_start ≥ {t.earliest_start}")
         if t.latest_start:
@@ -163,7 +180,56 @@ def whys(brief: Brief, grid: Grid) -> list[Why]:
 def term_is_set(t: Terms, name: str) -> bool:
     """Does this film's booking actually carry the named term?"""
     v = getattr(t, name)
-    return v is not None if name == "max_shows" else bool(v)
+    return v is not None if name in ("max_shows", "screenings", "guest") else bool(v)
+
+
+@dataclass
+class Clash:
+    """Two titles of one strand running at once at different screens: the audience that
+    wanted both. Minutes are counted on the brief's start grid, the way the objective
+    counts them, so the checker and the solver measure the same thing without sharing
+    a line."""
+
+    strand: str
+    at: int  # the first grid minute both were running
+    titles: tuple[str, ...]
+    minutes: int
+
+
+def clashes(brief: Brief, grid: Grid) -> list[Clash]:
+    """Every same-strand overlap on the day, from the brief and the grid alone. A session
+    runs from its doors to its feature's end; at each minute of the start grid, every
+    session of a strand beyond the first is a clash minute. Consecutive grid minutes
+    with the same set of titles overlapping are one clash."""
+    p = brief.policy
+    strands: dict[str, list[Session]] = {}
+    for s in grid.sessions:
+        strand = brief.film(s.film).strand
+        if strand:
+            strands.setdefault(strand, []).append(s)
+    out: list[Clash] = []
+    for strand, sessions in sorted(strands.items()):
+        if len(sessions) < 2:
+            continue
+        last = max(s.feature_end for s in sessions)
+        open_: Clash | None = None
+        t = p.open_min
+        while t < last:
+            running = tuple(sorted(s.film for s in sessions if s.start <= t < s.feature_end))
+            extra = max(0, len(running) - 1)
+            if extra and open_ is not None and open_.titles == running:
+                open_.minutes += p.slot_min * extra
+            elif extra:
+                open_ = Clash(strand, t, running, p.slot_min * extra)
+                out.append(open_)
+            else:
+                open_ = None
+            t += p.slot_min
+    return out
+
+
+def clash_minutes(brief: Brief, grid: Grid) -> int:
+    return sum(c.minutes for c in clashes(brief, grid))
 
 
 @dataclass
@@ -344,6 +410,64 @@ def check(brief: Brief, grid: Grid) -> Report:
             + (f"busiest {busiest} at {fmt_time(when)}" if turns else "no turnarounds"),
         )
 
+    # Print move: the same title at two screens needs its print or DCP carried between
+    # them. The later start is no sooner than the earlier feature's end plus the move;
+    # one print cannot be in two rooms at the same minute either.
+    if p.move_min > 0:
+        tight: list[str] = []
+        for fid, ss in grid.by_film().items():
+            for a in ss:
+                for b in ss:
+                    if a.screen == b.screen:
+                        continue
+                    if a.start == b.start and a.screen > b.screen:
+                        continue  # the pair is named once
+                    if a.start <= b.start < a.feature_end + p.move_min:
+                        tight.append(
+                            f"{fid} {brief.screen(a.screen).label} ends {fmt_time(a.feature_end)}, "
+                            f"{brief.screen(b.screen).label} starts {fmt_time(b.start)}"
+                        )
+        moved = sum(1 for ss in grid.by_film().values() if len({s.screen for s in ss}) > 1)
+        r.add(
+            "print-move",
+            not tight,
+            f"{p.move_min}′ between venues · {moved} title{'s' if moved != 1 else ''} moved"
+            + (f" · {len(tight)} too tight: " + "; ".join(tight) if tight else ""),
+        )
+
+    # Strand clashes: soft, so never a failure on their own; but the solver claims what
+    # it paid and the claim is held to this count.
+    strands = {f.strand for f in brief.films if f.strand}
+    if strands or grid.clash_paid:
+        found = clashes(brief, grid)
+        minutes = sum(c.minutes for c in found)
+        owed_clash = brief.policy.clash_penalty * minutes / 60
+        # the solver pays in whole cents per grid step; allow it that, and no more
+        tol = 0.01 + 0.005 * (minutes // p.slot_min)
+        named = "; ".join(
+            f"{c.strand} {fmt_time(c.at)} "
+            + " v ".join(brief.film(t).title for t in c.titles)
+            + f" {c.minutes}′"
+            for c in found[:3]
+        )
+        r.add(
+            "strand-clash",
+            abs(grid.clash_paid - owed_clash) <= tol,
+            f"{len(strands)} strand{'s' if len(strands) != 1 else ''} · "
+            + (
+                f"{len(found)} clash{'es' if len(found) != 1 else ''}, {minutes}′ at once"
+                + (f": {named}" if named else "")
+                + (" …" if len(found) > 3 else "")
+                if found
+                else "no two titles of a strand run at once"
+            )
+            + (
+                f" · paid {grid.clash_paid:,.1f}, owed {owed_clash:,.1f}"
+                if abs(grid.clash_paid - owed_clash) > tol
+                else (f" · paid {owed_clash:,.0f}" if owed_clash else "")
+            ),
+        )
+
     # Terms per film.
     by_film = grid.by_film()
     for f in brief.films:
@@ -421,12 +545,13 @@ def check(brief: Brief, grid: Grid) -> Report:
             abs(grid.admissions - sold) <= tol,
             f"{grid.admissions:,.1f} claimed · " + tail,
         )
-        net = grid.admissions - grid.hold_paid
+        net = grid.admissions - grid.hold_paid - grid.clash_paid
         r.add(
             "objective",
             abs(grid.objective - net) <= 0.01,
             f"{grid.objective:,.1f} = {grid.admissions:,.1f} admissions"
-            + (f" − {grid.hold_paid:,.0f} hold penalty" if grid.hold_paid else ""),
+            + (f" − {grid.hold_paid:,.0f} hold penalty" if grid.hold_paid else "")
+            + (f" − {grid.clash_paid:,.1f} clash penalty" if grid.clash_paid else ""),
         )
     return r
 
@@ -588,4 +713,79 @@ def check_week(week: WeekBrief, wg: WeekGrid) -> WeekReport:
                 f.id,
                 (f.id, "exclusive_screen") in given_up,
             )
+    return WeekReport(days=names, reports=reports, week=w)
+
+
+def check_festival(fest: FestivalBrief, wg: WeekGrid) -> WeekReport:
+    """Every day against its own unfolded brief, then the festival's own terms, counted
+    across the days from the sessions alone: each title screened as many times as its
+    booking says, and every guest's screening fell on a day and at an hour they could
+    attend. A relaxation declared on any day's grid covers the festival term."""
+    names = [d.name for d in fest.days]
+    w = Report()
+    w.add(
+        "days",
+        wg.days == names and len(wg.grids) == len(names),
+        f"{len(wg.grids)} grids for {len(names)} days"
+        + ("" if wg.days == names else f"; grid names {wg.days}, brief names {names}"),
+    )
+    briefs = fest.briefs()
+    reports = [
+        check(briefs[i], wg.grids[i]) if i < len(wg.grids) else Report()
+        for i in range(len(fest.days))
+    ]
+    grids = list(wg.grids)
+    given_up = {(t.film, t.term) for g in grids for t in g.relaxed}
+    for f in fest.films:
+        t = f.terms
+        per_day = [len([s for s in g.sessions if s.film == f.id]) for g in grids]
+        if t.screenings is not None:
+            n = sum(per_day)
+            where = " ".join(f"{d} {k}" for d, k in zip(names, per_day, strict=False) if k)
+            w.add(
+                "screenings",
+                n == t.screenings,
+                f"{n} of {t.screenings} · " + (where or "none"),
+                f.id,
+                (f.id, "screenings") in given_up,
+            )
+        if t.guest is not None:
+            g = t.guest
+            attended = [
+                f"{names[i]} {fmt_time(s.start)}"
+                for i, grid in enumerate(grids)
+                if names[i] in g.days
+                for s in grid.sessions
+                if s.film == f.id and g.covers(s.start)
+            ]
+            w.add(
+                "guest",
+                bool(attended),
+                (g.name + " " if g.name else "")
+                + f"there {g.window}: "
+                + (", ".join(attended) if attended else "no screening they can attend"),
+                f.id,
+                (f.id, "guest") in given_up,
+            )
+        if t.available is not None:
+            stray = [names[i] for i, k in enumerate(per_day) if k and names[i] not in t.available]
+            w.add(
+                "available",
+                not stray,
+                f"in town {'/'.join(t.available)}: "
+                + (
+                    f"screened {', '.join(stray)} without the print"
+                    if stray
+                    else "every screening inside"
+                ),
+                f.id,
+            )
+    minutes = sum(clash_minutes(b, g) for b, g in zip(briefs, grids, strict=False))
+    paid = sum(g.clash_paid for g in grids)
+    w.add(
+        "clashes",
+        True,
+        f"{minutes}′ of same-strand overlap over the festival"
+        + (f" · {paid:,.0f} paid" if paid else ""),
+    )
     return WeekReport(days=names, reports=reports, week=w)
