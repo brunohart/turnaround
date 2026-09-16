@@ -20,7 +20,8 @@ for b in "${briefs[@]}"; do
   why=""
   tl=30
   [ "$n" = "regent" ] && why="--why"  # the hero sheet carries every session's why (one solve per session)
-  [ "$n" = "sixteen" ] && tl=60       # the multiplex gets the bench's minute per day (docs/bench.md)
+  [ "$n" = "sixteen" ] && tl=90       # the multiplex: the bench's minute per day and a half again (docs/bench.md)
+  chflags -R nohidden .venv 2>/dev/null || true  # uv re-hides it under ~/Documents
   uv run turnaround plan "$b" --out "docs/grids/$n.json" --html "docs/grids/$n.html" --quiet --time-limit $tl $why || rc=$?
   if [ "$rc" -eq 2 ]; then
     uv run turnaround plan "$b" --relax --out "docs/grids/$n.json" --html "docs/grids/$n.html" --quiet --time-limit $tl

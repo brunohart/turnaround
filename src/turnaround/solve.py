@@ -326,7 +326,14 @@ def _build(
     # can be permuted into that order, so nothing is lost. Not under a probe: forbidding a
     # show names one room, and the permutation would move the forbidden show onto it.
     groups = identical_screens(brief) if tuning.symmetry and not forbid else []
-    group_ranks = tuning.group_ranks if tuning.group_ranks is not None else hint is not None
+    # A hint is complete when every session of it is a candidate today; a Sunday that opens
+    # at 11:00 after a Saturday that ran to 23:00 gets a partial one, and a partial hint pins
+    # only what it names. Ranks per capacity class only when the hint is complete: on a
+    # poor hint they cost the first grid (docs/bench.md).
+    had = {(sn.screen, sn.film, sn.start) for sn in hint.sessions} if hint is not None else set()
+    keys = {(c.screen, c.film, c.start) for c in cands}
+    complete = hint is not None and had <= keys
+    group_ranks = tuning.group_ranks if tuning.group_ranks is not None else complete
     for g in groups:
         loads = [sum(c.block * mdl.x[c] for c in cands if c.screen == scr.id) for scr in g]
         for a, b in zip(loads, loads[1:], strict=False):
@@ -514,11 +521,11 @@ def _build(
     # improves on it; nothing about the answer depends on it.
     hinted = 0
     if hint is not None:
-        had = {(sn.screen, sn.film, sn.start) for sn in hint.sessions}
         for c in cands:
             here = (c.screen, c.film, c.start) in had
             hinted += here
-            m.add_hint(mdl.x[c], 1 if here else 0)
+            if here or complete:
+                m.add_hint(mdl.x[c], 1 if here else 0)
 
     mdl.stats = SolveStats(
         candidates=len(cands),
