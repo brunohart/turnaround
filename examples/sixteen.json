@@ -170,8 +170,8 @@
         "min_shows": 4,
         "prime_shows": 2,
         "exclusive_until": "Sun",
-        "min_shows_per_week": 36,
-        "prime_shows_per_week": 12
+        "min_shows_per_week": 28,
+        "prime_shows_per_week": 7
       }
     },
     {
@@ -243,7 +243,7 @@
       "terms": {
         "min_shows": 4,
         "prime_shows": 2,
-        "min_shows_per_week": 30
+        "min_shows_per_week": 21
       }
     },
     {
