@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from typer.testing import CliRunner
@@ -84,3 +85,54 @@ def test_what_if_can_add_an_usher(tmp_path: Path) -> None:
     )
     assert r.exit_code == 0, r.output
     assert "objective" in r.output
+
+
+def test_diff_names_the_re_plan_as_a_table_and_as_json(tmp_path: Path) -> None:
+    brief, grid = _regent_grid(tmp_path)
+    g = Grid.model_validate_json(grid.read_text())
+    first = min(g.sessions, key=lambda s: s.start)
+    # the re-plan: the first session five minutes earlier, the last one gone
+    last = max(g.sessions, key=lambda s: s.start)
+    moved = first.model_copy(
+        update={
+            "start": first.start - 5,
+            "feature_start": first.feature_start - 5,
+            "feature_end": first.feature_end - 5,
+            "clear": first.clear - 5,
+        }
+    )
+    new = g.model_copy(
+        update={"sessions": [moved] + [s for s in g.sessions if s not in (first, last)]}
+    )
+    new_path = tmp_path / "replan.json"
+    new_path.write_text(new.model_dump_json(indent=2))
+    out = tmp_path / "diff.json"
+    html = tmp_path / "replan.html"
+    r = runner.invoke(
+        app,
+        [
+            "diff",
+            str(grid),
+            str(new_path),
+            "--brief",
+            str(brief),
+            "--out",
+            str(out),
+            "--html",
+            str(html),
+        ],
+    )
+    assert r.exit_code == 0, r.output
+    assert "1 removed" in r.output and "1 moved" in r.output
+    assert f"{first.key}" in r.output and moved.key in r.output
+    assert "sessions 15 → 14" in r.output
+    assert "seats on offer" in r.output
+    written = json.loads(out.read_text())
+    assert len(written["removed"]) == 1 and written["removed"][0]["start"] == last.start
+    assert written["moved"][0]["title"]  # the brief names the titles
+    text = html.read_text()
+    assert "Re-plan sheet" in text and 'class="block was-here' in text
+    r = runner.invoke(app, ["diff", str(grid), str(new_path), "--json"])
+    assert r.exit_code == 0 and '"moved"' in r.output
+    r = runner.invoke(app, ["diff", str(grid), str(new_path), "--html", str(html)])
+    assert r.exit_code == 1 and "--html needs --brief" in r.output

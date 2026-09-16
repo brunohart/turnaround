@@ -23,7 +23,7 @@
   <div class="wash"></div>
   <header>
     <div>
-      <div class="stamp mono">Festival sheet · {{ days|length }} days · {{ wg.status }}{% if relaxed_total %} · relaxed{% endif %}</div>
+      <div class="stamp mono">{% if diffs %}Festival re-plan{% else %}Festival sheet{% endif %} · {{ days|length }} days · {{ wg.status }}{% if relaxed_total %} · relaxed{% endif %}</div>
       <h1><span class="ghost" aria-hidden="true">{{ fest.festival }}</span>{{ fest.festival }}</h1>
     </div>
     <div class="meta mono">
@@ -80,7 +80,7 @@
   <section class="day-page">
     <div class="day-head">
       <div>
-        <div class="stamp mono">{{ dd.name }} · {{ dd.grid.status }}{% if dd.grid.relaxed %} · relaxed{% endif %}</div>
+        <div class="stamp mono">{{ dd.name }} · {{ dd.grid.status }}{% if dd.grid.relaxed %} · relaxed{% endif %}{% if dd.diff %} · re-plan · {{ dd.diff.summary }}{% endif %}</div>
         <h2><span class="ghost" aria-hidden="true">{{ dd.name }}</span>{{ dd.name }}{% if dd.brief.date %} <span style="color:var(--grey);font-weight:400">{{ dd.brief.date }}</span>{% endif %}</h2>
       </div>
       <div class="meta mono">
@@ -94,6 +94,7 @@
     </div>
     {% if dd.grid.status in ("OPTIMAL", "FEASIBLE") %}
     {{ day.grid(dd.brief, dd.d) }}
+    {{ day.replan(dd.d) }}
     {% if dd.clashes %}<p class="clash-line mono">clashes · {% for c in dd.clashes %}<b>{{ c.strand }}</b> {{ c.at }} {{ c.titles|join(" v ") }} {{ c.minutes }}′{% if not loop.last %} · {% endif %}{% endfor %}</p>{% endif %}
     {{ day.tables(dd.d, dd.report) }}
     {{ day.strips(dd.brief, dd.d, dd.name ~ (" " ~ dd.brief.date if dd.brief.date else "")) }}

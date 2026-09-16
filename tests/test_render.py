@@ -84,3 +84,55 @@ def test_terms_sheet_is_a_letter() -> None:
     html = render_terms_html(b, grid, check(b, grid))
     assert "@page letter { size:A4 portrait;" in html
     assert ".sheet { page:letter; }" in html
+
+
+def test_the_re_plan_sheet_marks_moves_additions_and_removals() -> None:
+    from turnaround.diff import diff
+    from turnaround.render import day_context
+
+    b, _ = _booth()
+    grid = solve(b, time_limit_s=20)
+    by_start = sorted(grid.sessions, key=lambda s: s.start)
+    first, last = by_start[0], by_start[-1]
+    moved = first.model_copy(
+        update={
+            "start": first.start - 5,
+            "feature_start": first.feature_start - 5,
+            "feature_end": first.feature_end - 5,
+            "clear": first.clear - 5,
+        }
+    )
+    old = grid.model_copy(update={"sessions": [moved] + [s for s in by_start[1:]]})
+    new = grid.model_copy(update={"sessions": [s for s in by_start if s is not last]})
+    d = diff(old, new, b)
+    assert len(d.moved) == 1 and len(d.removed) == 1 and not d.added
+    html = render_html(b, new, check(b, new), diff=d)
+    assert "Re-plan sheet" in html and "Re-plan · 1 removed · 1 moved" in html
+    # the ghost where the moved session was, on the ink hatch, and its old time
+    assert html.count('class="block was-here mono"') == 1
+    assert f"was {moved.start_hhmm}" in html
+    # the removed session struck through in the by-title table
+    assert html.count('class="st gone"') == 1
+    assert f'title="removed · was on {b.screen(last.screen).label}">{last.start_hhmm}' in html
+    # the orange stamp only on an addition, and none here; the legend says what the marks mean
+    assert '<span class="new">added</span>' not in html
+    assert "was here" in html and "removed</span>" in html
+    added = grid.model_copy(update={"sessions": by_start + [moved]})
+    html2 = render_html(b, added, None, diff=diff(grid, added, b))
+    assert html2.count('<span class="new">added</span>') == 2  # the block and its booth strip
+    # a removed title with no session left today survives the festival fold
+    away = b.model_copy(
+        update={
+            "films": [
+                f.model_copy(update={"terms": f.terms.model_copy(update={"max_shows": 0})})
+                if f.id == last.film
+                else f
+                for f in b.films
+            ]
+        }
+    )
+    gone = grid.model_copy(update={"sessions": [s for s in by_start if s.film != last.film]})
+    d2 = diff(grid, gone, away)
+    ctx = day_context(away, gone, hide_away=True, diff=d2)
+    assert any(f["film"].id == last.film and f["removed"] for f in ctx["films"])
+    assert all(f["film"].id != last.film for f in day_context(away, gone, hide_away=True)["films"])

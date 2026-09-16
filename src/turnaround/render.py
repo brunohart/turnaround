@@ -15,12 +15,14 @@ from typing import Any
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from .check import Check, Report, WeekReport, admissions, clashes, term_is_set, whys
+from .diff import GridDiff
 from .model import (
     TERM_SCOPE,
     Brief,
     FestivalBrief,
     Film,
     Grid,
+    Session,
     WeekBrief,
     WeekGrid,
     festival_terms_set,
@@ -37,14 +39,25 @@ def _env() -> Environment:
     return env
 
 
-def day_context(brief: Brief, grid: Grid, *, hide_away: bool = False) -> dict[str, Any]:
+def day_context(
+    brief: Brief, grid: Grid, *, hide_away: bool = False, diff: GridDiff | None = None
+) -> dict[str, Any]:
     """Everything the grid macro needs to draw one day: rows of blocks on a ruler. The
     same rows feed the booth strips (one screen, its sessions in mono, turned vertical).
     `hide_away` leaves a title whose print is not in town today (max_shows 0, nothing
-    screened) out of the by-title table: a festival day lists what plays, not the slate."""
+    screened) out of the by-title table: a festival day lists what plays, not the slate.
+    With a `diff` the day is a re-plan: a moved session leaves a ghost outline where it
+    was, an added one carries a stamp, and a removed one is struck through in the
+    by-title table — where it stays even when the fold would hide its title."""
     p = brief.policy
     day_start = p.open_min - (p.open_min % 60)
-    latest_clear = max((s.clear for s in grid.sessions), default=p.last_start_min + 120)
+    ghosts = [m for m in diff.moved if m.what != "length"] if diff else []
+    latest_clear = max(
+        [s.clear for s in grid.sessions] + [m.old.clear for m in ghosts],
+        default=p.last_start_min + 120,
+    )
+    old_start = min([s.start for s in grid.sessions] + [m.old.start for m in ghosts], default=0)
+    day_start = min(day_start, old_start - old_start % 60) if ghosts else day_start
     day_end = latest_clear + (60 - latest_clear % 60) % 60
     span = max(day_end - day_start, 60)
     hours = list(range(day_start, day_end + 1, 60))
@@ -62,10 +75,22 @@ def day_context(brief: Brief, grid: Grid, *, hide_away: bool = False) -> dict[st
             # left over the feature by the credits it overlaps, so the three still add up.
             # The minutes beside them are what the booth strip prints, turned vertical.
             nxt = sessions[i + 1] if i + 1 < len(sessions) else None
+            was = diff.moved_from(s) if diff else None
             blocks.append(
                 {
                     "film": f,
                     "s": s,
+                    "added": diff.is_added(s) if diff else False,
+                    "was": (
+                        f"was {fmt_time(was.start)}"
+                        + (
+                            f" on {brief.screen(was.screen).label}"
+                            if was.screen != s.screen
+                            else ""
+                        )
+                        if was
+                        else None
+                    ),
                     "left": (s.start - day_start) / span * 100,
                     "w": block / span * 100,
                     "pre": brief.preshow_for(f) / block * 100,
@@ -83,10 +108,27 @@ def day_context(brief: Brief, grid: Grid, *, hide_away: bool = False) -> dict[st
                 }
             )
         own_hours = scr.open is not None or scr.last_start is not None
+        # the ghosts: where a moved session was, drawn on the row it left
+        ghost_blocks = [
+            {
+                "film": brief.film(m.old.film),
+                "left": (m.old.start - day_start) / span * 100,
+                "w": (m.old.clear - m.old.start) / span * 100,
+                "start": fmt_time(m.old.start),
+                "now": m.new.key if m.new.screen != scr.id else f"now {fmt_time(m.new.start)}",
+                "title": (
+                    f"{brief.film(m.old.film).title} was here at {fmt_time(m.old.start)} · "
+                    f"now {m.new.key}"
+                ),
+            }
+            for m in ghosts
+            if m.old.screen == scr.id
+        ]
         rows.append(
             {
                 "screen": scr,
                 "blocks": blocks,
+                "ghosts": ghost_blocks,
                 "count": len(sessions),
                 "hours": (
                     f"{fmt_time(brief.open_for(scr))}–{fmt_time(brief.last_start_for(scr))}"
@@ -116,15 +158,24 @@ def day_context(brief: Brief, grid: Grid, *, hide_away: bool = False) -> dict[st
     )
     films = []
     seats_sold = {a.film: a for a in admissions(brief, grid)}
+    removed_by: dict[str, list[dict[str, str]]] = {}
+    for r in diff.removed if diff else []:
+        removed_by.setdefault(r.film, []).append(
+            {"hhmm": fmt_time(r.start), "screen": brief.screen(r.screen).label}
+        )
     for f in brief.films:
         ss = grid.by_film().get(f.id, [])
-        if hide_away and f.terms.max_shows == 0 and not ss:
+        if hide_away and f.terms.max_shows == 0 and not ss and f.id not in removed_by:
             continue
         a = seats_sold[f.id]
         films.append(
             {
                 "film": f,
                 "starts": [fmt_time(s.start) for s in ss],
+                "removed": removed_by.get(f.id, []),
+                "count_was": next(
+                    (t.old for t in (diff.titles if diff else []) if t.film == f.id), None
+                ),
                 "whys": [
                     {
                         "start": fmt_time(s.start),
@@ -135,6 +186,8 @@ def day_context(brief: Brief, grid: Grid, *, hide_away: bool = False) -> dict[st
                         >= 0.5,
                         "forced": s.forced,
                         "why": why_of[(s.screen, s.start)].sentence,
+                        "was": _was(brief, diff, s),
+                        "added": diff.is_added(s) if diff else False,
                     }
                     for s in ss
                 ],
@@ -164,10 +217,50 @@ def day_context(brief: Brief, grid: Grid, *, hide_away: bool = False) -> dict[st
         forced_by[("objective", None)] = [f"{len(wanted)} sessions"] + [
             f"{s.key} −{s.forced.delta:,.0f}" for s in top if s.forced
         ]
+    changes = []
+    if diff:
+        title_of = {f.id: f.title for f in brief.films}
+        for m in diff.moved:
+            changes.append(
+                {
+                    "at": m.new.start,
+                    "what": f"moved · {m.what}",
+                    "title": title_of.get(m.film, m.film),
+                    "was": m.old.key
+                    if m.what != "length"
+                    else f"{m.old.key} · clear {fmt_time(m.old.clear)}",
+                    "now": m.new.key
+                    if m.what != "length"
+                    else f"{m.new.key} · clear {fmt_time(m.new.clear)}",
+                }
+            )
+        for s in diff.added:
+            changes.append(
+                {
+                    "at": s.start,
+                    "what": "added",
+                    "title": title_of.get(s.film, s.film),
+                    "was": "—",
+                    "now": s.key,
+                }
+            )
+        for s in diff.removed:
+            changes.append(
+                {
+                    "at": s.start,
+                    "what": "removed",
+                    "title": title_of.get(s.film, s.film),
+                    "was": s.key,
+                    "now": "—",
+                }
+            )
+        changes.sort(key=lambda c: (c["at"], c["what"]))
     return {
         "rows": rows,
         "films": films,
         "hours": hours,
+        "diff": diff,
+        "changes": changes,
         "day_start": day_start,
         "span": span,
         "prime_left": (p.prime_start_min - day_start) / span * 100,
@@ -187,9 +280,27 @@ def day_context(brief: Brief, grid: Grid, *, hide_away: bool = False) -> dict[st
     }
 
 
-def render_html(brief: Brief, grid: Grid, report: Report | None = None) -> str:
+def _was(brief: Brief, diff: GridDiff | None, s: Session) -> str | None:
+    """For the by-title table: where a moved session was — the time alone if it stayed
+    in its room, the room and time if it did not."""
+    if diff is None:
+        return None
+    old = diff.moved_from(s)
+    if old is None:
+        return None
+    if old.screen == s.screen:
+        return fmt_time(old.start) if old.start != s.start else None
+    return f"{brief.screen(old.screen).label} {fmt_time(old.start)}"
+
+
+def render_html(
+    brief: Brief, grid: Grid, report: Report | None = None, diff: GridDiff | None = None
+) -> str:
+    """The day's sheet; with a `diff`, the re-plan sheet against the grid it replaces."""
     tpl = _env().get_template("sheet.html.j2")
-    return tpl.render(brief=brief, grid=grid, report=report, d=day_context(brief, grid))
+    return tpl.render(
+        brief=brief, grid=grid, report=report, d=day_context(brief, grid, diff=diff), diff=diff
+    )
 
 
 def _overrides(week: WeekBrief | FestivalBrief, i: int) -> list[str]:
@@ -212,8 +323,10 @@ def render_week_html(
     wg: WeekGrid,
     report: WeekReport | None = None,
     explain: dict[str, str] | None = None,
+    diffs: dict[str, GridDiff] | None = None,
 ) -> str:
-    """One sheet for the week. `explain` maps a day name to the sentence for its conflict."""
+    """One sheet for the week. `explain` maps a day name to the sentence for its conflict;
+    `diffs` maps a day name to its re-plan diff, and the week is then a re-plan sheet."""
     tpl = _env().get_template("week.html.j2")
     briefs = week.briefs()
     hold = set(week.hold_indices)
@@ -224,7 +337,8 @@ def render_week_html(
                 "name": d.name,
                 "brief": brief,
                 "grid": grid,
-                "d": day_context(brief, grid),
+                "d": day_context(brief, grid, diff=(diffs or {}).get(d.name)),
+                "diff": (diffs or {}).get(d.name),
                 "report": report.reports[i] if report else None,
                 "hold": i in hold,
                 "overrides": _overrides(week, i),
@@ -267,7 +381,20 @@ def render_week_html(
         turned_away=sum(a.turned_away for d in sold_by_day for a in d.values()),
         hold_paid=sum(g.hold_paid for g in wg.grids),
         relaxed_total=sum(len(g.relaxed) for g in wg.grids),
+        diffs=diffs,
+        diff_summary=_diff_summary(diffs),
     )
+
+
+def _diff_summary(diffs: dict[str, GridDiff] | None) -> str | None:
+    if not diffs:
+        return None
+    added = sum(len(d.added) for d in diffs.values())
+    removed = sum(len(d.removed) for d in diffs.values())
+    moved = sum(len(d.moved) for d in diffs.values())
+    counts = ((added, "added"), (removed, "removed"), (moved, "moved"))
+    parts = [f"{n} {what}" for n, what in counts if n]
+    return " · ".join(parts) if parts else "no change"
 
 
 def _fold_away(brief: Brief, report: Report) -> Report:
@@ -300,9 +427,11 @@ def render_festival_html(
     wg: WeekGrid,
     report: WeekReport | None = None,
     explain: dict[str, str] | None = None,
+    diffs: dict[str, GridDiff] | None = None,
 ) -> str:
     """One sheet for the festival: the programme by title across the days, the festival's
-    proof, then every day's grid on its own page with the venues as its rows."""
+    proof, then every day's grid on its own page with the venues as its rows. With
+    `diffs` (by day name) each day page is a re-plan against the grid it replaces."""
     tpl = _env().get_template("festival.html.j2")
     briefs = fest.briefs()
     days = []
@@ -313,7 +442,8 @@ def render_festival_html(
                 "name": d.name,
                 "brief": brief,
                 "grid": grid,
-                "d": day_context(brief, grid, hide_away=True),
+                "d": day_context(brief, grid, hide_away=True, diff=(diffs or {}).get(d.name)),
+                "diff": (diffs or {}).get(d.name),
                 "report": _fold_away(brief, report.reports[i]) if report else None,
                 "overrides": _overrides(fest, i),
                 "explain": (explain or {}).get(d.name),
@@ -398,6 +528,8 @@ def render_festival_html(
         clash_minutes=clash_minutes_total,
         guests=sum(1 for f in fest.films if f.terms.guest),
         relaxed_total=sum(len(g.relaxed) for g in wg.grids),
+        diffs=diffs,
+        diff_summary=_diff_summary(diffs),
     )
 
 

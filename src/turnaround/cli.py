@@ -14,6 +14,7 @@ from rich.table import Table
 from . import __version__
 from .check import WeekReport, admissions, check_festival, check_week, whys
 from .check import check as run_check
+from .diff import GridDiff, WeekDiff, diff, diff_week
 from .inout import Day, export_csv, export_ical, export_json_text, import_csv, screen_ids
 from .model import (
     Brief,
@@ -721,6 +722,158 @@ def what_if_cmd(
     if not rep.ok:
         console.print("[red bold]the what-if grid fails its own check — this is a bug[/red bold]")
         raise typer.Exit(code=3)
+
+
+def _delta_text(old: float, new: float) -> str:
+    """`1,532 → 1,609 (+76)`; the arrow only when the number moved."""
+    if abs(new - old) < 0.05:
+        return f"{new:,.0f}"
+    d = new - old
+    colour = "blue" if d > 0 else "red"
+    return f"{old:,.0f} → [bold]{new:,.0f}[/bold] [{colour}]({d:+,.0f})[/{colour}]"
+
+
+def _print_diff(d: GridDiff, heading: str) -> None:
+    """The re-plan as a table: what moved, what came, what went; then the titles whose
+    count changed and the grids' claims in one line each."""
+    t = Table(title=heading, show_lines=False)
+    t.add_column("What", style="bold")
+    t.add_column("Title")
+    t.add_column("Was")
+    t.add_column("Now")
+    rows: list[tuple[int, str, str, str, str]] = []
+    for m in d.moved:
+        rows.append(
+            (m.new.start, f"moved · {m.what}", m.title or m.film, m.old.key, m.new.key)
+            if m.what != "length"
+            else (
+                m.new.start,
+                "moved · length",
+                m.title or m.film,
+                f"{m.old.key} clear {fmt_time(m.old.clear)}",
+                f"{m.new.key} clear {fmt_time(m.new.clear)}",
+            )
+        )
+    for s in d.added:
+        rows.append((s.start, "[blue]added[/blue]", s.film, "—", f"[blue]{s.key}[/blue]"))
+    for s in d.removed:
+        rows.append((s.start, "[red]removed[/red]", s.film, f"[strike]{s.key}[/strike]", "—"))
+    titles = {t.film: t.title for t in d.titles if t.title}
+    titles.update({m.film: m.title for m in d.moved if m.title})
+    for _, what, film, was, now in sorted(rows, key=lambda r: (r[0], r[1])):
+        t.add_row(what, titles.get(film, film), was, now)
+    if not rows:
+        t.add_row("[dim]no change[/dim]", "", "", "")
+    console.print(t)
+    if d.titles:
+        console.print(
+            "by title: "
+            + " · ".join(f"{x.title or x.film} {x.old} → {x.new} ({x.delta:+d})" for x in d.titles)
+        )
+    tm = d.terms
+    line = f"sessions {_delta_text(*d.sessions)}"
+    if d.seats:
+        line += f" · seats on offer {_delta_text(d.seats.old, d.seats.new)}"
+    line += (
+        f" · status {tm.status[0]} → {tm.status[1]}"
+        if tm.status[0] != tm.status[1]
+        else f" · {tm.status[1]}"
+    )
+    console.print(line)
+    claims = f"objective {_delta_text(tm.objective.old, tm.objective.new)}"
+    if tm.admissions:
+        claims += f" · expected admissions {_delta_text(tm.admissions.old, tm.admissions.new)}"
+    if tm.hold_paid.old or tm.hold_paid.new:
+        claims += f" · paid to hold {_delta_text(tm.hold_paid.old, tm.hold_paid.new)}"
+    if tm.clash_paid.old or tm.clash_paid.new:
+        claims += f" · paid in clashes {_delta_text(tm.clash_paid.old, tm.clash_paid.new)}"
+    console.print(claims)
+    if tm.relaxed_added:
+        console.print("[red]now given up:[/red] " + " · ".join(str(x) for x in tm.relaxed_added))
+    if tm.relaxed_removed:
+        console.print("[blue]held again:[/blue] " + " · ".join(str(x) for x in tm.relaxed_removed))
+
+
+def _is_week_grid(path: Path) -> bool:
+    head = json.loads(path.read_text())
+    return isinstance(head, dict) and "grids" in head
+
+
+@app.command("diff")
+def diff_cmd(
+    old_path: Annotated[Path, typer.Argument(help="The grid as it stands (JSON)")],
+    new_path: Annotated[Path, typer.Argument(help="The re-planned grid (JSON)")],
+    brief_path: Annotated[
+        Path | None,
+        typer.Option(
+            "--brief",
+            help="The brief both grids answer: names the titles, counts the seats, and "
+            "is what the sheet needs",
+        ),
+    ] = None,
+    as_json: Annotated[
+        bool, typer.Option("--json", help="Print the diff as JSON instead of the table")
+    ] = False,
+    out: Annotated[Path | None, typer.Option("--out", "-o", help="Write the diff JSON")] = None,
+    html: Annotated[
+        Path | None, typer.Option("--html", help="Write the re-plan sheet (needs --brief)")
+    ] = None,
+) -> None:
+    """What changed between two grids of one day, or two weeks, or two festivals:
+    sessions added, removed and moved (same title, new time or room), the seats and the
+    show counts by title, and the grids' claims. The Thursday re-plan artefact. A week
+    is diffed day by day by name, so a re-plan that drops a day reads as one."""
+    if html and not brief_path:
+        console.print("[red]--html needs --brief: the sheet is drawn on the brief[/red]")
+        raise typer.Exit(code=1)
+    if _is_week_grid(old_path) != _is_week_grid(new_path):
+        console.print("[red]one of these is a week of grids and the other a day[/red]")
+        raise typer.Exit(code=1)
+    if _is_week_grid(old_path):
+        old_w, new_w = _load_week_grid(old_path), _load_week_grid(new_path)
+        week: WeekBrief | FestivalBrief | None = None
+        briefs: dict[str, Brief] = {}
+        if brief_path:
+            week = (
+                _load_festival(brief_path) if _is_festival(brief_path) else _load_week(brief_path)
+            )
+            briefs = {d.name: b for d, b in zip(week.days, week.briefs(), strict=True)}
+        wd: WeekDiff = diff_week(old_w, new_w, briefs)
+        if as_json:
+            console.print_json(wd.model_dump_json())
+        else:
+            for d in wd.days:
+                _print_diff(d, f"{d.day} · {d.summary}")
+            console.print(f"[bold]{wd.house}[/bold] · {wd.summary}")
+            if wd.held[0] != wd.held[1]:
+                console.print(
+                    f"holds: {', '.join(wd.held[0]) or 'none'} → {', '.join(wd.held[1]) or 'none'}"
+                )
+        if out:
+            out.write_text(wd.model_dump_json(indent=2))
+            console.print(f"diff → {out}")
+        if html and week is not None:
+            diffs = {d.day: d for d in wd.days if d.day}
+            if isinstance(week, FestivalBrief):
+                text = render_festival_html(week, new_w, check_festival(week, new_w), diffs=diffs)
+            else:
+                text = render_week_html(week, new_w, check_week(week, new_w), diffs=diffs)
+            html.write_text(text)
+            console.print(f"sheet → {html}")
+        return
+    old_g, new_g = _load_grid(old_path), _load_grid(new_path)
+    brief = _load_brief(brief_path) if brief_path else None
+    d = diff(old_g, new_g, brief)
+    if as_json:
+        console.print_json(d.model_dump_json())
+    else:
+        _print_diff(d, f"{d.house} · {d.date or 'the day'} · {d.summary}")
+    if out:
+        out.write_text(d.model_dump_json(indent=2))
+        console.print(f"diff → {out}")
+    if html and brief is not None:
+        html.write_text(render_html(brief, new_g, run_check(brief, new_g), diff=d))
+        console.print(f"sheet → {html}")
 
 
 @app.command("check")

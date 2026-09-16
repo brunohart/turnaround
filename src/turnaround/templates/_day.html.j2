@@ -90,6 +90,29 @@
      stays on the turnaround (DESIGN.md), so the objective's mark is the ink at less than half strength */
   .block .feat.forced::before, .block .feat.wanted::before { content:""; position:absolute; right:0; bottom:0; width:0; height:0; border-style:solid; border-width:0 0 9px 9px; border-color:transparent transparent var(--blue) transparent; }
   .block .feat.wanted::before { border-color:transparent transparent rgba(26,26,26,.45) transparent; }
+  /* the re-plan (Day 11): a moved session leaves a ghost where it was — an outline on the ink
+     hatch, nothing filled — an added one carries a stamp, a removed one is struck through in the
+     by-title table. The stamp is orange: the one orange on the grid besides the turnaround, and
+     only on a re-plan sheet (DESIGN.md) */
+  .block.was-here { display:block; border:1px dashed var(--ink); background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.16) 3px 4px); color:var(--grey); padding:5px 6px; overflow:hidden; white-space:nowrap; letter-spacing:.08em; z-index:0; }
+  .block.was-here:hover { transform:none; }
+  .block .feat { z-index:1; }
+  .new { display:inline-block; font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.12em; font-size:9px; font-weight:400; color:var(--orange); border:1px solid var(--orange); padding:0 4px; line-height:1.5; background:var(--bg); white-space:nowrap; }
+  .block .feat .new { position:absolute; right:-7px; top:-9px; transform:rotate(-4deg); z-index:2; }
+  .vblock .vfeat .new { position:absolute; right:-6px; top:-8px; transform:rotate(-4deg); z-index:2; }
+  td.starts .st s.was, td.starts .st.gone { text-decoration:line-through; }
+  td.starts .st s.was { color:var(--grey); margin-right:2px; }
+  td.starts .st.gone { color:var(--red); }
+  td .count-was { color:var(--grey); }
+  .legend i.ghost-i { border:1px dashed var(--ink); background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.16) 3px 4px); }
+  .legend s { color:var(--red); }
+  .replan { margin-top:36px; }
+  .replan .cols { margin-top:0; }
+  .replan td.what { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.1em; font-size:10px; white-space:nowrap; }
+  .replan td.what.added { color:var(--orange); } .replan td.what.removed { color:var(--red); }
+  .replan td.starts s { color:var(--red); }
+  .replan .claims { color:var(--grey); line-height:1.9; }
+  .replan .claims b { color:var(--ink); font-weight:500; }
   footer { margin-top:56px; color:var(--grey); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
   .week-table th.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.14em; font-size:11px; }
   .week-table td.day { font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; font-size:11px; letter-spacing:.02em; line-height:1.6; white-space:nowrap; }
@@ -179,12 +202,16 @@
           <div class="cap mono">{{ row.screen.capacity }} seats · {{ row.screen.formats|join("/") }} · {{ row.count }} shows{% if row.hours %} · {{ row.hours }}{% endif %}</div>
         </div>
         <div class="lane">
+          {% for g in row.ghosts %}
+          <div class="block was-here mono" style="left:{{ g.left }}%; width:{{ g.w }}%" title="{{ g.title }}">{{ g.start }}</div>
+          {% endfor %}
           {% for b in row.blocks %}
           <div class="block{% if b.prime %} prime{% endif %}" style="left:{{ b.left }}%; width:{{ b.w }}%"
-               title="{{ b.film.title }}{% if b.film.strand %} · {{ b.film.strand }}{% endif %} · preshow {{ b.s.start|hhmm }} · feature {{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }}{% if b.over > 0 %} · turnaround from {{ b.turn_begin|hhmm }} over the credits{% endif %} · clear {{ b.s.clear|hhmm }}
+               title="{{ b.film.title }}{% if b.film.strand %} · {{ b.film.strand }}{% endif %} · preshow {{ b.s.start|hhmm }} · feature {{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }}{% if b.over > 0 %} · turnaround from {{ b.turn_begin|hhmm }} over the credits{% endif %} · clear {{ b.s.clear|hhmm }}{% if b.added %} · added in this plan{% elif b.was %} · {{ b.was }}{% endif %}
 why: {{ b.why }}">
             <div class="pre" style="width:{{ b.pre }}%"></div>
             <div class="feat{% if b.forced and b.forced.by == 'terms' %} forced{% elif b.forced and b.forced.by == 'objective' %} wanted{% endif %}" style="width:{{ b.feat }}%">
+              {% if b.added %}<span class="new">added</span>{% endif %}
               <div class="t">{{ b.film.title }}</div>
               <div class="tm mono">{{ b.s.start|hhmm }} · {{ b.film.runtime_min }}′{% if b.film.format != "2D" %} · {{ b.film.format }}{% endif %}</div>
             </div>
@@ -195,7 +222,7 @@ why: {{ b.why }}">
       </div>
       {% endfor %}
     </div>
-    <div class="legend mono"><span><i class="pre"></i>{{ d.preshows }}</span><span><i class="feat"></i>feature</span><span><i class="clean"></i>turnaround{% if d.credits %} · from the credits{% endif %}</span><span>{{ d.stagger }}</span>{% if d.staff %}<span>{{ d.staff }}</span>{% endif %}{% if d.probed %}<span><i class="feat forced-i"></i>forced by the terms</span><span><i class="feat wanted-i"></i>by the objective</span>{% endif %}</div>
+    <div class="legend mono"><span><i class="pre"></i>{{ d.preshows }}</span><span><i class="feat"></i>feature</span><span><i class="clean"></i>turnaround{% if d.credits %} · from the credits{% endif %}</span><span>{{ d.stagger }}</span>{% if d.staff %}<span>{{ d.staff }}</span>{% endif %}{% if d.probed %}<span><i class="feat forced-i"></i>forced by the terms</span><span><i class="feat wanted-i"></i>by the objective</span>{% endif %}{% if d.diff %}<span><i class="ghost-i"></i>was here</span><span><b class="new">added</b> new this plan</span><span><s>15:00</s> removed</span>{% endif %}</div>
   </div>
 {% endmacro %}
 
@@ -219,8 +246,9 @@ why: {{ b.why }}">
       <div class="vblock{% if b.prime %} prime{% endif %}">
         <div class="vpre mono"><span><b>{{ b.s.start|hhmm }}</b> doors</span><span>preshow {{ b.pre_min }}′</span></div>
         <div class="vfeat">
+          {% if b.added %}<span class="new">added</span>{% endif %}
           <div class="t">{{ b.film.title }}</div>
-          <div class="tm mono">{{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }} · {{ b.film.runtime_min }}′{% if b.film.format != "2D" %} · {{ b.film.format }}{% endif %}{% if b.prime %} · prime{% endif %}{% if b.film.strand %} <span class="tag">{{ b.film.strand }}</span>{% endif %}</div>
+          <div class="tm mono">{{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }} · {{ b.film.runtime_min }}′{% if b.film.format != "2D" %} · {{ b.film.format }}{% endif %}{% if b.prime %} · prime{% endif %}{% if b.film.strand %} <span class="tag">{{ b.film.strand }}</span>{% endif %}{% if b.was %} · {{ b.was }}{% endif %}</div>
         </div>
         <div class="vclean mono{% if b.over_min > 0 %} over{% endif %}"><span>turnaround {{ b.turn_begin|hhmm }}{% if b.over_min > 0 %} over the credits{% endif %}</span><span>clear <b>{{ b.s.clear|hhmm }}</b></span></div>
       </div>
@@ -242,12 +270,12 @@ why: {{ b.why }}">
         {% for f in d.films %}
         <tr>
           <td class="title"><b>{{ f.film.title }}</b>{% if f.film.strand %} <span class="tag">{{ f.film.strand }}</span>{% endif %}<br><span class="mono" style="color:var(--grey)">{{ f.film.runtime_min }}′ · {{ f.film.format }}{% if f.film.rating %} · {{ f.film.rating }}{% endif %} · {{ "demand stated" if f.film.demand else "w" ~ f.film.weight }}</span></td>
-          <td>{{ f.starts|length }}{% if f.film.terms.min_shows %}<span class="mono" style="color:var(--grey)"> /{{ f.film.terms.min_shows }} min</span>{% endif %}</td>
+          <td>{% if f.count_was is not none %}<span class="count-was mono">{{ f.count_was }} → </span>{% endif %}{{ f.starts|length }}{% if f.film.terms.min_shows %}<span class="mono" style="color:var(--grey)"> /{{ f.film.terms.min_shows }} min</span>{% endif %}</td>
           <td>{{ f.prime }}{% if f.film.terms.prime_shows %}<span class="mono" style="color:var(--grey)"> /{{ f.film.terms.prime_shows }}</span>{% endif %}</td>
           <td class="num">{{ "{:,}".format(f.seats) }}</td>
           <td class="num">{{ "{:,.0f}".format(f.admissions) }}</td>
           <td class="num{% if f.turned_away >= 0.5 %} away{% endif %}">{{ "{:,.0f}".format(f.turned_away) if f.turned_away >= 0.5 else "—" }}</td>
-          <td class="starts">{% for w in f.whys %}<span class="st" title="{{ w.why }}">{{ w.start }} <i{% if w.short %} class="short"{% endif %}>{{ "{:,.0f}".format(w.sold) }}</i>{% if w.forced and w.forced.by == "terms" %} <b class="fx">forced</b>{% elif w.forced and w.forced.by == "objective" %} <b class="fo">−{{ "{:,.0f}".format(w.forced.delta) }}</b>{% endif %}</span>{% endfor %}</td>
+          <td class="starts">{% for w in f.whys %}<span class="st" title="{{ w.why }}{% if w.was %} · was {{ w.was }}{% endif %}">{% if w.was %}<s class="was">{{ w.was }}</s> {% endif %}{{ w.start }} <i{% if w.short %} class="short"{% endif %}>{{ "{:,.0f}".format(w.sold) }}</i>{% if w.added %} <b class="new">added</b>{% endif %}{% if w.forced and w.forced.by == "terms" %} <b class="fx">forced</b>{% elif w.forced and w.forced.by == "objective" %} <b class="fo">−{{ "{:,.0f}".format(w.forced.delta) }}</b>{% endif %}</span>{% endfor %}{% for r in f.removed %}<span class="st gone" title="removed · was on {{ r.screen }}">{{ r.hhmm }}</span>{% endfor %}</td>
         </tr>
         {% endfor %}
         </tbody>
@@ -269,4 +297,39 @@ why: {{ b.why }}">
       {% else %}<p class="mono" style="color:var(--grey)">no check run</p>{% endif %}
     </div>
   </div>
+{% endmacro %}
+
+{% macro replan(d) %}
+  {% if d.diff %}
+  <div class="replan">
+    <div class="stamp mono">Re-plan · {{ d.diff.summary }}</div>
+    <div class="cols">
+      <div class="panel">
+        <div class="scroll"><table class="changes">
+          <thead><tr><th>What</th><th>Title</th><th>Was</th><th>Now</th></tr></thead>
+          <tbody>
+          {% for c in d.changes %}
+          <tr><td class="what{% if c.what == 'added' %} added{% elif c.what == 'removed' %} removed{% endif %}">{{ c.what }}</td><td><b>{{ c.title }}</b></td><td class="starts">{% if c.what == 'removed' %}<s>{{ c.was }}</s>{% else %}{{ c.was }}{% endif %}</td><td class="starts">{{ c.now }}</td></tr>
+          {% endfor %}
+          {% if not d.changes %}<tr><td colspan="4" class="mono" style="color:var(--grey)">nothing moved, nothing came, nothing went</td></tr>{% endif %}
+          </tbody>
+        </table></div>
+      </div>
+      <div class="panel">
+        {% set t = d.diff.terms %}
+        <div class="claims mono">
+          <div>sessions <b>{{ d.diff.sessions[0] }} → {{ d.diff.sessions[1] }}</b>{% if d.diff.seats %} · seats on offer <b>{{ "{:,.0f}".format(d.diff.seats.old) }} → {{ "{:,.0f}".format(d.diff.seats.new) }}</b>{% endif %}</div>
+          <div>objective <b>{{ "{:,.0f}".format(t.objective.old) }} → {{ "{:,.0f}".format(t.objective.new) }}</b>{% if t.objective.delta|abs >= 0.5 %} ({{ "{:+,.0f}".format(t.objective.delta) }}){% endif %}</div>
+          {% if t.admissions %}<div>expected admissions <b>{{ "{:,.0f}".format(t.admissions.old) }} → {{ "{:,.0f}".format(t.admissions.new) }}</b></div>{% endif %}
+          {% if t.hold_paid.old or t.hold_paid.new %}<div>paid to hold <b>{{ "{:,.0f}".format(t.hold_paid.old) }} → {{ "{:,.0f}".format(t.hold_paid.new) }}</b></div>{% endif %}
+          {% if t.clash_paid.old or t.clash_paid.new %}<div>paid in clashes <b>{{ "{:,.0f}".format(t.clash_paid.old) }} → {{ "{:,.0f}".format(t.clash_paid.new) }}</b></div>{% endif %}
+          {% for x in d.diff.titles %}<div>{{ x.title or x.film }} <b>{{ x.old }} → {{ x.new }}</b> show{{ 's' if x.new != 1 }}</div>{% endfor %}
+          {% if t.relaxed_added %}<div class="given-up">now given up: {% for r in t.relaxed_added %}{{ r }}{% if not loop.last %} · {% endif %}{% endfor %}</div>{% endif %}
+          {% if t.relaxed_removed %}<div class="ok">held again: {% for r in t.relaxed_removed %}{{ r }}{% if not loop.last %} · {% endif %}{% endfor %}</div>{% endif %}
+          <div>{% if t.status[0] != t.status[1] %}{{ t.status[0] }} → {{ t.status[1] }}{% else %}{{ t.status[1] }}, as it was{% endif %}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 {% endmacro %}

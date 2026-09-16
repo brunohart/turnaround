@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ brief.house }} — {{ brief.date or "the day" }} — turnaround</title>
+<title>{{ brief.house }} — {{ brief.date or "the day" }}{% if diff %} — re-plan{% endif %} — turnaround</title>
 {{ day.style() }}
 </head>
 <body>
@@ -11,12 +11,13 @@
   <div class="wash"></div>
   <header>
     <div>
-      <div class="stamp mono">Week sheet · {{ grid.status }}{% if grid.relaxed %} · relaxed{% endif %}</div>
+      <div class="stamp mono">{% if diff %}Re-plan sheet{% else %}Week sheet{% endif %} · {{ grid.status }}{% if grid.relaxed %} · relaxed{% endif %}</div>
       <h1><span class="ghost" aria-hidden="true">{{ brief.house }}</span>{{ brief.house }}</h1>
     </div>
     <div class="meta mono">
       <div><b>{{ brief.date or "—" }}</b></div>
       <div>{{ grid.sessions|length }} sessions · {{ brief.screens|length }} screens · {{ brief.films|length }} titles</div>
+      {% if diff %}<div>against the grid as it stood · {{ diff.sessions[0] }} sessions · {{ diff.terms.status[0] }} · <b>{{ diff.summary }}</b></div>{% endif %}
       {% if grid.relaxed %}<div class="given-up">{{ grid.relaxed|length }} term{{ 's' if grid.relaxed|length != 1 }} given up · see proof</div>{% endif %}
       <div><b>{{ "{:,.0f}".format(d.admissions) }}</b> expected admissions · {{ "{:,}".format(d.seats) }} seats on offer</div>
       {% if d.turned_away >= 0.5 %}<div class="given-up">{{ "{:,.0f}".format(d.turned_away) }} turned away at capacity</div>{% endif %}
@@ -27,6 +28,7 @@
   <div class="divider"></div>
 
   {{ day.grid(brief, d) }}
+  {{ day.replan(d) }}
   {{ day.tables(d, report) }}
   {{ day.strips(brief, d, (brief.day_name ~ " " if brief.day_name else "") ~ (brief.date or "the day")) }}
 
