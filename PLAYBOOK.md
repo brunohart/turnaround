@@ -81,11 +81,12 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - *From Day 3:* the demand rank literals (one per screen × title × daypart × rank) took the Regent from 0.8 s to 4.4 s. Measure their share first; the rank count is an upper bound the house-wide stagger could tighten.
 - *Run on Tue 16 Sep:* the Sunday slot did not fire. *Number hit:* 13.4 % gap at 60 s hinted, 16.3 % unhinted, against the 2 % asked (`docs/bench.md`); the Day 7 model was at 21.6 %. *Shipped besides:* `Grid.stats` (model size, first grid, bound, gap, the grid solved on), `plan --hint`, `--max-candidates`, `--probe-budget`, `scripts/bench.py`, `run.sh <name>` for one example. *Not done:* dominated starts — none are dominated in the exact sense on this model (bench.md says why); a heuristic prune would be a hidden relaxation. *Left for Day 13, with the bench table in the README:* the staff cumulative's share of solve time (Day 4) and `day_bound`'s cost of re-enumerating candidates per film per day (Day 5), neither measured today. *Left open:* the bound is the loose half of the gap; a tighter one (a per-daypart capacity cut, or solving the ranks' LP first) is the next lever, and the sixteen's Thursday is the test.
 
-## Day 9 — Mon 15 Sep — In and out
+## Day 9 — Mon 15 Sep — In and out ✅
 
 - `turnaround import --csv sessions.csv` reads a plain showtimes export (screen, title, start, runtime) into a brief skeleton plus a grid, so a house can `check` the grid it made by hand before it trusts the solver with anything.
 - `turnaround export grid.json --ical --csv --json`: a calendar per screen, a flat CSV for signage, JSON for a website.
 - Round-trip tests: export → import → check passes; the Regent grid survives the loop unchanged.
+- *Run on Wed 16 Sep:* the Monday slot did not fire. *Shipped besides:* a brief skeleton from the CSV alone that says what it assumed; `examples/regent-hand.csv`, the Regent's Thursday as a manager typed it, with the five slips the checker names on its sheet; a week goes out as one CSV and a calendar per screen across it and comes back a day at a time (`--day`); ADR-017. *Left open:* a ticketing export's late show is written as the next date and `01:15`, and the import reads only the day's own `25:15` — the adapter for that form is a later day; a skeleton assumes the default stagger and no staff cap, so the booth's grid fails its own skeleton on the stagger until the house edits it in.
 
 ## Day 10 — Tue 16 Sep — The festival profile
 
