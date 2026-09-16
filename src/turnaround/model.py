@@ -636,6 +636,37 @@ class Session(BaseModel):
         return fmt_time(self.feature_end)
 
 
+class SolveStats(BaseModel):
+    """What the solver was given and how the search went: the size of the model, the grid
+    it was solved on, the first grid's time and the proven bound. The solver's own account
+    of itself; the checker never reads it."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    candidates: int = Field(description="(screen, title, start) triples the model could place")
+    booleans: int = Field(description="Boolean variables in the model, rank literals included")
+    rank_literals: int = Field(default=0, description="Demand rank literals (ADR-011)")
+    constraints: int = Field(default=0, description="Constraints in the model")
+    slot_min: int = Field(description="The start grid the day was solved on, minutes")
+    slot_asked: int = Field(description="The grid the brief asked for")
+    slot_reason: str | None = Field(
+        default=None, description="Why the grid is coarser than the brief's, in a sentence"
+    )
+    first_feasible_s: float | None = Field(
+        default=None, description="Seconds to the first grid the solver found"
+    )
+    bound: float | None = Field(
+        default=None, description="The solver's proven upper bound on the objective"
+    )
+    gap: float | None = Field(
+        default=None, description="(bound − objective) / bound; 0 on a proven-optimal grid"
+    )
+    hinted: int = Field(default=0, description="Sessions of a previous grid offered as a hint")
+    symmetry_groups: int = Field(
+        default=0, description="Groups of identical screens the solver ordered by load"
+    )
+
+
 class Grid(BaseModel):
     """The solver's answer for one day."""
 
@@ -667,6 +698,9 @@ class Grid(BaseModel):
     relaxed: list[TermRef] = Field(
         default_factory=list,
         description="Terms the solver was told it could drop, and did. Never silent (ADR-002)",
+    )
+    stats: SolveStats | None = Field(
+        default=None, description="The model's size and the search, as the solver saw them"
     )
 
     def by_screen(self) -> dict[str, list[Session]]:

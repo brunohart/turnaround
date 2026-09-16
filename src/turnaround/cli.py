@@ -16,7 +16,7 @@ from .check import WeekReport, admissions, check_week, whys
 from .check import check as run_check
 from .model import Brief, Grid, Session, WeekBrief, WeekGrid, fmt_time, validation_sentences
 from .render import render_html, render_terms_html, render_week_html, render_week_terms_html
-from .solve import explain, probe, probe_all, relax, solve, solve_week, what_if
+from .solve import Tuning, explain, probe, probe_all, relax, solve, solve_week, what_if
 
 app = typer.Typer(add_completion=False, no_args_is_help=True, help=__doc__)
 console = Console()
@@ -238,6 +238,34 @@ def _print_week_report(week: WeekBrief, wg: WeekGrid) -> WeekReport:
     return rep
 
 
+def _say_stats(grid: Grid) -> None:
+    """One dim line: the model's size, the grid it was solved on, the first grid's time
+    and, on a grid not proven best, the bound and the gap."""
+    st = grid.stats
+    if st is None:
+        return
+    line = (
+        f"{st.candidates:,} candidates on a {st.slot_min}-minute grid · "
+        f"{st.booleans:,} booleans, {st.rank_literals:,} of them ranks · "
+        f"{st.constraints:,} constraints"
+    )
+    if st.first_feasible_s is not None:
+        line += f" · first grid at {st.first_feasible_s:.1f}s"
+    if grid.status == "FEASIBLE" and st.bound is not None and st.gap is not None:
+        line += f" · bound {st.bound:,.1f} · gap {st.gap:.1%}"
+    if st.hinted:
+        line += f" · {st.hinted} sessions hinted"
+    if st.symmetry_groups:
+        line += f" · {st.symmetry_groups} groups of identical screens ordered"
+    console.print(f"[dim]{line}[/dim]")
+    if st.slot_reason:
+        console.print(f"[yellow]{st.slot_reason}[/yellow]")
+
+
+def _tuning(max_candidates: int) -> Tuning:
+    return Tuning(candidate_cap=max_candidates or None)
+
+
 def _plan_week(
     path: Path,
     out: Path | None,
@@ -245,9 +273,10 @@ def _plan_week(
     time_limit: float,
     relax_terms: bool,
     quiet: bool,
+    tuning: Tuning,
 ) -> None:
     week = _load_week(path)
-    wg = solve_week(week, time_limit_s=time_limit, relax_terms=relax_terms)
+    wg = solve_week(week, time_limit_s=time_limit, relax_terms=relax_terms, tuning=tuning)
     briefs = week.briefs()
     bad = [
         (d.name, b, g)
@@ -270,6 +299,9 @@ def _plan_week(
         _print_week(week, wg)
     for d, b, g in zip(week.days, briefs, wg.grids, strict=True):
         _say_relaxed(b, g, prefix=f"{d.name} ")
+        if g.stats and (g.stats.slot_reason or g.status == "FEASIBLE"):
+            console.print(f"[dim]{d.name}[/dim]", end=" ")
+            _say_stats(g)
     rep = _print_week_report(week, wg) if not quiet else check_week(week, wg)
     if out:
         out.write_text(wg.model_dump_json(indent=2))
@@ -307,19 +339,39 @@ def plan(
             "or the objective force it. One solve per session; a day only.",
         ),
     ] = False,
+    probe_budget: Annotated[
+        float | None,
+        typer.Option(
+            "--probe-budget",
+            help="Seconds the whole --why probe may take; sessions left unprobed are unknown",
+        ),
+    ] = None,
+    hint: Annotated[
+        Path | None,
+        typer.Option("--hint", help="A grid to start the search from: yesterday's, or this one"),
+    ] = None,
+    max_candidates: Annotated[
+        int,
+        typer.Option(
+            "--max-candidates",
+            help="Coarsen the start grid until the candidates fit under this; 0 never coarsens",
+        ),
+    ] = 20_000,
 ) -> None:
     """Solve a day, or a week, and print the grid with its proof. Exit 2 if the terms conflict."""
+    tuning = _tuning(max_candidates)
     if _is_week(brief_path):
         if why:
             console.print("[red]--why probes a day; run explain on one day of the week[/red]")
             raise typer.Exit(code=1)
-        _plan_week(brief_path, out, html, time_limit, relax_terms, quiet)
+        _plan_week(brief_path, out, html, time_limit, relax_terms, quiet, tuning)
         return
     brief = _load_brief(brief_path)
+    start_from = _load_grid(hint) if hint else None
     grid = (
-        relax(brief, time_limit_s=time_limit)
+        relax(brief, time_limit_s=time_limit, tuning=tuning, hint=start_from)
         if relax_terms
-        else solve(brief, time_limit_s=time_limit)
+        else solve(brief, time_limit_s=time_limit, tuning=tuning, hint=start_from)
     )
     if grid.status not in ("OPTIMAL", "FEASIBLE"):
         if grid.status == "INFEASIBLE":
@@ -333,9 +385,10 @@ def plan(
     if not quiet:
         _print_grid(brief, grid)
     _say_relaxed(brief, grid)
+    _say_stats(grid)
     ok = _print_report(brief, grid) if not quiet else run_check(brief, grid).ok
     if why:
-        probe_all(brief, grid, time_limit_s=min(time_limit, 10.0))
+        probe_all(brief, grid, time_limit_s=min(time_limit, 10.0), budget_s=probe_budget)
         if not quiet:
             _print_whys(brief, grid)
         _say_forced(grid)

@@ -71,7 +71,7 @@
         {% if dd.grid.relaxed %}<div class="given-up">{{ dd.grid.relaxed|length }} term{{ 's' if dd.grid.relaxed|length != 1 }} given up · see proof</div>{% endif %}
         <div>doors {{ dd.brief.policy.open }} · last start {{ dd.brief.policy.last_start }} · turnaround {{ dd.brief.policy.clean_min }}′{% if dd.brief.policy.school_holiday %} · school holidays{% endif %}</div>
         {% if dd.overrides %}<div>{{ dd.overrides|join(" · ") }}</div>{% endif %}
-        <div>solved in {{ dd.grid.solve_seconds }}s · objective {{ "{:,.0f}".format(dd.grid.objective) }}{% if dd.grid.hold_paid %} after {{ "{:,.0f}".format(dd.grid.hold_paid) }} paid to hold{% endif %}</div>
+        <div>solved in {{ dd.grid.solve_seconds }}s · objective {{ "{:,.0f}".format(dd.grid.objective) }}{% if dd.grid.hold_paid %} after {{ "{:,.0f}".format(dd.grid.hold_paid) }} paid to hold{% endif %}{% if dd.grid.stats and dd.grid.stats.slot_reason %} · on a {{ dd.grid.stats.slot_min }}-minute grid{% endif %}{% if dd.grid.status == "FEASIBLE" and dd.grid.stats and dd.grid.stats.gap is not none %} · not proven best, gap {{ "%.1f"|format(dd.grid.stats.gap * 100) }}%{% endif %}</div>
       </div>
     </div>
     {% if dd.grid.status in ("OPTIMAL", "FEASIBLE") %}

@@ -1,0 +1,575 @@
+{
+  "house": "The Palladium",
+  "screens": [
+    {
+      "id": "1",
+      "name": "Screen 1",
+      "capacity": 400,
+      "formats": [
+        "2D",
+        "PLF"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Screen 2",
+      "capacity": 400,
+      "formats": [
+        "2D",
+        "PLF"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Screen 3",
+      "capacity": 260,
+      "formats": [
+        "2D",
+        "3D"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Screen 4",
+      "capacity": 260,
+      "formats": [
+        "2D",
+        "3D"
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Screen 5",
+      "capacity": 260,
+      "formats": [
+        "2D",
+        "3D"
+      ]
+    },
+    {
+      "id": "6",
+      "name": "Screen 6",
+      "capacity": 180,
+      "formats": [
+        "2D"
+      ]
+    },
+    {
+      "id": "7",
+      "name": "Screen 7",
+      "capacity": 180,
+      "formats": [
+        "2D"
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Screen 8",
+      "capacity": 180,
+      "formats": [
+        "2D"
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Screen 9",
+      "capacity": 180,
+      "formats": [
+        "2D"
+      ]
+    },
+    {
+      "id": "10",
+      "name": "Screen 10",
+      "capacity": 140,
+      "formats": [
+        "2D"
+      ]
+    },
+    {
+      "id": "11",
+      "name": "Screen 11",
+      "capacity": 140,
+      "formats": [
+        "2D"
+      ]
+    },
+    {
+      "id": "12",
+      "name": "Screen 12",
+      "capacity": 140,
+      "formats": [
+        "2D"
+      ]
+    },
+    {
+      "id": "13",
+      "name": "Screen 13",
+      "capacity": 140,
+      "formats": [
+        "2D"
+      ]
+    },
+    {
+      "id": "14",
+      "name": "Screen 14",
+      "capacity": 90,
+      "formats": [
+        "2D"
+      ],
+      "clean_min": 15
+    },
+    {
+      "id": "15",
+      "name": "Screen 15",
+      "capacity": 90,
+      "formats": [
+        "2D"
+      ],
+      "clean_min": 15
+    },
+    {
+      "id": "16",
+      "name": "Screen 16",
+      "capacity": 60,
+      "formats": [
+        "2D"
+      ],
+      "clean_min": 15,
+      "open": "12:00"
+    }
+  ],
+  "films": [
+    {
+      "id": "tide",
+      "title": "The Iron Tide",
+      "runtime_min": 158,
+      "format": "PLF",
+      "rating": "M",
+      "demand": {
+        "per_session": {
+          "matinee": 160,
+          "afternoon": 240,
+          "prime": 400,
+          "late": 260
+        },
+        "decay": 0.6,
+        "weekday": {
+          "Fri": 1.3,
+          "Sat": 1.5,
+          "Sun": 1.25
+        },
+        "holiday": 1.0,
+        "assumptions": [
+          "Opening week of the season's PLF event title: the first prime show fills a 400-seat room every night and sells out Fri/Sat.",
+          "Weekend uplift 25-50%.",
+          "A second show in the same daypart draws 60% of the first: the audience is there for the format and picks one."
+        ]
+      },
+      "terms": {
+        "min_shows": 4,
+        "prime_shows": 2,
+        "exclusive_until": "Sun",
+        "min_shows_per_week": 36,
+        "prime_shows_per_week": 12
+      }
+    },
+    {
+      "id": "lantern",
+      "title": "Paper Lantern",
+      "runtime_min": 131,
+      "format": "PLF",
+      "rating": "PG",
+      "weight": 1.6,
+      "terms": {
+        "min_shows": 2,
+        "prime_shows": 1
+      }
+    },
+    {
+      "id": "orchard",
+      "title": "The Orchard Keepers",
+      "runtime_min": 96,
+      "format": "3D",
+      "rating": "G",
+      "demand": {
+        "per_session": {
+          "matinee": 220,
+          "afternoon": 180,
+          "prime": 90,
+          "late": 10
+        },
+        "decay": 0.7,
+        "weekday": {
+          "Sat": 1.6,
+          "Sun": 1.6
+        },
+        "holiday": 1.5,
+        "assumptions": [
+          "Animated family title in its third week: mornings and weekends, dead after dark.",
+          "Sessions in the same daypart cannibalise less (70%) because families pick by time, not by format."
+        ]
+      },
+      "terms": {
+        "min_shows": 3,
+        "latest_start": "18:00"
+      }
+    },
+    {
+      "id": "hollow",
+      "title": "Hollow Creek",
+      "runtime_min": 101,
+      "format": "2D",
+      "rating": "R16",
+      "weight": 1.2,
+      "daypart_weights": {
+        "matinee": 0.2,
+        "afternoon": 0.6,
+        "late": 1.5
+      },
+      "terms": {
+        "min_shows": 3,
+        "prime_shows": 1,
+        "earliest_start": "15:00"
+      }
+    },
+    {
+      "id": "meridian",
+      "title": "Meridian",
+      "runtime_min": 143,
+      "format": "2D",
+      "rating": "M",
+      "weight": 1.5,
+      "terms": {
+        "min_shows": 4,
+        "prime_shows": 2,
+        "min_shows_per_week": 30
+      }
+    },
+    {
+      "id": "stitch",
+      "title": "Stitch and Bone",
+      "runtime_min": 118,
+      "format": "2D",
+      "rating": "M",
+      "weight": 1.1,
+      "terms": {
+        "min_shows": 3,
+        "prime_shows": 1
+      }
+    },
+    {
+      "id": "brass",
+      "title": "Brass Sunday",
+      "runtime_min": 109,
+      "format": "2D",
+      "rating": "PG",
+      "weight": 1.0,
+      "daypart_weights": {
+        "matinee": 1.3,
+        "afternoon": 1.2,
+        "late": 0.5
+      },
+      "terms": {
+        "min_shows": 2
+      }
+    },
+    {
+      "id": "glasshouse",
+      "title": "The Glasshouse",
+      "runtime_min": 127,
+      "format": "2D",
+      "rating": "M",
+      "weight": 0.9,
+      "terms": {
+        "min_shows": 2,
+        "prime_shows": 1
+      }
+    },
+    {
+      "id": "kites",
+      "title": "Kites Over Halden",
+      "runtime_min": 88,
+      "format": "3D",
+      "rating": "G",
+      "weight": 0.9,
+      "daypart_weights": {
+        "matinee": 1.6,
+        "afternoon": 1.1,
+        "prime": 0.4,
+        "late": 0.05
+      },
+      "terms": {
+        "min_shows": 2,
+        "latest_start": "17:00"
+      }
+    },
+    {
+      "id": "salt",
+      "title": "Salt Road",
+      "runtime_min": 152,
+      "format": "2D",
+      "rating": "M",
+      "weight": 1.3,
+      "demand": {
+        "per_session": {
+          "matinee": 40,
+          "afternoon": 90,
+          "prime": 210,
+          "late": 140
+        },
+        "decay": 0.5,
+        "weekday": {
+          "Fri": 1.2,
+          "Sat": 1.35,
+          "Sun": 1.1
+        },
+        "holiday": 1.0,
+        "assumptions": [
+          "Second week of a prestige drama: evenings, adults, word of mouth still building.",
+          "A second show in a daypart halves: the audience will move to the other time."
+        ]
+      },
+      "terms": {
+        "min_shows": 3,
+        "prime_shows": 1
+      }
+    },
+    {
+      "id": "ninth",
+      "title": "The Ninth Floor",
+      "runtime_min": 97,
+      "format": "2D",
+      "rating": "R13",
+      "weight": 1.0,
+      "daypart_weights": {
+        "matinee": 0.4,
+        "late": 1.3
+      },
+      "terms": {
+        "min_shows": 2,
+        "earliest_start": "14:00"
+      }
+    },
+    {
+      "id": "tango",
+      "title": "Last Tango in Timaru",
+      "runtime_min": 104,
+      "format": "2D",
+      "rating": "M",
+      "weight": 0.8,
+      "terms": {
+        "min_shows": 2
+      }
+    },
+    {
+      "id": "wren",
+      "title": "Wren",
+      "runtime_min": 92,
+      "format": "2D",
+      "rating": "PG",
+      "weight": 0.7,
+      "daypart_weights": {
+        "matinee": 1.4,
+        "late": 0.4
+      },
+      "terms": {
+        "min_shows": 1
+      }
+    },
+    {
+      "id": "cartographer",
+      "title": "The Cartographer's Daughter",
+      "runtime_min": 139,
+      "format": "2D",
+      "rating": "M",
+      "weight": 0.8,
+      "terms": {
+        "min_shows": 1,
+        "prime_shows": 1
+      }
+    },
+    {
+      "id": "static",
+      "title": "Static",
+      "runtime_min": 84,
+      "format": "2D",
+      "rating": "R16",
+      "weight": 0.6,
+      "daypart_weights": {
+        "matinee": 0.1,
+        "afternoon": 0.4,
+        "late": 1.6
+      },
+      "terms": {
+        "min_shows": 1,
+        "earliest_start": "18:00"
+      }
+    },
+    {
+      "id": "harbour",
+      "title": "Harbour Lights",
+      "runtime_min": 115,
+      "format": "2D",
+      "rating": "PG",
+      "weight": 0.7,
+      "terms": {
+        "min_shows": 1
+      }
+    },
+    {
+      "id": "quarry",
+      "title": "Quarry",
+      "runtime_min": 123,
+      "format": "2D",
+      "rating": "M",
+      "weight": 0.6,
+      "terms": {
+        "min_shows": 1,
+        "min_capacity": 120
+      }
+    },
+    {
+      "id": "anthem",
+      "title": "Anthem for the Small Hours",
+      "runtime_min": 76,
+      "format": "2D",
+      "rating": "E",
+      "weight": 0.5,
+      "daypart_weights": {
+        "matinee": 0.6,
+        "afternoon": 1.0,
+        "late": 0.2
+      },
+      "terms": {
+        "min_shows": 1
+      }
+    },
+    {
+      "id": "ledger",
+      "title": "The Ledger",
+      "runtime_min": 134,
+      "format": "2D",
+      "rating": "M",
+      "weight": 0.5,
+      "terms": {
+        "min_shows": 1,
+        "max_shows": 2
+      }
+    },
+    {
+      "id": "reef",
+      "title": "Reef",
+      "runtime_min": 68,
+      "format": "3D",
+      "rating": "G",
+      "weight": 0.6,
+      "daypart_weights": {
+        "matinee": 1.5,
+        "afternoon": 1.0,
+        "prime": 0.3,
+        "late": 0.05
+      },
+      "terms": {
+        "min_shows": 1,
+        "latest_start": "16:00"
+      }
+    },
+    {
+      "id": "pilgrim",
+      "title": "The Pilgrim Years",
+      "runtime_min": 171,
+      "format": "2D",
+      "rating": "M",
+      "weight": 0.6,
+      "terms": {
+        "min_shows": 1,
+        "max_shows": 2,
+        "prime_shows": 1
+      }
+    },
+    {
+      "id": "reel",
+      "title": "Reel Twelve",
+      "runtime_min": 111,
+      "format": "2D",
+      "rating": "M",
+      "weight": 0.4,
+      "terms": {
+        "min_shows": 1,
+        "max_shows": 1,
+        "screens": [
+          "14",
+          "15",
+          "16"
+        ]
+      }
+    }
+  ],
+  "policy": {
+    "open": "10:00",
+    "last_start": "21:45",
+    "preshow_min": 20,
+    "preshow_by_format": {
+      "3D": 25,
+      "PLF": 30
+    },
+    "clean_min": 20,
+    "max_concurrent_turnarounds": 6,
+    "stagger_min": 10,
+    "max_starts_per_window": 3,
+    "slot_min": 5,
+    "assumed_admissions": 110
+  },
+  "days": [
+    {
+      "name": "Thu",
+      "date": "2026-09-17"
+    },
+    {
+      "name": "Fri",
+      "date": "2026-09-18",
+      "policy": {
+        "last_start": "23:00"
+      }
+    },
+    {
+      "name": "Sat",
+      "date": "2026-09-19",
+      "policy": {
+        "last_start": "23:00"
+      }
+    },
+    {
+      "name": "Sun",
+      "date": "2026-09-20",
+      "policy": {
+        "open": "11:00"
+      }
+    },
+    {
+      "name": "Mon",
+      "date": "2026-09-21"
+    },
+    {
+      "name": "Tue",
+      "date": "2026-09-22",
+      "terms": {
+        "orchard": {
+          "min_shows": 4
+        }
+      }
+    },
+    {
+      "name": "Wed",
+      "date": "2026-09-23"
+    }
+  ],
+  "hold_days": [
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu"
+  ],
+  "hold_penalty": 60
+}

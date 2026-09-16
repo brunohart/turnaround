@@ -7,14 +7,23 @@ cd "$(dirname "$0")/.."
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
 chflags -R nohidden .venv 2>/dev/null || true  # see build.sh
 mkdir -p docs/grids
-for b in examples/*.json; do
+# With names given (scripts/run.sh sixteen regent) only those examples are regenerated.
+if [ "$#" -gt 0 ]; then
+  briefs=()
+  for n in "$@"; do briefs+=("examples/$n.json"); done
+else
+  briefs=(examples/*.json)
+fi
+for b in "${briefs[@]}"; do
   n=$(basename "$b" .json)
   rc=0
   why=""
+  tl=30
   [ "$n" = "regent" ] && why="--why"  # the hero sheet carries every session's why (one solve per session)
-  uv run turnaround plan "$b" --out "docs/grids/$n.json" --html "docs/grids/$n.html" --quiet $why || rc=$?
+  [ "$n" = "sixteen" ] && tl=60       # the multiplex gets the bench's minute per day (docs/bench.md)
+  uv run turnaround plan "$b" --out "docs/grids/$n.json" --html "docs/grids/$n.html" --quiet --time-limit $tl $why || rc=$?
   if [ "$rc" -eq 2 ]; then
-    uv run turnaround plan "$b" --relax --out "docs/grids/$n.json" --html "docs/grids/$n.html" --quiet
+    uv run turnaround plan "$b" --relax --out "docs/grids/$n.json" --html "docs/grids/$n.html" --quiet --time-limit $tl
   elif [ "$rc" -ne 0 ]; then
     exit "$rc"
   fi

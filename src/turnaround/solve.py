@@ -32,7 +32,9 @@ from .model import (
     Film,
     Forced,
     Grid,
+    Screen,
     Session,
+    SolveStats,
     TermRef,
     WeekBrief,
     WeekGrid,
@@ -60,6 +62,36 @@ before did not meet and the days after could not. Computed by solve_week."""
 
 
 @dataclass(frozen=True)
+class Tuning:
+    """How the model is contained on a big house (Day 8). Every switch but the candidate
+    cap is exact: the optimum is the plain model's. The cap coarsens the start grid when
+    the brief's would make too many candidates, and the grid says so in its stats."""
+
+    group_ranks: bool | None = None
+    """One rank literal per capacity class rather than per screen: rooms with the same
+    seats sell the same, so a rank on either is the same rank. Halves the booleans on
+    the sixteen and gives the best grid and bound when the search starts from a hint,
+    but unhinted the solver found no grid at all in 60 s (docs/bench.md); None means
+    grouped when a hint is given, per screen when not."""
+    tighten_ranks: bool = True
+    """Cap the rank count per (title, daypart) by what the house-wide stagger allows."""
+    symmetry: bool = False
+    """Identical screens ordered by load, so the solver does not try each permutation.
+    Off by default: CP-SAT finds the twins itself (its `max_lp_sym` worker), and the
+    ordering cost the sixteen its first grid within 60 s (docs/bench.md). Exact, kept."""
+    candidate_cap: int | None = 20_000
+    """Coarsen slot_min, in multiples of the brief's, until the candidates fit under this.
+    None keeps the brief's grid whatever the size."""
+
+
+TUNED = Tuning()
+"""The defaults: every exact containment on, and the candidate cap."""
+
+PLAIN = Tuning(group_ranks=False, tighten_ranks=False, symmetry=False, candidate_cap=None)
+"""The model as Day 7 left it: the bench's baseline."""
+
+
+@dataclass(frozen=True)
 class Candidate:
     screen: str
     film: str
@@ -70,9 +102,11 @@ class Candidate:
     turn: tuple[int, int]  # when the floor staff are in the room
 
 
-def candidates(brief: Brief) -> list[Candidate]:
-    """Every (screen, film, start) the terms and the house allow."""
+def candidates(brief: Brief, slot_min: int | None = None) -> list[Candidate]:
+    """Every (screen, film, start) the terms and the house allow, on the brief's start
+    grid or a coarser one given in minutes."""
     p = brief.policy
+    slot = slot_min or p.slot_min
     out: list[Candidate] = []
     for scr in brief.screens:
         for f in brief.films:
@@ -87,8 +121,8 @@ def candidates(brief: Brief) -> list[Candidate]:
                 hi = min(hi, parse_time(t.latest_start))
             block = brief.block_len(scr, f)
             # Align to the slot grid from the house's opening time.
-            first = lo + (-(lo - p.open_min) % p.slot_min)
-            for start in range(first, hi + 1, p.slot_min):
+            first = lo + (-(lo - p.open_min) % slot)
+            for start in range(first, hi + 1, slot):
                 dp = p.daypart_at(start)
                 out.append(
                     Candidate(
@@ -101,6 +135,57 @@ def candidates(brief: Brief) -> list[Candidate]:
                         turn=brief.turnaround_of(scr, f, start),
                     )
                 )
+    return out
+
+
+def choose_slot(brief: Brief, tuning: Tuning) -> tuple[int, int, str | None]:
+    """The start grid to solve on: the brief's, unless its candidates exceed the cap, in
+    which case the smallest multiple of it that fits (never past 30 minutes). Returns
+    the slot, the candidate count on it, and the reason if it is not the brief's."""
+    asked = brief.policy.slot_min
+    n = len(candidates(brief))
+    if tuning.candidate_cap is None or n <= tuning.candidate_cap:
+        return asked, n, None
+    k = 2
+    while True:
+        slot = asked * k
+        m = len(candidates(brief, slot))
+        if m <= tuning.candidate_cap or slot >= 30:
+            return (
+                slot,
+                m,
+                f"{n:,} candidates on the {asked}-minute grid exceed the cap of "
+                f"{tuning.candidate_cap:,}; solved on a {slot}-minute grid ({m:,} candidates)",
+            )
+        k += 1
+
+
+def identical_screens(brief: Brief) -> list[list[Screen]]:
+    """Screens a grid could swap without anyone noticing: the same seats, formats, hours
+    and clean time, and no booking that names some of them but not the others. Groups of
+    two or more, in the brief's order."""
+
+    def key(scr: Screen) -> tuple[int, tuple[str, ...], int, int, int]:
+        return (
+            scr.capacity,
+            tuple(sorted(scr.formats)),
+            brief.clean_for(scr),
+            brief.open_for(scr),
+            brief.last_start_for(scr),
+        )
+
+    groups: dict[tuple[int, tuple[str, ...], int, int, int], list[Screen]] = {}
+    for scr in brief.screens:
+        groups.setdefault(key(scr), []).append(scr)
+    out: list[list[Screen]] = []
+    for g in groups.values():
+        if len(g) < 2:
+            continue
+        ids = {scr.id for scr in g}
+        named = [set(f.terms.screens) & ids for f in brief.films if f.terms.screens is not None]
+        if any(n and n != ids for n in named):
+            continue
+        out.append(g)
     return out
 
 
@@ -163,6 +248,8 @@ class _Model:
     """(admissions in cents, rank literal): the objective's positive terms."""
     differs: list[cp_model.IntVar] = field(default_factory=list)
     """One per held title: 1 if today's starts are not the anchor's."""
+    stats: SolveStats | None = None
+    """The model's size, filled in when it is built; the search's figures come later."""
 
     def guard(self, ref: TermRef) -> cp_model.IntVar:
         a = self.assumptions.get(ref)
@@ -189,6 +276,8 @@ def _build(
     hold_penalty: float = 0.0,
     owed: Owed | None = None,
     forbid: Forbid = frozenset(),
+    tuning: Tuning = TUNED,
+    hint: Grid | None = None,
 ) -> _Model:
     """The model. Terms in `dropped` are not enforced; every other term is guarded.
     A feasibility-only model has no objective: a probe stops at the first grid it finds.
@@ -196,10 +285,12 @@ def _build(
     had on the anchor day costs `hold_penalty` expected admissions. Nothing is forced; a
     day whose hours cannot carry the anchor's starts simply pays. `owed` is what the
     week's terms still require of this day (solve_week works it out); a week term with
-    nothing owed today is carried for the record and constrains nothing."""
+    nothing owed today is carried for the record and constrains nothing. `tuning` is how
+    the model is contained on a big house; `hint` is a grid to start the search from."""
     p = brief.policy
     owed = owed or {}
-    cands = candidates(brief)
+    slot, _, slot_reason = choose_slot(brief, tuning)
+    cands = candidates(brief, slot)
     m = cp_model.CpModel()
     mdl = _Model(m=m, cands=cands, x={})
 
@@ -229,6 +320,17 @@ def _build(
                 brief.last_start_for(scr) + max(c.block for c in mine_here) - brief.open_for(scr)
             )
             m.add(sum(c.block * mdl.x[c] for c in mine_here) <= day_len)
+
+    # Symmetry: identical screens are interchangeable, so the solver would otherwise prove
+    # the same grid once per permutation. Order them by load (minutes of block). Any grid
+    # can be permuted into that order, so nothing is lost. Not under a probe: forbidding a
+    # show names one room, and the permutation would move the forbidden show onto it.
+    groups = identical_screens(brief) if tuning.symmetry and not forbid else []
+    group_ranks = tuning.group_ranks if tuning.group_ranks is not None else hint is not None
+    for g in groups:
+        loads = [sum(c.block * mdl.x[c] for c in cands if c.screen == scr.id) for scr in g]
+        for a, b in zip(loads, loads[1:], strict=False):
+            m.add(a >= b)
 
     # Stagger: within any window of stagger_min, at most max_starts_per_window starts
     # house-wide. The default is one in ten.
@@ -331,10 +433,13 @@ def _build(
                     m.add(a == 0)
 
     # Demand. Within a title and a daypart the first session draws the most and each
-    # further one decays, and a room sells no more than its seats. y[s,f,d,k] says the
-    # k-th ranked session of f in daypart d is on screen s; the solver hands out ranks,
-    # and because a bigger room can only sell more, the biggest room takes rank 0. The
-    # rank count is an upper bound on how many sessions of f can start in d at all.
+    # further one decays, and a room sells no more than its seats. y[g,f,d,k] says the
+    # k-th ranked session of f in daypart d is in room class g; the solver hands out ranks,
+    # and because a bigger room can only sell more, the biggest room takes rank 0. A class
+    # is one screen, or (tuned) every screen with the same seats, which sell the same. The
+    # rank count is an upper bound on how many sessions of f can start in d at all: what
+    # fits on the screens, and (tuned) what the house-wide stagger lets start.
+    rank_literals = 0
     if not feasibility_only:
         for f in brief.films:
             mine = [c for c in cands if c.film == f.id]
@@ -349,18 +454,28 @@ def _build(
                     starts_here = [c.start for c in group if c.screen == sid]
                     block = brief.block_len(brief.screen(sid), f)
                     ranks += (max(starts_here) - min(starts_here)) // block + 1
-                took: list[list[cp_model.IntVar]] = [[] for _ in range(ranks)]
+                if tuning.tighten_ranks and p.stagger_min > 0:
+                    lo, hi = min(c.start for c in group), max(c.start for c in group)
+                    windows = (hi - lo) // p.stagger_min + 1
+                    ranks = min(ranks, windows * p.max_starts_per_window)
+                classes: dict[str, list[str]] = {}
                 for sid in screens_here:
                     cap = brief.screen(sid).capacity
+                    key = f"c{cap}" if group_ranks else sid
+                    classes.setdefault(key, []).append(sid)
+                took: list[list[cp_model.IntVar]] = [[] for _ in range(ranks)]
+                for key, sids in classes.items():
+                    cap = brief.screen(sids[0]).capacity
                     ys = []
                     for k in range(ranks):
-                        y = m.new_bool_var(f"rank[{sid},{f.id},{dp_name},{k}]")
+                        y = m.new_bool_var(f"rank[{key},{f.id},{dp_name},{k}]")
+                        rank_literals += 1
                         ys.append(y)
                         took[k].append(y)
                         cents = int(round(min(float(cap), brief.expected(f, dp, k)) * 100))
                         if cents:
                             mdl.sold.append((cents, y))
-                    m.add(sum(ys) == sum(mdl.x[c] for c in group if c.screen == sid))
+                    m.add(sum(ys) == sum(mdl.x[c] for c in group if c.screen in sids))
                 for k, holders in enumerate(took):
                     m.add(sum(holders) <= 1)
                     if k:  # ranks fill in order; a tightening, the objective would anyway
@@ -394,7 +509,41 @@ def _build(
             sum(cents * y for cents, y in mdl.sold)
             - sum(int(round(hold_penalty * 100)) * d for d in differs)
         )
+
+    # A hint: yesterday's grid, or the grid being re-planned. The search starts there and
+    # improves on it; nothing about the answer depends on it.
+    hinted = 0
+    if hint is not None:
+        had = {(sn.screen, sn.film, sn.start) for sn in hint.sessions}
+        for c in cands:
+            here = (c.screen, c.film, c.start) in had
+            hinted += here
+            m.add_hint(mdl.x[c], 1 if here else 0)
+
+    mdl.stats = SolveStats(
+        candidates=len(cands),
+        booleans=len(m.proto.variables),
+        rank_literals=rank_literals,
+        constraints=len(m.proto.constraints),
+        slot_min=slot,
+        slot_asked=p.slot_min,
+        slot_reason=slot_reason,
+        hinted=hinted,
+        symmetry_groups=len(groups),
+    )
     return mdl
+
+
+class _FirstGrid(cp_model.CpSolverSolutionCallback):
+    """Notes when the solver found its first grid."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.at: float | None = None
+
+    def on_solution_callback(self) -> None:
+        if self.at is None:
+            self.at = self.wall_time
 
 
 def _solver(time_limit_s: float, workers: int) -> cp_model.CpSolver:
@@ -540,17 +689,30 @@ def solve(
     hold_penalty: float = 0.0,
     owed: Owed | None = None,
     forbid: Forbid = frozenset(),
+    tuning: Tuning = TUNED,
+    hint: Grid | None = None,
 ) -> Grid:
     """Solve one day. On INFEASIBLE the grid carries the conflicting terms. `owed` is
     what the week's terms still require of this day; a day solved on its own owes
     nothing. `forbid` rules candidates out; a probe uses it to ask what the day looks
-    like without one session."""
+    like without one session. `hint` is a grid to start from: yesterday's, or the one
+    being re-planned."""
     t0 = time.perf_counter()
-    mdl = _build(brief, dropped, hold=hold, hold_penalty=hold_penalty, owed=owed, forbid=forbid)
+    mdl = _build(
+        brief,
+        dropped,
+        hold=hold,
+        hold_penalty=hold_penalty,
+        owed=owed,
+        forbid=forbid,
+        tuning=tuning,
+        hint=hint,
+    )
     terms = list(mdl.assumptions)
     _pin(mdl, terms)
     solver = _solver(time_limit_s, workers)
-    status = solver.solve(mdl.m)
+    first = _FirstGrid()
+    status = solver.solve(mdl.m, first)
     conflict: list[TermRef] = []
     alone = False
     if status == cp_model.INFEASIBLE:
@@ -588,6 +750,16 @@ def solve(
         hold_penalty=hold_penalty if hold else 0.0,
     )
     grid.conflict_alone = alone
+    if mdl.stats is not None:
+        stats = mdl.stats.model_copy()
+        if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+            stats.first_feasible_s = round(first.at, 3) if first.at is not None else None
+            stats.bound = round(solver.best_objective_bound / 100, 2)
+            if status == cp_model.OPTIMAL:
+                stats.gap = 0.0
+            elif stats.bound > 0:
+                stats.gap = round(max(0.0, (stats.bound - grid.objective) / stats.bound), 4)
+        grid.stats = stats
     return grid
 
 
@@ -609,6 +781,8 @@ def relax(
     hold: Hold | None = None,
     hold_penalty: float = 0.0,
     owed: Owed | None = None,
+    tuning: Tuning = TUNED,
+    hint: Grid | None = None,
 ) -> Grid:
     """Drop terms one at a time, from the conflict, in relax_key order, until a grid
     exists. The grid lists every term dropped. Nothing is dropped that the
@@ -624,6 +798,8 @@ def relax(
             hold=hold,
             hold_penalty=hold_penalty,
             owed=owed,
+            tuning=tuning,
+            hint=hint,
         )
         if grid.status != "INFEASIBLE" or not grid.conflict:
             break
@@ -725,10 +901,25 @@ def probe(
     return Forced(by="objective", delta=delta, instead=instead, seconds=seconds)
 
 
-def probe_all(brief: Brief, grid: Grid, *, time_limit_s: float = 10.0, workers: int = 8) -> Grid:
-    """Every session probed; the grid returned with `forced` set on each."""
+def probe_all(
+    brief: Brief,
+    grid: Grid,
+    *,
+    time_limit_s: float = 10.0,
+    workers: int = 8,
+    budget_s: float | None = None,
+) -> Grid:
+    """Every session probed; the grid returned with `forced` set on each. A budget is the
+    seconds the whole probe may take: once it is spent, the sessions still unprobed are
+    `unknown` with no seconds against them, which is the honest answer on a house where
+    one solve per session is an afternoon."""
+    spent = 0.0
     for s in grid.sessions:
+        if budget_s is not None and spent >= budget_s:
+            s.forced = Forced(by="unknown", seconds=0.0)
+            continue
         s.forced = probe(brief, grid, s, time_limit_s=time_limit_s, workers=workers)
+        spent += s.forced.seconds
     return grid
 
 
@@ -835,12 +1026,14 @@ def solve_week(
     time_limit_s: float = 30.0,
     workers: int = 8,
     relax_terms: bool = False,
+    tuning: Tuning = TUNED,
 ) -> WeekGrid:
     """Solve the week day by day. The first hold day that solves becomes the anchor;
     every later hold day pays `week.hold_penalty` per title whose starts differ from
     it. A day that cannot hold its terms keeps its own conflict on its own grid; the
     other days are still solved. With `relax_terms`, each such day is relaxed on its
-    own (ADR-009), never the week as a whole."""
+    own (ADR-009), never the week as a whole. Each day starts its search from the day
+    before's grid."""
     t0 = time.perf_counter()
     grids: list[Grid] = []
     anchor: Hold | None = None
@@ -853,6 +1046,7 @@ def solve_week(
         penalty = week.hold_penalty if hold else 0.0
         owed = _owed_today(week, grids, bounds, i)
         run = relax if relax_terms else solve
+        yesterday = grids[-1] if grids and grids[-1].status in ("OPTIMAL", "FEASIBLE") else None
         grid = run(
             brief,
             time_limit_s=time_limit_s,
@@ -860,6 +1054,8 @@ def solve_week(
             hold=hold,
             hold_penalty=penalty,
             owed=owed,
+            tuning=tuning,
+            hint=yesterday,
         )
         grids.append(grid)
         if i in hold_set and anchor is None and grid.status in ("OPTIMAL", "FEASIBLE"):

@@ -21,7 +21,7 @@
       <div><b>{{ "{:,.0f}".format(d.admissions) }}</b> expected admissions · {{ "{:,}".format(d.seats) }} seats on offer</div>
       {% if d.turned_away >= 0.5 %}<div class="given-up">{{ "{:,.0f}".format(d.turned_away) }} turned away at capacity</div>{% endif %}
       <div>doors {{ brief.policy.open }} · last start {{ brief.policy.last_start }} · turnaround {{ brief.policy.clean_min }}′{% if brief.policy.school_holiday %} · school holidays{% endif %}{% if brief.day_name %} · {{ brief.day_name }}{% endif %}</div>
-      <div>solved in {{ grid.solve_seconds }}s</div>
+      <div>solved in {{ grid.solve_seconds }}s{% if grid.stats and grid.stats.slot_reason %} · on a {{ grid.stats.slot_min }}-minute grid{% endif %}{% if grid.status == "FEASIBLE" and grid.stats and grid.stats.gap is not none %} · not proven best, gap {{ "%.1f"|format(grid.stats.gap * 100) }}%{% endif %}</div>
     </div>
   </header>
   <div class="divider"></div>
