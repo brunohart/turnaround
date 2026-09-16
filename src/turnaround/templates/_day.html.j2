@@ -97,6 +97,8 @@
   .week-table td.day.hold { background:rgba(27,45,79,.05); }
   .held { display:inline-block; border:1px solid var(--blue); color:var(--blue); padding:1px 5px; transform:rotate(-1.2deg); font-size:10px; }
   .status-inf { color:var(--red); font-weight:600; }
+  /* a strand is a mono tag, never a colour (DESIGN.md): the sheet is read by position and type */
+  .tag { display:inline-block; font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.12em; font-size:9px; border:1px solid var(--ink); padding:0 4px; line-height:1.5; vertical-align:middle; white-space:nowrap; }
   .day-page { margin-top:64px; padding-top:28px; border-top:1px solid var(--ink); position:relative; }
   .day-page h2 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:34px; line-height:.95; letter-spacing:-.03em; margin:0 0 6px; position:relative; }
   .day-page .stamp { margin-bottom:8px; }
@@ -179,7 +181,7 @@
         <div class="lane">
           {% for b in row.blocks %}
           <div class="block{% if b.prime %} prime{% endif %}" style="left:{{ b.left }}%; width:{{ b.w }}%"
-               title="{{ b.film.title }} · preshow {{ b.s.start|hhmm }} · feature {{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }}{% if b.over > 0 %} · turnaround from {{ b.turn_begin|hhmm }} over the credits{% endif %} · clear {{ b.s.clear|hhmm }}
+               title="{{ b.film.title }}{% if b.film.strand %} · {{ b.film.strand }}{% endif %} · preshow {{ b.s.start|hhmm }} · feature {{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }}{% if b.over > 0 %} · turnaround from {{ b.turn_begin|hhmm }} over the credits{% endif %} · clear {{ b.s.clear|hhmm }}
 why: {{ b.why }}">
             <div class="pre" style="width:{{ b.pre }}%"></div>
             <div class="feat{% if b.forced and b.forced.by == 'terms' %} forced{% elif b.forced and b.forced.by == 'objective' %} wanted{% endif %}" style="width:{{ b.feat }}%">
@@ -218,7 +220,7 @@ why: {{ b.why }}">
         <div class="vpre mono"><span><b>{{ b.s.start|hhmm }}</b> doors</span><span>preshow {{ b.pre_min }}′</span></div>
         <div class="vfeat">
           <div class="t">{{ b.film.title }}</div>
-          <div class="tm mono">{{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }} · {{ b.film.runtime_min }}′{% if b.film.format != "2D" %} · {{ b.film.format }}{% endif %}{% if b.prime %} · prime{% endif %}</div>
+          <div class="tm mono">{{ b.s.feature_start|hhmm }}–{{ b.s.feature_end|hhmm }} · {{ b.film.runtime_min }}′{% if b.film.format != "2D" %} · {{ b.film.format }}{% endif %}{% if b.prime %} · prime{% endif %}{% if b.film.strand %} <span class="tag">{{ b.film.strand }}</span>{% endif %}</div>
         </div>
         <div class="vclean mono{% if b.over_min > 0 %} over{% endif %}"><span>turnaround {{ b.turn_begin|hhmm }}{% if b.over_min > 0 %} over the credits{% endif %}</span><span>clear <b>{{ b.s.clear|hhmm }}</b></span></div>
       </div>
@@ -239,7 +241,7 @@ why: {{ b.why }}">
         <tbody>
         {% for f in d.films %}
         <tr>
-          <td class="title"><b>{{ f.film.title }}</b><br><span class="mono" style="color:var(--grey)">{{ f.film.runtime_min }}′ · {{ f.film.format }}{% if f.film.rating %} · {{ f.film.rating }}{% endif %} · {{ "demand stated" if f.film.demand else "w" ~ f.film.weight }}</span></td>
+          <td class="title"><b>{{ f.film.title }}</b>{% if f.film.strand %} <span class="tag">{{ f.film.strand }}</span>{% endif %}<br><span class="mono" style="color:var(--grey)">{{ f.film.runtime_min }}′ · {{ f.film.format }}{% if f.film.rating %} · {{ f.film.rating }}{% endif %} · {{ "demand stated" if f.film.demand else "w" ~ f.film.weight }}</span></td>
           <td>{{ f.starts|length }}{% if f.film.terms.min_shows %}<span class="mono" style="color:var(--grey)"> /{{ f.film.terms.min_shows }} min</span>{% endif %}</td>
           <td>{{ f.prime }}{% if f.film.terms.prime_shows %}<span class="mono" style="color:var(--grey)"> /{{ f.film.terms.prime_shows }}</span>{% endif %}</td>
           <td class="num">{{ "{:,}".format(f.seats) }}</td>

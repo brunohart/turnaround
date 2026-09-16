@@ -1,0 +1,976 @@
+{
+  "house": "Brightwater Film Festival",
+  "days": [
+    "Fri 2",
+    "Sat 3",
+    "Sun 4",
+    "Mon 5",
+    "Tue 6",
+    "Wed 7",
+    "Thu 8",
+    "Fri 9",
+    "Sat 10",
+    "Sun 11"
+  ],
+  "grids": [
+    {
+      "house": "Brightwater Film Festival",
+      "date": "2026-10-02",
+      "status": "OPTIMAL",
+      "objective": 1480.14,
+      "admissions": 1480.14,
+      "hold_paid": 0.0,
+      "clash_paid": 0.0,
+      "solve_seconds": 0.467,
+      "sessions": [
+        {
+          "screen": "annexe",
+          "film": "kite-library",
+          "start": 840,
+          "feature_start": 850,
+          "feature_end": 936,
+          "clear": 956,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "projectionist",
+          "start": 960,
+          "feature_start": 970,
+          "feature_end": 1058,
+          "clear": 1078,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "glass-harbour",
+          "start": 1080,
+          "feature_start": 1090,
+          "feature_end": 1198,
+          "clear": 1218,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "nocturne",
+          "start": 1230,
+          "feature_start": 1240,
+          "feature_end": 1344,
+          "clear": 1364,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "glasshouse",
+          "start": 840,
+          "feature_start": 850,
+          "feature_end": 926,
+          "clear": 951,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "salt-road",
+          "start": 1080,
+          "feature_start": 1090,
+          "feature_end": 1208,
+          "clear": 1233,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "teeth",
+          "start": 1260,
+          "feature_start": 1270,
+          "feature_end": 1366,
+          "clear": 1391,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "static",
+          "start": 1410,
+          "feature_start": 1420,
+          "feature_end": 1503,
+          "clear": 1528,
+          "forced": null
+        },
+        {
+          "screen": "vault",
+          "film": "bright-room",
+          "start": 1230,
+          "feature_start": 1240,
+          "feature_end": 1318,
+          "clear": 1333,
+          "forced": null
+        }
+      ],
+      "conflict": [],
+      "conflict_alone": false,
+      "relaxed": [],
+      "stats": {
+        "candidates": 996,
+        "booleans": 1671,
+        "rank_literals": 461,
+        "constraints": 2522,
+        "slot_min": 15,
+        "slot_asked": 15,
+        "slot_reason": null,
+        "first_feasible_s": 0.249,
+        "bound": 1480.14,
+        "gap": 0.0,
+        "hinted": 0,
+        "symmetry_groups": 0
+      }
+    },
+    {
+      "house": "Brightwater Film Festival",
+      "date": "2026-10-03",
+      "status": "OPTIMAL",
+      "objective": 1859.82,
+      "admissions": 1859.82,
+      "hold_paid": 0.0,
+      "clash_paid": 0.0,
+      "solve_seconds": 0.991,
+      "sessions": [
+        {
+          "screen": "annexe",
+          "film": "kite-library",
+          "start": 750,
+          "feature_start": 760,
+          "feature_end": 846,
+          "clear": 866,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "nocturne",
+          "start": 870,
+          "feature_start": 880,
+          "feature_end": 984,
+          "clear": 1004,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "projectionist",
+          "start": 1035,
+          "feature_start": 1045,
+          "feature_end": 1133,
+          "clear": 1153,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "second-summer",
+          "start": 1155,
+          "feature_start": 1165,
+          "feature_end": 1279,
+          "clear": 1299,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "static",
+          "start": 1305,
+          "feature_start": 1315,
+          "feature_end": 1398,
+          "clear": 1418,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "moth-lantern",
+          "start": 660,
+          "feature_start": 670,
+          "feature_end": 749,
+          "clear": 774,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "glasshouse",
+          "start": 930,
+          "feature_start": 940,
+          "feature_end": 1016,
+          "clear": 1041,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "house-north",
+          "start": 1050,
+          "feature_start": 1060,
+          "feature_end": 1191,
+          "clear": 1216,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "salt-road",
+          "start": 1230,
+          "feature_start": 1240,
+          "feature_end": 1358,
+          "clear": 1383,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "teeth",
+          "start": 1410,
+          "feature_start": 1420,
+          "feature_end": 1516,
+          "clear": 1541,
+          "forced": null
+        },
+        {
+          "screen": "vault",
+          "film": "bright-room",
+          "start": 1095,
+          "feature_start": 1105,
+          "feature_end": 1183,
+          "clear": 1198,
+          "forced": null
+        },
+        {
+          "screen": "vault",
+          "film": "pigeon",
+          "start": 1215,
+          "feature_start": 1225,
+          "feature_end": 1310,
+          "clear": 1325,
+          "forced": null
+        }
+      ],
+      "conflict": [],
+      "conflict_alone": false,
+      "relaxed": [],
+      "stats": {
+        "candidates": 1467,
+        "booleans": 2493,
+        "rank_literals": 667,
+        "constraints": 3788,
+        "slot_min": 15,
+        "slot_asked": 15,
+        "slot_reason": null,
+        "first_feasible_s": 0.338,
+        "bound": 1859.82,
+        "gap": 0.0,
+        "hinted": 0,
+        "symmetry_groups": 0
+      }
+    },
+    {
+      "house": "Brightwater Film Festival",
+      "date": "2026-10-04",
+      "status": "OPTIMAL",
+      "objective": 1092.78,
+      "admissions": 1092.78,
+      "hold_paid": 0.0,
+      "clash_paid": 0.0,
+      "solve_seconds": 0.414,
+      "sessions": [
+        {
+          "screen": "annexe",
+          "film": "ninety-days",
+          "start": 960,
+          "feature_start": 970,
+          "feature_end": 1065,
+          "clear": 1085,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "understudy",
+          "start": 1110,
+          "feature_start": 1120,
+          "feature_end": 1212,
+          "clear": 1232,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "lodger",
+          "start": 1290,
+          "feature_start": 1300,
+          "feature_end": 1399,
+          "clear": 1419,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "orchard",
+          "start": 840,
+          "feature_start": 850,
+          "feature_end": 932,
+          "clear": 957,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "moth-lantern",
+          "start": 960,
+          "feature_start": 970,
+          "feature_end": 1049,
+          "clear": 1074,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "cartographer",
+          "start": 1095,
+          "feature_start": 1105,
+          "feature_end": 1202,
+          "clear": 1227,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "house-north",
+          "start": 1230,
+          "feature_start": 1240,
+          "feature_end": 1371,
+          "clear": 1396,
+          "forced": null
+        },
+        {
+          "screen": "vault",
+          "film": "pigeon",
+          "start": 1215,
+          "feature_start": 1225,
+          "feature_end": 1310,
+          "clear": 1325,
+          "forced": null
+        }
+      ],
+      "conflict": [],
+      "conflict_alone": false,
+      "relaxed": [],
+      "stats": {
+        "candidates": 1744,
+        "booleans": 2904,
+        "rank_literals": 842,
+        "constraints": 4459,
+        "slot_min": 15,
+        "slot_asked": 15,
+        "slot_reason": null,
+        "first_feasible_s": 0.199,
+        "bound": 1092.78,
+        "gap": 0.0,
+        "hinted": 0,
+        "symmetry_groups": 0
+      }
+    },
+    {
+      "house": "Brightwater Film Festival",
+      "date": "2026-10-05",
+      "status": "OPTIMAL",
+      "objective": 905.58,
+      "admissions": 905.58,
+      "hold_paid": 0.0,
+      "clash_paid": 0.0,
+      "solve_seconds": 0.261,
+      "sessions": [
+        {
+          "screen": "annexe",
+          "film": "copper-street",
+          "start": 855,
+          "feature_start": 865,
+          "feature_end": 954,
+          "clear": 974,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "orchard",
+          "start": 975,
+          "feature_start": 985,
+          "feature_end": 1067,
+          "clear": 1087,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "understudy",
+          "start": 1095,
+          "feature_start": 1105,
+          "feature_end": 1197,
+          "clear": 1217,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "lodger",
+          "start": 1275,
+          "feature_start": 1285,
+          "feature_end": 1384,
+          "clear": 1404,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "ninety-days",
+          "start": 855,
+          "feature_start": 865,
+          "feature_end": 960,
+          "clear": 985,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "cartographer",
+          "start": 1050,
+          "feature_start": 1060,
+          "feature_end": 1157,
+          "clear": 1182,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "low-tide",
+          "start": 1215,
+          "feature_start": 1225,
+          "feature_end": 1337,
+          "clear": 1362,
+          "forced": null
+        }
+      ],
+      "conflict": [],
+      "conflict_alone": false,
+      "relaxed": [],
+      "stats": {
+        "candidates": 1457,
+        "booleans": 2457,
+        "rank_literals": 741,
+        "constraints": 3756,
+        "slot_min": 15,
+        "slot_asked": 15,
+        "slot_reason": null,
+        "first_feasible_s": 0.115,
+        "bound": 905.58,
+        "gap": 0.0,
+        "hinted": 0,
+        "symmetry_groups": 0
+      }
+    },
+    {
+      "house": "Brightwater Film Festival",
+      "date": "2026-10-06",
+      "status": "OPTIMAL",
+      "objective": 990.66,
+      "admissions": 990.66,
+      "hold_paid": 0.0,
+      "clash_paid": 0.0,
+      "solve_seconds": 0.281,
+      "sessions": [
+        {
+          "screen": "annexe",
+          "film": "low-tide",
+          "start": 1050,
+          "feature_start": 1060,
+          "feature_end": 1172,
+          "clear": 1192,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "winter-pasture",
+          "start": 1215,
+          "feature_start": 1225,
+          "feature_end": 1351,
+          "clear": 1371,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "field-guide",
+          "start": 870,
+          "feature_start": 880,
+          "feature_end": 971,
+          "clear": 996,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "quiet-machines",
+          "start": 1005,
+          "feature_start": 1015,
+          "feature_end": 1085,
+          "clear": 1110,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "long-division",
+          "start": 1125,
+          "feature_start": 1135,
+          "feature_end": 1256,
+          "clear": 1281,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "bloodmoss",
+          "start": 1290,
+          "feature_start": 1300,
+          "feature_end": 1387,
+          "clear": 1412,
+          "forced": null
+        },
+        {
+          "screen": "vault",
+          "film": "km-zero",
+          "start": 1065,
+          "feature_start": 1075,
+          "feature_end": 1149,
+          "clear": 1164,
+          "forced": null
+        }
+      ],
+      "conflict": [],
+      "conflict_alone": false,
+      "relaxed": [],
+      "stats": {
+        "candidates": 1593,
+        "booleans": 2647,
+        "rank_literals": 795,
+        "constraints": 4084,
+        "slot_min": 15,
+        "slot_asked": 15,
+        "slot_reason": null,
+        "first_feasible_s": 0.124,
+        "bound": 990.66,
+        "gap": 0.0,
+        "hinted": 0,
+        "symmetry_groups": 0
+      }
+    },
+    {
+      "house": "Brightwater Film Festival",
+      "date": "2026-10-07",
+      "status": "OPTIMAL",
+      "objective": 799.86,
+      "admissions": 799.86,
+      "hold_paid": 0.0,
+      "clash_paid": 0.0,
+      "solve_seconds": 0.231,
+      "sessions": [
+        {
+          "screen": "annexe",
+          "film": "bells",
+          "start": 1050,
+          "feature_start": 1060,
+          "feature_end": 1161,
+          "clear": 1181,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "bloodmoss",
+          "start": 1290,
+          "feature_start": 1300,
+          "feature_end": 1387,
+          "clear": 1407,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "quiet-machines",
+          "start": 855,
+          "feature_start": 865,
+          "feature_end": 935,
+          "clear": 960,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "sundowners",
+          "start": 1080,
+          "feature_start": 1090,
+          "feature_end": 1178,
+          "clear": 1203,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "winter-pasture",
+          "start": 1215,
+          "feature_start": 1225,
+          "feature_end": 1351,
+          "clear": 1376,
+          "forced": null
+        },
+        {
+          "screen": "vault",
+          "film": "km-zero",
+          "start": 1200,
+          "feature_start": 1210,
+          "feature_end": 1284,
+          "clear": 1299,
+          "forced": null
+        }
+      ],
+      "conflict": [],
+      "conflict_alone": false,
+      "relaxed": [],
+      "stats": {
+        "candidates": 1523,
+        "booleans": 2553,
+        "rank_literals": 771,
+        "constraints": 3913,
+        "slot_min": 15,
+        "slot_asked": 15,
+        "slot_reason": null,
+        "first_feasible_s": 0.095,
+        "bound": 799.86,
+        "gap": 0.0,
+        "hinted": 0,
+        "symmetry_groups": 0
+      }
+    },
+    {
+      "house": "Brightwater Film Festival",
+      "date": "2026-10-08",
+      "status": "OPTIMAL",
+      "objective": 510.0,
+      "admissions": 510.0,
+      "hold_paid": 0.0,
+      "clash_paid": 0.0,
+      "solve_seconds": 0.156,
+      "sessions": [
+        {
+          "screen": "annexe",
+          "film": "silent-partner",
+          "start": 1095,
+          "feature_start": 1105,
+          "feature_end": 1207,
+          "clear": 1227,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "bells",
+          "start": 1230,
+          "feature_start": 1240,
+          "feature_end": 1341,
+          "clear": 1361,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "field-guide",
+          "start": 930,
+          "feature_start": 940,
+          "feature_end": 1031,
+          "clear": 1056,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "sundowners",
+          "start": 1185,
+          "feature_start": 1195,
+          "feature_end": 1283,
+          "clear": 1308,
+          "forced": null
+        }
+      ],
+      "conflict": [],
+      "conflict_alone": false,
+      "relaxed": [],
+      "stats": {
+        "candidates": 1208,
+        "booleans": 2076,
+        "rank_literals": 609,
+        "constraints": 3143,
+        "slot_min": 15,
+        "slot_asked": 15,
+        "slot_reason": null,
+        "first_feasible_s": 0.062,
+        "bound": 510.0,
+        "gap": 0.0,
+        "hinted": 0,
+        "symmetry_groups": 0
+      }
+    },
+    {
+      "house": "Brightwater Film Festival",
+      "date": "2026-10-09",
+      "status": "OPTIMAL",
+      "objective": 637.62,
+      "admissions": 637.62,
+      "hold_paid": 0.0,
+      "clash_paid": 0.0,
+      "solve_seconds": 0.203,
+      "sessions": [
+        {
+          "screen": "annexe",
+          "film": "paper-sun",
+          "start": 840,
+          "feature_start": 850,
+          "feature_end": 929,
+          "clear": 949,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "night-bus",
+          "start": 1275,
+          "feature_start": 1285,
+          "feature_end": 1377,
+          "clear": 1397,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "small-whale",
+          "start": 960,
+          "feature_start": 970,
+          "feature_end": 1042,
+          "clear": 1067,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "small-hours",
+          "start": 1140,
+          "feature_start": 1150,
+          "feature_end": 1258,
+          "clear": 1283,
+          "forced": null
+        }
+      ],
+      "conflict": [],
+      "conflict_alone": false,
+      "relaxed": [],
+      "stats": {
+        "candidates": 1710,
+        "booleans": 2827,
+        "rank_literals": 787,
+        "constraints": 4339,
+        "slot_min": 15,
+        "slot_asked": 15,
+        "slot_reason": null,
+        "first_feasible_s": 0.072,
+        "bound": 637.62,
+        "gap": 0.0,
+        "hinted": 0,
+        "symmetry_groups": 0
+      }
+    },
+    {
+      "house": "Brightwater Film Festival",
+      "date": "2026-10-10",
+      "status": "OPTIMAL",
+      "objective": 1646.22,
+      "admissions": 1646.22,
+      "hold_paid": 0.0,
+      "clash_paid": 0.0,
+      "solve_seconds": 0.641,
+      "sessions": [
+        {
+          "screen": "annexe",
+          "film": "small-whale",
+          "start": 660,
+          "feature_start": 670,
+          "feature_end": 742,
+          "clear": 762,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "hedgehog",
+          "start": 840,
+          "feature_start": 850,
+          "feature_end": 940,
+          "clear": 960,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "rain",
+          "start": 975,
+          "feature_start": 985,
+          "feature_end": 1078,
+          "clear": 1098,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "ash-wednesday",
+          "start": 1140,
+          "feature_start": 1150,
+          "feature_end": 1246,
+          "clear": 1266,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "vespers",
+          "start": 1275,
+          "feature_start": 1285,
+          "feature_end": 1390,
+          "clear": 1410,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "tidewater",
+          "start": 840,
+          "feature_start": 850,
+          "feature_end": 934,
+          "clear": 959,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "paper-sun",
+          "start": 960,
+          "feature_start": 970,
+          "feature_end": 1049,
+          "clear": 1074,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "small-hours",
+          "start": 1080,
+          "feature_start": 1090,
+          "feature_end": 1198,
+          "clear": 1223,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "fallow",
+          "start": 1230,
+          "feature_start": 1240,
+          "feature_end": 1362,
+          "clear": 1387,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "night-bus",
+          "start": 1395,
+          "feature_start": 1405,
+          "feature_end": 1497,
+          "clear": 1522,
+          "forced": null
+        },
+        {
+          "screen": "vault",
+          "film": "brackish",
+          "start": 1080,
+          "feature_start": 1090,
+          "feature_end": 1171,
+          "clear": 1186,
+          "forced": null
+        }
+      ],
+      "conflict": [],
+      "conflict_alone": false,
+      "relaxed": [],
+      "stats": {
+        "candidates": 1959,
+        "booleans": 3224,
+        "rank_literals": 907,
+        "constraints": 4971,
+        "slot_min": 15,
+        "slot_asked": 15,
+        "slot_reason": null,
+        "first_feasible_s": 0.286,
+        "bound": 1646.22,
+        "gap": 0.0,
+        "hinted": 0,
+        "symmetry_groups": 0
+      }
+    },
+    {
+      "house": "Brightwater Film Festival",
+      "date": "2026-10-11",
+      "status": "OPTIMAL",
+      "objective": 929.88,
+      "admissions": 929.88,
+      "hold_paid": 0.0,
+      "clash_paid": 0.0,
+      "solve_seconds": 0.192,
+      "sessions": [
+        {
+          "screen": "annexe",
+          "film": "hedgehog",
+          "start": 870,
+          "feature_start": 880,
+          "feature_end": 970,
+          "clear": 990,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "tidewater",
+          "start": 990,
+          "feature_start": 1000,
+          "feature_end": 1084,
+          "clear": 1104,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "brackish",
+          "start": 1125,
+          "feature_start": 1135,
+          "feature_end": 1216,
+          "clear": 1236,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "vespers",
+          "start": 1275,
+          "feature_start": 1285,
+          "feature_end": 1390,
+          "clear": 1410,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "rain",
+          "start": 1050,
+          "feature_start": 1060,
+          "feature_end": 1153,
+          "clear": 1178,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "fallow",
+          "start": 1185,
+          "feature_start": 1195,
+          "feature_end": 1317,
+          "clear": 1342,
+          "forced": null
+        }
+      ],
+      "conflict": [],
+      "conflict_alone": false,
+      "relaxed": [],
+      "stats": {
+        "candidates": 1262,
+        "booleans": 2148,
+        "rank_literals": 619,
+        "constraints": 3251,
+        "slot_min": 15,
+        "slot_asked": 15,
+        "slot_reason": null,
+        "first_feasible_s": 0.09,
+        "bound": 929.88,
+        "gap": 0.0,
+        "hinted": 0,
+        "symmetry_groups": 0
+      }
+    }
+  ],
+  "hold_days": [],
+  "held": [],
+  "solve_seconds": 6.187
+}

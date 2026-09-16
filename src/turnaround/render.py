@@ -14,8 +14,19 @@ from typing import Any
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from .check import Check, Report, WeekReport, admissions, term_is_set, whys
-from .model import TERM_SCOPE, Brief, Film, Grid, WeekBrief, WeekGrid, fmt_time, week_terms_set
+from .check import Check, Report, WeekReport, admissions, clashes, term_is_set, whys
+from .model import (
+    TERM_SCOPE,
+    Brief,
+    FestivalBrief,
+    Film,
+    Grid,
+    WeekBrief,
+    WeekGrid,
+    festival_terms_set,
+    fmt_time,
+    week_terms_set,
+)
 
 _TEMPLATES = Path(__file__).parent / "templates"
 
@@ -26,9 +37,11 @@ def _env() -> Environment:
     return env
 
 
-def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
+def day_context(brief: Brief, grid: Grid, *, hide_away: bool = False) -> dict[str, Any]:
     """Everything the grid macro needs to draw one day: rows of blocks on a ruler. The
-    same rows feed the booth strips (one screen, its sessions in mono, turned vertical)."""
+    same rows feed the booth strips (one screen, its sessions in mono, turned vertical).
+    `hide_away` leaves a title whose print is not in town today (max_shows 0, nothing
+    screened) out of the by-title table: a festival day lists what plays, not the slate."""
     p = brief.policy
     day_start = p.open_min - (p.open_min % 60)
     latest_clear = max((s.clear for s in grid.sessions), default=p.last_start_min + 120)
@@ -89,7 +102,9 @@ def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
         f"{fmt} {mins}′" for fmt, mins in p.preshow_by_format.items() if mins != p.preshow_min
     ]
     stagger = (
-        f"stagger ≥ {p.stagger_min}′"
+        "no stagger"
+        if p.stagger_min == 0
+        else f"stagger ≥ {p.stagger_min}′"
         if p.max_starts_per_window == 1
         else f"≤ {p.max_starts_per_window} starts in {p.stagger_min}′"
     )
@@ -103,6 +118,8 @@ def day_context(brief: Brief, grid: Grid) -> dict[str, Any]:
     seats_sold = {a.film: a for a in admissions(brief, grid)}
     for f in brief.films:
         ss = grid.by_film().get(f.id, [])
+        if hide_away and f.terms.max_shows == 0 and not ss:
+            continue
         a = seats_sold[f.id]
         films.append(
             {
@@ -175,7 +192,7 @@ def render_html(brief: Brief, grid: Grid, report: Report | None = None) -> str:
     return tpl.render(brief=brief, grid=grid, report=report, d=day_context(brief, grid))
 
 
-def _overrides(week: WeekBrief, i: int) -> list[str]:
+def _overrides(week: WeekBrief | FestivalBrief, i: int) -> list[str]:
     """The day's differences from the base brief, as short labels for the sheet."""
     d = week.days[i]
     out = [f"{k} {v}" for k, v in d.policy.items()]
@@ -253,6 +270,137 @@ def render_week_html(
     )
 
 
+def _fold_away(brief: Brief, report: Report) -> Report:
+    """The day's proof with the titles whose print is away folded into one line: thirty
+    `max_shows 0 ≤ 0` rows say one thing. The sheet's reading only; the grid JSON and
+    `turnaround check` carry every row."""
+    away = {f.id for f in brief.films if f.terms.max_shows == 0}
+    if not away:
+        return report
+    folded = Report()
+    rows = [c for c in report.checks if c.film in away]
+    folded.checks = [c for c in report.checks if c.film not in away]
+    ok = all(c.ok for c in rows)
+    slipped = sorted({c.film or "?" for c in rows if not c.ok})
+    titles = len({c.film for c in rows})
+    folded.checks.append(
+        Check(
+            "not in town",
+            ok,
+            f"{titles} title{'s' if titles != 1 else ''} whose print is away today, "
+            f"{len(rows)} checks"
+            + (", none screened" if ok else f"; slipped: {', '.join(slipped)}"),
+        )
+    )
+    return folded
+
+
+def render_festival_html(
+    fest: FestivalBrief,
+    wg: WeekGrid,
+    report: WeekReport | None = None,
+    explain: dict[str, str] | None = None,
+) -> str:
+    """One sheet for the festival: the programme by title across the days, the festival's
+    proof, then every day's grid on its own page with the venues as its rows."""
+    tpl = _env().get_template("festival.html.j2")
+    briefs = fest.briefs()
+    days = []
+    for i, (d, brief, grid) in enumerate(zip(fest.days, briefs, wg.grids, strict=True)):
+        found = clashes(brief, grid) if grid.status in ("OPTIMAL", "FEASIBLE") else []
+        days.append(
+            {
+                "name": d.name,
+                "brief": brief,
+                "grid": grid,
+                "d": day_context(brief, grid, hide_away=True),
+                "report": _fold_away(brief, report.reports[i]) if report else None,
+                "overrides": _overrides(fest, i),
+                "explain": (explain or {}).get(d.name),
+                "clashes": [
+                    {
+                        "strand": c.strand,
+                        "at": fmt_time(c.at),
+                        "titles": [brief.film(t).title for t in c.titles],
+                        "minutes": c.minutes,
+                    }
+                    for c in found
+                ],
+            }
+        )
+    sold_by_day = [
+        {a.film: a for a in admissions(b, g)} for b, g in zip(briefs, wg.grids, strict=True)
+    ]
+    checks_by = {(c.name, c.film): c for c in report.week.checks} if report else {}
+    title_rows = []
+    for f in fest.films:
+        cells = []
+        total = 0
+        for i, grid in enumerate(wg.grids):
+            mine = sorted((s for s in grid.sessions if s.film == f.id), key=lambda s: s.start)
+            total += len(mine)
+            g = f.terms.guest
+            cells.append(
+                {
+                    "starts": [
+                        {
+                            "hhmm": fmt_time(s.start),
+                            "venue": briefs[i].screen(s.screen).label,
+                            "guest": bool(g and fest.days[i].name in g.days and g.covers(s.start)),
+                        }
+                        for s in mine
+                    ],
+                    "status": grid.status,
+                    "away": (
+                        f.terms.available is not None and fest.days[i].name not in f.terms.available
+                    ),
+                    "guest_day": bool(g and fest.days[i].name in g.days),
+                }
+            )
+        guest_check = checks_by.get(("guest", f.id))
+        screenings_check = checks_by.get(("screenings", f.id))
+        title_rows.append(
+            {
+                "film": f,
+                "cells": cells,
+                "total": total,
+                "asked": f.terms.screenings,
+                "guest": f.terms.guest,
+                "guest_ok": guest_check.ok if guest_check else None,
+                "guest_relaxed": guest_check.relaxed if guest_check else False,
+                "screenings_ok": screenings_check.ok if screenings_check else None,
+                "screenings_relaxed": screenings_check.relaxed if screenings_check else False,
+                "admissions": sum(d[f.id].admissions for d in sold_by_day),
+                "turned_away": sum(d[f.id].turned_away for d in sold_by_day),
+            }
+        )
+    seats = sum(
+        brief.screen(s.screen).capacity
+        for brief, grid in zip(briefs, wg.grids, strict=True)
+        for s in grid.sessions
+    )
+    clash_minutes_total = sum(
+        c.minutes
+        for b, g in zip(briefs, wg.grids, strict=True)
+        if g.status in ("OPTIMAL", "FEASIBLE")
+        for c in clashes(b, g)
+    )
+    return tpl.render(
+        fest=fest,
+        wg=wg,
+        days=days,
+        title_rows=title_rows,
+        week_report=report,
+        seats=seats,
+        admissions=sum(a.admissions for d in sold_by_day for a in d.values()),
+        turned_away=sum(a.turned_away for d in sold_by_day for a in d.values()),
+        clash_paid=sum(g.clash_paid for g in wg.grids),
+        clash_minutes=clash_minutes_total,
+        guests=sum(1 for f in fest.films if f.terms.guest),
+        relaxed_total=sum(len(g.relaxed) for g in wg.grids),
+    )
+
+
 def _verdict(checks: list[tuple[str, Check]]) -> tuple[str, str]:
     """One word for a term across its days, from the checker's own verdicts:
     honoured, given up (declared on the grid), or not met. And the days it failed on."""
@@ -291,17 +439,22 @@ def terms_context(
     films: list[Film],
     days: list[tuple[str, Brief, Grid, Report | None]],
     week_checks: list[Check],
+    *,
+    festival: bool = False,
 ) -> list[dict[str, Any]]:
     """One terms sheet per title: every term the booking carries, its scope, what was
     asked, what the grid delivered day by day, and the checker's verdict. The proof is
-    the checker's, not the solver's (ADR-003)."""
+    the checker's, not the solver's (ADR-003). `week_checks` are the checks that span the
+    days — a week's, or with `festival` the festival's."""
     sheets = []
     for f in films:
         base = f.terms
         rows: list[dict[str, Any]] = []
         for name, scope in TERM_SCOPE.items():
-            if scope == "week":
+            if scope != "day":
                 continue
+            if name == "max_shows" and base.available is not None and base.max_shows is None:
+                continue  # the unfold's max_shows 0 on a day the print is away: not a term
             if not term_is_set(base, name) and not any(
                 term_is_set(b.film(f.id).terms, name) for _, b, _, _ in days
             ):
@@ -310,15 +463,19 @@ def terms_context(
                 continue  # the exclusive_until row says it
             asked = getattr(base, name)
             asked_s = ", ".join(asked) if isinstance(asked, list) else str(asked).lower()
+            # a day the print is away is not a day the booking speaks of
+            in_town = [d for d, _, _, _ in days if base.available is None or d in base.available]
             overrides = []
             for d, b, _, _ in days:
                 v = getattr(b.film(f.id).terms, name)
+                if d not in in_town:
+                    continue
                 if v != asked and not (name == "exclusive_screen" and base.exclusive_until):
                     overrides.append(f"{d} {str(v).lower()}")
             day_checks = [
                 (d, c)
                 for d, _, _, rep in days
-                if rep
+                if rep and d in in_town
                 for c in rep.checks
                 if c.film == f.id and c.name == name
             ]
@@ -326,7 +483,7 @@ def terms_context(
                 day_checks = [
                     (d, c)
                     for d, _, _, rep in days
-                    if rep
+                    if rep and d in in_town
                     for c in rep.checks
                     if c.name == "eligibility"
                 ]
@@ -334,6 +491,7 @@ def terms_context(
                     f"{d} "
                     + (", ".join(sorted({s.screen for s in g.sessions if s.film == f.id})) or "—")
                     for d, _, g, _ in days
+                    if d in in_town
                 )
             else:
                 delivered = _delivered(name, day_checks)
@@ -348,7 +506,8 @@ def terms_context(
                     "where": where,
                 }
             )
-        for name, value in week_terms_set(base):
+        across = festival_terms_set(base) if festival else week_terms_set(base)
+        for name, value in across:
             wc = [("week", c) for c in week_checks if c.film == f.id and c.name == name]
             verdict, where = _verdict(wc)
             if name == "exclusive_until":
@@ -356,7 +515,7 @@ def terms_context(
             rows.append(
                 {
                     "term": name,
-                    "scope": "the week",
+                    "scope": "the festival" if festival else "the week",
                     "asked": value,
                     "delivered": wc[0][1].evidence if wc else "—",
                     "verdict": verdict,
@@ -427,4 +586,33 @@ def render_week_terms_html(week: WeekBrief, wg: WeekGrid, report: WeekReport | N
         span=span.strip(),
         days=[d[0] for d in days],
         sheets=terms_context(week.house, week.films, days, report.week.checks if report else []),
+    )
+
+
+def render_festival_terms_html(
+    fest: FestivalBrief, wg: WeekGrid, report: WeekReport | None = None
+) -> str:
+    """The terms sheets for the festival: one page per title, every day in its columns,
+    the festival's terms (screenings, the guest, the print's days) with the checker's
+    verdict across the days."""
+    tpl = _env().get_template("terms.html.j2")
+    briefs = fest.briefs()
+    days = [
+        (d.name, b, g, report.reports[i] if report else None)
+        for i, (d, b, g) in enumerate(zip(fest.days, briefs, wg.grids, strict=True))
+    ]
+    first, last = fest.days[0], fest.days[-1]
+    span = f"{first.name} {first.date or ''} → {last.name} {last.date or ''}".replace("  ", " ")
+    return tpl.render(
+        house=fest.festival,
+        span=span.strip(),
+        days=[d[0] for d in days],
+        sheets=terms_context(
+            fest.festival,
+            fest.films,
+            days,
+            report.week.checks if report else [],
+            festival=True,
+        ),
+        festival=True,
     )

@@ -23,6 +23,7 @@ for b in "${briefs[@]}"; do
   tl=30
   [ "$n" = "regent" ] && why="--why"  # the hero sheet carries every session's why (one solve per session)
   [ "$n" = "sixteen" ] && tl=90       # the multiplex: the bench's minute per day and a half again (docs/bench.md)
+  [ "$n" = "festival" ] && tl=20      # the festival: ten sparse days, each proven in about a second
   tr plan "$b" --out "docs/grids/$n.json" --html "docs/grids/$n.html" --quiet --time-limit $tl $why || rc=$?
   if [ "$rc" -eq 2 ]; then
     tr plan "$b" --relax --out "docs/grids/$n.json" --html "docs/grids/$n.html" --quiet --time-limit $tl

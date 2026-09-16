@@ -1,0 +1,1122 @@
+{
+  "festival": "Brightwater Film Festival",
+  "venues": [
+    {
+      "id": "hall",
+      "name": "Grand Hall",
+      "capacity": 640,
+      "formats": [
+        "2D",
+        "35mm"
+      ]
+    },
+    {
+      "id": "annexe",
+      "name": "Annexe",
+      "capacity": 220,
+      "formats": [
+        "2D",
+        "35mm"
+      ],
+      "clean_min": 20
+    },
+    {
+      "id": "vault",
+      "name": "Vault",
+      "capacity": 90,
+      "clean_min": 15
+    }
+  ],
+  "films": [
+    {
+      "id": "salt-road",
+      "title": "The Salt Road",
+      "runtime_min": 118,
+      "format": "2D",
+      "strand": "Competition",
+      "weight": 3.0,
+      "rating": "M",
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Fri 2",
+          "Sat 3",
+          "Sun 4",
+          "Mon 5"
+        ],
+        "guest": {
+          "name": "Ines Marlow, director",
+          "days": [
+            "Fri 2",
+            "Sat 3"
+          ],
+          "earliest": "18:00"
+        }
+      }
+    },
+    {
+      "id": "nocturne",
+      "title": "Nocturne for Elna",
+      "runtime_min": 104,
+      "format": "2D",
+      "strand": "Competition",
+      "weight": 1.6,
+      "rating": "M",
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Fri 2",
+          "Sat 3",
+          "Sun 4",
+          "Mon 5",
+          "Tue 6"
+        ]
+      }
+    },
+    {
+      "id": "house-north",
+      "title": "A House Facing North",
+      "runtime_min": 131,
+      "format": "2D",
+      "strand": "Competition",
+      "weight": 1.8,
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sat 3",
+          "Sun 4",
+          "Mon 5",
+          "Tue 6",
+          "Wed 7"
+        ],
+        "guest": {
+          "name": "Tomas Reyes, director",
+          "days": [
+            "Sat 3",
+            "Sun 4"
+          ],
+          "earliest": "17:00",
+          "latest": "20:30"
+        }
+      }
+    },
+    {
+      "id": "cartographer",
+      "title": "The Cartographer's Daughter",
+      "runtime_min": 97,
+      "format": "2D",
+      "strand": "Competition",
+      "weight": 1.4,
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sun 4",
+          "Mon 5",
+          "Tue 6",
+          "Wed 7",
+          "Thu 8"
+        ]
+      }
+    },
+    {
+      "id": "low-tide",
+      "title": "Low Tide",
+      "runtime_min": 112,
+      "format": "2D",
+      "strand": "Competition",
+      "weight": 1.5,
+      "rating": "M",
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Mon 5",
+          "Tue 6",
+          "Wed 7",
+          "Thu 8",
+          "Fri 9"
+        ]
+      }
+    },
+    {
+      "id": "winter-pasture",
+      "title": "Winter Pasture",
+      "runtime_min": 126,
+      "format": "2D",
+      "strand": "Competition",
+      "weight": 1.7,
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Tue 6",
+          "Wed 7",
+          "Thu 8",
+          "Fri 9",
+          "Sat 10"
+        ],
+        "guest": {
+          "name": "the producers",
+          "days": [
+            "Wed 7",
+            "Thu 8"
+          ],
+          "earliest": "18:30"
+        }
+      }
+    },
+    {
+      "id": "bells",
+      "title": "The Weight of Bells",
+      "runtime_min": 101,
+      "format": "2D",
+      "strand": "Competition",
+      "weight": 1.3,
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Wed 7",
+          "Thu 8",
+          "Fri 9",
+          "Sat 10",
+          "Sun 11"
+        ]
+      }
+    },
+    {
+      "id": "rain",
+      "title": "Other People's Rain",
+      "runtime_min": 93,
+      "format": "2D",
+      "strand": "Competition",
+      "weight": 1.2,
+      "rating": "R13",
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sat 10",
+          "Sun 11"
+        ]
+      }
+    },
+    {
+      "id": "small-hours",
+      "title": "Small Hours",
+      "runtime_min": 108,
+      "format": "2D",
+      "strand": "Competition",
+      "weight": 1.9,
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Fri 9",
+          "Sat 10",
+          "Sun 11"
+        ],
+        "guest": {
+          "name": "Ayla Brandt, lead",
+          "days": [
+            "Sat 10"
+          ],
+          "earliest": "18:00"
+        }
+      }
+    },
+    {
+      "id": "fallow",
+      "title": "Fallow",
+      "runtime_min": 122,
+      "format": "2D",
+      "strand": "Competition",
+      "weight": 2.4,
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sat 10",
+          "Sun 11"
+        ],
+        "guest": {
+          "name": "the closing-night guests",
+          "days": [
+            "Sun 11"
+          ],
+          "earliest": "18:00",
+          "latest": "20:00"
+        }
+      }
+    },
+    {
+      "id": "projectionist",
+      "title": "The Last Projectionist",
+      "runtime_min": 88,
+      "format": "2D",
+      "strand": "Documentary",
+      "weight": 1.4,
+      "daypart_weights": {
+        "matinee": 1.1,
+        "afternoon": 1.3,
+        "prime": 0.9,
+        "late": 0.3
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Fri 2",
+          "Sat 3",
+          "Sun 4",
+          "Mon 5"
+        ],
+        "guest": {
+          "name": "Hal Dunmore, subject",
+          "days": [
+            "Sat 3"
+          ],
+          "earliest": "13:00",
+          "latest": "18:00"
+        }
+      }
+    },
+    {
+      "id": "glasshouse",
+      "title": "Glasshouse",
+      "runtime_min": 76,
+      "format": "2D",
+      "strand": "Documentary",
+      "weight": 0.9,
+      "daypart_weights": {
+        "matinee": 1.1,
+        "afternoon": 1.3,
+        "prime": 0.9,
+        "late": 0.3
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Fri 2",
+          "Sat 3",
+          "Sun 4",
+          "Mon 5",
+          "Tue 6"
+        ]
+      }
+    },
+    {
+      "id": "ninety-days",
+      "title": "Ninety Days of Wind",
+      "runtime_min": 95,
+      "format": "2D",
+      "strand": "Documentary",
+      "weight": 1.1,
+      "daypart_weights": {
+        "matinee": 1.1,
+        "afternoon": 1.3,
+        "prime": 0.9,
+        "late": 0.3
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sun 4",
+          "Mon 5",
+          "Tue 6",
+          "Wed 7"
+        ]
+      }
+    },
+    {
+      "id": "orchard",
+      "title": "The Orchard Ledger",
+      "runtime_min": 82,
+      "format": "2D",
+      "strand": "Documentary",
+      "weight": 0.8,
+      "daypart_weights": {
+        "matinee": 1.1,
+        "afternoon": 1.3,
+        "prime": 0.9,
+        "late": 0.3
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sun 4",
+          "Mon 5",
+          "Tue 6",
+          "Wed 7",
+          "Thu 8"
+        ]
+      }
+    },
+    {
+      "id": "quiet-machines",
+      "title": "Quiet Machines",
+      "runtime_min": 70,
+      "format": "2D",
+      "strand": "Documentary",
+      "weight": 0.9,
+      "daypart_weights": {
+        "matinee": 1.1,
+        "afternoon": 1.3,
+        "prime": 0.9,
+        "late": 0.3
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Tue 6",
+          "Wed 7",
+          "Thu 8",
+          "Fri 9"
+        ]
+      }
+    },
+    {
+      "id": "field-guide",
+      "title": "A Field Guide to Leaving",
+      "runtime_min": 91,
+      "format": "2D",
+      "strand": "Documentary",
+      "weight": 1.2,
+      "daypart_weights": {
+        "matinee": 1.1,
+        "afternoon": 1.3,
+        "prime": 0.9,
+        "late": 0.3
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Tue 6",
+          "Wed 7",
+          "Thu 8",
+          "Fri 9",
+          "Sat 10"
+        ],
+        "guest": {
+          "name": "Priya Sethi, director",
+          "days": [
+            "Thu 8",
+            "Fri 9"
+          ],
+          "earliest": "13:00"
+        }
+      }
+    },
+    {
+      "id": "tidewater",
+      "title": "Tidewater",
+      "runtime_min": 84,
+      "format": "2D",
+      "strand": "Documentary",
+      "weight": 1.0,
+      "daypart_weights": {
+        "matinee": 1.1,
+        "afternoon": 1.3,
+        "prime": 0.9,
+        "late": 0.3
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sat 10",
+          "Sun 11"
+        ]
+      }
+    },
+    {
+      "id": "paper-sun",
+      "title": "Paper Sun",
+      "runtime_min": 79,
+      "format": "2D",
+      "strand": "Documentary",
+      "weight": 0.9,
+      "daypart_weights": {
+        "matinee": 1.1,
+        "afternoon": 1.3,
+        "prime": 0.9,
+        "late": 0.3
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Fri 9",
+          "Sat 10",
+          "Sun 11"
+        ]
+      }
+    },
+    {
+      "id": "teeth",
+      "title": "Teeth of the Hound",
+      "runtime_min": 96,
+      "format": "2D",
+      "strand": "Midnight",
+      "weight": 1.3,
+      "rating": "R18",
+      "daypart_weights": {
+        "matinee": 0.05,
+        "afternoon": 0.1,
+        "prime": 0.5,
+        "late": 1.6
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Fri 2",
+          "Sat 3",
+          "Sun 4"
+        ],
+        "earliest_start": "21:00"
+      }
+    },
+    {
+      "id": "static",
+      "title": "Static",
+      "runtime_min": 83,
+      "format": "2D",
+      "strand": "Midnight",
+      "weight": 1.0,
+      "rating": "R16",
+      "daypart_weights": {
+        "matinee": 0.05,
+        "afternoon": 0.1,
+        "prime": 0.5,
+        "late": 1.6
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Fri 2",
+          "Sat 3",
+          "Sun 4",
+          "Mon 5"
+        ],
+        "earliest_start": "21:00"
+      }
+    },
+    {
+      "id": "lodger",
+      "title": "The Lodger's Room",
+      "runtime_min": 99,
+      "format": "2D",
+      "strand": "Midnight",
+      "weight": 1.1,
+      "rating": "R16",
+      "daypart_weights": {
+        "matinee": 0.05,
+        "afternoon": 0.1,
+        "prime": 0.5,
+        "late": 1.6
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sun 4",
+          "Mon 5",
+          "Tue 6",
+          "Wed 7",
+          "Thu 8"
+        ],
+        "earliest_start": "21:00"
+      }
+    },
+    {
+      "id": "bloodmoss",
+      "title": "Bloodmoss",
+      "runtime_min": 87,
+      "format": "2D",
+      "strand": "Midnight",
+      "weight": 1.2,
+      "rating": "R18",
+      "daypart_weights": {
+        "matinee": 0.05,
+        "afternoon": 0.1,
+        "prime": 0.5,
+        "late": 1.6
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Tue 6",
+          "Wed 7",
+          "Thu 8",
+          "Fri 9",
+          "Sat 10"
+        ],
+        "earliest_start": "21:00"
+      }
+    },
+    {
+      "id": "night-bus",
+      "title": "Night Bus Nine",
+      "runtime_min": 92,
+      "format": "2D",
+      "strand": "Midnight",
+      "weight": 1.4,
+      "rating": "R16",
+      "daypart_weights": {
+        "matinee": 0.05,
+        "afternoon": 0.1,
+        "prime": 0.5,
+        "late": 1.6
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Fri 9",
+          "Sat 10",
+          "Sun 11"
+        ],
+        "earliest_start": "21:00"
+      }
+    },
+    {
+      "id": "vespers",
+      "title": "Vespers",
+      "runtime_min": 105,
+      "format": "2D",
+      "strand": "Midnight",
+      "weight": 1.1,
+      "rating": "R16",
+      "daypart_weights": {
+        "matinee": 0.05,
+        "afternoon": 0.1,
+        "prime": 0.5,
+        "late": 1.6
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sat 10",
+          "Sun 11"
+        ],
+        "earliest_start": "21:00"
+      }
+    },
+    {
+      "id": "glass-harbour",
+      "title": "The Glass Harbour (1962)",
+      "runtime_min": 108,
+      "format": "35mm",
+      "strand": "Retrospective",
+      "weight": 1.0,
+      "daypart_weights": {
+        "matinee": 0.8,
+        "afternoon": 1.1,
+        "prime": 1.0,
+        "late": 0.5
+      },
+      "terms": {
+        "screenings": 1,
+        "max_shows": 1,
+        "available": [
+          "Fri 2",
+          "Sat 3",
+          "Sun 4"
+        ],
+        "screens": [
+          "hall",
+          "annexe"
+        ]
+      }
+    },
+    {
+      "id": "second-summer",
+      "title": "Second Summer (1978)",
+      "runtime_min": 114,
+      "format": "35mm",
+      "strand": "Retrospective",
+      "weight": 0.9,
+      "daypart_weights": {
+        "matinee": 0.8,
+        "afternoon": 1.1,
+        "prime": 1.0,
+        "late": 0.5
+      },
+      "terms": {
+        "screenings": 1,
+        "max_shows": 1,
+        "available": [
+          "Sat 3",
+          "Sun 4",
+          "Mon 5",
+          "Tue 6"
+        ],
+        "screens": [
+          "hall",
+          "annexe"
+        ]
+      }
+    },
+    {
+      "id": "copper-street",
+      "title": "Copper Street (1955)",
+      "runtime_min": 89,
+      "format": "35mm",
+      "strand": "Retrospective",
+      "weight": 0.8,
+      "daypart_weights": {
+        "matinee": 0.8,
+        "afternoon": 1.1,
+        "prime": 1.0,
+        "late": 0.5
+      },
+      "terms": {
+        "screenings": 1,
+        "max_shows": 1,
+        "available": [
+          "Mon 5",
+          "Tue 6",
+          "Wed 7"
+        ],
+        "screens": [
+          "hall",
+          "annexe"
+        ]
+      }
+    },
+    {
+      "id": "long-division",
+      "title": "Long Division (1984)",
+      "runtime_min": 121,
+      "format": "35mm",
+      "strand": "Retrospective",
+      "weight": 1.1,
+      "daypart_weights": {
+        "matinee": 0.8,
+        "afternoon": 1.1,
+        "prime": 1.0,
+        "late": 0.5
+      },
+      "terms": {
+        "screenings": 1,
+        "max_shows": 1,
+        "available": [
+          "Tue 6",
+          "Wed 7",
+          "Thu 8",
+          "Fri 9"
+        ],
+        "guest": {
+          "name": "Rosa Vane, lead",
+          "days": [
+            "Tue 6",
+            "Wed 7"
+          ],
+          "earliest": "15:00",
+          "latest": "20:00"
+        },
+        "screens": [
+          "hall",
+          "annexe"
+        ]
+      }
+    },
+    {
+      "id": "silent-partner",
+      "title": "The Silent Partner (1971)",
+      "runtime_min": 102,
+      "format": "35mm",
+      "strand": "Retrospective",
+      "weight": 0.9,
+      "daypart_weights": {
+        "matinee": 0.8,
+        "afternoon": 1.1,
+        "prime": 1.0,
+        "late": 0.5
+      },
+      "terms": {
+        "screenings": 1,
+        "max_shows": 1,
+        "available": [
+          "Thu 8",
+          "Fri 9",
+          "Sat 10"
+        ],
+        "screens": [
+          "hall",
+          "annexe"
+        ]
+      }
+    },
+    {
+      "id": "ash-wednesday",
+      "title": "Ash Wednesday (1969)",
+      "runtime_min": 96,
+      "format": "35mm",
+      "strand": "Retrospective",
+      "weight": 1.0,
+      "daypart_weights": {
+        "matinee": 0.8,
+        "afternoon": 1.1,
+        "prime": 1.0,
+        "late": 0.5
+      },
+      "terms": {
+        "screenings": 1,
+        "max_shows": 1,
+        "available": [
+          "Sat 10",
+          "Sun 11"
+        ],
+        "screens": [
+          "hall",
+          "annexe"
+        ]
+      }
+    },
+    {
+      "id": "bright-room",
+      "title": "Bright Room",
+      "runtime_min": 78,
+      "format": "2D",
+      "strand": "New Voices",
+      "weight": 0.7,
+      "daypart_weights": {
+        "matinee": 0.5,
+        "afternoon": 0.9,
+        "prime": 1.1,
+        "late": 0.9
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Fri 2",
+          "Sat 3",
+          "Sun 4",
+          "Mon 5"
+        ]
+      }
+    },
+    {
+      "id": "pigeon",
+      "title": "Pigeon Season",
+      "runtime_min": 85,
+      "format": "2D",
+      "strand": "New Voices",
+      "weight": 0.8,
+      "daypart_weights": {
+        "matinee": 0.5,
+        "afternoon": 0.9,
+        "prime": 1.1,
+        "late": 0.9
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sat 3",
+          "Sun 4",
+          "Mon 5",
+          "Tue 6",
+          "Wed 7"
+        ]
+      }
+    },
+    {
+      "id": "understudy",
+      "title": "The Understudy",
+      "runtime_min": 92,
+      "format": "2D",
+      "strand": "New Voices",
+      "weight": 0.9,
+      "daypart_weights": {
+        "matinee": 0.5,
+        "afternoon": 0.9,
+        "prime": 1.1,
+        "late": 0.9
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sun 4",
+          "Mon 5",
+          "Tue 6",
+          "Wed 7",
+          "Thu 8"
+        ],
+        "guest": {
+          "name": "Jonah Pell, director",
+          "days": [
+            "Mon 5",
+            "Tue 6"
+          ],
+          "earliest": "17:00"
+        }
+      }
+    },
+    {
+      "id": "km-zero",
+      "title": "Kilometre Zero",
+      "runtime_min": 74,
+      "format": "2D",
+      "strand": "New Voices",
+      "weight": 0.6,
+      "daypart_weights": {
+        "matinee": 0.5,
+        "afternoon": 0.9,
+        "prime": 1.1,
+        "late": 0.9
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Tue 6",
+          "Wed 7",
+          "Thu 8",
+          "Fri 9"
+        ]
+      }
+    },
+    {
+      "id": "sundowners",
+      "title": "Sundowners",
+      "runtime_min": 88,
+      "format": "2D",
+      "strand": "New Voices",
+      "weight": 0.8,
+      "daypart_weights": {
+        "matinee": 0.5,
+        "afternoon": 0.9,
+        "prime": 1.1,
+        "late": 0.9
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Wed 7",
+          "Thu 8",
+          "Fri 9",
+          "Sat 10",
+          "Sun 11"
+        ]
+      }
+    },
+    {
+      "id": "brackish",
+      "title": "Brackish",
+      "runtime_min": 81,
+      "format": "2D",
+      "strand": "New Voices",
+      "weight": 0.7,
+      "daypart_weights": {
+        "matinee": 0.5,
+        "afternoon": 0.9,
+        "prime": 1.1,
+        "late": 0.9
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sat 10",
+          "Sun 11"
+        ]
+      }
+    },
+    {
+      "id": "kite-library",
+      "title": "The Kite Library",
+      "runtime_min": 86,
+      "format": "2D",
+      "strand": "Family",
+      "weight": 1.5,
+      "rating": "G",
+      "daypart_weights": {
+        "matinee": 1.6,
+        "afternoon": 1.2,
+        "prime": 0.4,
+        "late": 0.05
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Fri 2",
+          "Sat 3",
+          "Sun 4"
+        ],
+        "latest_start": "16:00"
+      }
+    },
+    {
+      "id": "moth-lantern",
+      "title": "Moth & Lantern",
+      "runtime_min": 79,
+      "format": "2D",
+      "strand": "Family",
+      "weight": 1.3,
+      "rating": "G",
+      "daypart_weights": {
+        "matinee": 1.6,
+        "afternoon": 1.2,
+        "prime": 0.4,
+        "late": 0.05
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sat 3",
+          "Sun 4",
+          "Mon 5"
+        ],
+        "latest_start": "16:00"
+      }
+    },
+    {
+      "id": "small-whale",
+      "title": "A Very Small Whale",
+      "runtime_min": 72,
+      "format": "2D",
+      "strand": "Family",
+      "weight": 1.2,
+      "rating": "G",
+      "daypart_weights": {
+        "matinee": 1.6,
+        "afternoon": 1.2,
+        "prime": 0.4,
+        "late": 0.05
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Fri 9",
+          "Sat 10",
+          "Sun 11"
+        ],
+        "latest_start": "16:00"
+      }
+    },
+    {
+      "id": "hedgehog",
+      "title": "The Hedgehog Parliament",
+      "runtime_min": 90,
+      "format": "2D",
+      "strand": "Family",
+      "weight": 1.4,
+      "rating": "PG",
+      "daypart_weights": {
+        "matinee": 1.6,
+        "afternoon": 1.2,
+        "prime": 0.4,
+        "late": 0.05
+      },
+      "terms": {
+        "screenings": 2,
+        "max_shows": 1,
+        "available": [
+          "Sat 10",
+          "Sun 11"
+        ],
+        "latest_start": "16:00"
+      }
+    }
+  ],
+  "policy": {
+    "open": "11:00",
+    "last_start": "21:30",
+    "preshow_min": 10,
+    "clean_min": 25,
+    "stagger_min": 0,
+    "slot_min": 15,
+    "move_min": 45,
+    "clash_penalty": 40,
+    "prime_start": "17:30",
+    "prime_end": "20:45",
+    "assumed_admissions": 120
+  },
+  "days": [
+    {
+      "name": "Fri 2",
+      "date": "2026-10-02",
+      "policy": {
+        "last_start": "23:30"
+      }
+    },
+    {
+      "name": "Sat 3",
+      "date": "2026-10-03",
+      "policy": {
+        "last_start": "23:30"
+      }
+    },
+    {
+      "name": "Sun 4",
+      "date": "2026-10-04"
+    },
+    {
+      "name": "Mon 5",
+      "date": "2026-10-05",
+      "policy": {
+        "open": "13:00"
+      }
+    },
+    {
+      "name": "Tue 6",
+      "date": "2026-10-06",
+      "policy": {
+        "open": "13:00"
+      }
+    },
+    {
+      "name": "Wed 7",
+      "date": "2026-10-07",
+      "policy": {
+        "open": "13:00"
+      }
+    },
+    {
+      "name": "Thu 8",
+      "date": "2026-10-08",
+      "policy": {
+        "open": "13:00"
+      }
+    },
+    {
+      "name": "Fri 9",
+      "date": "2026-10-09",
+      "policy": {
+        "last_start": "23:30"
+      }
+    },
+    {
+      "name": "Sat 10",
+      "date": "2026-10-10",
+      "policy": {
+        "last_start": "23:30"
+      }
+    },
+    {
+      "name": "Sun 11",
+      "date": "2026-10-11"
+    }
+  ]
+}

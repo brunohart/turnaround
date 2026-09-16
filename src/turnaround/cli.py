@@ -12,21 +12,63 @@ from rich.console import Console
 from rich.table import Table
 
 from . import __version__
-from .check import WeekReport, admissions, check_week, whys
+from .check import WeekReport, admissions, check_festival, check_week, whys
 from .check import check as run_check
 from .inout import Day, export_csv, export_ical, export_json_text, import_csv, screen_ids
-from .model import Brief, Grid, Session, WeekBrief, WeekGrid, fmt_time, validation_sentences
-from .render import render_html, render_terms_html, render_week_html, render_week_terms_html
-from .solve import Tuning, explain, probe, probe_all, relax, solve, solve_week, what_if
+from .model import (
+    Brief,
+    FestivalBrief,
+    Grid,
+    Session,
+    WeekBrief,
+    WeekGrid,
+    fmt_time,
+    validation_sentences,
+)
+from .render import (
+    render_festival_html,
+    render_festival_terms_html,
+    render_html,
+    render_terms_html,
+    render_week_html,
+    render_week_terms_html,
+)
+from .solve import (
+    Tuning,
+    explain,
+    probe,
+    probe_all,
+    relax,
+    solve,
+    solve_festival,
+    solve_week,
+    what_if,
+)
 
 app = typer.Typer(add_completion=False, no_args_is_help=True, help=__doc__)
 console = Console()
 
 
 def _is_week(path: Path) -> bool:
-    """A week brief carries `days`; a week grid carries `grids`. Cheap to tell apart."""
+    """A week brief carries `days`; a week grid carries `grids`. Cheap to tell apart. A
+    festival brief carries `days` too, and `festival`; it is not a week."""
     head = json.loads(path.read_text())
-    return isinstance(head, dict) and ("days" in head or "grids" in head)
+    return isinstance(head, dict) and ("days" in head or "grids" in head) and "festival" not in head
+
+
+def _is_festival(path: Path) -> bool:
+    """A festival brief says `festival` where a house says `house`."""
+    head = json.loads(path.read_text())
+    return isinstance(head, dict) and "festival" in head
+
+
+def _load_festival(path: Path) -> FestivalBrief:
+    raw = json.loads(path.read_text())
+    try:
+        return FestivalBrief.model_validate(raw)
+    except ValidationError as e:
+        _refuse(e, raw, path)
+        raise
 
 
 def _refuse(err: ValidationError, raw: object, path: Path) -> None:
@@ -88,6 +130,8 @@ def _say_admissions(brief: Brief, grid: Grid, prefix: str = "") -> None:
         line += " (" + ", ".join(full) + ")"
     if grid.hold_paid:
         line += f" · {grid.hold_paid:,.0f} paid to hold times"
+    if grid.clash_paid:
+        line += f" · {grid.clash_paid:,.0f} paid in clashes"
     console.print(line)
 
 
@@ -206,9 +250,39 @@ def _print_week(week: WeekBrief, wg: WeekGrid) -> None:
             _say_admissions(brief, grid, prefix=f"{d.name}: ")
 
 
-def _print_week_report(week: WeekBrief, wg: WeekGrid) -> WeekReport:
-    rep = check_week(week, wg)
-    t = Table(title="Proof, the week", show_lines=False)
+def _print_festival(fest: FestivalBrief, wg: WeekGrid) -> None:
+    """One row per day: status, seconds, sessions, what plays where."""
+    t = Table(
+        title=f"{fest.festival} · {len(fest.days)} days · {wg.status} · {wg.solve_seconds}s",
+        show_lines=False,
+    )
+    t.add_column("Day", style="bold")
+    t.add_column("Status")
+    t.add_column("Sessions", justify="right")
+    t.add_column("Programme")
+    for d, brief, grid in zip(fest.days, fest.briefs(), wg.grids, strict=True):
+        cells = [d.name, f"{grid.status} {grid.solve_seconds}s", str(len(grid.sessions))]
+        if grid.status in ("OPTIMAL", "FEASIBLE"):
+            cells.append(
+                "  ·  ".join(
+                    f"{fmt_time(s.start)} {brief.film(s.film).title} [dim]{s.screen}[/dim]"
+                    for s in sorted(grid.sessions, key=lambda s: (s.start, s.screen))
+                )
+                or "[dim]dark[/dim]"
+            )
+        else:
+            cells.append(f"[red]{explain(brief, grid)}[/red]")
+        t.add_row(*cells)
+    console.print(t)
+    for d, brief, grid in zip(fest.days, fest.briefs(), wg.grids, strict=True):
+        if grid.status in ("OPTIMAL", "FEASIBLE"):
+            _say_admissions(brief, grid, prefix=f"{d.name}: ")
+
+
+def _print_week_report(week: WeekBrief | FestivalBrief, wg: WeekGrid) -> WeekReport:
+    festival = isinstance(week, FestivalBrief)
+    rep = check_festival(week, wg) if isinstance(week, FestivalBrief) else check_week(week, wg)
+    t = Table(title="Proof, the festival" if festival else "Proof, the week", show_lines=False)
     t.add_column("")
     t.add_column("Day")
     t.add_column("Evidence")
@@ -317,6 +391,57 @@ def _plan_week(
         raise typer.Exit(code=3)
 
 
+def _plan_festival(
+    path: Path,
+    out: Path | None,
+    html: Path | None,
+    time_limit: float,
+    relax_terms: bool,
+    quiet: bool,
+    tuning: Tuning,
+) -> None:
+    fest = _load_festival(path)
+    wg = solve_festival(fest, time_limit_s=time_limit, relax_terms=relax_terms, tuning=tuning)
+    briefs = fest.briefs()
+    bad = [
+        (d.name, b, g)
+        for d, b, g in zip(fest.days, briefs, wg.grids, strict=True)
+        if g.status not in ("OPTIMAL", "FEASIBLE")
+    ]
+    for name, b, g in bad:
+        if g.status == "INFEASIBLE":
+            console.print(f"[red bold]{name} INFEASIBLE[/red bold] — {explain(b, g)}")
+        else:
+            console.print(f"[red bold]{name} {g.status}[/red bold] — no grid within {time_limit}s")
+            _say_relaxed(b, g, prefix=f"{name} ")
+    if bad:
+        if not relax_terms and any(g.status == "INFEASIBLE" for _, _, g in bad):
+            console.print(
+                "[dim]turnaround plan --relax drops terms day by day until each day fits[/dim]"
+            )
+        raise typer.Exit(code=2)
+    if not quiet:
+        _print_festival(fest, wg)
+    for d, b, g in zip(fest.days, briefs, wg.grids, strict=True):
+        _say_relaxed(b, g, prefix=f"{d.name} ")
+        if g.stats and (g.stats.slot_reason or g.status == "FEASIBLE"):
+            console.print(f"[dim]{d.name}[/dim]", end=" ")
+            _say_stats(g)
+    rep = _print_week_report(fest, wg) if not quiet else check_festival(fest, wg)
+    if out:
+        out.write_text(wg.model_dump_json(indent=2))
+        console.print(f"grid → {out}")
+    if html:
+        html.write_text(render_festival_html(fest, wg, rep))
+        console.print(f"sheet → {html}")
+    if not rep.ok:
+        console.print(
+            "[red bold]the solver produced a festival the checker rejects — "
+            "this is a bug[/red bold]"
+        )
+        raise typer.Exit(code=3)
+
+
 @app.command()
 def plan(
     brief_path: Annotated[Path, typer.Argument(help="Brief JSON")],
@@ -361,6 +486,12 @@ def plan(
 ) -> None:
     """Solve a day, or a week, and print the grid with its proof. Exit 2 if the terms conflict."""
     tuning = _tuning(max_candidates)
+    if _is_festival(brief_path):
+        if why:
+            console.print("[red]--why probes a day; a festival is solved day by day[/red]")
+            raise typer.Exit(code=1)
+        _plan_festival(brief_path, out, html, time_limit, relax_terms, quiet, tuning)
+        return
     if _is_week(brief_path):
         if why:
             console.print("[red]--why probes a day; run explain on one day of the week[/red]")
@@ -446,7 +577,7 @@ def explain_cmd(
 ) -> None:
     """Why a session is where it is: the terms it helps satisfy, what it sells, and —
     by forbidding it and solving again — whether the terms or the objective force it."""
-    if _is_week(brief_path):
+    if _is_week(brief_path) or _is_festival(brief_path):
         console.print("[red]explain takes a day's brief and grid; pick a day of the week[/red]")
         raise typer.Exit(code=1)
     brief = _load_brief(brief_path)
@@ -551,7 +682,7 @@ def what_if_cmd(
     """The day without a title, or under a changed policy, beside the day as it stands:
     what the freed slots went to and what the objective gained or lost. Terms are never
     relaxed; a what-if that cannot hold them says INFEASIBLE."""
-    if _is_week(brief_path):
+    if _is_week(brief_path) or _is_festival(brief_path):
         console.print("[red]what-if takes a day's brief; pick a day of the week[/red]")
         raise typer.Exit(code=1)
     if not drop and not set_:
@@ -597,9 +728,10 @@ def check_cmd(
     brief_path: Annotated[Path, typer.Argument(help="Brief JSON")],
     grid_path: Annotated[Path, typer.Argument(help="Grid JSON")],
 ) -> None:
-    """Verify a grid, or a week of them, against its brief, independently of the solver."""
-    if _is_week(brief_path):
-        week = _load_week(brief_path)
+    """Verify a grid, or a week or a festival of them, against its brief, independently
+    of the solver."""
+    if _is_week(brief_path) or _is_festival(brief_path):
+        week = _load_festival(brief_path) if _is_festival(brief_path) else _load_week(brief_path)
         wg = _load_week_grid(grid_path)
         for d, b, g in zip(week.days, week.briefs(), wg.grids, strict=True):
             _say_relaxed(b, g, prefix=f"{d.name} ")
@@ -666,8 +798,10 @@ def import_cmd(
     The import never judges the grid; `turnaround check` does."""
     brief: Brief | None = None
     if brief_path is not None:
-        if _is_week(brief_path):
-            week = _load_week(brief_path)
+        if _is_week(brief_path) or _is_festival(brief_path):
+            week: WeekBrief | FestivalBrief = (
+                _load_festival(brief_path) if _is_festival(brief_path) else _load_week(brief_path)
+            )
             names = [d.name for d in week.days]
             if day is None or day not in names:
                 console.print(
@@ -750,8 +884,8 @@ def export(
     With no format named, all three. A week grid goes out as one CSV and one JSON of
     seven days and one calendar per screen across the week."""
     days: list[Day]
-    if _is_week(brief_path):
-        week = _load_week(brief_path)
+    if _is_week(brief_path) or _is_festival(brief_path):
+        week = _load_festival(brief_path) if _is_festival(brief_path) else _load_week(brief_path)
         wg = _load_week_grid(grid_path)
         days = [(d.name, b, g) for d, b, g in zip(week.days, week.briefs(), wg.grids, strict=True)]
     else:
@@ -786,7 +920,13 @@ def render(
     grid_path: Annotated[Path, typer.Argument()],
     html: Annotated[Path, typer.Option("--html")],
 ) -> None:
-    """Render an existing grid, or week of grids, as the week sheet."""
+    """Render an existing grid, or a week or a festival of grids, as the sheet."""
+    if _is_festival(brief_path):
+        fest = _load_festival(brief_path)
+        wg = _load_week_grid(grid_path)
+        html.write_text(render_festival_html(fest, wg, check_festival(fest, wg)))
+        console.print(f"sheet → {html}")
+        return
     if _is_week(brief_path):
         week = _load_week(brief_path)
         wg = _load_week_grid(grid_path)
@@ -808,7 +948,11 @@ def terms(
     """The terms sheets: one page per title, every term the booking carries, what the
     grid delivered day by day, and the checker's verdict. The document a programmer
     sends back to the distributor."""
-    if _is_week(brief_path):
+    if _is_festival(brief_path):
+        fest = _load_festival(brief_path)
+        wg = _load_week_grid(grid_path)
+        html.write_text(render_festival_terms_html(fest, wg, check_festival(fest, wg)))
+    elif _is_week(brief_path):
         week = _load_week(brief_path)
         wg = _load_week_grid(grid_path)
         html.write_text(render_week_terms_html(week, wg, check_week(week, wg)))
@@ -823,6 +967,24 @@ def terms(
 def validate(brief_path: Annotated[Path, typer.Argument()]) -> None:
     """Validate a brief, or a week brief, and summarise it. A brief the tool cannot
     take is refused in sentences: which title, which term, and why."""
+    if _is_festival(brief_path):
+        fest = _load_festival(brief_path)
+        console.print_json(
+            json.dumps(
+                {
+                    "festival": fest.festival,
+                    "days": [d.name for d in fest.days],
+                    "venues": [v.label for v in fest.venues],
+                    "films": len(fest.films),
+                    "strands": fest.strands,
+                    "screenings": sum(f.terms.screenings or 0 for f in fest.films),
+                    "guests": sum(1 for f in fest.films if f.terms.guest),
+                    "move_min": fest.policy.move_min,
+                    "clash_penalty": fest.policy.clash_penalty,
+                }
+            )
+        )
+        return
     if _is_week(brief_path):
         week = _load_week(brief_path)
         console.print_json(
