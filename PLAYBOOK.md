@@ -73,12 +73,13 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - `turnaround explain grid.json --session 1@17:30` prints that session's why. `turnaround what-if brief.json --drop bees` re-solves without a title and reports what the freed slots went to.
 - The sheet's hover title and the by-title table show the why; the proof table gains a *forced* column.
 
-## Day 8 — Sun 14 Sep — Scale
+## Day 8 — Sun 14 Sep — Scale ✅
 
 - `examples/sixteen.json`: a 16-screen multiplex, 22 titles, a full week. Measure: candidates, booleans, time to first feasible, time to optimal or the gap at 60 s. Write `docs/bench.md` as a table and commit it.
 - Contain it: prune dominated starts, break symmetry between identical screens, adaptive `slot_min` (10-minute grid when candidates exceed a threshold, with the choice reported), solver hints from yesterday's grid when re-planning.
 - Target written down before optimising: one day of the sixteen under 60 s to a proven-optimal or ≤2 % gap. Record the number hit, not the number hoped for.
 - *From Day 3:* the demand rank literals (one per screen × title × daypart × rank) took the Regent from 0.8 s to 4.4 s. Measure their share first; the rank count is an upper bound the house-wide stagger could tighten.
+- *Run on Tue 16 Sep:* the Sunday slot did not fire. *Number hit:* 13.4 % gap at 60 s hinted, 16.3 % unhinted, against the 2 % asked (`docs/bench.md`); the Day 7 model was at 21.6 %. *Shipped besides:* `Grid.stats` (model size, first grid, bound, gap, the grid solved on), `plan --hint`, `--max-candidates`, `--probe-budget`, `scripts/bench.py`, `run.sh <name>` for one example. *Not done:* dominated starts — none are dominated in the exact sense on this model (bench.md says why); a heuristic prune would be a hidden relaxation. *Left for Day 13:* the bench table in the README. *Left open:* the bound is the loose half of the gap; a tighter one (a per-daypart capacity cut, or solving the ranks' LP first) is the next lever, and the sixteen's Thursday is the test.
 
 ## Day 9 — Mon 15 Sep — In and out
 
