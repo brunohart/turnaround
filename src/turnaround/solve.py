@@ -29,6 +29,7 @@ from ortools.sat.python import cp_model
 
 from .model import (
     Brief,
+    FestivalBrief,
     Film,
     Forced,
     Grid,
@@ -45,20 +46,27 @@ from .model import (
 # Relaxation order: the term with the smallest key goes first.
 # exclusive_screen and plf_lock are always last; otherwise the lightest film first,
 # and within a film the day's terms before the week's: prime_shows, max_shows,
-# min_shows, then prime_shows_per_week, then min_shows_per_week.
+# min_shows, then the festival's guest and screenings, then prime_shows_per_week,
+# then min_shows_per_week.
 _TERM_RANK = {
     "prime_shows": 0,
     "max_shows": 1,
     "min_shows": 2,
-    "prime_shows_per_week": 3,
-    "min_shows_per_week": 4,
-    "exclusive_screen": 5,
-    "plf_lock": 6,
+    "guest": 3,
+    "screenings": 4,
+    "prime_shows_per_week": 5,
+    "min_shows_per_week": 6,
+    "exclusive_screen": 7,
+    "plf_lock": 8,
 }
 
 Owed = dict[str, dict[str, int]]
-"""Per film id, what a week term still requires of *this* day: the floor the days
-before did not meet and the days after could not. Computed by solve_week."""
+"""Per film id, what a week or festival term still requires of *this* day: the floor the
+days before did not meet and the days after could not (`min_shows_per_week`,
+`prime_shows_per_week`, `screenings`); the ceiling the festival's count leaves today
+(`screenings_left`); whether the guest's screening is owed today (`guest`: their last
+day, nothing delivered yet) and whether one screening must be kept back for them
+(`guest_reserve`). Computed by solve_week and solve_festival."""
 
 
 @dataclass(frozen=True)
@@ -110,8 +118,8 @@ def candidates(brief: Brief, slot_min: int | None = None) -> list[Candidate]:
     out: list[Candidate] = []
     for scr in brief.screens:
         for f in brief.films:
-            if not brief.can_play(scr, f):
-                continue
+            if not brief.can_play(scr, f) or f.terms.max_shows == 0:
+                continue  # max_shows 0: the print is not in town today (a festival's day)
             lo = brief.open_for(scr)
             hi = brief.last_start_for(scr)
             t = f.terms
@@ -211,6 +219,10 @@ def terms_of(film: Film) -> list[TermRef]:
         out.append(
             TermRef(film=film.id, term="prime_shows_per_week", value=str(t.prime_shows_per_week))
         )
+    if t.screenings is not None:
+        out.append(TermRef(film=film.id, term="screenings", value=str(t.screenings)))
+    if t.guest is not None:
+        out.append(TermRef(film=film.id, term="guest", value=t.guest.window))
     return out
 
 
@@ -248,6 +260,10 @@ class _Model:
     """(admissions in cents, rank literal): the objective's positive terms."""
     differs: list[cp_model.IntVar] = field(default_factory=list)
     """One per held title: 1 if today's starts are not the anchor's."""
+    clash: list[cp_model.IntVar] = field(default_factory=list)
+    """One per (strand, grid minute): how many same-strand titles beyond the first run then."""
+    clash_cents: int = 0
+    """What one of those costs, in cents of expected admissions."""
     stats: SolveStats | None = None
     """The model's size, filled in when it is built; the search's figures come later."""
 
@@ -385,6 +401,49 @@ def _build(
                 if not due:
                     continue
                 ref = TermRef(film=ref.film, term=ref.term, value=f"{ref.value} · {due} owed today")
+            if ref.term == "screenings":
+                # The festival's count reaches today as a floor (what the days before did
+                # not screen and the days after cannot) and a ceiling (what is left). A day
+                # solved on its own owes nothing and is capped by nothing: carried for the
+                # record. With a guest still to come, one screening is kept back for them.
+                mine_owed = owed.get(f.id, {})
+                if "screenings_left" not in mine_owed:
+                    continue
+                left = mine_owed["screenings_left"]
+                ref = TermRef(
+                    film=ref.film,
+                    term=ref.term,
+                    value=f"{ref.value} · {due} owed today · {left} left",
+                )
+                a = mdl.guard(ref)
+                if vs:
+                    m.add(sum(vs) <= left).only_enforce_if(a)
+                    if due:
+                        m.add(sum(vs) >= due).only_enforce_if(a)
+                elif due:
+                    m.add(a == 0)
+                if mine_owed.get("guest_reserve") and (f.id, "guest") not in dropped:
+                    guest = t.guest
+                    outside = [mdl.x[c] for c in mine if guest is None or not guest.covers(c.start)]
+                    if outside:
+                        m.add(sum(outside) <= left - 1).only_enforce_if(a)
+                    elif left < 1:
+                        m.add(a == 0)
+                continue
+            if ref.term == "guest":
+                # Owed only on the guest's last day with nothing delivered before it: at
+                # least one screening starts inside their window today.
+                if not owed.get(f.id, {}).get("guest") or t.guest is None:
+                    continue
+                guest = t.guest
+                ref = TermRef(film=ref.film, term=ref.term, value=f"{ref.value} · owed today")
+                a = mdl.guard(ref)
+                inside = [mdl.x[c] for c in mine if guest.covers(c.start)]
+                if inside:
+                    m.add(sum(inside) >= 1).only_enforce_if(a)
+                else:
+                    m.add(a == 0)
+                continue
             a = mdl.guard(ref)
             if ref.term == "min_shows_per_week":
                 if due and vs:
@@ -438,6 +497,56 @@ def _build(
                     m.add(sum(ys) >= 1).only_enforce_if(a)
                 else:
                     m.add(a == 0)
+
+    # Print move: one print or DCP per title. At another screen the same title starts no
+    # sooner than the move after its feature ends, and never at the same minute. Any two
+    # starts of a title within one window conflict, so one clause per candidate is exact.
+    if p.move_min > 0:
+        for f in brief.films:
+            mine = [c for c in cands if c.film == f.id]
+            if len({c.screen for c in mine}) < 2:
+                continue
+            reach = brief.preshow_for(f) + f.runtime_min + p.move_min
+            by_start_f: dict[int, list[Candidate]] = {}
+            for c in mine:
+                by_start_f.setdefault(c.start, []).append(c)
+            starts_f = sorted(by_start_f)
+            for c in mine:
+                others = [
+                    mdl.x[o]
+                    for s0 in starts_f
+                    if c.start <= s0 < c.start + reach
+                    for o in by_start_f[s0]
+                    if o.screen != c.screen
+                ]
+                if others:
+                    m.add(mdl.x[c] + sum(others) <= 1)
+
+    # Strand clash: at each minute of the brief's start grid, every same-strand session
+    # beyond the first is a clash the objective pays for. Counted on the brief's grid
+    # whatever grid the day is solved on, the way the checker counts it.
+    if p.clash_penalty > 0 and not feasibility_only:
+        by_strand: dict[str, list[Candidate]] = {}
+        for c in cands:
+            strand = brief.film(c.film).strand
+            if strand:
+                by_strand.setdefault(strand, []).append(c)
+        ends = {
+            c: c.start + brief.preshow_for(brief.film(c.film)) + brief.film(c.film).runtime_min
+            for c in cands
+        }
+        mdl.clash_cents = int(round(p.clash_penalty * p.slot_min / 60 * 100))
+        for strand, group in sorted(by_strand.items()):
+            if len({c.film for c in group}) < 2:
+                continue
+            t0 = p.open_min
+            while t0 < max(ends[c] for c in group):
+                running = [mdl.x[c] for c in group if c.start <= t0 < ends[c]]
+                if len(running) >= 2:
+                    extra = m.new_int_var(0, len(running) - 1, f"clash[{strand},{t0}]")
+                    m.add(extra >= sum(running) - 1)
+                    mdl.clash.append(extra)
+                t0 += p.slot_min
 
     # Demand. Within a title and a daypart the first session draws the most and each
     # further one decays, and a room sells no more than its seats. y[g,f,d,k] says the
@@ -510,11 +619,13 @@ def _build(
                 m.add(d == 1)  # an anchor start is not on offer today: it cannot hold
             differs.append(d)
 
-    # Objective: expected admissions less the hold penalty, in cents so it stays integer.
+    # Objective: expected admissions less the hold and clash penalties, in cents so it
+    # stays integer.
     if not feasibility_only:
         m.maximize(
             sum(cents * y for cents, y in mdl.sold)
             - sum(int(round(hold_penalty * 100)) * d for d in differs)
+            - sum(mdl.clash_cents * extra for extra in mdl.clash)
         )
 
     # A hint: yesterday's grid, or the grid being re-planned. The search starts there and
@@ -651,9 +762,11 @@ def _grid(
     sessions: list[Session] = []
     admissions: float | None = None
     hold_paid = 0.0
+    clash_paid = 0.0
     if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
         admissions = sum(cents for cents, y in mdl.sold if solver.value(y)) / 100
         hold_paid = hold_penalty * sum(1 for d in mdl.differs if solver.value(d))
+        clash_paid = mdl.clash_cents * sum(solver.value(extra) for extra in mdl.clash) / 100
         for c in mdl.cands:
             if solver.value(mdl.x[c]):
                 film = brief.film(c.film)
@@ -678,6 +791,7 @@ def _grid(
         objective=objective,
         admissions=admissions,
         hold_paid=hold_paid,
+        clash_paid=clash_paid,
         solve_seconds=round(elapsed, 3),
         sessions=sessions,
         conflict=conflict,
@@ -1081,5 +1195,75 @@ def solve_week(
         grids=grids,
         hold_days=[d.name for d in week.days if d.name in week.hold_days],
         held=held,
+        solve_seconds=round(time.perf_counter() - t0, 3),
+    )
+
+
+def _owed_festival(
+    fest: FestivalBrief, done: list[Grid], bounds: list[dict[str, tuple[int, int]]], i: int
+) -> Owed:
+    """What the festival's terms require of day i. `screenings` is exact, so it reaches a
+    day as a floor (the count less what was screened, less the most the days after could
+    screen) and a ceiling (the count less what was screened). A guest's screening is owed
+    on their last day if none of their days before delivered one, and while it is still
+    to come one screening is kept back for it, so the days before the guest arrives
+    cannot use the title up."""
+    names = [d.name for d in fest.days]
+    out: Owed = {}
+    later = range(i + 1, len(fest.days))
+    for f in fest.films:
+        t = f.terms
+        mine: dict[str, int] = {}
+        had = sum(len([s for s in g.sessions if s.film == f.id]) for g in done)
+        if t.screenings is not None:
+            could = sum(bounds[j][f.id][0] for j in later)
+            mine["screenings"] = max(0, t.screenings - had - could)
+            mine["screenings_left"] = max(0, t.screenings - had)
+        g = t.guest
+        if g is not None:
+            delivered = any(
+                names[j] in g.days and s.film == f.id and g.covers(s.start)
+                for j, grid in enumerate(done)
+                for s in grid.sessions
+            )
+            to_come = [j for j in range(i, len(fest.days)) if names[j] in g.days]
+            if not delivered and to_come:
+                if to_come[-1] == i:
+                    mine["guest"] = 1  # their last day: the screening is owed today
+                elif t.screenings is not None:
+                    mine["guest_reserve"] = 1  # a day before it: keep one screening back
+        if mine:
+            out[f.id] = mine
+    return out
+
+
+def solve_festival(
+    fest: FestivalBrief,
+    *,
+    time_limit_s: float = 30.0,
+    workers: int = 8,
+    relax_terms: bool = False,
+    tuning: Tuning = TUNED,
+) -> WeekGrid:
+    """Solve the festival day by day, the way a week is solved. Each day owes the
+    festival's terms what the days before left and the days after cannot cover
+    (`_owed_festival`); the print move and the clash penalty are the day's own policy.
+    Nothing holds day to day (every title screens once or twice), so no day is hinted
+    from the last. A day that cannot hold its terms keeps its own conflict; with
+    `relax_terms` it is relaxed on its own (ADR-009)."""
+    t0 = time.perf_counter()
+    grids: list[Grid] = []
+    briefs = fest.briefs()
+    bounds = [{f.id: day_bound(b, f) for f in b.films} for b in briefs]
+    for i in range(len(fest.days)):
+        owed = _owed_festival(fest, grids, bounds, i)
+        run = relax if relax_terms else solve
+        grids.append(
+            run(briefs[i], time_limit_s=time_limit_s, workers=workers, owed=owed, tuning=tuning)
+        )
+    return WeekGrid(
+        house=fest.festival,
+        days=[d.name for d in fest.days],
+        grids=grids,
         solve_seconds=round(time.perf_counter() - t0, 3),
     )
