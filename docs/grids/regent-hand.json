@@ -1,0 +1,141 @@
+{
+  "house": "The Regent",
+  "date": "2026-09-10",
+  "status": "IMPORTED",
+  "objective": 1532.3,
+  "admissions": null,
+  "hold_paid": 0.0,
+  "solve_seconds": 0.0,
+  "sessions": [
+    {
+      "screen": "1",
+      "film": "odyssey",
+      "start": 630,
+      "feature_start": 650,
+      "feature_end": 818,
+      "clear": 838,
+      "forced": null
+    },
+    {
+      "screen": "1",
+      "film": "odyssey",
+      "start": 840,
+      "feature_start": 860,
+      "feature_end": 1028,
+      "clear": 1048,
+      "forced": null
+    },
+    {
+      "screen": "1",
+      "film": "odyssey",
+      "start": 1065,
+      "feature_start": 1085,
+      "feature_end": 1253,
+      "clear": 1273,
+      "forced": null
+    },
+    {
+      "screen": "1",
+      "film": "odyssey",
+      "start": 1280,
+      "feature_start": 1300,
+      "feature_end": 1468,
+      "clear": 1488,
+      "forced": null
+    },
+    {
+      "screen": "2",
+      "film": "harvest",
+      "start": 600,
+      "feature_start": 620,
+      "feature_end": 724,
+      "clear": 744,
+      "forced": null
+    },
+    {
+      "screen": "2",
+      "film": "bees",
+      "start": 750,
+      "feature_start": 770,
+      "feature_end": 854,
+      "clear": 874,
+      "forced": null
+    },
+    {
+      "screen": "2",
+      "film": "harvest",
+      "start": 875,
+      "feature_start": 895,
+      "feature_end": 999,
+      "clear": 1019,
+      "forced": null
+    },
+    {
+      "screen": "2",
+      "film": "bees",
+      "start": 1020,
+      "feature_start": 1040,
+      "feature_end": 1124,
+      "clear": 1144,
+      "forced": null
+    },
+    {
+      "screen": "2",
+      "film": "harvest",
+      "start": 1150,
+      "feature_start": 1170,
+      "feature_end": 1274,
+      "clear": 1294,
+      "forced": null
+    },
+    {
+      "screen": "2",
+      "film": "signal",
+      "start": 1290,
+      "feature_start": 1310,
+      "feature_end": 1402,
+      "clear": 1422,
+      "forced": null
+    },
+    {
+      "screen": "3",
+      "film": "atlas",
+      "start": 660,
+      "feature_start": 680,
+      "feature_end": 801,
+      "clear": 816,
+      "forced": null
+    },
+    {
+      "screen": "3",
+      "film": "signal",
+      "start": 930,
+      "feature_start": 950,
+      "feature_end": 1042,
+      "clear": 1057,
+      "forced": null
+    },
+    {
+      "screen": "3",
+      "film": "signal",
+      "start": 1060,
+      "feature_start": 1080,
+      "feature_end": 1172,
+      "clear": 1187,
+      "forced": null
+    },
+    {
+      "screen": "3",
+      "film": "harvest",
+      "start": 1190,
+      "feature_start": 1210,
+      "feature_end": 1314,
+      "clear": 1329,
+      "forced": null
+    }
+  ],
+  "conflict": [],
+  "conflict_alone": false,
+  "relaxed": [],
+  "stats": null
+}

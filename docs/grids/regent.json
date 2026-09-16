@@ -5,36 +5,36 @@
   "objective": 1608.6,
   "admissions": 1608.6,
   "hold_paid": 0.0,
-  "solve_seconds": 4.205,
+  "solve_seconds": 4.952,
   "sessions": [
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 625,
-      "feature_start": 645,
-      "feature_end": 813,
-      "clear": 833,
+      "start": 640,
+      "feature_start": 660,
+      "feature_end": 828,
+      "clear": 848,
       "forced": {
         "by": "objective",
         "delta": 121.0,
         "terms": [],
         "instead": "the slot goes dark · 1 show fewer",
-        "seconds": 5.75
+        "seconds": 3.311
       }
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 845,
-      "feature_start": 865,
-      "feature_end": 1033,
-      "clear": 1053,
+      "start": 850,
+      "feature_start": 870,
+      "feature_end": 1038,
+      "clear": 1058,
       "forced": {
         "by": "objective",
         "delta": 92.4,
         "terms": [],
-        "instead": "shifts to 13:50, matinee",
-        "seconds": 4.253
+        "instead": "shifts to 13:55, matinee",
+        "seconds": 4.247
       }
     },
     {
@@ -55,22 +55,22 @@
           }
         ],
         "instead": "",
-        "seconds": 1.07
+        "seconds": 1.084
       }
     },
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 1280,
-      "feature_start": 1300,
-      "feature_end": 1468,
-      "clear": 1488,
+      "start": 1275,
+      "feature_start": 1295,
+      "feature_end": 1463,
+      "clear": 1483,
       "forced": {
         "by": "objective",
         "delta": 70.4,
         "terms": [],
         "instead": "shifts to 20:40, prime",
-        "seconds": 4.498
+        "seconds": 4.716
       }
     },
     {
@@ -84,8 +84,8 @@
         "by": "objective",
         "delta": 16.85,
         "terms": [],
-        "instead": "moves to Screen 3 10:00",
-        "seconds": 4.222
+        "instead": "moves to Screen 3 10:05",
+        "seconds": 3.555
       }
     },
     {
@@ -99,8 +99,8 @@
         "by": "objective",
         "delta": 28.7,
         "terms": [],
-        "instead": "the slot goes to Harvest Moon 12:30",
-        "seconds": 1.27
+        "instead": "the slot goes to Harvest Moon 12:25",
+        "seconds": 1.644
       }
     },
     {
@@ -114,38 +114,38 @@
         "by": "objective",
         "delta": 1.5,
         "terms": [],
-        "instead": "moves to Screen 3 15:35",
-        "seconds": 3.291
+        "instead": "moves to Screen 3 15:20",
+        "seconds": 3.849
       }
     },
     {
       "screen": "2",
       "film": "bees",
-      "start": 1020,
-      "feature_start": 1040,
-      "feature_end": 1124,
-      "clear": 1144,
+      "start": 1015,
+      "feature_start": 1035,
+      "feature_end": 1119,
+      "clear": 1139,
       "forced": {
         "by": "objective",
         "delta": 23.01,
         "terms": [],
-        "instead": "the slot goes to Dead Signal 16:50",
-        "seconds": 2.845
+        "instead": "the slot goes to Dead Signal 16:45",
+        "seconds": 2.337
       }
     },
     {
       "screen": "2",
       "film": "harvest",
-      "start": 1145,
-      "feature_start": 1165,
-      "feature_end": 1269,
-      "clear": 1289,
+      "start": 1140,
+      "feature_start": 1160,
+      "feature_end": 1264,
+      "clear": 1284,
       "forced": {
         "by": "objective",
         "delta": 20.0,
         "terms": [],
-        "instead": "moves to Screen 3 18:15",
-        "seconds": 2.765
+        "instead": "moves to Screen 3 18:10",
+        "seconds": 2.895
       }
     },
     {
@@ -159,83 +159,83 @@
         "by": "objective",
         "delta": 16.85,
         "terms": [],
-        "instead": "moves to Screen 3 21:30",
-        "seconds": 3.717
-      }
-    },
-    {
-      "screen": "3",
-      "film": "atlas",
-      "start": 655,
-      "feature_start": 675,
-      "feature_end": 796,
-      "clear": 811,
-      "forced": {
-        "by": "objective",
-        "delta": 16.85,
-        "terms": [],
-        "instead": "moves to Screen 2 12:45",
-        "seconds": 4.276
+        "instead": "moves to Screen 3 21:20",
+        "seconds": 4.306
       }
     },
     {
       "screen": "3",
       "film": "harvest",
-      "start": 835,
-      "feature_start": 855,
-      "feature_end": 959,
-      "clear": 974,
+      "start": 610,
+      "feature_start": 630,
+      "feature_end": 734,
+      "clear": 749,
       "forced": {
         "by": "objective",
         "delta": 5.85,
         "terms": [],
-        "instead": "moves to Screen 2 12:05",
-        "seconds": 2.32
-      }
-    },
-    {
-      "screen": "3",
-      "film": "signal",
-      "start": 975,
-      "feature_start": 995,
-      "feature_end": 1087,
-      "clear": 1102,
-      "forced": {
-        "by": "objective",
-        "delta": 1.5,
-        "terms": [],
-        "instead": "moves to Screen 2 16:45",
-        "seconds": 4.051
-      }
-    },
-    {
-      "screen": "3",
-      "film": "signal",
-      "start": 1105,
-      "feature_start": 1125,
-      "feature_end": 1217,
-      "clear": 1232,
-      "forced": {
-        "by": "objective",
-        "delta": 18.0,
-        "terms": [],
-        "instead": "the slot goes to Harvest Moon 18:10 · 1 show fewer",
-        "seconds": 3.502
+        "instead": "moves to Screen 2 10:00",
+        "seconds": 3.097
       }
     },
     {
       "screen": "3",
       "film": "atlas",
-      "start": 1235,
-      "feature_start": 1255,
-      "feature_end": 1376,
-      "clear": 1391,
+      "start": 780,
+      "feature_start": 800,
+      "feature_end": 921,
+      "clear": 936,
       "forced": {
         "by": "objective",
         "delta": 16.85,
         "terms": [],
-        "instead": "moves to Screen 2 20:35",
-        "seconds": 2.134
+        "instead": "moves to Screen 2 10:20",
+        "seconds": 4.729
+      }
+    },
+    {
+      "screen": "3",
+      "film": "signal",
+      "start": 970,
+      "feature_start": 990,
+      "feature_end": 1082,
+      "clear": 1097,
+      "forced": {
+        "by": "objective",
+        "delta": 1.5,
+        "terms": [],
+        "instead": "moves to Screen 2 16:35",
+        "seconds": 3.436
+      }
+    },
+    {
+      "screen": "3",
+      "film": "signal",
+      "start": 1100,
+      "feature_start": 1120,
+      "feature_end": 1212,
+      "clear": 1227,
+      "forced": {
+        "by": "objective",
+        "delta": 18.0,
+        "terms": [],
+        "instead": "the slot goes to Harvest Moon 18:20 · 1 show fewer",
+        "seconds": 3.794
+      }
+    },
+    {
+      "screen": "3",
+      "film": "atlas",
+      "start": 1240,
+      "feature_start": 1260,
+      "feature_end": 1381,
+      "clear": 1396,
+      "forced": {
+        "by": "objective",
+        "delta": 16.85,
+        "terms": [],
+        "instead": "moves to Screen 2 19:55",
+        "seconds": 2.005
       }
     }
   ],
@@ -250,7 +250,7 @@
     "slot_min": 5,
     "slot_asked": 5,
     "slot_reason": null,
-    "first_feasible_s": 0.095,
+    "first_feasible_s": 0.123,
     "bound": 1608.6,
     "gap": 0.0,
     "hinted": 0,

@@ -29,4 +29,15 @@ for b in "${briefs[@]}"; do
     exit "$rc"
   fi
   uv run turnaround terms "$b" "docs/grids/$n.json" --html "docs/grids/$n-terms.html"
+  # Out (Day 9): a calendar per screen, a flat CSV for signage, JSON for a website.
+  uv run turnaround export "$b" "docs/grids/$n.json" --out-dir docs/grids/export
+  if [ "$n" = "regent" ]; then
+    # In (Day 9): the Regent's Thursday as a manager typed it, imported against the brief and
+    # rendered with its proof. The checker is meant to reject it — the slips are the point —
+    # so its exit code is reported, not obeyed.
+    uv run turnaround import --csv examples/regent-hand.csv --brief "$b" --out docs/grids/regent-hand.json
+    uv run turnaround render "$b" docs/grids/regent-hand.json --html docs/grids/regent-hand.html
+    uv run turnaround check "$b" docs/grids/regent-hand.json \
+      || echo "regent-hand: the checker rejects the hand-made grid, as it should (exit $?)"
+  fi
 done

@@ -109,6 +109,8 @@ Python 3.13+. The only heavy dependency is `ortools`.
 | `turnaround render brief.json grid.json --html sheet.html` | Render an existing grid as the week sheet. |
 | `turnaround terms brief.json grid.json --html terms.html` | The terms sheets: one page per title, every term the booking carries, its scope, what the grid delivered day by day, and the checker's verdict — the document a programmer sends back to the distributor. |
 | `turnaround validate brief.json` | Validate and summarise a brief; refuse a bad one in sentences. |
+| `turnaround import --csv sessions.csv [--brief brief.json] [--out grid.json]` | A plain showtimes export (`screen`, `title`, `start`, `runtime`) as a grid the checker can read — against the house's brief, or with a brief skeleton made from the CSV alone — so a hand-made grid can be checked before the solver is trusted with anything. The import never judges the grid; `check` does. |
+| `turnaround export brief.json grid.json [--ical] [--csv] [--json] [--out-dir DIR]` | A grid out: a calendar per screen (`.ics`), a flat CSV for signage, JSON for a website. With no format named, all three. A week goes out as one CSV and one JSON of seven days and a calendar per screen across the week. |
 
 ## The brief
 
@@ -140,6 +142,10 @@ A brief the tool cannot take is refused in sentences, not stack traces: *"Dead S
 
 <img src="docs/grids/day-5-terms.png" alt="The Long Voyage's terms sheet: five terms, their scope, what was delivered day by day, every one honoured, and the sessions as delivered with the prime starts underlined" width="100%">
 
+**In and out** (Day 9): `turnaround import --csv` reads the showtimes export any ticketing system can make — four columns, `screen`, `title`, `start`, `runtime`; times on the day's own clock, so Friday's 01:15 show is `25:15` — and writes a grid the checker reads. Against the house's brief (`--brief`) every title and screen is resolved and every term is checked; without one a *brief skeleton* is written beside the grid with the screens and titles the CSV names, the hours from the starts, and the preshow, turnaround and seats the CSV states or the defaults it assumes out loud — no terms, the house writes those. `examples/regent-hand.csv` is the Regent's Thursday as a manager typed it; `docs/grids/regent-hand.html` is its sheet, stamped *imported*, with the five slips the checker found. `turnaround export` writes the same grid out as a calendar per screen, a flat CSV for signage (which `import` reads back whole, so a grid that goes out comes back the same grid) and JSON for a website.
+
+<img src="docs/grids/day-9-hand-made.png" alt="The Regent's Thursday as typed by hand, imported from a four-column CSV: the sheet stamped imported, not solved, and the proof table with five red crosses — a turnaround the manager cut short, two starts five minutes apart, a horror show before its earliest start, and a title one show and one prime start short" width="100%">
+
 **The sheet prints** (Day 6) from the same HTML: an A3 landscape pin-up with the grid and both tables, then an A4 portrait *booth strip* per screen — the three-strip block turned vertical, the turnaround called out with when it begins and when the room is clear. On a phone the strips replace the grid. `scripts/shot.py` takes the screenshots at a real device width.
 
 <img src="docs/grids/day-6-print-a3.png" alt="The A3 pin-up as printed: the Regent's grid with the credits-overlap hatch, the by-title table and the proof on one sheet" width="100%">
@@ -148,7 +154,7 @@ A brief the tool cannot take is refused in sentences, not stack traces: *"Dead S
 
 ## What it does not do yet
 
-This is Day 6 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: *why* each session is where it is (Day 7); scale benchmarks (Day 8); CSV/iCal in and out (Day 9); a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12).
+This is Day 9 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12). Days 7 and 8 — *why* each session is where it is, and the sixteen-screen benchmark — are in `docs/LOG.md` and `docs/bench.md` and not yet written up here.
 
 The design decisions and their reasons are in `DECISIONS.md`. The log of what each day shipped and what it left rough is in `docs/LOG.md`.
 

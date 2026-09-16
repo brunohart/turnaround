@@ -1,0 +1,292 @@
+{
+  "house": "The Regent",
+  "titles": [
+    {
+      "id": "odyssey",
+      "title": "The Long Voyage",
+      "runtime": 168,
+      "format": "PLF",
+      "rating": "M"
+    },
+    {
+      "id": "harvest",
+      "title": "Harvest Moon",
+      "runtime": 104,
+      "format": "2D",
+      "rating": "PG"
+    },
+    {
+      "id": "signal",
+      "title": "Dead Signal",
+      "runtime": 92,
+      "format": "2D",
+      "rating": "R16"
+    },
+    {
+      "id": "atlas",
+      "title": "Atlas of Small Rooms",
+      "runtime": 121,
+      "format": "2D",
+      "rating": "M"
+    },
+    {
+      "id": "bees",
+      "title": "The Bee Kingdom",
+      "runtime": 84,
+      "format": "3D",
+      "rating": "G"
+    }
+  ],
+  "days": [
+    {
+      "day": "Thu",
+      "date": "2026-09-10",
+      "status": "OPTIMAL",
+      "sessions": 15,
+      "screens": [
+        {
+          "id": "1",
+          "name": "Screen 1",
+          "capacity": 320,
+          "formats": [
+            "2D",
+            "PLF"
+          ],
+          "sessions": [
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "10:40",
+              "minutes": 640,
+              "feature_start": "11:00",
+              "feature_end": "13:48",
+              "clear": "14:08",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "14:10",
+              "minutes": 850,
+              "feature_start": "14:30",
+              "feature_end": "17:18",
+              "clear": "17:38",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "17:45",
+              "minutes": 1065,
+              "feature_start": "18:05",
+              "feature_end": "20:53",
+              "clear": "21:13",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "21:15",
+              "minutes": 1275,
+              "feature_start": "21:35",
+              "feature_end": "00:23",
+              "clear": "00:43",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Screen 2",
+          "capacity": 180,
+          "formats": [
+            "2D",
+            "3D"
+          ],
+          "sessions": [
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "10:00",
+              "minutes": 600,
+              "feature_start": "10:20",
+              "feature_end": "12:04",
+              "clear": "12:24",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "12:25",
+              "minutes": 745,
+              "feature_start": "12:45",
+              "feature_end": "14:09",
+              "clear": "14:29",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "14:30",
+              "minutes": 870,
+              "feature_start": "14:50",
+              "feature_end": "16:34",
+              "clear": "16:54",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "16:55",
+              "minutes": 1015,
+              "feature_start": "17:15",
+              "feature_end": "18:39",
+              "clear": "18:59",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "19:00",
+              "minutes": 1140,
+              "feature_start": "19:20",
+              "feature_end": "21:04",
+              "clear": "21:24",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "21:30",
+              "minutes": 1290,
+              "feature_start": "21:50",
+              "feature_end": "23:22",
+              "clear": "23:42",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "name": "Screen 3",
+          "capacity": 96,
+          "formats": [
+            "2D"
+          ],
+          "sessions": [
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "10:10",
+              "minutes": 610,
+              "feature_start": "10:30",
+              "feature_end": "12:14",
+              "clear": "12:29",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "13:00",
+              "minutes": 780,
+              "feature_start": "13:20",
+              "feature_end": "15:21",
+              "clear": "15:36",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "16:10",
+              "minutes": 970,
+              "feature_start": "16:30",
+              "feature_end": "18:02",
+              "clear": "18:17",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "18:20",
+              "minutes": 1100,
+              "feature_start": "18:40",
+              "feature_end": "20:12",
+              "clear": "20:27",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "20:40",
+              "minutes": 1240,
+              "feature_start": "21:00",
+              "feature_end": "23:01",
+              "clear": "23:16",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -14,6 +14,7 @@ from rich.table import Table
 from . import __version__
 from .check import WeekReport, admissions, check_week, whys
 from .check import check as run_check
+from .inout import Day, export_csv, export_ical, export_json_text, import_csv, screen_ids
 from .model import Brief, Grid, Session, WeekBrief, WeekGrid, fmt_time, validation_sentences
 from .render import render_html, render_terms_html, render_week_html, render_week_terms_html
 from .solve import Tuning, explain, probe, probe_all, relax, solve, solve_week, what_if
@@ -609,6 +610,174 @@ def check_cmd(
     _say_relaxed(brief, grid)
     ok = _print_report(brief, grid)
     raise typer.Exit(code=0 if ok else 1)
+
+
+@app.command("import")
+def import_cmd(
+    csv_path: Annotated[
+        Path,
+        typer.Option(
+            "--csv",
+            help="A showtimes export: screen, title, start, runtime. Other columns "
+            "(film, format, rating, capacity, preshow, clean, credits, date, day) are read "
+            "when present and ignored otherwise",
+        ),
+    ],
+    brief_path: Annotated[
+        Path | None,
+        typer.Option(
+            "--brief",
+            help="The house's brief to import against. Without it a brief skeleton is made "
+            "from the CSV alone and written beside the grid",
+        ),
+    ] = None,
+    out: Annotated[
+        Path | None,
+        typer.Option("--out", "-o", help="Write the grid here (default: <csv>.grid.json)"),
+    ] = None,
+    brief_out: Annotated[
+        Path | None,
+        typer.Option("--brief-out", help="Write the skeleton here (default: <csv>.brief.json)"),
+    ] = None,
+    day: Annotated[
+        str | None,
+        typer.Option("--day", help="The day to take from a week brief, or from a CSV of several"),
+    ] = None,
+    date: Annotated[
+        str | None,
+        typer.Option("--date", help="The grid's date, or the date to take from a CSV of several"),
+    ] = None,
+    house: Annotated[
+        str | None, typer.Option("--house", help="The skeleton's house name (default: the CSV's)")
+    ] = None,
+    capacity: Annotated[
+        int, typer.Option(help="Seats assumed per screen on a skeleton when the CSV does not say")
+    ] = 100,
+    preshow: Annotated[
+        int, typer.Option(help="Preshow minutes assumed on a skeleton when the CSV does not say")
+    ] = 20,
+    clean: Annotated[
+        int, typer.Option(help="Turnaround minutes assumed on a skeleton when the CSV does not say")
+    ] = 20,
+) -> None:
+    """A plain showtimes CSV (screen, title, start, runtime) as a grid the checker can
+    read — against the house's brief, or with a brief skeleton made from the CSV alone —
+    so a hand-made grid can be checked before the solver is trusted with anything.
+    The import never judges the grid; `turnaround check` does."""
+    brief: Brief | None = None
+    if brief_path is not None:
+        if _is_week(brief_path):
+            week = _load_week(brief_path)
+            names = [d.name for d in week.days]
+            if day is None or day not in names:
+                console.print(
+                    f"[red]{brief_path} is a week — say which day to import against with "
+                    f"--day ({', '.join(names)})[/red]"
+                )
+                raise typer.Exit(code=1)
+            brief = week.day(week.day_index(day))
+        else:
+            brief = _load_brief(brief_path)
+    try:
+        brief, grid, notes = import_csv(
+            csv_path.read_text(),
+            brief=brief,
+            house=house or csv_path.stem,
+            day=day,
+            date=date,
+            capacity=capacity,
+            preshow=preshow,
+            clean=clean,
+        )
+    except (ValueError, ValidationError) as e:
+        console.print(f"[red bold]{csv_path} is not a showtimes CSV the tool can take[/red bold]")
+        lines = validation_sentences(e, None) if isinstance(e, ValidationError) else [str(e)]
+        for line in lines:
+            console.print(f"  [red]✗[/red] {line}")
+        raise typer.Exit(code=1) from None
+    screens = len({s.screen for s in grid.sessions})
+    titles = len({s.film for s in grid.sessions})
+    console.print(
+        f"[bold]{brief.house}[/bold]"
+        + (f" · {grid.date}" if grid.date else "")
+        + f" · {len(grid.sessions)} sessions on {screens} screens · {titles} titles · "
+        f"{grid.objective:,.0f} expected admissions by the checker's count"
+    )
+    for n in notes:
+        console.print(f"  [yellow]·[/yellow] {n}")
+    grid_path = out or csv_path.with_suffix(".grid.json")
+    grid_path.write_text(grid.model_dump_json(indent=2))
+    console.print(f"grid → {grid_path}")
+    if brief_path is None:
+        skeleton_path = brief_out or csv_path.with_suffix(".brief.json")
+        skeleton_path.write_text(brief.model_dump_json(indent=2, exclude_none=True))
+        console.print(f"brief skeleton → {skeleton_path}")
+        brief_path = skeleton_path
+    rep = run_check(brief, grid)
+    green = sum(1 for c in rep.checks if c.ok)
+    verdict = f"{green} of {len(rep.checks)} checks green"
+    if rep.failures:
+        verdict += (
+            " · [red bold]"
+            + "; ".join(
+                f"{c.name}{' ' + brief.film(c.film).title if c.film else ''}: {c.evidence}"
+                for c in rep.failures
+            )
+            + "[/red bold]"
+        )
+    console.print(verdict)
+    console.print(f"[dim]turnaround check {brief_path} {grid_path} prints the proof[/dim]")
+
+
+@app.command()
+def export(
+    brief_path: Annotated[Path, typer.Argument(help="Brief JSON, a day or a week")],
+    grid_path: Annotated[Path, typer.Argument(help="Grid JSON, a day or a week")],
+    ical: Annotated[
+        bool, typer.Option("--ical", help="A calendar per screen: <grid>.screen-<id>.ics")
+    ] = False,
+    csv_: Annotated[
+        bool, typer.Option("--csv", help="A flat CSV for signage: <grid>.sessions.csv")
+    ] = False,
+    json_: Annotated[
+        bool, typer.Option("--json", help="JSON for a website: <grid>.sessions.json")
+    ] = False,
+    out_dir: Annotated[
+        Path | None, typer.Option("--out-dir", help="Where to write (default: beside the grid)")
+    ] = None,
+) -> None:
+    """A grid out: a calendar per screen, a flat CSV for signage, JSON for a website.
+    With no format named, all three. A week grid goes out as one CSV and one JSON of
+    seven days and one calendar per screen across the week."""
+    days: list[Day]
+    if _is_week(brief_path):
+        week = _load_week(brief_path)
+        wg = _load_week_grid(grid_path)
+        days = [(d.name, b, g) for d, b, g in zip(week.days, week.briefs(), wg.grids, strict=True)]
+    else:
+        days = [(None, _load_brief(brief_path), _load_grid(grid_path))]
+    if not (ical or csv_ or json_):
+        ical = csv_ = json_ = True
+    where = out_dir or grid_path.parent
+    where.mkdir(parents=True, exist_ok=True)
+    stem = grid_path.stem
+    try:
+        files: list[tuple[str, str, str]] = []
+        if csv_:
+            files.append(("csv", f"{stem}.sessions.csv", export_csv(days)))
+        if json_:
+            files.append(("json", f"{stem}.sessions.json", export_json_text(days)))
+        if ical:
+            files += [
+                ("ical", f"{stem}.screen-{sid}.ics", export_ical(days, sid))
+                for sid in screen_ids(days)
+            ]
+    except ValueError as e:
+        console.print(f"  [red]✗[/red] {e}")
+        raise typer.Exit(code=1) from None
+    for kind, name, text in files:
+        (where / name).write_text(text)
+        console.print(f"{kind} → {where / name}")
 
 
 @app.command()
