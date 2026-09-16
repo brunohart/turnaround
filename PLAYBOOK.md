@@ -88,11 +88,12 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - Round-trip tests: export → import → check passes; the Regent grid survives the loop unchanged.
 - *Run on Wed 16 Sep:* the Monday slot did not fire. *Shipped besides:* a brief skeleton from the CSV alone that says what it assumed; `examples/regent-hand.csv`, the Regent's Thursday as a manager typed it, with the five slips the checker names on its sheet; a week goes out as one CSV and a calendar per screen across it and comes back a day at a time (`--day`); ADR-017. *Left open:* a ticketing export's late show is written as the next date and `01:15`, and the import reads only the day's own `25:15` — the adapter for that form is a later day; a skeleton assumes the default stagger and no staff cap, so the booth's grid fails its own skeleton on the stagger until the house edits it in.
 
-## Day 10 — Tue 16 Sep — The festival profile
+## Day 10 — Tue 16 Sep — The festival profile ✅
 
 - A second brief profile: many titles with one or two screenings each, several venues, `strand`s, guest availability windows (hard), print or DCP move time between venues (hard), and clash-minimisation between titles in the same strand (soft: an audience should not have to choose).
 - `examples/festival.json`: 40 fictional titles, 3 venues, 10 days. Same checker discipline, new checks named for the festival's terms.
 - The sheet learns to render venues as screens and days as pages; strands get a mono tag, never a colour.
+- *Run in two sittings on the day:* the slot was cut off by a rate limit after the checker half was written and resumed from the working tree. *Shipped besides:* `available` (the festival days the print is in town) as a third festival term, because a festival solved day by day puts every title on the first day of its window otherwise; the guest reserve; a festival day's tables folded to the titles in town; ADR-018. *Left open:* the festival is solved day by day and the days first in a title's window take its screenings unless a window or a guest says otherwise; no day is hinted from the last; `explain` and `what-if` take a day of a house, not a festival; the sheet's programme table is wider than the page at ten days and scrolls in its box.
 
 ## Day 11 — Wed 17 Sep — Diff
 

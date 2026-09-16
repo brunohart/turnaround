@@ -1,0 +1,75 @@
+date,day,screen,screen_name,title,film,start,feature_start,feature_end,clear,runtime,preshow,clean,credits,format,rating,capacity,daypart
+2026-10-02,Fri 2,hall,Grand Hall,The Kite Library,kite-library,14:00,14:10,15:36,16:01,86,10,25,0,2D,G,640,afternoon
+2026-10-02,Fri 2,hall,Grand Hall,The Glass Harbour (1962),glass-harbour,17:45,17:55,19:43,20:08,108,10,25,0,35mm,,640,prime
+2026-10-02,Fri 2,hall,Grand Hall,The Salt Road,salt-road,20:30,20:40,22:38,23:03,118,10,25,0,2D,M,640,prime
+2026-10-02,Fri 2,annexe,Annexe,Glasshouse,glasshouse,14:00,14:10,15:26,15:46,76,10,20,0,2D,,220,afternoon
+2026-10-02,Fri 2,annexe,Annexe,The Last Projectionist,projectionist,16:00,16:10,17:38,17:58,88,10,20,0,2D,,220,afternoon
+2026-10-02,Fri 2,annexe,Annexe,Nocturne for Elna,nocturne,18:30,18:40,20:24,20:44,104,10,20,0,2D,M,220,prime
+2026-10-02,Fri 2,annexe,Annexe,Static,static,21:00,21:10,22:33,22:53,83,10,20,0,2D,R16,220,late
+2026-10-02,Fri 2,annexe,Annexe,Teeth of the Hound,teeth,23:15,23:25,25:01,25:21,96,10,20,0,2D,R18,220,late
+2026-10-02,Fri 2,vault,Vault,Bright Room,bright-room,20:30,20:40,21:58,22:13,78,10,15,0,2D,,90,prime
+2026-10-03,Sat 3,hall,Grand Hall,The Last Projectionist,projectionist,14:00,14:10,15:38,16:03,88,10,25,0,2D,,640,afternoon
+2026-10-03,Sat 3,hall,Grand Hall,Glasshouse,glasshouse,16:15,16:25,17:41,18:06,76,10,25,0,2D,,640,afternoon
+2026-10-03,Sat 3,hall,Grand Hall,The Salt Road,salt-road,18:15,18:25,20:23,20:48,118,10,25,0,2D,M,640,prime
+2026-10-03,Sat 3,hall,Grand Hall,Teeth of the Hound,teeth,21:00,21:10,22:46,23:11,96,10,25,0,2D,R18,640,late
+2026-10-03,Sat 3,hall,Grand Hall,Static,static,23:30,23:40,25:03,25:28,83,10,25,0,2D,R16,640,late
+2026-10-03,Sat 3,annexe,Annexe,The Kite Library,kite-library,11:00,11:10,12:36,12:56,86,10,20,0,2D,G,220,matinee
+2026-10-03,Sat 3,annexe,Annexe,Moth & Lantern,moth-lantern,13:00,13:10,14:29,14:49,79,10,20,0,2D,G,220,matinee
+2026-10-03,Sat 3,annexe,Annexe,Nocturne for Elna,nocturne,15:30,15:40,17:24,17:44,104,10,20,0,2D,M,220,afternoon
+2026-10-03,Sat 3,annexe,Annexe,Second Summer (1978),second-summer,17:45,17:55,19:49,20:09,114,10,20,0,35mm,,220,prime
+2026-10-03,Sat 3,annexe,Annexe,A House Facing North,house-north,20:30,20:40,22:51,23:11,131,10,20,0,2D,,220,prime
+2026-10-03,Sat 3,vault,Vault,Pigeon Season,pigeon,17:30,17:40,19:05,19:20,85,10,15,0,2D,,90,prime
+2026-10-03,Sat 3,vault,Vault,Bright Room,bright-room,20:30,20:40,21:58,22:13,78,10,15,0,2D,,90,prime
+2026-10-04,Sun 4,hall,Grand Hall,Moth & Lantern,moth-lantern,14:00,14:10,15:29,15:54,79,10,25,0,2D,G,640,afternoon
+2026-10-04,Sun 4,hall,Grand Hall,The Orchard Ledger,orchard,16:00,16:10,17:32,17:57,82,10,25,0,2D,,640,afternoon
+2026-10-04,Sun 4,hall,Grand Hall,The Understudy,understudy,18:00,18:10,19:42,20:07,92,10,25,0,2D,,640,prime
+2026-10-04,Sun 4,hall,Grand Hall,A House Facing North,house-north,20:30,20:40,22:51,23:16,131,10,25,0,2D,,640,prime
+2026-10-04,Sun 4,annexe,Annexe,Ninety Days of Wind,ninety-days,14:15,14:25,16:00,16:20,95,10,20,0,2D,,220,afternoon
+2026-10-04,Sun 4,annexe,Annexe,The Cartographer's Daughter,cartographer,18:15,18:25,20:02,20:22,97,10,20,0,2D,,220,prime
+2026-10-04,Sun 4,annexe,Annexe,The Lodger's Room,lodger,21:15,21:25,23:04,23:24,99,10,20,0,2D,R16,220,late
+2026-10-04,Sun 4,vault,Vault,Pigeon Season,pigeon,20:15,20:25,21:50,22:05,85,10,15,0,2D,,90,prime
+2026-10-05,Mon 5,hall,Grand Hall,Ninety Days of Wind,ninety-days,14:00,14:10,15:45,16:10,95,10,25,0,2D,,640,afternoon
+2026-10-05,Mon 5,hall,Grand Hall,The Orchard Ledger,orchard,16:30,16:40,18:02,18:27,82,10,25,0,2D,,640,afternoon
+2026-10-05,Mon 5,hall,Grand Hall,The Understudy,understudy,18:30,18:40,20:12,20:37,92,10,25,0,2D,,640,prime
+2026-10-05,Mon 5,hall,Grand Hall,The Lodger's Room,lodger,21:30,21:40,23:19,23:44,99,10,25,0,2D,R16,640,late
+2026-10-05,Mon 5,annexe,Annexe,Copper Street (1955),copper-street,14:30,14:40,16:09,16:29,89,10,20,0,35mm,,220,afternoon
+2026-10-05,Mon 5,annexe,Annexe,The Cartographer's Daughter,cartographer,17:30,17:40,19:17,19:37,97,10,20,0,2D,,220,prime
+2026-10-05,Mon 5,annexe,Annexe,Low Tide,low-tide,20:30,20:40,22:32,22:52,112,10,20,0,2D,M,220,prime
+2026-10-06,Tue 6,hall,Grand Hall,Long Division (1984),long-division,17:30,17:40,19:41,20:06,121,10,25,0,35mm,,640,prime
+2026-10-06,Tue 6,hall,Grand Hall,Bloodmoss,bloodmoss,21:15,21:25,22:52,23:17,87,10,25,0,2D,R18,640,late
+2026-10-06,Tue 6,annexe,Annexe,Quiet Machines,quiet-machines,14:00,14:10,15:20,15:40,70,10,20,0,2D,,220,afternoon
+2026-10-06,Tue 6,annexe,Annexe,A Field Guide to Leaving,field-guide,15:45,15:55,17:26,17:46,91,10,20,0,2D,,220,afternoon
+2026-10-06,Tue 6,annexe,Annexe,Low Tide,low-tide,18:00,18:10,20:02,20:22,112,10,20,0,2D,M,220,prime
+2026-10-06,Tue 6,annexe,Annexe,Winter Pasture,winter-pasture,20:30,20:40,22:46,23:06,126,10,20,0,2D,,220,prime
+2026-10-06,Tue 6,vault,Vault,Kilometre Zero,km-zero,18:30,18:40,19:54,20:09,74,10,15,0,2D,,90,prime
+2026-10-07,Wed 7,hall,Grand Hall,Sundowners,sundowners,17:30,17:40,19:08,19:33,88,10,25,0,2D,,640,prime
+2026-10-07,Wed 7,hall,Grand Hall,Winter Pasture,winter-pasture,20:30,20:40,22:46,23:11,126,10,25,0,2D,,640,prime
+2026-10-07,Wed 7,annexe,Annexe,Quiet Machines,quiet-machines,15:45,15:55,17:05,17:25,70,10,20,0,2D,,220,afternoon
+2026-10-07,Wed 7,annexe,Annexe,The Weight of Bells,bells,17:30,17:40,19:21,19:41,101,10,20,0,2D,,220,prime
+2026-10-07,Wed 7,annexe,Annexe,Kilometre Zero,km-zero,19:45,19:55,21:09,21:29,74,10,20,0,2D,,220,prime
+2026-10-07,Wed 7,annexe,Annexe,Bloodmoss,bloodmoss,21:30,21:40,23:07,23:27,87,10,20,0,2D,R18,220,late
+2026-10-08,Thu 8,hall,Grand Hall,A Field Guide to Leaving,field-guide,14:00,14:10,15:41,16:06,91,10,25,0,2D,,640,afternoon
+2026-10-08,Thu 8,hall,Grand Hall,Sundowners,sundowners,19:45,19:55,21:23,21:48,88,10,25,0,2D,,640,prime
+2026-10-08,Thu 8,annexe,Annexe,The Silent Partner (1971),silent-partner,17:30,17:40,19:22,19:42,102,10,20,0,35mm,,220,prime
+2026-10-08,Thu 8,annexe,Annexe,The Weight of Bells,bells,20:00,20:10,21:51,22:11,101,10,20,0,2D,,220,prime
+2026-10-09,Fri 9,hall,Grand Hall,A Very Small Whale,small-whale,16:00,16:10,17:22,17:47,72,10,25,0,2D,G,640,afternoon
+2026-10-09,Fri 9,hall,Grand Hall,Small Hours,small-hours,19:00,19:10,20:58,21:23,108,10,25,0,2D,,640,prime
+2026-10-09,Fri 9,annexe,Annexe,Paper Sun,paper-sun,14:00,14:10,15:29,15:49,79,10,20,0,2D,,220,afternoon
+2026-10-09,Fri 9,annexe,Annexe,Night Bus Nine,night-bus,21:15,21:25,22:57,23:17,92,10,20,0,2D,R16,220,late
+2026-10-10,Sat 10,hall,Grand Hall,A Very Small Whale,small-whale,11:00,11:10,12:22,12:47,72,10,25,0,2D,G,640,matinee
+2026-10-10,Sat 10,hall,Grand Hall,Paper Sun,paper-sun,14:00,14:10,15:29,15:54,79,10,25,0,2D,,640,afternoon
+2026-10-10,Sat 10,hall,Grand Hall,Tidewater,tidewater,16:00,16:10,17:34,17:59,84,10,25,0,2D,,640,afternoon
+2026-10-10,Sat 10,hall,Grand Hall,Small Hours,small-hours,18:00,18:10,19:58,20:23,108,10,25,0,2D,,640,prime
+2026-10-10,Sat 10,hall,Grand Hall,Fallow,fallow,20:30,20:40,22:42,23:07,122,10,25,0,2D,,640,prime
+2026-10-10,Sat 10,hall,Grand Hall,Vespers,vespers,23:30,23:40,25:25,25:50,105,10,25,0,2D,R16,640,late
+2026-10-10,Sat 10,annexe,Annexe,The Hedgehog Parliament,hedgehog,14:00,14:10,15:40,16:00,90,10,20,0,2D,PG,220,afternoon
+2026-10-10,Sat 10,annexe,Annexe,Other People's Rain,rain,16:00,16:10,17:43,18:03,93,10,20,0,2D,R13,220,afternoon
+2026-10-10,Sat 10,annexe,Annexe,Ash Wednesday (1969),ash-wednesday,18:30,18:40,20:16,20:36,96,10,20,0,35mm,,220,prime
+2026-10-10,Sat 10,annexe,Annexe,Night Bus Nine,night-bus,21:15,21:25,22:57,23:17,92,10,20,0,2D,R16,220,late
+2026-10-10,Sat 10,vault,Vault,Brackish,brackish,17:45,17:55,19:16,19:31,81,10,15,0,2D,,90,prime
+2026-10-11,Sun 11,hall,Grand Hall,Tidewater,tidewater,15:15,15:25,16:49,17:14,84,10,25,0,2D,,640,afternoon
+2026-10-11,Sun 11,hall,Grand Hall,Other People's Rain,rain,17:45,17:55,19:28,19:53,93,10,25,0,2D,R13,640,prime
+2026-10-11,Sun 11,hall,Grand Hall,Fallow,fallow,20:00,20:10,22:12,22:37,122,10,25,0,2D,,640,prime
+2026-10-11,Sun 11,annexe,Annexe,The Hedgehog Parliament,hedgehog,14:30,14:40,16:10,16:30,90,10,20,0,2D,PG,220,afternoon
+2026-10-11,Sun 11,annexe,Annexe,Brackish,brackish,17:30,17:40,19:01,19:21,81,10,20,0,2D,,220,prime
+2026-10-11,Sun 11,annexe,Annexe,Vespers,vespers,21:15,21:25,23:10,23:30,105,10,20,0,2D,R16,220,late

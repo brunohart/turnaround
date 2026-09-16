@@ -102,6 +102,8 @@
   .week-table td.day.hold { background:rgba(27,45,79,.05); }
   .held { display:inline-block; border:1px solid var(--blue); color:var(--blue); padding:1px 5px; transform:rotate(-1.2deg); font-size:10px; }
   .status-inf { color:var(--red); font-weight:600; }
+  /* a strand is a mono tag, never a colour (DESIGN.md): the sheet is read by position and type */
+  .tag { display:inline-block; font-family:"JetBrains Mono", ui-monospace, Menlo, monospace; text-transform:uppercase; letter-spacing:.12em; font-size:9px; border:1px solid var(--ink); padding:0 4px; line-height:1.5; vertical-align:middle; white-space:nowrap; }
   .day-page { margin-top:64px; padding-top:28px; border-top:1px solid var(--ink); position:relative; }
   .day-page h2 { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:34px; line-height:.95; letter-spacing:-.03em; margin:0 0 6px; position:relative; }
   .day-page .stamp { margin-bottom:8px; }
@@ -264,7 +266,7 @@
       
       <div class="row">
         <div class="d">Thu <span style="letter-spacing:.06em">09-10</span></div>
-        <div><span class="s">10:30 <i>Screen 1</i></span><span class="s">14:05 <i>Screen 1</i></span><span class="s prime">17:35 <i>Screen 1</i></span><span class="s">21:20 <i>Screen 1</i></span></div>
+        <div><span class="s">10:25 <i>Screen 1</i></span><span class="s">14:05 <i>Screen 1</i></span><span class="s prime">17:45 <i>Screen 1</i></span><span class="s">21:15 <i>Screen 1</i></span></div>
       </div>
       
       <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
@@ -304,7 +306,7 @@
       
       <div class="row">
         <div class="d">Thu <span style="letter-spacing:.06em">09-10</span></div>
-        <div><span class="s">10:05 <i>Screen 2</i></span><span class="s">13:05 <i>Screen 3</i></span><span class="s">16:40 <i>Screen 2</i></span><span class="s prime">19:05 <i>Screen 2</i></span></div>
+        <div><span class="s">12:05 <i>Screen 2</i></span><span class="s">13:00 <i>Screen 3</i></span><span class="s">16:40 <i>Screen 2</i></span><span class="s prime">19:05 <i>Screen 2</i></span></div>
       </div>
       
       <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
@@ -352,7 +354,7 @@
       
       <div class="row">
         <div class="d">Thu <span style="letter-spacing:.06em">09-10</span></div>
-        <div><span class="s">16:05 <i>Screen 3</i></span><span class="s prime">18:25 <i>Screen 3</i></span><span class="s">21:30 <i>Screen 2</i></span></div>
+        <div><span class="s">16:15 <i>Screen 3</i></span><span class="s prime">18:25 <i>Screen 3</i></span><span class="s">21:30 <i>Screen 2</i></span></div>
       </div>
       
       <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>
@@ -448,7 +450,7 @@
       
       <div class="row">
         <div class="d">Thu <span style="letter-spacing:.06em">09-10</span></div>
-        <div><span class="s">12:30 <i>Screen 2</i></span><span class="s">14:35 <i>Screen 2</i></span></div>
+        <div><span class="s">10:00 <i>Screen 2</i></span><span class="s">14:35 <i>Screen 2</i></span></div>
       </div>
       
       <div class="legend mono"><span><i style="border:0;border-bottom:2px solid var(--blue);height:6px;width:18px"></i>starts in prime</span></div>

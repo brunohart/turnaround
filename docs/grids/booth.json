@@ -5,15 +5,16 @@
   "objective": 1625.1,
   "admissions": 1625.1,
   "hold_paid": 0.0,
-  "solve_seconds": 2.567,
+  "clash_paid": 0.0,
+  "solve_seconds": 3.489,
   "sessions": [
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 620,
-      "feature_start": 650,
-      "feature_end": 818,
-      "clear": 827,
+      "start": 630,
+      "feature_start": 660,
+      "feature_end": 828,
+      "clear": 837,
       "forced": null
     },
     {
@@ -28,10 +29,10 @@
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 1050,
-      "feature_start": 1080,
-      "feature_end": 1248,
-      "clear": 1257,
+      "start": 1080,
+      "feature_start": 1110,
+      "feature_end": 1278,
+      "clear": 1287,
       "forced": null
     },
     {
@@ -45,20 +46,20 @@
     },
     {
       "screen": "2",
-      "film": "harvest",
+      "film": "bees",
       "start": 600,
-      "feature_start": 620,
-      "feature_end": 724,
-      "clear": 738,
+      "feature_start": 625,
+      "feature_end": 709,
+      "clear": 725,
       "forced": null
     },
     {
       "screen": "2",
-      "film": "bees",
-      "start": 740,
-      "feature_start": 765,
+      "film": "harvest",
+      "start": 725,
+      "feature_start": 745,
       "feature_end": 849,
-      "clear": 865,
+      "clear": 863,
       "forced": null
     },
     {
@@ -109,19 +110,19 @@
     {
       "screen": "3",
       "film": "harvest",
-      "start": 860,
-      "feature_start": 880,
-      "feature_end": 984,
-      "clear": 993,
+      "start": 855,
+      "feature_start": 875,
+      "feature_end": 979,
+      "clear": 988,
       "forced": null
     },
     {
       "screen": "3",
       "film": "signal",
-      "start": 1000,
-      "feature_start": 1020,
-      "feature_end": 1112,
-      "clear": 1120,
+      "start": 990,
+      "feature_start": 1010,
+      "feature_end": 1102,
+      "clear": 1110,
       "forced": null
     },
     {
@@ -154,7 +155,7 @@
     "slot_min": 5,
     "slot_asked": 5,
     "slot_reason": null,
-    "first_feasible_s": 0.209,
+    "first_feasible_s": 0.181,
     "bound": 1625.1,
     "gap": 0.0,
     "hinted": 0,

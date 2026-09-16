@@ -1,0 +1,1718 @@
+{
+  "house": "Brightwater Film Festival",
+  "titles": [
+    {
+      "id": "salt-road",
+      "title": "The Salt Road",
+      "runtime": 118,
+      "format": "2D",
+      "rating": "M"
+    },
+    {
+      "id": "nocturne",
+      "title": "Nocturne for Elna",
+      "runtime": 104,
+      "format": "2D",
+      "rating": "M"
+    },
+    {
+      "id": "house-north",
+      "title": "A House Facing North",
+      "runtime": 131,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "cartographer",
+      "title": "The Cartographer's Daughter",
+      "runtime": 97,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "low-tide",
+      "title": "Low Tide",
+      "runtime": 112,
+      "format": "2D",
+      "rating": "M"
+    },
+    {
+      "id": "winter-pasture",
+      "title": "Winter Pasture",
+      "runtime": 126,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "bells",
+      "title": "The Weight of Bells",
+      "runtime": 101,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "rain",
+      "title": "Other People's Rain",
+      "runtime": 93,
+      "format": "2D",
+      "rating": "R13"
+    },
+    {
+      "id": "small-hours",
+      "title": "Small Hours",
+      "runtime": 108,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "fallow",
+      "title": "Fallow",
+      "runtime": 122,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "projectionist",
+      "title": "The Last Projectionist",
+      "runtime": 88,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "glasshouse",
+      "title": "Glasshouse",
+      "runtime": 76,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "ninety-days",
+      "title": "Ninety Days of Wind",
+      "runtime": 95,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "orchard",
+      "title": "The Orchard Ledger",
+      "runtime": 82,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "quiet-machines",
+      "title": "Quiet Machines",
+      "runtime": 70,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "field-guide",
+      "title": "A Field Guide to Leaving",
+      "runtime": 91,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "tidewater",
+      "title": "Tidewater",
+      "runtime": 84,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "paper-sun",
+      "title": "Paper Sun",
+      "runtime": 79,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "teeth",
+      "title": "Teeth of the Hound",
+      "runtime": 96,
+      "format": "2D",
+      "rating": "R18"
+    },
+    {
+      "id": "static",
+      "title": "Static",
+      "runtime": 83,
+      "format": "2D",
+      "rating": "R16"
+    },
+    {
+      "id": "lodger",
+      "title": "The Lodger's Room",
+      "runtime": 99,
+      "format": "2D",
+      "rating": "R16"
+    },
+    {
+      "id": "bloodmoss",
+      "title": "Bloodmoss",
+      "runtime": 87,
+      "format": "2D",
+      "rating": "R18"
+    },
+    {
+      "id": "night-bus",
+      "title": "Night Bus Nine",
+      "runtime": 92,
+      "format": "2D",
+      "rating": "R16"
+    },
+    {
+      "id": "vespers",
+      "title": "Vespers",
+      "runtime": 105,
+      "format": "2D",
+      "rating": "R16"
+    },
+    {
+      "id": "glass-harbour",
+      "title": "The Glass Harbour (1962)",
+      "runtime": 108,
+      "format": "35mm",
+      "rating": null
+    },
+    {
+      "id": "second-summer",
+      "title": "Second Summer (1978)",
+      "runtime": 114,
+      "format": "35mm",
+      "rating": null
+    },
+    {
+      "id": "copper-street",
+      "title": "Copper Street (1955)",
+      "runtime": 89,
+      "format": "35mm",
+      "rating": null
+    },
+    {
+      "id": "long-division",
+      "title": "Long Division (1984)",
+      "runtime": 121,
+      "format": "35mm",
+      "rating": null
+    },
+    {
+      "id": "silent-partner",
+      "title": "The Silent Partner (1971)",
+      "runtime": 102,
+      "format": "35mm",
+      "rating": null
+    },
+    {
+      "id": "ash-wednesday",
+      "title": "Ash Wednesday (1969)",
+      "runtime": 96,
+      "format": "35mm",
+      "rating": null
+    },
+    {
+      "id": "bright-room",
+      "title": "Bright Room",
+      "runtime": 78,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "pigeon",
+      "title": "Pigeon Season",
+      "runtime": 85,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "understudy",
+      "title": "The Understudy",
+      "runtime": 92,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "km-zero",
+      "title": "Kilometre Zero",
+      "runtime": 74,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "sundowners",
+      "title": "Sundowners",
+      "runtime": 88,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "brackish",
+      "title": "Brackish",
+      "runtime": 81,
+      "format": "2D",
+      "rating": null
+    },
+    {
+      "id": "kite-library",
+      "title": "The Kite Library",
+      "runtime": 86,
+      "format": "2D",
+      "rating": "G"
+    },
+    {
+      "id": "moth-lantern",
+      "title": "Moth & Lantern",
+      "runtime": 79,
+      "format": "2D",
+      "rating": "G"
+    },
+    {
+      "id": "small-whale",
+      "title": "A Very Small Whale",
+      "runtime": 72,
+      "format": "2D",
+      "rating": "G"
+    },
+    {
+      "id": "hedgehog",
+      "title": "The Hedgehog Parliament",
+      "runtime": 90,
+      "format": "2D",
+      "rating": "PG"
+    }
+  ],
+  "days": [
+    {
+      "day": "Fri 2",
+      "date": "2026-10-02",
+      "status": "OPTIMAL",
+      "sessions": 9,
+      "screens": [
+        {
+          "id": "hall",
+          "name": "Grand Hall",
+          "capacity": 640,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "The Kite Library",
+              "film": "kite-library",
+              "start": "14:00",
+              "minutes": 840,
+              "feature_start": "14:10",
+              "feature_end": "15:36",
+              "clear": "16:01",
+              "runtime": 86,
+              "format": "2D",
+              "rating": "G",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Glass Harbour (1962)",
+              "film": "glass-harbour",
+              "start": "17:45",
+              "minutes": 1065,
+              "feature_start": "17:55",
+              "feature_end": "19:43",
+              "clear": "20:08",
+              "runtime": 108,
+              "format": "35mm",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "The Salt Road",
+              "film": "salt-road",
+              "start": "20:30",
+              "minutes": 1230,
+              "feature_start": "20:40",
+              "feature_end": "22:38",
+              "clear": "23:03",
+              "runtime": 118,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        },
+        {
+          "id": "annexe",
+          "name": "Annexe",
+          "capacity": 220,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "Glasshouse",
+              "film": "glasshouse",
+              "start": "14:00",
+              "minutes": 840,
+              "feature_start": "14:10",
+              "feature_end": "15:26",
+              "clear": "15:46",
+              "runtime": 76,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Last Projectionist",
+              "film": "projectionist",
+              "start": "16:00",
+              "minutes": 960,
+              "feature_start": "16:10",
+              "feature_end": "17:38",
+              "clear": "17:58",
+              "runtime": 88,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Nocturne for Elna",
+              "film": "nocturne",
+              "start": "18:30",
+              "minutes": 1110,
+              "feature_start": "18:40",
+              "feature_end": "20:24",
+              "clear": "20:44",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Static",
+              "film": "static",
+              "start": "21:00",
+              "minutes": 1260,
+              "feature_start": "21:10",
+              "feature_end": "22:33",
+              "clear": "22:53",
+              "runtime": 83,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            },
+            {
+              "title": "Teeth of the Hound",
+              "film": "teeth",
+              "start": "23:15",
+              "minutes": 1395,
+              "feature_start": "23:25",
+              "feature_end": "01:01",
+              "clear": "01:21",
+              "runtime": 96,
+              "format": "2D",
+              "rating": "R18",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "vault",
+          "name": "Vault",
+          "capacity": 90,
+          "formats": [
+            "2D"
+          ],
+          "sessions": [
+            {
+              "title": "Bright Room",
+              "film": "bright-room",
+              "start": "20:30",
+              "minutes": 1230,
+              "feature_start": "20:40",
+              "feature_end": "21:58",
+              "clear": "22:13",
+              "runtime": 78,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "Sat 3",
+      "date": "2026-10-03",
+      "status": "OPTIMAL",
+      "sessions": 12,
+      "screens": [
+        {
+          "id": "hall",
+          "name": "Grand Hall",
+          "capacity": 640,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "The Last Projectionist",
+              "film": "projectionist",
+              "start": "14:00",
+              "minutes": 840,
+              "feature_start": "14:10",
+              "feature_end": "15:38",
+              "clear": "16:03",
+              "runtime": 88,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Glasshouse",
+              "film": "glasshouse",
+              "start": "16:15",
+              "minutes": 975,
+              "feature_start": "16:25",
+              "feature_end": "17:41",
+              "clear": "18:06",
+              "runtime": 76,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Salt Road",
+              "film": "salt-road",
+              "start": "18:15",
+              "minutes": 1095,
+              "feature_start": "18:25",
+              "feature_end": "20:23",
+              "clear": "20:48",
+              "runtime": 118,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Teeth of the Hound",
+              "film": "teeth",
+              "start": "21:00",
+              "minutes": 1260,
+              "feature_start": "21:10",
+              "feature_end": "22:46",
+              "clear": "23:11",
+              "runtime": 96,
+              "format": "2D",
+              "rating": "R18",
+              "daypart": "late",
+              "prime": false
+            },
+            {
+              "title": "Static",
+              "film": "static",
+              "start": "23:30",
+              "minutes": 1410,
+              "feature_start": "23:40",
+              "feature_end": "01:03",
+              "clear": "01:28",
+              "runtime": 83,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "annexe",
+          "name": "Annexe",
+          "capacity": 220,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "The Kite Library",
+              "film": "kite-library",
+              "start": "11:00",
+              "minutes": 660,
+              "feature_start": "11:10",
+              "feature_end": "12:36",
+              "clear": "12:56",
+              "runtime": 86,
+              "format": "2D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Moth & Lantern",
+              "film": "moth-lantern",
+              "start": "13:00",
+              "minutes": 780,
+              "feature_start": "13:10",
+              "feature_end": "14:29",
+              "clear": "14:49",
+              "runtime": 79,
+              "format": "2D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Nocturne for Elna",
+              "film": "nocturne",
+              "start": "15:30",
+              "minutes": 930,
+              "feature_start": "15:40",
+              "feature_end": "17:24",
+              "clear": "17:44",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Second Summer (1978)",
+              "film": "second-summer",
+              "start": "17:45",
+              "minutes": 1065,
+              "feature_start": "17:55",
+              "feature_end": "19:49",
+              "clear": "20:09",
+              "runtime": 114,
+              "format": "35mm",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "A House Facing North",
+              "film": "house-north",
+              "start": "20:30",
+              "minutes": 1230,
+              "feature_start": "20:40",
+              "feature_end": "22:51",
+              "clear": "23:11",
+              "runtime": 131,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        },
+        {
+          "id": "vault",
+          "name": "Vault",
+          "capacity": 90,
+          "formats": [
+            "2D"
+          ],
+          "sessions": [
+            {
+              "title": "Pigeon Season",
+              "film": "pigeon",
+              "start": "17:30",
+              "minutes": 1050,
+              "feature_start": "17:40",
+              "feature_end": "19:05",
+              "clear": "19:20",
+              "runtime": 85,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Bright Room",
+              "film": "bright-room",
+              "start": "20:30",
+              "minutes": 1230,
+              "feature_start": "20:40",
+              "feature_end": "21:58",
+              "clear": "22:13",
+              "runtime": 78,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "Sun 4",
+      "date": "2026-10-04",
+      "status": "OPTIMAL",
+      "sessions": 8,
+      "screens": [
+        {
+          "id": "hall",
+          "name": "Grand Hall",
+          "capacity": 640,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "Moth & Lantern",
+              "film": "moth-lantern",
+              "start": "14:00",
+              "minutes": 840,
+              "feature_start": "14:10",
+              "feature_end": "15:29",
+              "clear": "15:54",
+              "runtime": 79,
+              "format": "2D",
+              "rating": "G",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Orchard Ledger",
+              "film": "orchard",
+              "start": "16:00",
+              "minutes": 960,
+              "feature_start": "16:10",
+              "feature_end": "17:32",
+              "clear": "17:57",
+              "runtime": 82,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Understudy",
+              "film": "understudy",
+              "start": "18:00",
+              "minutes": 1080,
+              "feature_start": "18:10",
+              "feature_end": "19:42",
+              "clear": "20:07",
+              "runtime": 92,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "A House Facing North",
+              "film": "house-north",
+              "start": "20:30",
+              "minutes": 1230,
+              "feature_start": "20:40",
+              "feature_end": "22:51",
+              "clear": "23:16",
+              "runtime": 131,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        },
+        {
+          "id": "annexe",
+          "name": "Annexe",
+          "capacity": 220,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "Ninety Days of Wind",
+              "film": "ninety-days",
+              "start": "14:15",
+              "minutes": 855,
+              "feature_start": "14:25",
+              "feature_end": "16:00",
+              "clear": "16:20",
+              "runtime": 95,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Cartographer's Daughter",
+              "film": "cartographer",
+              "start": "18:15",
+              "minutes": 1095,
+              "feature_start": "18:25",
+              "feature_end": "20:02",
+              "clear": "20:22",
+              "runtime": 97,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "The Lodger's Room",
+              "film": "lodger",
+              "start": "21:15",
+              "minutes": 1275,
+              "feature_start": "21:25",
+              "feature_end": "23:04",
+              "clear": "23:24",
+              "runtime": 99,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "vault",
+          "name": "Vault",
+          "capacity": 90,
+          "formats": [
+            "2D"
+          ],
+          "sessions": [
+            {
+              "title": "Pigeon Season",
+              "film": "pigeon",
+              "start": "20:15",
+              "minutes": 1215,
+              "feature_start": "20:25",
+              "feature_end": "21:50",
+              "clear": "22:05",
+              "runtime": 85,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "Mon 5",
+      "date": "2026-10-05",
+      "status": "OPTIMAL",
+      "sessions": 7,
+      "screens": [
+        {
+          "id": "hall",
+          "name": "Grand Hall",
+          "capacity": 640,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "Ninety Days of Wind",
+              "film": "ninety-days",
+              "start": "14:00",
+              "minutes": 840,
+              "feature_start": "14:10",
+              "feature_end": "15:45",
+              "clear": "16:10",
+              "runtime": 95,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Orchard Ledger",
+              "film": "orchard",
+              "start": "16:30",
+              "minutes": 990,
+              "feature_start": "16:40",
+              "feature_end": "18:02",
+              "clear": "18:27",
+              "runtime": 82,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Understudy",
+              "film": "understudy",
+              "start": "18:30",
+              "minutes": 1110,
+              "feature_start": "18:40",
+              "feature_end": "20:12",
+              "clear": "20:37",
+              "runtime": 92,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "The Lodger's Room",
+              "film": "lodger",
+              "start": "21:30",
+              "minutes": 1290,
+              "feature_start": "21:40",
+              "feature_end": "23:19",
+              "clear": "23:44",
+              "runtime": 99,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "annexe",
+          "name": "Annexe",
+          "capacity": 220,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "Copper Street (1955)",
+              "film": "copper-street",
+              "start": "14:30",
+              "minutes": 870,
+              "feature_start": "14:40",
+              "feature_end": "16:09",
+              "clear": "16:29",
+              "runtime": 89,
+              "format": "35mm",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Cartographer's Daughter",
+              "film": "cartographer",
+              "start": "17:30",
+              "minutes": 1050,
+              "feature_start": "17:40",
+              "feature_end": "19:17",
+              "clear": "19:37",
+              "runtime": 97,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Low Tide",
+              "film": "low-tide",
+              "start": "20:30",
+              "minutes": 1230,
+              "feature_start": "20:40",
+              "feature_end": "22:32",
+              "clear": "22:52",
+              "runtime": 112,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        },
+        {
+          "id": "vault",
+          "name": "Vault",
+          "capacity": 90,
+          "formats": [
+            "2D"
+          ],
+          "sessions": []
+        }
+      ]
+    },
+    {
+      "day": "Tue 6",
+      "date": "2026-10-06",
+      "status": "OPTIMAL",
+      "sessions": 7,
+      "screens": [
+        {
+          "id": "hall",
+          "name": "Grand Hall",
+          "capacity": 640,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "Long Division (1984)",
+              "film": "long-division",
+              "start": "17:30",
+              "minutes": 1050,
+              "feature_start": "17:40",
+              "feature_end": "19:41",
+              "clear": "20:06",
+              "runtime": 121,
+              "format": "35mm",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Bloodmoss",
+              "film": "bloodmoss",
+              "start": "21:15",
+              "minutes": 1275,
+              "feature_start": "21:25",
+              "feature_end": "22:52",
+              "clear": "23:17",
+              "runtime": 87,
+              "format": "2D",
+              "rating": "R18",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "annexe",
+          "name": "Annexe",
+          "capacity": 220,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "Quiet Machines",
+              "film": "quiet-machines",
+              "start": "14:00",
+              "minutes": 840,
+              "feature_start": "14:10",
+              "feature_end": "15:20",
+              "clear": "15:40",
+              "runtime": 70,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "A Field Guide to Leaving",
+              "film": "field-guide",
+              "start": "15:45",
+              "minutes": 945,
+              "feature_start": "15:55",
+              "feature_end": "17:26",
+              "clear": "17:46",
+              "runtime": 91,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Low Tide",
+              "film": "low-tide",
+              "start": "18:00",
+              "minutes": 1080,
+              "feature_start": "18:10",
+              "feature_end": "20:02",
+              "clear": "20:22",
+              "runtime": 112,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Winter Pasture",
+              "film": "winter-pasture",
+              "start": "20:30",
+              "minutes": 1230,
+              "feature_start": "20:40",
+              "feature_end": "22:46",
+              "clear": "23:06",
+              "runtime": 126,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        },
+        {
+          "id": "vault",
+          "name": "Vault",
+          "capacity": 90,
+          "formats": [
+            "2D"
+          ],
+          "sessions": [
+            {
+              "title": "Kilometre Zero",
+              "film": "km-zero",
+              "start": "18:30",
+              "minutes": 1110,
+              "feature_start": "18:40",
+              "feature_end": "19:54",
+              "clear": "20:09",
+              "runtime": 74,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "Wed 7",
+      "date": "2026-10-07",
+      "status": "OPTIMAL",
+      "sessions": 6,
+      "screens": [
+        {
+          "id": "hall",
+          "name": "Grand Hall",
+          "capacity": 640,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "Sundowners",
+              "film": "sundowners",
+              "start": "17:30",
+              "minutes": 1050,
+              "feature_start": "17:40",
+              "feature_end": "19:08",
+              "clear": "19:33",
+              "runtime": 88,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Winter Pasture",
+              "film": "winter-pasture",
+              "start": "20:30",
+              "minutes": 1230,
+              "feature_start": "20:40",
+              "feature_end": "22:46",
+              "clear": "23:11",
+              "runtime": 126,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        },
+        {
+          "id": "annexe",
+          "name": "Annexe",
+          "capacity": 220,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "Quiet Machines",
+              "film": "quiet-machines",
+              "start": "15:45",
+              "minutes": 945,
+              "feature_start": "15:55",
+              "feature_end": "17:05",
+              "clear": "17:25",
+              "runtime": 70,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Weight of Bells",
+              "film": "bells",
+              "start": "17:30",
+              "minutes": 1050,
+              "feature_start": "17:40",
+              "feature_end": "19:21",
+              "clear": "19:41",
+              "runtime": 101,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Kilometre Zero",
+              "film": "km-zero",
+              "start": "19:45",
+              "minutes": 1185,
+              "feature_start": "19:55",
+              "feature_end": "21:09",
+              "clear": "21:29",
+              "runtime": 74,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Bloodmoss",
+              "film": "bloodmoss",
+              "start": "21:30",
+              "minutes": 1290,
+              "feature_start": "21:40",
+              "feature_end": "23:07",
+              "clear": "23:27",
+              "runtime": 87,
+              "format": "2D",
+              "rating": "R18",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "vault",
+          "name": "Vault",
+          "capacity": 90,
+          "formats": [
+            "2D"
+          ],
+          "sessions": []
+        }
+      ]
+    },
+    {
+      "day": "Thu 8",
+      "date": "2026-10-08",
+      "status": "OPTIMAL",
+      "sessions": 4,
+      "screens": [
+        {
+          "id": "hall",
+          "name": "Grand Hall",
+          "capacity": 640,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "A Field Guide to Leaving",
+              "film": "field-guide",
+              "start": "14:00",
+              "minutes": 840,
+              "feature_start": "14:10",
+              "feature_end": "15:41",
+              "clear": "16:06",
+              "runtime": 91,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Sundowners",
+              "film": "sundowners",
+              "start": "19:45",
+              "minutes": 1185,
+              "feature_start": "19:55",
+              "feature_end": "21:23",
+              "clear": "21:48",
+              "runtime": 88,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        },
+        {
+          "id": "annexe",
+          "name": "Annexe",
+          "capacity": 220,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "The Silent Partner (1971)",
+              "film": "silent-partner",
+              "start": "17:30",
+              "minutes": 1050,
+              "feature_start": "17:40",
+              "feature_end": "19:22",
+              "clear": "19:42",
+              "runtime": 102,
+              "format": "35mm",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "The Weight of Bells",
+              "film": "bells",
+              "start": "20:00",
+              "minutes": 1200,
+              "feature_start": "20:10",
+              "feature_end": "21:51",
+              "clear": "22:11",
+              "runtime": 101,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        },
+        {
+          "id": "vault",
+          "name": "Vault",
+          "capacity": 90,
+          "formats": [
+            "2D"
+          ],
+          "sessions": []
+        }
+      ]
+    },
+    {
+      "day": "Fri 9",
+      "date": "2026-10-09",
+      "status": "OPTIMAL",
+      "sessions": 4,
+      "screens": [
+        {
+          "id": "hall",
+          "name": "Grand Hall",
+          "capacity": 640,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "A Very Small Whale",
+              "film": "small-whale",
+              "start": "16:00",
+              "minutes": 960,
+              "feature_start": "16:10",
+              "feature_end": "17:22",
+              "clear": "17:47",
+              "runtime": 72,
+              "format": "2D",
+              "rating": "G",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Small Hours",
+              "film": "small-hours",
+              "start": "19:00",
+              "minutes": 1140,
+              "feature_start": "19:10",
+              "feature_end": "20:58",
+              "clear": "21:23",
+              "runtime": 108,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        },
+        {
+          "id": "annexe",
+          "name": "Annexe",
+          "capacity": 220,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "Paper Sun",
+              "film": "paper-sun",
+              "start": "14:00",
+              "minutes": 840,
+              "feature_start": "14:10",
+              "feature_end": "15:29",
+              "clear": "15:49",
+              "runtime": 79,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Night Bus Nine",
+              "film": "night-bus",
+              "start": "21:15",
+              "minutes": 1275,
+              "feature_start": "21:25",
+              "feature_end": "22:57",
+              "clear": "23:17",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "vault",
+          "name": "Vault",
+          "capacity": 90,
+          "formats": [
+            "2D"
+          ],
+          "sessions": []
+        }
+      ]
+    },
+    {
+      "day": "Sat 10",
+      "date": "2026-10-10",
+      "status": "OPTIMAL",
+      "sessions": 11,
+      "screens": [
+        {
+          "id": "hall",
+          "name": "Grand Hall",
+          "capacity": 640,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "A Very Small Whale",
+              "film": "small-whale",
+              "start": "11:00",
+              "minutes": 660,
+              "feature_start": "11:10",
+              "feature_end": "12:22",
+              "clear": "12:47",
+              "runtime": 72,
+              "format": "2D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Paper Sun",
+              "film": "paper-sun",
+              "start": "14:00",
+              "minutes": 840,
+              "feature_start": "14:10",
+              "feature_end": "15:29",
+              "clear": "15:54",
+              "runtime": 79,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Tidewater",
+              "film": "tidewater",
+              "start": "16:00",
+              "minutes": 960,
+              "feature_start": "16:10",
+              "feature_end": "17:34",
+              "clear": "17:59",
+              "runtime": 84,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Small Hours",
+              "film": "small-hours",
+              "start": "18:00",
+              "minutes": 1080,
+              "feature_start": "18:10",
+              "feature_end": "19:58",
+              "clear": "20:23",
+              "runtime": 108,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Fallow",
+              "film": "fallow",
+              "start": "20:30",
+              "minutes": 1230,
+              "feature_start": "20:40",
+              "feature_end": "22:42",
+              "clear": "23:07",
+              "runtime": 122,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Vespers",
+              "film": "vespers",
+              "start": "23:30",
+              "minutes": 1410,
+              "feature_start": "23:40",
+              "feature_end": "01:25",
+              "clear": "01:50",
+              "runtime": 105,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "annexe",
+          "name": "Annexe",
+          "capacity": 220,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "The Hedgehog Parliament",
+              "film": "hedgehog",
+              "start": "14:00",
+              "minutes": 840,
+              "feature_start": "14:10",
+              "feature_end": "15:40",
+              "clear": "16:00",
+              "runtime": 90,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Other People's Rain",
+              "film": "rain",
+              "start": "16:00",
+              "minutes": 960,
+              "feature_start": "16:10",
+              "feature_end": "17:43",
+              "clear": "18:03",
+              "runtime": 93,
+              "format": "2D",
+              "rating": "R13",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Ash Wednesday (1969)",
+              "film": "ash-wednesday",
+              "start": "18:30",
+              "minutes": 1110,
+              "feature_start": "18:40",
+              "feature_end": "20:16",
+              "clear": "20:36",
+              "runtime": 96,
+              "format": "35mm",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Night Bus Nine",
+              "film": "night-bus",
+              "start": "21:15",
+              "minutes": 1275,
+              "feature_start": "21:25",
+              "feature_end": "22:57",
+              "clear": "23:17",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "vault",
+          "name": "Vault",
+          "capacity": 90,
+          "formats": [
+            "2D"
+          ],
+          "sessions": [
+            {
+              "title": "Brackish",
+              "film": "brackish",
+              "start": "17:45",
+              "minutes": 1065,
+              "feature_start": "17:55",
+              "feature_end": "19:16",
+              "clear": "19:31",
+              "runtime": 81,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "Sun 11",
+      "date": "2026-10-11",
+      "status": "OPTIMAL",
+      "sessions": 6,
+      "screens": [
+        {
+          "id": "hall",
+          "name": "Grand Hall",
+          "capacity": 640,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "Tidewater",
+              "film": "tidewater",
+              "start": "15:15",
+              "minutes": 915,
+              "feature_start": "15:25",
+              "feature_end": "16:49",
+              "clear": "17:14",
+              "runtime": 84,
+              "format": "2D",
+              "rating": null,
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Other People's Rain",
+              "film": "rain",
+              "start": "17:45",
+              "minutes": 1065,
+              "feature_start": "17:55",
+              "feature_end": "19:28",
+              "clear": "19:53",
+              "runtime": 93,
+              "format": "2D",
+              "rating": "R13",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Fallow",
+              "film": "fallow",
+              "start": "20:00",
+              "minutes": 1200,
+              "feature_start": "20:10",
+              "feature_end": "22:12",
+              "clear": "22:37",
+              "runtime": 122,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        },
+        {
+          "id": "annexe",
+          "name": "Annexe",
+          "capacity": 220,
+          "formats": [
+            "2D",
+            "35mm"
+          ],
+          "sessions": [
+            {
+              "title": "The Hedgehog Parliament",
+              "film": "hedgehog",
+              "start": "14:30",
+              "minutes": 870,
+              "feature_start": "14:40",
+              "feature_end": "16:10",
+              "clear": "16:30",
+              "runtime": 90,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Brackish",
+              "film": "brackish",
+              "start": "17:30",
+              "minutes": 1050,
+              "feature_start": "17:40",
+              "feature_end": "19:01",
+              "clear": "19:21",
+              "runtime": 81,
+              "format": "2D",
+              "rating": null,
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Vespers",
+              "film": "vespers",
+              "start": "21:15",
+              "minutes": 1275,
+              "feature_start": "21:25",
+              "feature_end": "23:10",
+              "clear": "23:30",
+              "runtime": 105,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "vault",
+          "name": "Vault",
+          "capacity": 90,
+          "formats": [
+            "2D"
+          ],
+          "sessions": []
+        }
+      ]
+    }
+  ]
+}
