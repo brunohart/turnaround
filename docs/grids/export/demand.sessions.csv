@@ -1,58 +1,58 @@
 date,day,screen,screen_name,title,film,start,feature_start,feature_end,clear,runtime,preshow,clean,credits,format,rating,capacity,daypart
-2026-10-01,Thu,1,Screen 1,The Long Voyage,odyssey,10:25,10:45,13:33,13:53,168,20,20,0,PLF,M,320,matinee
-2026-10-01,Thu,1,Screen 1,The Long Voyage,odyssey,14:00,14:20,17:08,17:28,168,20,20,0,PLF,M,320,afternoon
-2026-10-01,Thu,1,Screen 1,The Long Voyage,odyssey,17:55,18:15,21:03,21:23,168,20,20,0,PLF,M,320,prime
-2026-10-01,Thu,1,Screen 1,The Long Voyage,odyssey,21:25,21:45,24:33,24:53,168,20,20,0,PLF,M,320,late
-2026-10-01,Thu,2,Screen 2,The Bee Kingdom,bees,10:00,10:20,11:44,12:04,84,20,20,0,3D,G,180,matinee
-2026-10-01,Thu,2,Screen 2,The Bee Kingdom,bees,12:05,12:25,13:49,14:09,84,20,20,0,3D,G,180,matinee
-2026-10-01,Thu,2,Screen 2,The Bee Kingdom,bees,14:10,14:30,15:54,16:14,84,20,20,0,3D,G,180,afternoon
-2026-10-01,Thu,2,Screen 2,Harvest Moon,harvest,16:15,16:35,18:19,18:39,104,20,20,0,2D,PG,180,afternoon
-2026-10-01,Thu,2,Screen 2,Harvest Moon,harvest,18:40,19:00,20:44,21:04,104,20,20,0,2D,PG,180,prime
-2026-10-01,Thu,2,Screen 2,Dead Signal,signal,21:15,21:35,23:07,23:27,92,20,20,0,2D,R16,180,late
-2026-10-01,Thu,3,Screen 3,Harvest Moon,harvest,10:10,10:30,12:14,12:29,104,20,15,0,2D,PG,96,matinee
-2026-10-01,Thu,3,Screen 3,Harvest Moon,harvest,12:30,12:50,14:34,14:49,104,20,15,0,2D,PG,96,matinee
-2026-10-01,Thu,3,Screen 3,Atlas of Small Rooms,atlas,14:55,15:15,17:16,17:31,121,20,15,0,2D,M,96,afternoon
-2026-10-01,Thu,3,Screen 3,Atlas of Small Rooms,atlas,17:40,18:00,20:01,20:16,121,20,15,0,2D,M,96,prime
-2026-10-01,Thu,3,Screen 3,Dead Signal,signal,20:30,20:50,22:22,22:37,92,20,15,0,2D,R16,96,prime
-2026-10-02,Fri,1,Screen 1,The Long Voyage,odyssey,10:30,10:50,13:38,13:58,168,20,20,0,PLF,M,320,matinee
-2026-10-02,Fri,1,Screen 1,The Long Voyage,odyssey,14:35,14:55,17:43,18:03,168,20,20,0,PLF,M,320,afternoon
-2026-10-02,Fri,1,Screen 1,The Long Voyage,odyssey,18:30,18:50,21:38,21:58,168,20,20,0,PLF,M,320,prime
-2026-10-02,Fri,1,Screen 1,The Long Voyage,odyssey,22:10,22:30,25:18,25:38,168,20,20,0,PLF,M,320,late
+2026-10-01,Thu,1,Screen 1,The Long Voyage,odyssey,10:35,10:55,13:43,14:03,168,20,20,0,PLF,M,320,matinee
+2026-10-01,Thu,1,Screen 1,The Long Voyage,odyssey,14:15,14:35,17:23,17:43,168,20,20,0,PLF,M,320,afternoon
+2026-10-01,Thu,1,Screen 1,The Long Voyage,odyssey,17:45,18:05,20:53,21:13,168,20,20,0,PLF,M,320,prime
+2026-10-01,Thu,1,Screen 1,The Long Voyage,odyssey,21:15,21:35,24:23,24:43,168,20,20,0,PLF,M,320,late
+2026-10-01,Thu,2,Screen 2,The Bee Kingdom,bees,10:10,10:30,11:54,12:14,84,20,20,0,3D,G,180,matinee
+2026-10-01,Thu,2,Screen 2,The Bee Kingdom,bees,12:15,12:35,13:59,14:19,84,20,20,0,3D,G,180,matinee
+2026-10-01,Thu,2,Screen 2,Harvest Moon,harvest,14:30,14:50,16:34,16:54,104,20,20,0,2D,PG,180,afternoon
+2026-10-01,Thu,2,Screen 2,The Bee Kingdom,bees,17:00,17:20,18:44,19:04,84,20,20,0,3D,G,180,afternoon
+2026-10-01,Thu,2,Screen 2,Harvest Moon,harvest,19:05,19:25,21:09,21:29,104,20,20,0,2D,PG,180,prime
+2026-10-01,Thu,2,Screen 2,Dead Signal,signal,21:30,21:50,23:22,23:42,92,20,20,0,2D,R16,180,late
+2026-10-01,Thu,3,Screen 3,Harvest Moon,harvest,10:00,10:20,12:04,12:19,104,20,15,0,2D,PG,96,matinee
+2026-10-01,Thu,3,Screen 3,Harvest Moon,harvest,12:25,12:45,14:29,14:44,104,20,15,0,2D,PG,96,matinee
+2026-10-01,Thu,3,Screen 3,Atlas of Small Rooms,atlas,14:50,15:10,17:11,17:26,121,20,15,0,2D,M,96,afternoon
+2026-10-01,Thu,3,Screen 3,Atlas of Small Rooms,atlas,17:35,17:55,19:56,20:11,121,20,15,0,2D,M,96,prime
+2026-10-01,Thu,3,Screen 3,Dead Signal,signal,20:25,20:45,22:17,22:32,92,20,15,0,2D,R16,96,prime
+2026-10-02,Fri,1,Screen 1,The Long Voyage,odyssey,10:25,10:45,13:33,13:53,168,20,20,0,PLF,M,320,matinee
+2026-10-02,Fri,1,Screen 1,The Long Voyage,odyssey,14:05,14:25,17:13,17:33,168,20,20,0,PLF,M,320,afternoon
+2026-10-02,Fri,1,Screen 1,The Long Voyage,odyssey,17:45,18:05,20:53,21:13,168,20,20,0,PLF,M,320,prime
+2026-10-02,Fri,1,Screen 1,The Long Voyage,odyssey,21:15,21:35,24:23,24:43,168,20,20,0,PLF,M,320,late
 2026-10-02,Fri,2,Screen 2,The Bee Kingdom,bees,10:10,10:30,11:54,12:14,84,20,20,0,3D,G,180,matinee
 2026-10-02,Fri,2,Screen 2,The Bee Kingdom,bees,12:15,12:35,13:59,14:19,84,20,20,0,3D,G,180,matinee
-2026-10-02,Fri,2,Screen 2,Harvest Moon,harvest,14:20,14:40,16:24,16:44,104,20,20,0,2D,PG,180,afternoon
-2026-10-02,Fri,2,Screen 2,The Bee Kingdom,bees,17:00,17:20,18:44,19:04,84,20,20,0,3D,G,180,afternoon
+2026-10-02,Fri,2,Screen 2,The Bee Kingdom,bees,14:40,15:00,16:24,16:44,84,20,20,0,3D,G,180,afternoon
+2026-10-02,Fri,2,Screen 2,Harvest Moon,harvest,17:05,17:25,19:09,19:29,104,20,20,0,2D,PG,180,afternoon
 2026-10-02,Fri,2,Screen 2,Dead Signal,signal,19:40,20:00,21:32,21:52,92,20,20,0,2D,R16,180,prime
-2026-10-02,Fri,2,Screen 2,Dead Signal,signal,22:20,22:40,24:12,24:32,92,20,20,0,2D,R16,180,late
+2026-10-02,Fri,2,Screen 2,Dead Signal,signal,22:00,22:20,23:52,24:12,92,20,20,0,2D,R16,180,late
 2026-10-02,Fri,3,Screen 3,Harvest Moon,harvest,10:00,10:20,12:04,12:19,104,20,15,0,2D,PG,96,matinee
-2026-10-02,Fri,3,Screen 3,Harvest Moon,harvest,12:25,12:45,14:29,14:44,104,20,15,0,2D,PG,96,matinee
+2026-10-02,Fri,3,Screen 3,Harvest Moon,harvest,12:30,12:50,14:34,14:49,104,20,15,0,2D,PG,96,matinee
 2026-10-02,Fri,3,Screen 3,Atlas of Small Rooms,atlas,14:50,15:10,17:11,17:26,121,20,15,0,2D,M,96,afternoon
 2026-10-02,Fri,3,Screen 3,Harvest Moon,harvest,17:30,17:50,19:34,19:49,104,20,15,0,2D,PG,96,prime
 2026-10-02,Fri,3,Screen 3,Atlas of Small Rooms,atlas,19:50,20:10,22:11,22:26,121,20,15,0,2D,M,96,prime
 2026-10-02,Fri,3,Screen 3,Dead Signal,signal,22:30,22:50,24:22,24:37,92,20,15,0,2D,R16,96,late
 2026-10-03,Sat,1,Screen 1,The Long Voyage,odyssey,10:35,10:55,13:43,14:03,168,20,20,0,PLF,M,320,matinee
-2026-10-03,Sat,1,Screen 1,The Long Voyage,odyssey,14:45,15:05,17:53,18:13,168,20,20,0,PLF,M,320,afternoon
+2026-10-03,Sat,1,Screen 1,The Long Voyage,odyssey,14:35,14:55,17:43,18:03,168,20,20,0,PLF,M,320,afternoon
 2026-10-03,Sat,1,Screen 1,The Long Voyage,odyssey,18:30,18:50,21:38,21:58,168,20,20,0,PLF,M,320,prime
-2026-10-03,Sat,1,Screen 1,The Long Voyage,odyssey,22:20,22:40,25:28,25:48,168,20,20,0,PLF,M,320,late
-2026-10-03,Sat,2,Screen 2,The Bee Kingdom,bees,10:10,10:30,11:54,12:14,84,20,20,0,3D,G,180,matinee
-2026-10-03,Sat,2,Screen 2,The Bee Kingdom,bees,13:00,13:20,14:44,15:04,84,20,20,0,3D,G,180,matinee
-2026-10-03,Sat,2,Screen 2,The Bee Kingdom,bees,15:15,15:35,16:59,17:19,84,20,20,0,3D,G,180,afternoon
-2026-10-03,Sat,2,Screen 2,Harvest Moon,harvest,17:20,17:40,19:24,19:44,104,20,20,0,2D,PG,180,afternoon
-2026-10-03,Sat,2,Screen 2,Harvest Moon,harvest,19:45,20:05,21:49,22:09,104,20,20,0,2D,PG,180,prime
-2026-10-03,Sat,2,Screen 2,Dead Signal,signal,22:10,22:30,24:02,24:22,92,20,20,0,2D,R16,180,late
-2026-10-03,Sat,3,Screen 3,Harvest Moon,harvest,10:00,10:20,12:04,12:19,104,20,15,0,2D,PG,96,matinee
-2026-10-03,Sat,3,Screen 3,Harvest Moon,harvest,12:35,12:55,14:39,14:54,104,20,15,0,2D,PG,96,matinee
-2026-10-03,Sat,3,Screen 3,Harvest Moon,harvest,14:55,15:15,16:59,17:14,104,20,15,0,2D,PG,96,afternoon
-2026-10-03,Sat,3,Screen 3,Atlas of Small Rooms,atlas,17:35,17:55,19:56,20:11,121,20,15,0,2D,M,96,prime
-2026-10-03,Sat,3,Screen 3,Dead Signal,signal,20:20,20:40,22:12,22:27,92,20,15,0,2D,R16,96,prime
-2026-10-03,Sat,3,Screen 3,Atlas of Small Rooms,atlas,22:30,22:50,24:51,25:06,121,20,15,0,2D,M,96,late
+2026-10-03,Sat,1,Screen 1,The Long Voyage,odyssey,22:30,22:50,25:38,25:58,168,20,20,0,PLF,M,320,late
+2026-10-03,Sat,2,Screen 2,The Bee Kingdom,bees,10:00,10:20,11:44,12:04,84,20,20,0,3D,G,180,matinee
+2026-10-03,Sat,2,Screen 2,The Bee Kingdom,bees,12:05,12:25,13:49,14:09,84,20,20,0,3D,G,180,matinee
+2026-10-03,Sat,2,Screen 2,The Bee Kingdom,bees,14:20,14:40,16:04,16:24,84,20,20,0,3D,G,180,afternoon
+2026-10-03,Sat,2,Screen 2,Harvest Moon,harvest,16:25,16:45,18:29,18:49,104,20,20,0,2D,PG,180,afternoon
+2026-10-03,Sat,2,Screen 2,Harvest Moon,harvest,18:50,19:10,20:54,21:14,104,20,20,0,2D,PG,180,prime
+2026-10-03,Sat,2,Screen 2,Dead Signal,signal,21:35,21:55,23:27,23:47,92,20,20,0,2D,R16,180,late
+2026-10-03,Sat,3,Screen 3,Harvest Moon,harvest,10:10,10:30,12:14,12:29,104,20,15,0,2D,PG,96,matinee
+2026-10-03,Sat,3,Screen 3,Harvest Moon,harvest,12:30,12:50,14:34,14:49,104,20,15,0,2D,PG,96,matinee
+2026-10-03,Sat,3,Screen 3,Harvest Moon,harvest,15:00,15:20,17:04,17:19,104,20,15,0,2D,PG,96,afternoon
+2026-10-03,Sat,3,Screen 3,Dead Signal,signal,17:30,17:50,19:22,19:37,92,20,15,0,2D,R16,96,prime
+2026-10-03,Sat,3,Screen 3,Atlas of Small Rooms,atlas,19:40,20:00,22:01,22:16,121,20,15,0,2D,M,96,prime
+2026-10-03,Sat,3,Screen 3,Atlas of Small Rooms,atlas,22:20,22:40,24:41,24:56,121,20,15,0,2D,M,96,late
 2026-10-04,Sun,1,Screen 1,The Long Voyage,odyssey,11:00,11:20,14:08,14:28,168,20,20,0,PLF,M,320,matinee
 2026-10-04,Sun,1,Screen 1,The Long Voyage,odyssey,14:30,14:50,17:38,17:58,168,20,20,0,PLF,M,320,afternoon
 2026-10-04,Sun,1,Screen 1,The Long Voyage,odyssey,18:00,18:20,21:08,21:28,168,20,20,0,PLF,M,320,prime
 2026-10-04,Sun,1,Screen 1,The Long Voyage,odyssey,21:30,21:50,24:38,24:58,168,20,20,0,PLF,M,320,late
 2026-10-04,Sun,2,Screen 2,The Bee Kingdom,bees,11:20,11:40,13:04,13:24,84,20,20,0,3D,G,180,matinee
-2026-10-04,Sun,2,Screen 2,The Bee Kingdom,bees,13:45,14:05,15:29,15:49,84,20,20,0,3D,G,180,matinee
-2026-10-04,Sun,2,Screen 2,Harvest Moon,harvest,16:00,16:20,18:04,18:24,104,20,20,0,2D,PG,180,afternoon
+2026-10-04,Sun,2,Screen 2,The Bee Kingdom,bees,13:50,14:10,15:34,15:54,84,20,20,0,3D,G,180,matinee
+2026-10-04,Sun,2,Screen 2,The Bee Kingdom,bees,16:45,17:05,18:29,18:49,84,20,20,0,3D,G,180,afternoon
 2026-10-04,Sun,2,Screen 2,Harvest Moon,harvest,18:50,19:10,20:54,21:14,104,20,20,0,2D,PG,180,prime
 2026-10-04,Sun,2,Screen 2,Dead Signal,signal,21:15,21:35,23:07,23:27,92,20,20,0,2D,R16,180,late
 2026-10-04,Sun,3,Screen 3,Harvest Moon,harvest,11:10,11:30,13:14,13:29,104,20,15,0,2D,PG,96,matinee
@@ -60,48 +60,48 @@ date,day,screen,screen_name,title,film,start,feature_start,feature_end,clear,run
 2026-10-04,Sun,3,Screen 3,Atlas of Small Rooms,atlas,15:50,16:10,18:11,18:26,121,20,15,0,2D,M,96,afternoon
 2026-10-04,Sun,3,Screen 3,Dead Signal,signal,18:30,18:50,20:22,20:37,92,20,15,0,2D,R16,96,prime
 2026-10-04,Sun,3,Screen 3,Atlas of Small Rooms,atlas,20:40,21:00,23:01,23:16,121,20,15,0,2D,M,96,prime
-2026-10-05,Mon,1,Screen 1,The Long Voyage,odyssey,10:25,10:45,13:33,13:53,168,20,20,0,PLF,M,320,matinee
-2026-10-05,Mon,1,Screen 1,The Long Voyage,odyssey,14:00,14:20,17:08,17:28,168,20,20,0,PLF,M,320,afternoon
-2026-10-05,Mon,1,Screen 1,The Long Voyage,odyssey,17:55,18:15,21:03,21:23,168,20,20,0,PLF,M,320,prime
-2026-10-05,Mon,1,Screen 1,The Long Voyage,odyssey,21:25,21:45,24:33,24:53,168,20,20,0,PLF,M,320,late
-2026-10-05,Mon,2,Screen 2,The Bee Kingdom,bees,10:00,10:20,11:44,12:04,84,20,20,0,3D,G,180,matinee
-2026-10-05,Mon,2,Screen 2,The Bee Kingdom,bees,12:05,12:25,13:49,14:09,84,20,20,0,3D,G,180,matinee
-2026-10-05,Mon,2,Screen 2,The Bee Kingdom,bees,14:10,14:30,15:54,16:14,84,20,20,0,3D,G,180,afternoon
-2026-10-05,Mon,2,Screen 2,Harvest Moon,harvest,16:15,16:35,18:19,18:39,104,20,20,0,2D,PG,180,afternoon
-2026-10-05,Mon,2,Screen 2,Harvest Moon,harvest,18:40,19:00,20:44,21:04,104,20,20,0,2D,PG,180,prime
-2026-10-05,Mon,2,Screen 2,Dead Signal,signal,21:15,21:35,23:07,23:27,92,20,20,0,2D,R16,180,late
-2026-10-05,Mon,3,Screen 3,Harvest Moon,harvest,10:10,10:30,12:14,12:29,104,20,15,0,2D,PG,96,matinee
-2026-10-05,Mon,3,Screen 3,Harvest Moon,harvest,12:30,12:50,14:34,14:49,104,20,15,0,2D,PG,96,matinee
-2026-10-05,Mon,3,Screen 3,Atlas of Small Rooms,atlas,14:55,15:15,17:16,17:31,121,20,15,0,2D,M,96,afternoon
-2026-10-05,Mon,3,Screen 3,Atlas of Small Rooms,atlas,17:40,18:00,20:01,20:16,121,20,15,0,2D,M,96,prime
-2026-10-05,Mon,3,Screen 3,Dead Signal,signal,20:30,20:50,22:22,22:37,92,20,15,0,2D,R16,96,prime
-2026-10-06,Tue,1,Screen 1,The Long Voyage,odyssey,10:25,10:45,13:33,13:53,168,20,20,0,PLF,M,320,matinee
-2026-10-06,Tue,1,Screen 1,The Long Voyage,odyssey,14:00,14:20,17:08,17:28,168,20,20,0,PLF,M,320,afternoon
-2026-10-06,Tue,1,Screen 1,The Long Voyage,odyssey,17:55,18:15,21:03,21:23,168,20,20,0,PLF,M,320,prime
-2026-10-06,Tue,1,Screen 1,The Long Voyage,odyssey,21:25,21:45,24:33,24:53,168,20,20,0,PLF,M,320,late
-2026-10-06,Tue,2,Screen 2,The Bee Kingdom,bees,10:00,10:20,11:44,12:04,84,20,20,0,3D,G,180,matinee
-2026-10-06,Tue,2,Screen 2,The Bee Kingdom,bees,12:05,12:25,13:49,14:09,84,20,20,0,3D,G,180,matinee
-2026-10-06,Tue,2,Screen 2,The Bee Kingdom,bees,14:10,14:30,15:54,16:14,84,20,20,0,3D,G,180,afternoon
-2026-10-06,Tue,2,Screen 2,Harvest Moon,harvest,16:15,16:35,18:19,18:39,104,20,20,0,2D,PG,180,afternoon
-2026-10-06,Tue,2,Screen 2,Harvest Moon,harvest,18:40,19:00,20:44,21:04,104,20,20,0,2D,PG,180,prime
-2026-10-06,Tue,2,Screen 2,Dead Signal,signal,21:15,21:35,23:07,23:27,92,20,20,0,2D,R16,180,late
-2026-10-06,Tue,3,Screen 3,Harvest Moon,harvest,10:10,10:30,12:14,12:29,104,20,15,0,2D,PG,96,matinee
-2026-10-06,Tue,3,Screen 3,Harvest Moon,harvest,12:30,12:50,14:34,14:49,104,20,15,0,2D,PG,96,matinee
-2026-10-06,Tue,3,Screen 3,Atlas of Small Rooms,atlas,14:55,15:15,17:16,17:31,121,20,15,0,2D,M,96,afternoon
-2026-10-06,Tue,3,Screen 3,Atlas of Small Rooms,atlas,17:40,18:00,20:01,20:16,121,20,15,0,2D,M,96,prime
-2026-10-06,Tue,3,Screen 3,Dead Signal,signal,20:30,20:50,22:22,22:37,92,20,15,0,2D,R16,96,prime
-2026-10-07,Wed,1,Screen 1,The Long Voyage,odyssey,10:25,10:45,13:33,13:53,168,20,20,0,PLF,M,320,matinee
-2026-10-07,Wed,1,Screen 1,The Long Voyage,odyssey,14:00,14:20,17:08,17:28,168,20,20,0,PLF,M,320,afternoon
-2026-10-07,Wed,1,Screen 1,The Long Voyage,odyssey,17:55,18:15,21:03,21:23,168,20,20,0,PLF,M,320,prime
-2026-10-07,Wed,1,Screen 1,The Long Voyage,odyssey,21:25,21:45,24:33,24:53,168,20,20,0,PLF,M,320,late
-2026-10-07,Wed,2,Screen 2,The Bee Kingdom,bees,10:00,10:20,11:44,12:04,84,20,20,0,3D,G,180,matinee
-2026-10-07,Wed,2,Screen 2,The Bee Kingdom,bees,12:05,12:25,13:49,14:09,84,20,20,0,3D,G,180,matinee
-2026-10-07,Wed,2,Screen 2,The Bee Kingdom,bees,14:10,14:30,15:54,16:14,84,20,20,0,3D,G,180,afternoon
-2026-10-07,Wed,2,Screen 2,Harvest Moon,harvest,16:15,16:35,18:19,18:39,104,20,20,0,2D,PG,180,afternoon
-2026-10-07,Wed,2,Screen 2,Harvest Moon,harvest,18:40,19:00,20:44,21:04,104,20,20,0,2D,PG,180,prime
-2026-10-07,Wed,2,Screen 2,Dead Signal,signal,21:15,21:35,23:07,23:27,92,20,20,0,2D,R16,180,late
-2026-10-07,Wed,3,Screen 3,Harvest Moon,harvest,10:10,10:30,12:14,12:29,104,20,15,0,2D,PG,96,matinee
-2026-10-07,Wed,3,Screen 3,Harvest Moon,harvest,12:30,12:50,14:34,14:49,104,20,15,0,2D,PG,96,matinee
-2026-10-07,Wed,3,Screen 3,Atlas of Small Rooms,atlas,14:55,15:15,17:16,17:31,121,20,15,0,2D,M,96,afternoon
-2026-10-07,Wed,3,Screen 3,Atlas of Small Rooms,atlas,17:40,18:00,20:01,20:16,121,20,15,0,2D,M,96,prime
-2026-10-07,Wed,3,Screen 3,Dead Signal,signal,20:30,20:50,22:22,22:37,92,20,15,0,2D,R16,96,prime
+2026-10-05,Mon,1,Screen 1,The Long Voyage,odyssey,10:35,10:55,13:43,14:03,168,20,20,0,PLF,M,320,matinee
+2026-10-05,Mon,1,Screen 1,The Long Voyage,odyssey,14:15,14:35,17:23,17:43,168,20,20,0,PLF,M,320,afternoon
+2026-10-05,Mon,1,Screen 1,The Long Voyage,odyssey,17:45,18:05,20:53,21:13,168,20,20,0,PLF,M,320,prime
+2026-10-05,Mon,1,Screen 1,The Long Voyage,odyssey,21:15,21:35,24:23,24:43,168,20,20,0,PLF,M,320,late
+2026-10-05,Mon,2,Screen 2,The Bee Kingdom,bees,10:10,10:30,11:54,12:14,84,20,20,0,3D,G,180,matinee
+2026-10-05,Mon,2,Screen 2,The Bee Kingdom,bees,12:15,12:35,13:59,14:19,84,20,20,0,3D,G,180,matinee
+2026-10-05,Mon,2,Screen 2,Harvest Moon,harvest,14:30,14:50,16:34,16:54,104,20,20,0,2D,PG,180,afternoon
+2026-10-05,Mon,2,Screen 2,The Bee Kingdom,bees,17:00,17:20,18:44,19:04,84,20,20,0,3D,G,180,afternoon
+2026-10-05,Mon,2,Screen 2,Harvest Moon,harvest,19:05,19:25,21:09,21:29,104,20,20,0,2D,PG,180,prime
+2026-10-05,Mon,2,Screen 2,Dead Signal,signal,21:30,21:50,23:22,23:42,92,20,20,0,2D,R16,180,late
+2026-10-05,Mon,3,Screen 3,Harvest Moon,harvest,10:00,10:20,12:04,12:19,104,20,15,0,2D,PG,96,matinee
+2026-10-05,Mon,3,Screen 3,Harvest Moon,harvest,12:25,12:45,14:29,14:44,104,20,15,0,2D,PG,96,matinee
+2026-10-05,Mon,3,Screen 3,Atlas of Small Rooms,atlas,14:50,15:10,17:11,17:26,121,20,15,0,2D,M,96,afternoon
+2026-10-05,Mon,3,Screen 3,Atlas of Small Rooms,atlas,17:35,17:55,19:56,20:11,121,20,15,0,2D,M,96,prime
+2026-10-05,Mon,3,Screen 3,Dead Signal,signal,20:25,20:45,22:17,22:32,92,20,15,0,2D,R16,96,prime
+2026-10-06,Tue,1,Screen 1,The Long Voyage,odyssey,10:35,10:55,13:43,14:03,168,20,20,0,PLF,M,320,matinee
+2026-10-06,Tue,1,Screen 1,The Long Voyage,odyssey,14:15,14:35,17:23,17:43,168,20,20,0,PLF,M,320,afternoon
+2026-10-06,Tue,1,Screen 1,The Long Voyage,odyssey,17:45,18:05,20:53,21:13,168,20,20,0,PLF,M,320,prime
+2026-10-06,Tue,1,Screen 1,The Long Voyage,odyssey,21:15,21:35,24:23,24:43,168,20,20,0,PLF,M,320,late
+2026-10-06,Tue,2,Screen 2,The Bee Kingdom,bees,10:10,10:30,11:54,12:14,84,20,20,0,3D,G,180,matinee
+2026-10-06,Tue,2,Screen 2,The Bee Kingdom,bees,12:15,12:35,13:59,14:19,84,20,20,0,3D,G,180,matinee
+2026-10-06,Tue,2,Screen 2,Harvest Moon,harvest,14:30,14:50,16:34,16:54,104,20,20,0,2D,PG,180,afternoon
+2026-10-06,Tue,2,Screen 2,The Bee Kingdom,bees,17:00,17:20,18:44,19:04,84,20,20,0,3D,G,180,afternoon
+2026-10-06,Tue,2,Screen 2,Harvest Moon,harvest,19:05,19:25,21:09,21:29,104,20,20,0,2D,PG,180,prime
+2026-10-06,Tue,2,Screen 2,Dead Signal,signal,21:30,21:50,23:22,23:42,92,20,20,0,2D,R16,180,late
+2026-10-06,Tue,3,Screen 3,Harvest Moon,harvest,10:00,10:20,12:04,12:19,104,20,15,0,2D,PG,96,matinee
+2026-10-06,Tue,3,Screen 3,Harvest Moon,harvest,12:25,12:45,14:29,14:44,104,20,15,0,2D,PG,96,matinee
+2026-10-06,Tue,3,Screen 3,Atlas of Small Rooms,atlas,14:50,15:10,17:11,17:26,121,20,15,0,2D,M,96,afternoon
+2026-10-06,Tue,3,Screen 3,Atlas of Small Rooms,atlas,17:35,17:55,19:56,20:11,121,20,15,0,2D,M,96,prime
+2026-10-06,Tue,3,Screen 3,Dead Signal,signal,20:25,20:45,22:17,22:32,92,20,15,0,2D,R16,96,prime
+2026-10-07,Wed,1,Screen 1,The Long Voyage,odyssey,10:35,10:55,13:43,14:03,168,20,20,0,PLF,M,320,matinee
+2026-10-07,Wed,1,Screen 1,The Long Voyage,odyssey,14:15,14:35,17:23,17:43,168,20,20,0,PLF,M,320,afternoon
+2026-10-07,Wed,1,Screen 1,The Long Voyage,odyssey,17:45,18:05,20:53,21:13,168,20,20,0,PLF,M,320,prime
+2026-10-07,Wed,1,Screen 1,The Long Voyage,odyssey,21:15,21:35,24:23,24:43,168,20,20,0,PLF,M,320,late
+2026-10-07,Wed,2,Screen 2,The Bee Kingdom,bees,10:10,10:30,11:54,12:14,84,20,20,0,3D,G,180,matinee
+2026-10-07,Wed,2,Screen 2,The Bee Kingdom,bees,12:15,12:35,13:59,14:19,84,20,20,0,3D,G,180,matinee
+2026-10-07,Wed,2,Screen 2,Harvest Moon,harvest,14:30,14:50,16:34,16:54,104,20,20,0,2D,PG,180,afternoon
+2026-10-07,Wed,2,Screen 2,The Bee Kingdom,bees,17:00,17:20,18:44,19:04,84,20,20,0,3D,G,180,afternoon
+2026-10-07,Wed,2,Screen 2,Harvest Moon,harvest,19:05,19:25,21:09,21:29,104,20,20,0,2D,PG,180,prime
+2026-10-07,Wed,2,Screen 2,Dead Signal,signal,21:30,21:50,23:22,23:42,92,20,20,0,2D,R16,180,late
+2026-10-07,Wed,3,Screen 3,Harvest Moon,harvest,10:00,10:20,12:04,12:19,104,20,15,0,2D,PG,96,matinee
+2026-10-07,Wed,3,Screen 3,Harvest Moon,harvest,12:25,12:45,14:29,14:44,104,20,15,0,2D,PG,96,matinee
+2026-10-07,Wed,3,Screen 3,Atlas of Small Rooms,atlas,14:50,15:10,17:11,17:26,121,20,15,0,2D,M,96,afternoon
+2026-10-07,Wed,3,Screen 3,Atlas of Small Rooms,atlas,17:35,17:55,19:56,20:11,121,20,15,0,2D,M,96,prime
+2026-10-07,Wed,3,Screen 3,Dead Signal,signal,20:25,20:45,22:17,22:32,92,20,15,0,2D,R16,96,prime

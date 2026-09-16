@@ -1,16 +1,16 @@
 date,day,screen,screen_name,title,film,start,feature_start,feature_end,clear,runtime,preshow,clean,credits,format,rating,capacity,daypart
-2026-09-10,Thu,1,Screen 1,The Long Voyage,odyssey,10:25,10:45,13:33,13:53,168,20,20,0,PLF,M,320,matinee
-2026-09-10,Thu,1,Screen 1,The Long Voyage,odyssey,14:05,14:25,17:13,17:33,168,20,20,0,PLF,M,320,afternoon
+2026-09-10,Thu,1,Screen 1,The Long Voyage,odyssey,10:40,11:00,13:48,14:08,168,20,20,0,PLF,M,320,matinee
+2026-09-10,Thu,1,Screen 1,The Long Voyage,odyssey,14:15,14:35,17:23,17:43,168,20,20,0,PLF,M,320,afternoon
 2026-09-10,Thu,1,Screen 1,The Long Voyage,odyssey,17:45,18:05,20:53,21:13,168,20,20,0,PLF,M,320,prime
 2026-09-10,Thu,1,Screen 1,The Long Voyage,odyssey,21:15,21:35,24:23,24:43,168,20,20,0,PLF,M,320,late
 2026-09-10,Thu,2,Screen 2,The Bee Kingdom,bees,10:00,10:20,11:44,12:04,84,20,20,0,3D,G,180,matinee
 2026-09-10,Thu,2,Screen 2,Harvest Moon,harvest,12:05,12:25,14:09,14:29,104,20,20,0,2D,PG,180,matinee
-2026-09-10,Thu,2,Screen 2,The Bee Kingdom,bees,14:35,14:55,16:19,16:39,84,20,20,0,3D,G,180,afternoon
-2026-09-10,Thu,2,Screen 2,Harvest Moon,harvest,16:40,17:00,18:44,19:04,104,20,20,0,2D,PG,180,afternoon
-2026-09-10,Thu,2,Screen 2,Harvest Moon,harvest,19:05,19:25,21:09,21:29,104,20,20,0,2D,PG,180,prime
+2026-09-10,Thu,2,Screen 2,Harvest Moon,harvest,14:30,14:50,16:34,16:54,104,20,20,0,2D,PG,180,afternoon
+2026-09-10,Thu,2,Screen 2,The Bee Kingdom,bees,16:55,17:15,18:39,18:59,84,20,20,0,3D,G,180,afternoon
+2026-09-10,Thu,2,Screen 2,Harvest Moon,harvest,19:00,19:20,21:04,21:24,104,20,20,0,2D,PG,180,prime
 2026-09-10,Thu,2,Screen 2,Dead Signal,signal,21:30,21:50,23:22,23:42,92,20,20,0,2D,R16,180,late
-2026-09-10,Thu,3,Screen 3,Atlas of Small Rooms,atlas,10:15,10:35,12:36,12:51,121,20,15,0,2D,M,96,matinee
-2026-09-10,Thu,3,Screen 3,Harvest Moon,harvest,13:00,13:20,15:04,15:19,104,20,15,0,2D,PG,96,matinee
-2026-09-10,Thu,3,Screen 3,Dead Signal,signal,16:15,16:35,18:07,18:22,92,20,15,0,2D,R16,96,afternoon
+2026-09-10,Thu,3,Screen 3,Harvest Moon,harvest,10:25,10:45,12:29,12:44,104,20,15,0,2D,PG,96,matinee
+2026-09-10,Thu,3,Screen 3,Atlas of Small Rooms,atlas,12:45,13:05,15:06,15:21,121,20,15,0,2D,M,96,matinee
+2026-09-10,Thu,3,Screen 3,Dead Signal,signal,16:05,16:25,17:57,18:12,92,20,15,0,2D,R16,96,afternoon
 2026-09-10,Thu,3,Screen 3,Dead Signal,signal,18:25,18:45,20:17,20:32,92,20,15,0,2D,R16,96,prime
 2026-09-10,Thu,3,Screen 3,Atlas of Small Rooms,atlas,20:35,20:55,22:56,23:11,121,20,15,0,2D,M,96,prime

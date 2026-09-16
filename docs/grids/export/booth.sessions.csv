@@ -1,7 +1,7 @@
 date,day,screen,screen_name,title,film,start,feature_start,feature_end,clear,runtime,preshow,clean,credits,format,rating,capacity,daypart
-2026-09-16,Wed,1,Screen 1,The Long Voyage,odyssey,10:30,11:00,13:48,13:57,168,30,20,11,PLF,M,320,matinee
-2026-09-16,Wed,1,Screen 1,The Long Voyage,odyssey,14:00,14:30,17:18,17:27,168,30,20,11,PLF,M,320,afternoon
-2026-09-16,Wed,1,Screen 1,The Long Voyage,odyssey,18:00,18:30,21:18,21:27,168,30,20,11,PLF,M,320,prime
+2026-09-16,Wed,1,Screen 1,The Long Voyage,odyssey,10:20,10:50,13:38,13:47,168,30,20,11,PLF,M,320,matinee
+2026-09-16,Wed,1,Screen 1,The Long Voyage,odyssey,14:05,14:35,17:23,17:32,168,30,20,11,PLF,M,320,afternoon
+2026-09-16,Wed,1,Screen 1,The Long Voyage,odyssey,17:50,18:20,21:08,21:17,168,30,20,11,PLF,M,320,prime
 2026-09-16,Wed,1,Screen 1,The Long Voyage,odyssey,21:30,22:00,24:48,24:57,168,30,20,11,PLF,M,320,late
 2026-09-16,Wed,2,Screen 2,The Bee Kingdom,bees,10:00,10:25,11:49,12:05,84,25,20,4,3D,G,180,matinee
 2026-09-16,Wed,2,Screen 2,Harvest Moon,harvest,12:05,12:25,14:09,14:23,104,20,20,6,2D,PG,180,matinee

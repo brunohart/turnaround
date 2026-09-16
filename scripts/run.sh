@@ -41,5 +41,9 @@ for b in "${briefs[@]}"; do
     tr render "$b" docs/grids/regent-hand.json --html docs/grids/regent-hand.html
     tr check "$b" docs/grids/regent-hand.json \
       || echo "regent-hand: the checker rejects the hand-made grid, as it should (exit $?)"
+    # Diff (Day 11): the Thursday re-plan artefact — the grid the manager typed against the
+    # one the solver made, every move a ghost on the sheet.
+    tr diff docs/grids/regent-hand.json docs/grids/regent.json --brief "$b" \
+      --out docs/grids/regent-replan.json --html docs/grids/regent-replan.html
   fi
 done

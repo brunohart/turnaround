@@ -1,544 +1,546 @@
 date,day,screen,screen_name,title,film,start,feature_start,feature_end,clear,runtime,preshow,clean,credits,format,rating,capacity,daypart
-2026-09-17,Thu,1,Screen 1,The Iron Tide,tide,10:40,11:10,13:48,14:08,158,30,20,0,PLF,M,400,matinee
-2026-09-17,Thu,1,Screen 1,The Iron Tide,tide,14:10,14:40,17:18,17:38,158,30,20,0,PLF,M,400,afternoon
-2026-09-17,Thu,1,Screen 1,The Iron Tide,tide,17:40,18:10,20:48,21:08,158,30,20,0,PLF,M,400,prime
+2026-09-17,Thu,1,Screen 1,The Iron Tide,tide,10:50,11:20,13:58,14:18,158,30,20,0,PLF,M,400,matinee
+2026-09-17,Thu,1,Screen 1,The Iron Tide,tide,14:20,14:50,17:28,17:48,158,30,20,0,PLF,M,400,afternoon
+2026-09-17,Thu,1,Screen 1,The Iron Tide,tide,17:50,18:20,20:58,21:18,158,30,20,0,PLF,M,400,prime
 2026-09-17,Thu,1,Screen 1,The Iron Tide,tide,21:20,21:50,24:28,24:48,158,30,20,0,PLF,M,400,late
-2026-09-17,Thu,2,Screen 2,Paper Lantern,lantern,10:50,11:20,13:31,13:51,131,30,20,0,PLF,PG,400,matinee
+2026-09-17,Thu,2,Screen 2,Paper Lantern,lantern,10:40,11:10,13:21,13:41,131,30,20,0,PLF,PG,400,matinee
 2026-09-17,Thu,2,Screen 2,The Iron Tide,tide,14:00,14:30,17:08,17:28,158,30,20,0,PLF,M,400,afternoon
 2026-09-17,Thu,2,Screen 2,Paper Lantern,lantern,17:30,18:00,20:11,20:31,131,30,20,0,PLF,PG,400,prime
 2026-09-17,Thu,2,Screen 2,The Iron Tide,tide,20:40,21:10,23:48,24:08,158,30,20,0,PLF,M,400,prime
-2026-09-17,Thu,3,Screen 3,Reef,reef,10:10,10:35,11:43,12:03,68,25,20,0,3D,G,260,matinee
-2026-09-17,Thu,3,Screen 3,The Orchard Keepers,orchard,12:10,12:35,14:11,14:31,96,25,20,0,3D,G,260,matinee
-2026-09-17,Thu,3,Screen 3,The Orchard Keepers,orchard,14:40,15:05,16:41,17:01,96,25,20,0,3D,G,260,afternoon
-2026-09-17,Thu,3,Screen 3,The Orchard Keepers,orchard,17:20,17:45,19:21,19:41,96,25,20,0,3D,G,260,afternoon
-2026-09-17,Thu,3,Screen 3,Meridian,meridian,20:00,20:20,22:43,23:03,143,20,20,0,2D,M,260,prime
-2026-09-17,Thu,4,Screen 4,The Orchard Keepers,orchard,10:30,10:55,12:31,12:51,96,25,20,0,3D,G,260,matinee
+2026-09-17,Thu,3,Screen 3,Reef,reef,10:30,10:55,12:03,12:23,68,25,20,0,3D,G,260,matinee
+2026-09-17,Thu,3,Screen 3,The Orchard Keepers,orchard,12:30,12:55,14:31,14:51,96,25,20,0,3D,G,260,matinee
+2026-09-17,Thu,3,Screen 3,The Orchard Keepers,orchard,15:00,15:25,17:01,17:21,96,25,20,0,3D,G,260,afternoon
+2026-09-17,Thu,3,Screen 3,Meridian,meridian,17:30,17:50,20:13,20:33,143,20,20,0,2D,M,260,prime
+2026-09-17,Thu,3,Screen 3,Meridian,meridian,20:40,21:00,23:23,23:43,143,20,20,0,2D,M,260,prime
+2026-09-17,Thu,4,Screen 4,Kites Over Halden,kites,10:20,10:45,12:13,12:33,88,25,20,0,3D,G,260,matinee
 2026-09-17,Thu,4,Screen 4,The Orchard Keepers,orchard,13:00,13:25,15:01,15:21,96,25,20,0,3D,G,260,matinee
-2026-09-17,Thu,4,Screen 4,Kites Over Halden,kites,15:30,15:55,17:23,17:43,88,25,20,0,3D,G,260,afternoon
-2026-09-17,Thu,4,Screen 4,The Orchard Keepers,orchard,17:50,18:15,19:51,20:11,96,25,20,0,3D,G,260,prime
-2026-09-17,Thu,4,Screen 4,The Glasshouse,glasshouse,20:30,20:50,22:57,23:17,127,20,20,0,2D,M,260,prime
-2026-09-17,Thu,5,Screen 5,The Orchard Keepers,orchard,10:00,10:25,12:01,12:21,96,25,20,0,3D,G,260,matinee
-2026-09-17,Thu,5,Screen 5,Kites Over Halden,kites,12:40,13:05,14:33,14:53,88,25,20,0,3D,G,260,matinee
-2026-09-17,Thu,5,Screen 5,The Orchard Keepers,orchard,15:00,15:25,17:01,17:21,96,25,20,0,3D,G,260,afternoon
-2026-09-17,Thu,5,Screen 5,Meridian,meridian,17:30,17:50,20:13,20:33,143,20,20,0,2D,M,260,prime
-2026-09-17,Thu,5,Screen 5,Salt Road,salt,20:40,21:00,23:32,23:52,152,20,20,0,2D,M,260,prime
-2026-09-17,Thu,6,Screen 6,The Cartographer's Daughter,cartographer,10:10,10:30,12:49,13:09,139,20,20,0,2D,M,180,matinee
-2026-09-17,Thu,6,Screen 6,Last Tango in Timaru,tango,13:20,13:40,15:24,15:44,104,20,20,0,2D,M,180,matinee
-2026-09-17,Thu,6,Screen 6,Brass Sunday,brass,16:10,16:30,18:19,18:39,109,20,20,0,2D,PG,180,afternoon
-2026-09-17,Thu,6,Screen 6,The Ninth Floor,ninth,19:00,19:20,20:57,21:17,97,20,20,0,2D,R13,180,prime
-2026-09-17,Thu,6,Screen 6,The Ninth Floor,ninth,21:30,21:50,23:27,23:47,97,20,20,0,2D,R13,180,late
-2026-09-17,Thu,7,Screen 7,Harbour Lights,harbour,10:00,10:20,12:15,12:35,115,20,20,0,2D,PG,180,matinee
-2026-09-17,Thu,7,Screen 7,Brass Sunday,brass,12:40,13:00,14:49,15:09,109,20,20,0,2D,PG,180,matinee
-2026-09-17,Thu,7,Screen 7,The Cartographer's Daughter,cartographer,15:10,15:30,17:49,18:09,139,20,20,0,2D,M,180,afternoon
-2026-09-17,Thu,7,Screen 7,Last Tango in Timaru,tango,18:10,18:30,20:14,20:34,104,20,20,0,2D,M,180,prime
-2026-09-17,Thu,7,Screen 7,Hollow Creek,hollow,20:40,21:00,22:41,23:01,101,20,20,0,2D,R16,180,prime
-2026-09-17,Thu,8,Screen 8,Meridian,meridian,10:20,10:40,13:03,13:23,143,20,20,0,2D,M,180,matinee
-2026-09-17,Thu,8,Screen 8,Salt Road,salt,15:00,15:20,17:52,18:12,152,20,20,0,2D,M,180,afternoon
-2026-09-17,Thu,8,Screen 8,Stitch and Bone,stitch,18:30,18:50,20:48,21:08,118,20,20,0,2D,M,180,prime
-2026-09-17,Thu,8,Screen 8,Hollow Creek,hollow,21:20,21:40,23:21,23:41,101,20,20,0,2D,R16,180,late
-2026-09-17,Thu,9,Screen 9,Stitch and Bone,stitch,10:30,10:50,12:48,13:08,118,20,20,0,2D,M,180,matinee
-2026-09-17,Thu,9,Screen 9,Stitch and Bone,stitch,13:10,13:30,15:28,15:48,118,20,20,0,2D,M,180,matinee
-2026-09-17,Thu,9,Screen 9,Stitch and Bone,stitch,15:50,16:10,18:08,18:28,118,20,20,0,2D,M,180,afternoon
-2026-09-17,Thu,9,Screen 9,Stitch and Bone,stitch,18:30,18:50,20:48,21:08,118,20,20,0,2D,M,180,prime
-2026-09-17,Thu,9,Screen 9,Salt Road,salt,21:10,21:30,24:02,24:22,152,20,20,0,2D,M,180,late
-2026-09-17,Thu,10,Screen 10,The Glasshouse,glasshouse,10:20,10:40,12:47,13:07,127,20,20,0,2D,M,140,matinee
-2026-09-17,Thu,10,Screen 10,Wren,wren,13:10,13:30,15:02,15:22,92,20,20,0,2D,PG,140,matinee
-2026-09-17,Thu,10,Screen 10,The Glasshouse,glasshouse,15:30,15:50,17:57,18:17,127,20,20,0,2D,M,140,afternoon
-2026-09-17,Thu,10,Screen 10,Salt Road,salt,18:20,18:40,21:12,21:32,152,20,20,0,2D,M,140,prime
+2026-09-17,Thu,4,Screen 4,The Orchard Keepers,orchard,15:30,15:55,17:31,17:51,96,25,20,0,3D,G,260,afternoon
+2026-09-17,Thu,4,Screen 4,The Orchard Keepers,orchard,18:00,18:25,20:01,20:21,96,25,20,0,3D,G,260,prime
+2026-09-17,Thu,4,Screen 4,The Glasshouse,glasshouse,20:40,21:00,23:07,23:27,127,20,20,0,2D,M,260,prime
+2026-09-17,Thu,5,Screen 5,Kites Over Halden,kites,10:10,10:35,12:03,12:23,88,25,20,0,3D,G,260,matinee
+2026-09-17,Thu,5,Screen 5,The Orchard Keepers,orchard,12:40,13:05,14:41,15:01,96,25,20,0,3D,G,260,matinee
+2026-09-17,Thu,5,Screen 5,Kites Over Halden,kites,15:10,15:35,17:03,17:23,88,25,20,0,3D,G,260,afternoon
+2026-09-17,Thu,5,Screen 5,Last Tango in Timaru,tango,17:40,18:00,19:44,20:04,104,20,20,0,2D,M,260,prime
+2026-09-17,Thu,5,Screen 5,Salt Road,salt,20:10,20:30,23:02,23:22,152,20,20,0,2D,M,260,prime
+2026-09-17,Thu,6,Screen 6,The Glasshouse,glasshouse,10:30,10:50,12:57,13:17,127,20,20,0,2D,M,180,matinee
+2026-09-17,Thu,6,Screen 6,The Cartographer's Daughter,cartographer,13:20,13:40,15:59,16:19,139,20,20,0,2D,M,180,matinee
+2026-09-17,Thu,6,Screen 6,Last Tango in Timaru,tango,16:20,16:40,18:24,18:44,104,20,20,0,2D,M,180,afternoon
+2026-09-17,Thu,6,Screen 6,Hollow Creek,hollow,18:50,19:10,20:51,21:11,101,20,20,0,2D,R16,180,prime
+2026-09-17,Thu,6,Screen 6,Stitch and Bone,stitch,21:30,21:50,23:48,24:08,118,20,20,0,2D,M,180,late
+2026-09-17,Thu,7,Screen 7,Brass Sunday,brass,10:00,10:20,12:09,12:29,109,20,20,0,2D,PG,180,matinee
+2026-09-17,Thu,7,Screen 7,Quarry,quarry,12:30,12:50,14:53,15:13,123,20,20,0,2D,M,180,matinee
+2026-09-17,Thu,7,Screen 7,Salt Road,salt,15:30,15:50,18:22,18:42,152,20,20,0,2D,M,180,afternoon
+2026-09-17,Thu,7,Screen 7,Wren,wren,18:50,19:10,20:42,21:02,92,20,20,0,2D,PG,180,prime
+2026-09-17,Thu,7,Screen 7,The Glasshouse,glasshouse,21:10,21:30,23:37,23:57,127,20,20,0,2D,M,180,late
+2026-09-17,Thu,8,Screen 8,Meridian,meridian,10:10,10:30,12:53,13:13,143,20,20,0,2D,M,180,matinee
+2026-09-17,Thu,8,Screen 8,Last Tango in Timaru,tango,13:20,13:40,15:24,15:44,104,20,20,0,2D,M,180,matinee
+2026-09-17,Thu,8,Screen 8,Meridian,meridian,15:50,16:10,18:33,18:53,143,20,20,0,2D,M,180,afternoon
+2026-09-17,Thu,8,Screen 8,Brass Sunday,brass,19:10,19:30,21:19,21:39,109,20,20,0,2D,PG,180,prime
+2026-09-17,Thu,8,Screen 8,Salt Road,salt,21:40,22:00,24:32,24:52,152,20,20,0,2D,M,180,late
+2026-09-17,Thu,9,Screen 9,Harbour Lights,harbour,10:10,10:30,12:25,12:45,115,20,20,0,2D,PG,180,matinee
+2026-09-17,Thu,9,Screen 9,Wren,wren,12:50,13:10,14:42,15:02,92,20,20,0,2D,PG,180,matinee
+2026-09-17,Thu,9,Screen 9,Stitch and Bone,stitch,15:10,15:30,17:28,17:48,118,20,20,0,2D,M,180,afternoon
+2026-09-17,Thu,9,Screen 9,Salt Road,salt,17:50,18:10,20:42,21:02,152,20,20,0,2D,M,180,prime
+2026-09-17,Thu,9,Screen 9,Hollow Creek,hollow,21:20,21:40,23:21,23:41,101,20,20,0,2D,R16,180,late
+2026-09-17,Thu,10,Screen 10,Salt Road,salt,10:40,11:00,13:32,13:52,152,20,20,0,2D,M,140,matinee
+2026-09-17,Thu,10,Screen 10,The Glasshouse,glasshouse,14:00,14:20,16:27,16:47,127,20,20,0,2D,M,140,afternoon
+2026-09-17,Thu,10,Screen 10,The Ninth Floor,ninth,16:50,17:10,18:47,19:07,97,20,20,0,2D,R13,140,afternoon
+2026-09-17,Thu,10,Screen 10,The Ninth Floor,ninth,19:20,19:40,21:17,21:37,97,20,20,0,2D,R13,140,prime
 2026-09-17,Thu,10,Screen 10,Meridian,meridian,21:40,22:00,24:23,24:43,143,20,20,0,2D,M,140,late
-2026-09-17,Thu,11,Screen 11,Brass Sunday,brass,10:30,10:50,12:39,12:59,109,20,20,0,2D,PG,140,matinee
-2026-09-17,Thu,11,Screen 11,Quarry,quarry,13:20,13:40,15:43,16:03,123,20,20,0,2D,M,140,matinee
-2026-09-17,Thu,11,Screen 11,Meridian,meridian,16:10,16:30,18:53,19:13,143,20,20,0,2D,M,140,afternoon
-2026-09-17,Thu,11,Screen 11,Wren,wren,19:20,19:40,21:12,21:32,92,20,20,0,2D,PG,140,prime
-2026-09-17,Thu,11,Screen 11,Hollow Creek,hollow,21:40,22:00,23:41,24:01,101,20,20,0,2D,R16,140,late
-2026-09-17,Thu,12,Screen 12,Last Tango in Timaru,tango,10:00,10:20,12:04,12:24,104,20,20,0,2D,M,140,matinee
-2026-09-17,Thu,12,Screen 12,Harbour Lights,harbour,12:30,12:50,14:45,15:05,115,20,20,0,2D,PG,140,matinee
-2026-09-17,Thu,12,Screen 12,The Ninth Floor,ninth,15:10,15:30,17:07,17:27,97,20,20,0,2D,R13,140,afternoon
-2026-09-17,Thu,12,Screen 12,Brass Sunday,brass,17:50,18:10,19:59,20:19,109,20,20,0,2D,PG,140,prime
-2026-09-17,Thu,12,Screen 12,The Cartographer's Daughter,cartographer,20:20,20:40,22:59,23:19,139,20,20,0,2D,M,140,prime
-2026-09-17,Thu,13,Screen 13,Wren,wren,10:10,10:30,12:02,12:22,92,20,20,0,2D,PG,140,matinee
-2026-09-17,Thu,13,Screen 13,Meridian,meridian,12:30,12:50,15:13,15:33,143,20,20,0,2D,M,140,matinee
-2026-09-17,Thu,13,Screen 13,Meridian,meridian,15:40,16:00,18:23,18:43,143,20,20,0,2D,M,140,afternoon
-2026-09-17,Thu,13,Screen 13,Hollow Creek,hollow,18:50,19:10,20:51,21:11,101,20,20,0,2D,R16,140,prime
-2026-09-17,Thu,13,Screen 13,Meridian,meridian,21:20,21:40,24:03,24:23,143,20,20,0,2D,M,140,late
-2026-09-17,Thu,14,Screen 14,Salt Road,salt,11:00,11:20,13:52,14:07,152,20,15,0,2D,M,90,matinee
-2026-09-17,Thu,14,Screen 14,Brass Sunday,brass,14:20,14:40,16:29,16:44,109,20,15,0,2D,PG,90,afternoon
-2026-09-17,Thu,14,Screen 14,Hollow Creek,hollow,16:50,17:10,18:51,19:06,101,20,15,0,2D,R16,90,afternoon
+2026-09-17,Thu,11,Screen 11,Meridian,meridian,10:00,10:20,12:43,13:03,143,20,20,0,2D,M,140,matinee
+2026-09-17,Thu,11,Screen 11,Brass Sunday,brass,13:10,13:30,15:19,15:39,109,20,20,0,2D,PG,140,matinee
+2026-09-17,Thu,11,Screen 11,Meridian,meridian,15:40,16:00,18:23,18:43,143,20,20,0,2D,M,140,afternoon
+2026-09-17,Thu,11,Screen 11,Stitch and Bone,stitch,18:50,19:10,21:08,21:28,118,20,20,0,2D,M,140,prime
+2026-09-17,Thu,11,Screen 11,Hollow Creek,hollow,21:30,21:50,23:31,23:51,101,20,20,0,2D,R16,140,late
+2026-09-17,Thu,12,Screen 12,Last Tango in Timaru,tango,10:20,10:40,12:24,12:44,104,20,20,0,2D,M,140,matinee
+2026-09-17,Thu,12,Screen 12,The Ledger,ledger,12:50,13:10,15:24,15:44,134,20,20,0,2D,M,140,matinee
+2026-09-17,Thu,12,Screen 12,Brass Sunday,brass,15:50,16:10,17:59,18:19,109,20,20,0,2D,PG,140,afternoon
+2026-09-17,Thu,12,Screen 12,The Cartographer's Daughter,cartographer,18:20,18:40,20:59,21:19,139,20,20,0,2D,M,140,prime
+2026-09-17,Thu,12,Screen 12,Meridian,meridian,21:20,21:40,24:03,24:23,143,20,20,0,2D,M,140,late
+2026-09-17,Thu,13,Screen 13,Stitch and Bone,stitch,11:50,12:10,14:08,14:28,118,20,20,0,2D,M,140,matinee
+2026-09-17,Thu,13,Screen 13,Anthem for the Small Hours,anthem,14:40,15:00,16:16,16:36,76,20,20,0,2D,E,140,afternoon
+2026-09-17,Thu,13,Screen 13,Brass Sunday,brass,16:40,17:00,18:49,19:09,109,20,20,0,2D,PG,140,afternoon
+2026-09-17,Thu,13,Screen 13,Hollow Creek,hollow,19:10,19:30,21:11,21:31,101,20,20,0,2D,R16,140,prime
+2026-09-17,Thu,13,Screen 13,Salt Road,salt,21:40,22:00,24:32,24:52,152,20,20,0,2D,M,140,late
+2026-09-17,Thu,14,Screen 14,Stitch and Bone,stitch,10:50,11:10,13:08,13:23,118,20,15,0,2D,M,90,matinee
+2026-09-17,Thu,14,Screen 14,The Cartographer's Daughter,cartographer,14:00,14:20,16:39,16:54,139,20,15,0,2D,M,90,afternoon
+2026-09-17,Thu,14,Screen 14,Wren,wren,17:00,17:20,18:52,19:07,92,20,15,0,2D,PG,90,afternoon
 2026-09-17,Thu,14,Screen 14,The Ninth Floor,ninth,19:10,19:30,21:07,21:22,97,20,15,0,2D,R13,90,prime
-2026-09-17,Thu,14,Screen 14,Stitch and Bone,stitch,21:30,21:50,23:48,24:03,118,20,15,0,2D,M,90,late
-2026-09-17,Thu,15,Screen 15,Brass Sunday,brass,10:20,10:40,12:29,12:44,109,20,15,0,2D,PG,90,matinee
-2026-09-17,Thu,15,Screen 15,The Glasshouse,glasshouse,12:50,13:10,15:17,15:32,127,20,15,0,2D,M,90,matinee
-2026-09-17,Thu,15,Screen 15,The Ninth Floor,ninth,15:50,16:10,17:47,18:02,97,20,15,0,2D,R13,90,afternoon
-2026-09-17,Thu,15,Screen 15,The Pilgrim Years,pilgrim,18:10,18:30,21:21,21:36,171,20,15,0,2D,M,90,prime
-2026-09-17,Thu,15,Screen 15,Salt Road,salt,21:40,22:00,24:32,24:47,152,20,15,0,2D,M,90,late
+2026-09-17,Thu,14,Screen 14,The Ninth Floor,ninth,21:30,21:50,23:27,23:42,97,20,15,0,2D,R13,90,late
+2026-09-17,Thu,15,Screen 15,Wren,wren,10:00,10:20,11:52,12:07,92,20,15,0,2D,PG,90,matinee
+2026-09-17,Thu,15,Screen 15,The Glasshouse,glasshouse,12:20,12:40,14:47,15:02,127,20,15,0,2D,M,90,matinee
+2026-09-17,Thu,15,Screen 15,The Ninth Floor,ninth,15:20,15:40,17:17,17:32,97,20,15,0,2D,R13,90,afternoon
+2026-09-17,Thu,15,Screen 15,The Pilgrim Years,pilgrim,17:40,18:00,20:51,21:06,171,20,15,0,2D,M,90,prime
+2026-09-17,Thu,15,Screen 15,Static,static,21:10,21:30,22:54,23:09,84,20,15,0,2D,R16,90,late
 2026-09-17,Thu,16,Screen 16,Reel Twelve,reel,12:00,12:20,14:11,14:26,111,20,15,0,2D,M,60,matinee
-2026-09-17,Thu,16,Screen 16,Last Tango in Timaru,tango,14:50,15:10,16:54,17:09,104,20,15,0,2D,M,60,afternoon
-2026-09-17,Thu,16,Screen 16,Anthem for the Small Hours,anthem,17:10,17:30,18:46,19:01,76,20,15,0,2D,E,60,afternoon
-2026-09-17,Thu,16,Screen 16,Static,static,19:30,19:50,21:14,21:29,84,20,15,0,2D,R16,60,prime
-2026-09-17,Thu,16,Screen 16,The Ledger,ledger,21:30,21:50,24:04,24:19,134,20,15,0,2D,M,60,late
-2026-09-18,Fri,1,Screen 1,The Iron Tide,tide,10:40,11:10,13:48,14:08,158,30,20,0,PLF,M,400,matinee
-2026-09-18,Fri,1,Screen 1,The Iron Tide,tide,14:10,14:40,17:18,17:38,158,30,20,0,PLF,M,400,afternoon
-2026-09-18,Fri,1,Screen 1,The Iron Tide,tide,17:40,18:10,20:48,21:08,158,30,20,0,PLF,M,400,prime
-2026-09-18,Fri,1,Screen 1,The Iron Tide,tide,22:00,22:30,25:08,25:28,158,30,20,0,PLF,M,400,late
-2026-09-18,Fri,2,Screen 2,Paper Lantern,lantern,10:00,10:30,12:41,13:01,131,30,20,0,PLF,PG,400,matinee
+2026-09-17,Thu,16,Screen 16,Hollow Creek,hollow,15:00,15:20,17:01,17:16,101,20,15,0,2D,R16,60,afternoon
+2026-09-17,Thu,16,Screen 16,Harbour Lights,harbour,17:30,17:50,19:45,20:00,115,20,15,0,2D,PG,60,prime
+2026-09-17,Thu,16,Screen 16,Static,static,20:00,20:20,21:44,21:59,84,20,15,0,2D,R16,60,prime
+2026-09-18,Fri,1,Screen 1,The Iron Tide,tide,10:50,11:20,13:58,14:18,158,30,20,0,PLF,M,400,matinee
+2026-09-18,Fri,1,Screen 1,The Iron Tide,tide,14:50,15:20,17:58,18:18,158,30,20,0,PLF,M,400,afternoon
+2026-09-18,Fri,1,Screen 1,The Iron Tide,tide,18:40,19:10,21:48,22:08,158,30,20,0,PLF,M,400,prime
+2026-09-18,Fri,1,Screen 1,The Iron Tide,tide,22:50,23:20,25:58,26:18,158,30,20,0,PLF,M,400,late
+2026-09-18,Fri,2,Screen 2,Paper Lantern,lantern,10:50,11:20,13:31,13:51,131,30,20,0,PLF,PG,400,matinee
 2026-09-18,Fri,2,Screen 2,The Iron Tide,tide,14:00,14:30,17:08,17:28,158,30,20,0,PLF,M,400,afternoon
 2026-09-18,Fri,2,Screen 2,Paper Lantern,lantern,17:30,18:00,20:11,20:31,131,30,20,0,PLF,PG,400,prime
 2026-09-18,Fri,2,Screen 2,The Iron Tide,tide,20:40,21:10,23:48,24:08,158,30,20,0,PLF,M,400,prime
-2026-09-18,Fri,3,Screen 3,The Orchard Keepers,orchard,10:20,10:45,12:21,12:41,96,25,20,0,3D,G,260,matinee
-2026-09-18,Fri,3,Screen 3,Reef,reef,12:50,13:15,14:23,14:43,68,25,20,0,3D,G,260,matinee
-2026-09-18,Fri,3,Screen 3,The Orchard Keepers,orchard,14:50,15:15,16:51,17:11,96,25,20,0,3D,G,260,afternoon
-2026-09-18,Fri,3,Screen 3,The Orchard Keepers,orchard,17:20,17:45,19:21,19:41,96,25,20,0,3D,G,260,afternoon
-2026-09-18,Fri,3,Screen 3,The Glasshouse,glasshouse,20:00,20:20,22:27,22:47,127,20,20,0,2D,M,260,prime
-2026-09-18,Fri,3,Screen 3,Last Tango in Timaru,tango,23:00,23:20,25:04,25:24,104,20,20,0,2D,M,260,late
-2026-09-18,Fri,4,Screen 4,The Orchard Keepers,orchard,10:10,10:35,12:11,12:31,96,25,20,0,3D,G,260,matinee
-2026-09-18,Fri,4,Screen 4,The Orchard Keepers,orchard,12:40,13:05,14:41,15:01,96,25,20,0,3D,G,260,matinee
-2026-09-18,Fri,4,Screen 4,The Orchard Keepers,orchard,15:30,15:55,17:31,17:51,96,25,20,0,3D,G,260,afternoon
-2026-09-18,Fri,4,Screen 4,The Orchard Keepers,orchard,18:00,18:25,20:01,20:21,96,25,20,0,3D,G,260,prime
-2026-09-18,Fri,4,Screen 4,Meridian,meridian,20:40,21:00,23:23,23:43,143,20,20,0,2D,M,260,prime
-2026-09-18,Fri,5,Screen 5,Kites Over Halden,kites,10:10,10:35,12:03,12:23,88,25,20,0,3D,G,260,matinee
-2026-09-18,Fri,5,Screen 5,The Orchard Keepers,orchard,12:30,12:55,14:31,14:51,96,25,20,0,3D,G,260,matinee
-2026-09-18,Fri,5,Screen 5,Kites Over Halden,kites,15:00,15:25,16:53,17:13,88,25,20,0,3D,G,260,afternoon
-2026-09-18,Fri,5,Screen 5,Meridian,meridian,17:30,17:50,20:13,20:33,143,20,20,0,2D,M,260,prime
-2026-09-18,Fri,5,Screen 5,Salt Road,salt,20:40,21:00,23:32,23:52,152,20,20,0,2D,M,260,prime
-2026-09-18,Fri,6,Screen 6,Last Tango in Timaru,tango,10:00,10:20,12:04,12:24,104,20,20,0,2D,M,180,matinee
-2026-09-18,Fri,6,Screen 6,Stitch and Bone,stitch,13:00,13:20,15:18,15:38,118,20,20,0,2D,M,180,matinee
-2026-09-18,Fri,6,Screen 6,Brass Sunday,brass,15:40,16:00,17:49,18:09,109,20,20,0,2D,PG,180,afternoon
-2026-09-18,Fri,6,Screen 6,Anthem for the Small Hours,anthem,18:20,18:40,19:56,20:16,76,20,20,0,2D,E,180,prime
+2026-09-18,Fri,3,Screen 3,The Orchard Keepers,orchard,10:00,10:25,12:01,12:21,96,25,20,0,3D,G,260,matinee
+2026-09-18,Fri,3,Screen 3,The Orchard Keepers,orchard,12:30,12:55,14:31,14:51,96,25,20,0,3D,G,260,matinee
+2026-09-18,Fri,3,Screen 3,The Orchard Keepers,orchard,15:00,15:25,17:01,17:21,96,25,20,0,3D,G,260,afternoon
+2026-09-18,Fri,3,Screen 3,Meridian,meridian,17:30,17:50,20:13,20:33,143,20,20,0,2D,M,260,prime
+2026-09-18,Fri,3,Screen 3,Meridian,meridian,20:40,21:00,23:23,23:43,143,20,20,0,2D,M,260,prime
+2026-09-18,Fri,4,Screen 4,Kites Over Halden,kites,10:10,10:35,12:03,12:23,88,25,20,0,3D,G,260,matinee
+2026-09-18,Fri,4,Screen 4,The Orchard Keepers,orchard,12:30,12:55,14:31,14:51,96,25,20,0,3D,G,260,matinee
+2026-09-18,Fri,4,Screen 4,The Orchard Keepers,orchard,15:00,15:25,17:01,17:21,96,25,20,0,3D,G,260,afternoon
+2026-09-18,Fri,4,Screen 4,The Orchard Keepers,orchard,17:30,17:55,19:31,19:51,96,25,20,0,3D,G,260,prime
+2026-09-18,Fri,4,Screen 4,The Glasshouse,glasshouse,20:00,20:20,22:27,22:47,127,20,20,0,2D,M,260,prime
+2026-09-18,Fri,4,Screen 4,The Ninth Floor,ninth,23:00,23:20,24:57,25:17,97,20,20,0,2D,R13,260,late
+2026-09-18,Fri,5,Screen 5,The Orchard Keepers,orchard,10:10,10:35,12:11,12:31,96,25,20,0,3D,G,260,matinee
+2026-09-18,Fri,5,Screen 5,Kites Over Halden,kites,12:40,13:05,14:33,14:53,88,25,20,0,3D,G,260,matinee
+2026-09-18,Fri,5,Screen 5,Reef,reef,15:10,15:35,16:43,17:03,68,25,20,0,3D,G,260,afternoon
+2026-09-18,Fri,5,Screen 5,The Orchard Keepers,orchard,17:10,17:35,19:11,19:31,96,25,20,0,3D,G,260,afternoon
+2026-09-18,Fri,5,Screen 5,Salt Road,salt,19:40,20:00,22:32,22:52,152,20,20,0,2D,M,260,prime
+2026-09-18,Fri,5,Screen 5,Static,static,23:00,23:20,24:44,25:04,84,20,20,0,2D,R16,260,late
+2026-09-18,Fri,6,Screen 6,The Cartographer's Daughter,cartographer,11:10,11:30,13:49,14:09,139,20,20,0,2D,M,180,matinee
+2026-09-18,Fri,6,Screen 6,Last Tango in Timaru,tango,14:10,14:30,16:14,16:34,104,20,20,0,2D,M,180,afternoon
+2026-09-18,Fri,6,Screen 6,Salt Road,salt,17:00,17:20,19:52,20:12,152,20,20,0,2D,M,180,afternoon
 2026-09-18,Fri,6,Screen 6,Brass Sunday,brass,20:20,20:40,22:29,22:49,109,20,20,0,2D,PG,180,prime
 2026-09-18,Fri,6,Screen 6,Salt Road,salt,22:50,23:10,25:42,26:02,152,20,20,0,2D,M,180,late
-2026-09-18,Fri,7,Screen 7,Harbour Lights,harbour,10:00,10:20,12:15,12:35,115,20,20,0,2D,PG,180,matinee
-2026-09-18,Fri,7,Screen 7,Brass Sunday,brass,12:40,13:00,14:49,15:09,109,20,20,0,2D,PG,180,matinee
-2026-09-18,Fri,7,Screen 7,Stitch and Bone,stitch,15:10,15:30,17:28,17:48,118,20,20,0,2D,M,180,afternoon
-2026-09-18,Fri,7,Screen 7,The Ninth Floor,ninth,17:50,18:10,19:47,20:07,97,20,20,0,2D,R13,180,prime
-2026-09-18,Fri,7,Screen 7,Hollow Creek,hollow,20:10,20:30,22:11,22:31,101,20,20,0,2D,R16,180,prime
-2026-09-18,Fri,7,Screen 7,The Glasshouse,glasshouse,22:50,23:10,25:17,25:37,127,20,20,0,2D,M,180,late
-2026-09-18,Fri,8,Screen 8,The Cartographer's Daughter,cartographer,10:40,11:00,13:19,13:39,139,20,20,0,2D,M,180,matinee
-2026-09-18,Fri,8,Screen 8,Salt Road,salt,14:00,14:20,16:52,17:12,152,20,20,0,2D,M,180,afternoon
-2026-09-18,Fri,8,Screen 8,The Cartographer's Daughter,cartographer,17:20,17:40,19:59,20:19,139,20,20,0,2D,M,180,afternoon
-2026-09-18,Fri,8,Screen 8,Harbour Lights,harbour,20:20,20:40,22:35,22:55,115,20,20,0,2D,PG,180,prime
-2026-09-18,Fri,8,Screen 8,Hollow Creek,hollow,23:00,23:20,25:01,25:21,101,20,20,0,2D,R16,180,late
-2026-09-18,Fri,9,Screen 9,Meridian,meridian,10:30,10:50,13:13,13:33,143,20,20,0,2D,M,180,matinee
-2026-09-18,Fri,9,Screen 9,Harbour Lights,harbour,14:40,15:00,16:55,17:15,115,20,20,0,2D,PG,180,afternoon
-2026-09-18,Fri,9,Screen 9,Stitch and Bone,stitch,17:30,17:50,19:48,20:08,118,20,20,0,2D,M,180,prime
-2026-09-18,Fri,9,Screen 9,Last Tango in Timaru,tango,20:30,20:50,22:34,22:54,104,20,20,0,2D,M,180,prime
-2026-09-18,Fri,9,Screen 9,The Ninth Floor,ninth,23:00,23:20,24:57,25:17,97,20,20,0,2D,R13,180,late
-2026-09-18,Fri,10,Screen 10,The Pilgrim Years,pilgrim,10:20,10:40,13:31,13:51,171,20,20,0,2D,M,140,matinee
-2026-09-18,Fri,10,Screen 10,The Glasshouse,glasshouse,14:10,14:30,16:37,16:57,127,20,20,0,2D,M,140,afternoon
-2026-09-18,Fri,10,Screen 10,Wren,wren,17:00,17:20,18:52,19:12,92,20,20,0,2D,PG,140,afternoon
-2026-09-18,Fri,10,Screen 10,Brass Sunday,brass,19:30,19:50,21:39,21:59,109,20,20,0,2D,PG,140,prime
-2026-09-18,Fri,10,Screen 10,The Cartographer's Daughter,cartographer,22:00,22:20,24:39,24:59,139,20,20,0,2D,M,140,late
-2026-09-18,Fri,11,Screen 11,Stitch and Bone,stitch,10:10,10:30,12:28,12:48,118,20,20,0,2D,M,140,matinee
-2026-09-18,Fri,11,Screen 11,Meridian,meridian,12:50,13:10,15:33,15:53,143,20,20,0,2D,M,140,matinee
-2026-09-18,Fri,11,Screen 11,Meridian,meridian,16:00,16:20,18:43,19:03,143,20,20,0,2D,M,140,afternoon
-2026-09-18,Fri,11,Screen 11,The Cartographer's Daughter,cartographer,19:10,19:30,21:49,22:09,139,20,20,0,2D,M,140,prime
-2026-09-18,Fri,11,Screen 11,Hollow Creek,hollow,22:30,22:50,24:31,24:51,101,20,20,0,2D,R16,140,late
-2026-09-18,Fri,12,Screen 12,Wren,wren,10:30,10:50,12:22,12:42,92,20,20,0,2D,PG,140,matinee
-2026-09-18,Fri,12,Screen 12,Last Tango in Timaru,tango,12:50,13:10,14:54,15:14,104,20,20,0,2D,M,140,matinee
-2026-09-18,Fri,12,Screen 12,The Ninth Floor,ninth,15:20,15:40,17:17,17:37,97,20,20,0,2D,R13,140,afternoon
-2026-09-18,Fri,12,Screen 12,Wren,wren,17:40,18:00,19:32,19:52,92,20,20,0,2D,PG,140,prime
+2026-09-18,Fri,7,Screen 7,Meridian,meridian,10:30,10:50,13:13,13:33,143,20,20,0,2D,M,180,matinee
+2026-09-18,Fri,7,Screen 7,Last Tango in Timaru,tango,13:50,14:10,15:54,16:14,104,20,20,0,2D,M,180,matinee
+2026-09-18,Fri,7,Screen 7,Stitch and Bone,stitch,16:50,17:10,19:08,19:28,118,20,20,0,2D,M,180,afternoon
+2026-09-18,Fri,7,Screen 7,Wren,wren,19:30,19:50,21:22,21:42,92,20,20,0,2D,PG,180,prime
+2026-09-18,Fri,7,Screen 7,Stitch and Bone,stitch,22:00,22:20,24:18,24:38,118,20,20,0,2D,M,180,late
+2026-09-18,Fri,8,Screen 8,Meridian,meridian,10:40,11:00,13:23,13:43,143,20,20,0,2D,M,180,matinee
+2026-09-18,Fri,8,Screen 8,Anthem for the Small Hours,anthem,14:10,14:30,15:46,16:06,76,20,20,0,2D,E,180,afternoon
+2026-09-18,Fri,8,Screen 8,Meridian,meridian,16:20,16:40,19:03,19:23,143,20,20,0,2D,M,180,afternoon
+2026-09-18,Fri,8,Screen 8,Salt Road,salt,19:40,20:00,22:32,22:52,152,20,20,0,2D,M,180,prime
+2026-09-18,Fri,8,Screen 8,Last Tango in Timaru,tango,23:00,23:20,25:04,25:24,104,20,20,0,2D,M,180,late
+2026-09-18,Fri,9,Screen 9,Quarry,quarry,10:00,10:20,12:23,12:43,123,20,20,0,2D,M,180,matinee
+2026-09-18,Fri,9,Screen 9,Brass Sunday,brass,12:50,13:10,14:59,15:19,109,20,20,0,2D,PG,180,matinee
+2026-09-18,Fri,9,Screen 9,Stitch and Bone,stitch,15:30,15:50,17:48,18:08,118,20,20,0,2D,M,180,afternoon
+2026-09-18,Fri,9,Screen 9,Hollow Creek,hollow,18:10,18:30,20:11,20:31,101,20,20,0,2D,R16,180,prime
+2026-09-18,Fri,9,Screen 9,Anthem for the Small Hours,anthem,20:40,21:00,22:16,22:36,76,20,20,0,2D,E,180,prime
+2026-09-18,Fri,9,Screen 9,Hollow Creek,hollow,22:40,23:00,24:41,25:01,101,20,20,0,2D,R16,180,late
+2026-09-18,Fri,10,Screen 10,Salt Road,salt,10:40,11:00,13:32,13:52,152,20,20,0,2D,M,140,matinee
+2026-09-18,Fri,10,Screen 10,Brass Sunday,brass,14:00,14:20,16:09,16:29,109,20,20,0,2D,PG,140,afternoon
+2026-09-18,Fri,10,Screen 10,The Ninth Floor,ninth,17:10,17:30,19:07,19:27,97,20,20,0,2D,R13,140,afternoon
+2026-09-18,Fri,10,Screen 10,The Cartographer's Daughter,cartographer,19:30,19:50,22:09,22:29,139,20,20,0,2D,M,140,prime
+2026-09-18,Fri,10,Screen 10,Salt Road,salt,22:40,23:00,25:32,25:52,152,20,20,0,2D,M,140,late
+2026-09-18,Fri,11,Screen 11,The Ledger,ledger,10:20,10:40,12:54,13:14,134,20,20,0,2D,M,140,matinee
+2026-09-18,Fri,11,Screen 11,Harbour Lights,harbour,14:00,14:20,16:15,16:35,115,20,20,0,2D,PG,140,afternoon
+2026-09-18,Fri,11,Screen 11,Meridian,meridian,16:40,17:00,19:23,19:43,143,20,20,0,2D,M,140,afternoon
+2026-09-18,Fri,11,Screen 11,Stitch and Bone,stitch,19:50,20:10,22:08,22:28,118,20,20,0,2D,M,140,prime
+2026-09-18,Fri,11,Screen 11,Hollow Creek,hollow,22:40,23:00,24:41,25:01,101,20,20,0,2D,R16,140,late
+2026-09-18,Fri,12,Screen 12,Anthem for the Small Hours,anthem,10:00,10:20,11:36,11:56,76,20,20,0,2D,E,140,matinee
+2026-09-18,Fri,12,Screen 12,Brass Sunday,brass,12:00,12:20,14:09,14:29,109,20,20,0,2D,PG,140,matinee
+2026-09-18,Fri,12,Screen 12,The Cartographer's Daughter,cartographer,14:30,14:50,17:09,17:29,139,20,20,0,2D,M,140,afternoon
+2026-09-18,Fri,12,Screen 12,The Ninth Floor,ninth,17:40,18:00,19:37,19:57,97,20,20,0,2D,R13,140,prime
 2026-09-18,Fri,12,Screen 12,Hollow Creek,hollow,20:00,20:20,22:01,22:21,101,20,20,0,2D,R16,140,prime
-2026-09-18,Fri,12,Screen 12,Meridian,meridian,22:40,23:00,25:23,25:43,143,20,20,0,2D,M,140,late
-2026-09-18,Fri,13,Screen 13,Quarry,quarry,10:20,10:40,12:43,13:03,123,20,20,0,2D,M,140,matinee
-2026-09-18,Fri,13,Screen 13,Wren,wren,13:10,13:30,15:02,15:22,92,20,20,0,2D,PG,140,matinee
-2026-09-18,Fri,13,Screen 13,Meridian,meridian,15:50,16:10,18:33,18:53,143,20,20,0,2D,M,140,afternoon
-2026-09-18,Fri,13,Screen 13,Salt Road,salt,19:10,19:30,22:02,22:22,152,20,20,0,2D,M,140,prime
+2026-09-18,Fri,12,Screen 12,Meridian,meridian,22:30,22:50,25:13,25:33,143,20,20,0,2D,M,140,late
+2026-09-18,Fri,13,Screen 13,Meridian,meridian,10:10,10:30,12:53,13:13,143,20,20,0,2D,M,140,matinee
+2026-09-18,Fri,13,Screen 13,The Glasshouse,glasshouse,14:10,14:30,16:37,16:57,127,20,20,0,2D,M,140,afternoon
+2026-09-18,Fri,13,Screen 13,Brass Sunday,brass,17:00,17:20,19:09,19:29,109,20,20,0,2D,PG,140,afternoon
+2026-09-18,Fri,13,Screen 13,Brass Sunday,brass,19:50,20:10,21:59,22:19,109,20,20,0,2D,PG,140,prime
 2026-09-18,Fri,13,Screen 13,Meridian,meridian,22:30,22:50,25:13,25:33,143,20,20,0,2D,M,140,late
-2026-09-18,Fri,14,Screen 14,The Glasshouse,glasshouse,11:20,11:40,13:47,14:02,127,20,15,0,2D,M,90,matinee
-2026-09-18,Fri,14,Screen 14,Brass Sunday,brass,14:10,14:30,16:19,16:34,109,20,15,0,2D,PG,90,afternoon
-2026-09-18,Fri,14,Screen 14,Hollow Creek,hollow,17:00,17:20,19:01,19:16,101,20,15,0,2D,R16,90,afternoon
-2026-09-18,Fri,14,Screen 14,The Ninth Floor,ninth,20:10,20:30,22:07,22:22,97,20,15,0,2D,R13,90,prime
-2026-09-18,Fri,14,Screen 14,Salt Road,salt,22:30,22:50,25:22,25:37,152,20,15,0,2D,M,90,late
-2026-09-18,Fri,15,Screen 15,Brass Sunday,brass,10:30,10:50,12:39,12:54,109,20,15,0,2D,PG,90,matinee
-2026-09-18,Fri,15,Screen 15,Salt Road,salt,13:10,13:30,16:02,16:17,152,20,15,0,2D,M,90,matinee
-2026-09-18,Fri,15,Screen 15,Last Tango in Timaru,tango,16:20,16:40,18:24,18:39,104,20,15,0,2D,M,90,afternoon
-2026-09-18,Fri,15,Screen 15,The Pilgrim Years,pilgrim,18:40,19:00,21:51,22:06,171,20,15,0,2D,M,90,prime
-2026-09-18,Fri,15,Screen 15,Stitch and Bone,stitch,22:10,22:30,24:28,24:43,118,20,15,0,2D,M,90,late
-2026-09-18,Fri,16,Screen 16,Reel Twelve,reel,12:00,12:20,14:11,14:26,111,20,15,0,2D,M,60,matinee
-2026-09-18,Fri,16,Screen 16,Anthem for the Small Hours,anthem,14:30,14:50,16:06,16:21,76,20,15,0,2D,E,60,afternoon
-2026-09-18,Fri,16,Screen 16,The Ninth Floor,ninth,16:30,16:50,18:27,18:42,97,20,15,0,2D,R13,60,afternoon
-2026-09-18,Fri,16,Screen 16,Static,static,18:50,19:10,20:34,20:49,84,20,15,0,2D,R16,60,prime
-2026-09-18,Fri,16,Screen 16,Static,static,20:50,21:10,22:34,22:49,84,20,15,0,2D,R16,60,late
-2026-09-18,Fri,16,Screen 16,The Ledger,ledger,22:50,23:10,25:24,25:39,134,20,15,0,2D,M,60,late
+2026-09-18,Fri,14,Screen 14,Stitch and Bone,stitch,10:20,10:40,12:38,12:53,118,20,15,0,2D,M,90,matinee
+2026-09-18,Fri,14,Screen 14,Stitch and Bone,stitch,13:00,13:20,15:18,15:33,118,20,15,0,2D,M,90,matinee
+2026-09-18,Fri,14,Screen 14,Wren,wren,15:40,16:00,17:32,17:47,92,20,15,0,2D,PG,90,afternoon
+2026-09-18,Fri,14,Screen 14,The Ninth Floor,ninth,17:50,18:10,19:47,20:02,97,20,15,0,2D,R13,90,prime
+2026-09-18,Fri,14,Screen 14,Stitch and Bone,stitch,20:10,20:30,22:28,22:43,118,20,15,0,2D,M,90,prime
+2026-09-18,Fri,14,Screen 14,The Glasshouse,glasshouse,22:50,23:10,25:17,25:32,127,20,15,0,2D,M,90,late
+2026-09-18,Fri,15,Screen 15,The Glasshouse,glasshouse,10:20,10:40,12:47,13:02,127,20,15,0,2D,M,90,matinee
+2026-09-18,Fri,15,Screen 15,Wren,wren,13:10,13:30,15:02,15:17,92,20,15,0,2D,PG,90,matinee
+2026-09-18,Fri,15,Screen 15,The Ninth Floor,ninth,15:20,15:40,17:17,17:32,97,20,15,0,2D,R13,90,afternoon
+2026-09-18,Fri,15,Screen 15,Last Tango in Timaru,tango,17:40,18:00,19:44,19:59,104,20,15,0,2D,M,90,prime
+2026-09-18,Fri,15,Screen 15,The Pilgrim Years,pilgrim,20:30,20:50,23:41,23:56,171,20,15,0,2D,M,90,prime
+2026-09-18,Fri,16,Screen 16,Reel Twelve,reel,12:40,13:00,14:51,15:06,111,20,15,0,2D,M,60,matinee
+2026-09-18,Fri,16,Screen 16,Hollow Creek,hollow,15:10,15:30,17:11,17:26,101,20,15,0,2D,R16,60,afternoon
+2026-09-18,Fri,16,Screen 16,Harbour Lights,harbour,17:50,18:10,20:05,20:20,115,20,15,0,2D,PG,60,prime
+2026-09-18,Fri,16,Screen 16,Static,static,20:20,20:40,22:04,22:19,84,20,15,0,2D,R16,60,prime
+2026-09-18,Fri,16,Screen 16,The Cartographer's Daughter,cartographer,22:20,22:40,24:59,25:14,139,20,15,0,2D,M,60,late
 2026-09-19,Sat,1,Screen 1,The Iron Tide,tide,10:40,11:10,13:48,14:08,158,30,20,0,PLF,M,400,matinee
-2026-09-19,Sat,1,Screen 1,The Iron Tide,tide,14:30,15:00,17:38,17:58,158,30,20,0,PLF,M,400,afternoon
+2026-09-19,Sat,1,Screen 1,The Iron Tide,tide,14:50,15:20,17:58,18:18,158,30,20,0,PLF,M,400,afternoon
 2026-09-19,Sat,1,Screen 1,The Iron Tide,tide,18:30,19:00,21:38,21:58,158,30,20,0,PLF,M,400,prime
-2026-09-19,Sat,1,Screen 1,The Iron Tide,tide,22:00,22:30,25:08,25:28,158,30,20,0,PLF,M,400,late
+2026-09-19,Sat,1,Screen 1,The Iron Tide,tide,22:20,22:50,25:28,25:48,158,30,20,0,PLF,M,400,late
 2026-09-19,Sat,2,Screen 2,Paper Lantern,lantern,10:50,11:20,13:31,13:51,131,30,20,0,PLF,PG,400,matinee
 2026-09-19,Sat,2,Screen 2,The Iron Tide,tide,14:00,14:30,17:08,17:28,158,30,20,0,PLF,M,400,afternoon
 2026-09-19,Sat,2,Screen 2,Paper Lantern,lantern,17:30,18:00,20:11,20:31,131,30,20,0,PLF,PG,400,prime
 2026-09-19,Sat,2,Screen 2,The Iron Tide,tide,20:40,21:10,23:48,24:08,158,30,20,0,PLF,M,400,prime
-2026-09-19,Sat,3,Screen 3,Kites Over Halden,kites,10:00,10:25,11:53,12:13,88,25,20,0,3D,G,260,matinee
-2026-09-19,Sat,3,Screen 3,The Orchard Keepers,orchard,12:20,12:45,14:21,14:41,96,25,20,0,3D,G,260,matinee
-2026-09-19,Sat,3,Screen 3,Kites Over Halden,kites,14:50,15:15,16:43,17:03,88,25,20,0,3D,G,260,afternoon
-2026-09-19,Sat,3,Screen 3,The Orchard Keepers,orchard,17:20,17:45,19:21,19:41,96,25,20,0,3D,G,260,afternoon
-2026-09-19,Sat,3,Screen 3,The Glasshouse,glasshouse,19:50,20:10,22:17,22:37,127,20,20,0,2D,M,260,prime
-2026-09-19,Sat,3,Screen 3,Last Tango in Timaru,tango,22:40,23:00,24:44,25:04,104,20,20,0,2D,M,260,late
-2026-09-19,Sat,4,Screen 4,The Orchard Keepers,orchard,10:10,10:35,12:11,12:31,96,25,20,0,3D,G,260,matinee
-2026-09-19,Sat,4,Screen 4,The Orchard Keepers,orchard,13:00,13:25,15:01,15:21,96,25,20,0,3D,G,260,matinee
-2026-09-19,Sat,4,Screen 4,The Orchard Keepers,orchard,15:30,15:55,17:31,17:51,96,25,20,0,3D,G,260,afternoon
-2026-09-19,Sat,4,Screen 4,The Orchard Keepers,orchard,18:00,18:25,20:01,20:21,96,25,20,0,3D,G,260,prime
-2026-09-19,Sat,4,Screen 4,Meridian,meridian,20:30,20:50,23:13,23:33,143,20,20,0,2D,M,260,prime
-2026-09-19,Sat,5,Screen 5,The Orchard Keepers,orchard,10:20,10:45,12:21,12:41,96,25,20,0,3D,G,260,matinee
-2026-09-19,Sat,5,Screen 5,Reef,reef,13:00,13:25,14:33,14:53,68,25,20,0,3D,G,260,matinee
-2026-09-19,Sat,5,Screen 5,The Orchard Keepers,orchard,15:00,15:25,17:01,17:21,96,25,20,0,3D,G,260,afternoon
-2026-09-19,Sat,5,Screen 5,Meridian,meridian,17:30,17:50,20:13,20:33,143,20,20,0,2D,M,260,prime
-2026-09-19,Sat,5,Screen 5,Salt Road,salt,20:40,21:00,23:32,23:52,152,20,20,0,2D,M,260,prime
-2026-09-19,Sat,6,Screen 6,Stitch and Bone,stitch,10:10,10:30,12:28,12:48,118,20,20,0,2D,M,180,matinee
-2026-09-19,Sat,6,Screen 6,Last Tango in Timaru,tango,13:00,13:20,15:04,15:24,104,20,20,0,2D,M,180,matinee
-2026-09-19,Sat,6,Screen 6,Brass Sunday,brass,15:30,15:50,17:39,17:59,109,20,20,0,2D,PG,180,afternoon
-2026-09-19,Sat,6,Screen 6,Anthem for the Small Hours,anthem,18:00,18:20,19:36,19:56,76,20,20,0,2D,E,180,prime
-2026-09-19,Sat,6,Screen 6,Hollow Creek,hollow,20:00,20:20,22:01,22:21,101,20,20,0,2D,R16,180,prime
-2026-09-19,Sat,6,Screen 6,The Ninth Floor,ninth,22:30,22:50,24:27,24:47,97,20,20,0,2D,R13,180,late
-2026-09-19,Sat,7,Screen 7,Harbour Lights,harbour,10:00,10:20,12:15,12:35,115,20,20,0,2D,PG,180,matinee
-2026-09-19,Sat,7,Screen 7,Brass Sunday,brass,12:40,13:00,14:49,15:09,109,20,20,0,2D,PG,180,matinee
-2026-09-19,Sat,7,Screen 7,Stitch and Bone,stitch,15:10,15:30,17:28,17:48,118,20,20,0,2D,M,180,afternoon
-2026-09-19,Sat,7,Screen 7,The Ninth Floor,ninth,17:50,18:10,19:47,20:07,97,20,20,0,2D,R13,180,prime
-2026-09-19,Sat,7,Screen 7,Last Tango in Timaru,tango,20:10,20:30,22:14,22:34,104,20,20,0,2D,M,180,prime
-2026-09-19,Sat,7,Screen 7,The Glasshouse,glasshouse,22:40,23:00,25:07,25:27,127,20,20,0,2D,M,180,late
-2026-09-19,Sat,8,Screen 8,The Cartographer's Daughter,cartographer,10:50,11:10,13:29,13:49,139,20,20,0,2D,M,180,matinee
-2026-09-19,Sat,8,Screen 8,The Cartographer's Daughter,cartographer,14:00,14:20,16:39,16:59,139,20,20,0,2D,M,180,afternoon
-2026-09-19,Sat,8,Screen 8,Salt Road,salt,17:00,17:20,19:52,20:12,152,20,20,0,2D,M,180,afternoon
-2026-09-19,Sat,8,Screen 8,Harbour Lights,harbour,20:20,20:40,22:35,22:55,115,20,20,0,2D,PG,180,prime
-2026-09-19,Sat,8,Screen 8,Salt Road,salt,23:00,23:20,25:52,26:12,152,20,20,0,2D,M,180,late
-2026-09-19,Sat,9,Screen 9,Meridian,meridian,10:30,10:50,13:13,13:33,143,20,20,0,2D,M,180,matinee
-2026-09-19,Sat,9,Screen 9,Meridian,meridian,14:10,14:30,16:53,17:13,143,20,20,0,2D,M,180,afternoon
-2026-09-19,Sat,9,Screen 9,Brass Sunday,brass,17:30,17:50,19:39,19:59,109,20,20,0,2D,PG,180,prime
-2026-09-19,Sat,9,Screen 9,Stitch and Bone,stitch,20:00,20:20,22:18,22:38,118,20,20,0,2D,M,180,prime
-2026-09-19,Sat,9,Screen 9,Hollow Creek,hollow,22:50,23:10,24:51,25:11,101,20,20,0,2D,R16,180,late
-2026-09-19,Sat,10,Screen 10,The Pilgrim Years,pilgrim,10:20,10:40,13:31,13:51,171,20,20,0,2D,M,140,matinee
-2026-09-19,Sat,10,Screen 10,Meridian,meridian,14:00,14:20,16:43,17:03,143,20,20,0,2D,M,140,afternoon
-2026-09-19,Sat,10,Screen 10,Wren,wren,17:10,17:30,19:02,19:22,92,20,20,0,2D,PG,140,afternoon
-2026-09-19,Sat,10,Screen 10,Brass Sunday,brass,19:30,19:50,21:39,21:59,109,20,20,0,2D,PG,140,prime
-2026-09-19,Sat,10,Screen 10,The Cartographer's Daughter,cartographer,22:00,22:20,24:39,24:59,139,20,20,0,2D,M,140,late
-2026-09-19,Sat,11,Screen 11,Meridian,meridian,10:10,10:30,12:53,13:13,143,20,20,0,2D,M,140,matinee
-2026-09-19,Sat,11,Screen 11,Stitch and Bone,stitch,13:20,13:40,15:38,15:58,118,20,20,0,2D,M,140,matinee
-2026-09-19,Sat,11,Screen 11,Brass Sunday,brass,17:00,17:20,19:09,19:29,109,20,20,0,2D,PG,140,afternoon
-2026-09-19,Sat,11,Screen 11,The Cartographer's Daughter,cartographer,19:30,19:50,22:09,22:29,139,20,20,0,2D,M,140,prime
-2026-09-19,Sat,11,Screen 11,Meridian,meridian,22:30,22:50,25:13,25:33,143,20,20,0,2D,M,140,late
-2026-09-19,Sat,12,Screen 12,Wren,wren,10:00,10:20,11:52,12:12,92,20,20,0,2D,PG,140,matinee
-2026-09-19,Sat,12,Screen 12,Last Tango in Timaru,tango,12:20,12:40,14:24,14:44,104,20,20,0,2D,M,140,matinee
-2026-09-19,Sat,12,Screen 12,The Ninth Floor,ninth,15:10,15:30,17:07,17:27,97,20,20,0,2D,R13,140,afternoon
-2026-09-19,Sat,12,Screen 12,Wren,wren,17:50,18:10,19:42,20:02,92,20,20,0,2D,PG,140,prime
-2026-09-19,Sat,12,Screen 12,Hollow Creek,hollow,20:10,20:30,22:11,22:31,101,20,20,0,2D,R16,140,prime
-2026-09-19,Sat,12,Screen 12,Meridian,meridian,22:40,23:00,25:23,25:43,143,20,20,0,2D,M,140,late
-2026-09-19,Sat,13,Screen 13,Quarry,quarry,10:20,10:40,12:43,13:03,123,20,20,0,2D,M,140,matinee
-2026-09-19,Sat,13,Screen 13,Wren,wren,13:10,13:30,15:02,15:22,92,20,20,0,2D,PG,140,matinee
-2026-09-19,Sat,13,Screen 13,The Glasshouse,glasshouse,15:30,15:50,17:57,18:17,127,20,20,0,2D,M,140,afternoon
-2026-09-19,Sat,13,Screen 13,Salt Road,salt,18:20,18:40,21:12,21:32,152,20,20,0,2D,M,140,prime
-2026-09-19,Sat,13,Screen 13,Hollow Creek,hollow,22:30,22:50,24:31,24:51,101,20,20,0,2D,R16,140,late
-2026-09-19,Sat,14,Screen 14,The Glasshouse,glasshouse,11:20,11:40,13:47,14:02,127,20,15,0,2D,M,90,matinee
-2026-09-19,Sat,14,Screen 14,Salt Road,salt,14:10,14:30,17:02,17:17,152,20,15,0,2D,M,90,afternoon
-2026-09-19,Sat,14,Screen 14,Hollow Creek,hollow,17:20,17:40,19:21,19:36,101,20,15,0,2D,R16,90,afternoon
+2026-09-19,Sat,3,Screen 3,The Orchard Keepers,orchard,10:00,10:25,12:01,12:21,96,25,20,0,3D,G,260,matinee
+2026-09-19,Sat,3,Screen 3,The Orchard Keepers,orchard,12:30,12:55,14:31,14:51,96,25,20,0,3D,G,260,matinee
+2026-09-19,Sat,3,Screen 3,The Orchard Keepers,orchard,15:00,15:25,17:01,17:21,96,25,20,0,3D,G,260,afternoon
+2026-09-19,Sat,3,Screen 3,Meridian,meridian,17:30,17:50,20:13,20:33,143,20,20,0,2D,M,260,prime
+2026-09-19,Sat,3,Screen 3,Salt Road,salt,20:40,21:00,23:32,23:52,152,20,20,0,2D,M,260,prime
+2026-09-19,Sat,4,Screen 4,The Orchard Keepers,orchard,10:20,10:45,12:21,12:41,96,25,20,0,3D,G,260,matinee
+2026-09-19,Sat,4,Screen 4,Kites Over Halden,kites,12:50,13:15,14:43,15:03,88,25,20,0,3D,G,260,matinee
+2026-09-19,Sat,4,Screen 4,The Orchard Keepers,orchard,15:10,15:35,17:11,17:31,96,25,20,0,3D,G,260,afternoon
+2026-09-19,Sat,4,Screen 4,The Orchard Keepers,orchard,17:40,18:05,19:41,20:01,96,25,20,0,3D,G,260,prime
+2026-09-19,Sat,4,Screen 4,The Glasshouse,glasshouse,20:10,20:30,22:37,22:57,127,20,20,0,2D,M,260,prime
+2026-09-19,Sat,4,Screen 4,The Ninth Floor,ninth,23:00,23:20,24:57,25:17,97,20,20,0,2D,R13,260,late
+2026-09-19,Sat,5,Screen 5,Kites Over Halden,kites,10:10,10:35,12:03,12:23,88,25,20,0,3D,G,260,matinee
+2026-09-19,Sat,5,Screen 5,The Orchard Keepers,orchard,12:30,12:55,14:31,14:51,96,25,20,0,3D,G,260,matinee
+2026-09-19,Sat,5,Screen 5,Reef,reef,15:10,15:35,16:43,17:03,68,25,20,0,3D,G,260,afternoon
+2026-09-19,Sat,5,Screen 5,The Orchard Keepers,orchard,17:10,17:35,19:11,19:31,96,25,20,0,3D,G,260,afternoon
+2026-09-19,Sat,5,Screen 5,Meridian,meridian,19:50,20:10,22:33,22:53,143,20,20,0,2D,M,260,prime
+2026-09-19,Sat,5,Screen 5,Static,static,23:00,23:20,24:44,25:04,84,20,20,0,2D,R16,260,late
+2026-09-19,Sat,6,Screen 6,The Cartographer's Daughter,cartographer,11:10,11:30,13:49,14:09,139,20,20,0,2D,M,180,matinee
+2026-09-19,Sat,6,Screen 6,Quarry,quarry,14:10,14:30,16:33,16:53,123,20,20,0,2D,M,180,afternoon
+2026-09-19,Sat,6,Screen 6,Salt Road,salt,17:00,17:20,19:52,20:12,152,20,20,0,2D,M,180,afternoon
+2026-09-19,Sat,6,Screen 6,Hollow Creek,hollow,20:20,20:40,22:21,22:41,101,20,20,0,2D,R16,180,prime
+2026-09-19,Sat,6,Screen 6,Salt Road,salt,22:50,23:10,25:42,26:02,152,20,20,0,2D,M,180,late
+2026-09-19,Sat,7,Screen 7,Wren,wren,10:10,10:30,12:02,12:22,92,20,20,0,2D,PG,180,matinee
+2026-09-19,Sat,7,Screen 7,Wren,wren,12:30,12:50,14:22,14:42,92,20,20,0,2D,PG,180,matinee
+2026-09-19,Sat,7,Screen 7,Last Tango in Timaru,tango,14:50,15:10,16:54,17:14,104,20,20,0,2D,M,180,afternoon
+2026-09-19,Sat,7,Screen 7,Stitch and Bone,stitch,17:20,17:40,19:38,19:58,118,20,20,0,2D,M,180,afternoon
+2026-09-19,Sat,7,Screen 7,Wren,wren,20:00,20:20,21:52,22:12,92,20,20,0,2D,PG,180,prime
+2026-09-19,Sat,7,Screen 7,Stitch and Bone,stitch,22:30,22:50,24:48,25:08,118,20,20,0,2D,M,180,late
+2026-09-19,Sat,8,Screen 8,Stitch and Bone,stitch,11:30,11:50,13:48,14:08,118,20,20,0,2D,M,180,matinee
+2026-09-19,Sat,8,Screen 8,Anthem for the Small Hours,anthem,14:10,14:30,15:46,16:06,76,20,20,0,2D,E,180,afternoon
+2026-09-19,Sat,8,Screen 8,Meridian,meridian,16:20,16:40,19:03,19:23,143,20,20,0,2D,M,180,afternoon
+2026-09-19,Sat,8,Screen 8,Salt Road,salt,19:40,20:00,22:32,22:52,152,20,20,0,2D,M,180,prime
+2026-09-19,Sat,8,Screen 8,Last Tango in Timaru,tango,23:00,23:20,25:04,25:24,104,20,20,0,2D,M,180,late
+2026-09-19,Sat,9,Screen 9,Last Tango in Timaru,tango,10:30,10:50,12:34,12:54,104,20,20,0,2D,M,180,matinee
+2026-09-19,Sat,9,Screen 9,Brass Sunday,brass,13:00,13:20,15:09,15:29,109,20,20,0,2D,PG,180,matinee
+2026-09-19,Sat,9,Screen 9,Stitch and Bone,stitch,15:30,15:50,17:48,18:08,118,20,20,0,2D,M,180,afternoon
+2026-09-19,Sat,9,Screen 9,Brass Sunday,brass,18:10,18:30,20:19,20:39,109,20,20,0,2D,PG,180,prime
+2026-09-19,Sat,9,Screen 9,Anthem for the Small Hours,anthem,20:40,21:00,22:16,22:36,76,20,20,0,2D,E,180,prime
+2026-09-19,Sat,9,Screen 9,Hollow Creek,hollow,22:40,23:00,24:41,25:01,101,20,20,0,2D,R16,180,late
+2026-09-19,Sat,10,Screen 10,Meridian,meridian,10:20,10:40,13:03,13:23,143,20,20,0,2D,M,140,matinee
+2026-09-19,Sat,10,Screen 10,The Ninth Floor,ninth,14:40,15:00,16:37,16:57,97,20,20,0,2D,R13,140,afternoon
+2026-09-19,Sat,10,Screen 10,Brass Sunday,brass,17:00,17:20,19:09,19:29,109,20,20,0,2D,PG,140,afternoon
+2026-09-19,Sat,10,Screen 10,The Cartographer's Daughter,cartographer,19:30,19:50,22:09,22:29,139,20,20,0,2D,M,140,prime
+2026-09-19,Sat,10,Screen 10,Salt Road,salt,22:30,22:50,25:22,25:42,152,20,20,0,2D,M,140,late
+2026-09-19,Sat,11,Screen 11,The Ledger,ledger,10:30,10:50,13:04,13:24,134,20,20,0,2D,M,140,matinee
+2026-09-19,Sat,11,Screen 11,Harbour Lights,harbour,14:00,14:20,16:15,16:35,115,20,20,0,2D,PG,140,afternoon
+2026-09-19,Sat,11,Screen 11,The Cartographer's Daughter,cartographer,16:40,17:00,19:19,19:39,139,20,20,0,2D,M,140,afternoon
+2026-09-19,Sat,11,Screen 11,Stitch and Bone,stitch,20:00,20:20,22:18,22:38,118,20,20,0,2D,M,140,prime
+2026-09-19,Sat,11,Screen 11,Hollow Creek,hollow,22:40,23:00,24:41,25:01,101,20,20,0,2D,R16,140,late
+2026-09-19,Sat,12,Screen 12,Anthem for the Small Hours,anthem,10:00,10:20,11:36,11:56,76,20,20,0,2D,E,140,matinee
+2026-09-19,Sat,12,Screen 12,Brass Sunday,brass,12:00,12:20,14:09,14:29,109,20,20,0,2D,PG,140,matinee
+2026-09-19,Sat,12,Screen 12,Brass Sunday,brass,14:30,14:50,16:39,16:59,109,20,20,0,2D,PG,140,afternoon
+2026-09-19,Sat,12,Screen 12,Brass Sunday,brass,17:30,17:50,19:39,19:59,109,20,20,0,2D,PG,140,prime
+2026-09-19,Sat,12,Screen 12,The Ninth Floor,ninth,20:10,20:30,22:07,22:27,97,20,20,0,2D,R13,140,prime
+2026-09-19,Sat,12,Screen 12,Meridian,meridian,22:30,22:50,25:13,25:33,143,20,20,0,2D,M,140,late
+2026-09-19,Sat,13,Screen 13,Salt Road,salt,10:30,10:50,13:22,13:42,152,20,20,0,2D,M,140,matinee
+2026-09-19,Sat,13,Screen 13,The Glasshouse,glasshouse,14:00,14:20,16:27,16:47,127,20,20,0,2D,M,140,afternoon
+2026-09-19,Sat,13,Screen 13,Meridian,meridian,16:50,17:10,19:33,19:53,143,20,20,0,2D,M,140,afternoon
+2026-09-19,Sat,13,Screen 13,Hollow Creek,hollow,20:00,20:20,22:01,22:21,101,20,20,0,2D,R16,140,prime
+2026-09-19,Sat,13,Screen 13,Meridian,meridian,22:40,23:00,25:23,25:43,143,20,20,0,2D,M,140,late
+2026-09-19,Sat,14,Screen 14,Meridian,meridian,10:00,10:20,12:43,12:58,143,20,15,0,2D,M,90,matinee
+2026-09-19,Sat,14,Screen 14,Stitch and Bone,stitch,13:00,13:20,15:18,15:33,118,20,15,0,2D,M,90,matinee
+2026-09-19,Sat,14,Screen 14,Wren,wren,15:40,16:00,17:32,17:47,92,20,15,0,2D,PG,90,afternoon
+2026-09-19,Sat,14,Screen 14,Last Tango in Timaru,tango,17:50,18:10,19:54,20:09,104,20,15,0,2D,M,90,prime
 2026-09-19,Sat,14,Screen 14,Stitch and Bone,stitch,20:10,20:30,22:28,22:43,118,20,15,0,2D,M,90,prime
-2026-09-19,Sat,14,Screen 14,Salt Road,salt,23:00,23:20,25:52,26:07,152,20,15,0,2D,M,90,late
-2026-09-19,Sat,15,Screen 15,Brass Sunday,brass,10:30,10:50,12:39,12:54,109,20,15,0,2D,PG,90,matinee
-2026-09-19,Sat,15,Screen 15,Salt Road,salt,13:50,14:10,16:42,16:57,152,20,15,0,2D,M,90,matinee
-2026-09-19,Sat,15,Screen 15,Last Tango in Timaru,tango,17:00,17:20,19:04,19:19,104,20,15,0,2D,M,90,afternoon
-2026-09-19,Sat,15,Screen 15,The Pilgrim Years,pilgrim,19:20,19:40,22:31,22:46,171,20,15,0,2D,M,90,prime
-2026-09-19,Sat,15,Screen 15,Stitch and Bone,stitch,23:00,23:20,25:18,25:33,118,20,15,0,2D,M,90,late
-2026-09-19,Sat,16,Screen 16,Reel Twelve,reel,12:00,12:20,14:11,14:26,111,20,15,0,2D,M,60,matinee
-2026-09-19,Sat,16,Screen 16,Anthem for the Small Hours,anthem,14:30,14:50,16:06,16:21,76,20,15,0,2D,E,60,afternoon
-2026-09-19,Sat,16,Screen 16,The Ninth Floor,ninth,16:30,16:50,18:27,18:42,97,20,15,0,2D,R13,60,afternoon
-2026-09-19,Sat,16,Screen 16,Static,static,18:50,19:10,20:34,20:49,84,20,15,0,2D,R16,60,prime
-2026-09-19,Sat,16,Screen 16,Static,static,20:50,21:10,22:34,22:49,84,20,15,0,2D,R16,60,late
-2026-09-19,Sat,16,Screen 16,The Ledger,ledger,22:50,23:10,25:24,25:39,134,20,15,0,2D,M,60,late
-2026-09-20,Sun,1,Screen 1,The Iron Tide,tide,14:00,14:30,17:08,17:28,158,30,20,0,PLF,M,400,afternoon
-2026-09-20,Sun,1,Screen 1,The Iron Tide,tide,18:00,18:30,21:08,21:28,158,30,20,0,PLF,M,400,prime
-2026-09-20,Sun,1,Screen 1,The Iron Tide,tide,21:30,22:00,24:38,24:58,158,30,20,0,PLF,M,400,late
-2026-09-20,Sun,2,Screen 2,Paper Lantern,lantern,11:10,11:40,13:51,14:11,131,30,20,0,PLF,PG,400,matinee
-2026-09-20,Sun,2,Screen 2,Paper Lantern,lantern,14:20,14:50,17:01,17:21,131,30,20,0,PLF,PG,400,afternoon
-2026-09-20,Sun,2,Screen 2,Paper Lantern,lantern,17:30,18:00,20:11,20:31,131,30,20,0,PLF,PG,400,prime
-2026-09-20,Sun,2,Screen 2,The Iron Tide,tide,20:40,21:10,23:48,24:08,158,30,20,0,PLF,M,400,prime
-2026-09-20,Sun,3,Screen 3,Kites Over Halden,kites,11:20,11:45,13:13,13:33,88,25,20,0,3D,G,260,matinee
-2026-09-20,Sun,3,Screen 3,The Orchard Keepers,orchard,13:40,14:05,15:41,16:01,96,25,20,0,3D,G,260,matinee
-2026-09-20,Sun,3,Screen 3,Kites Over Halden,kites,16:20,16:45,18:13,18:33,88,25,20,0,3D,G,260,afternoon
-2026-09-20,Sun,3,Screen 3,Static,static,18:40,19:00,20:24,20:44,84,20,20,0,2D,R16,260,prime
-2026-09-20,Sun,3,Screen 3,Hollow Creek,hollow,20:50,21:10,22:51,23:11,101,20,20,0,2D,R16,260,late
-2026-09-20,Sun,4,Screen 4,The Orchard Keepers,orchard,12:00,12:25,14:01,14:21,96,25,20,0,3D,G,260,matinee
-2026-09-20,Sun,4,Screen 4,The Orchard Keepers,orchard,14:30,14:55,16:31,16:51,96,25,20,0,3D,G,260,afternoon
-2026-09-20,Sun,4,Screen 4,The Orchard Keepers,orchard,17:00,17:25,19:01,19:21,96,25,20,0,3D,G,260,afternoon
-2026-09-20,Sun,4,Screen 4,Meridian,meridian,20:10,20:30,22:53,23:13,143,20,20,0,2D,M,260,prime
-2026-09-20,Sun,5,Screen 5,Reef,reef,11:00,11:25,12:33,12:53,68,25,20,0,3D,G,260,matinee
-2026-09-20,Sun,5,Screen 5,The Orchard Keepers,orchard,13:00,13:25,15:01,15:21,96,25,20,0,3D,G,260,matinee
-2026-09-20,Sun,5,Screen 5,The Orchard Keepers,orchard,15:30,15:55,17:31,17:51,96,25,20,0,3D,G,260,afternoon
-2026-09-20,Sun,5,Screen 5,The Orchard Keepers,orchard,18:00,18:25,20:01,20:21,96,25,20,0,3D,G,260,prime
-2026-09-20,Sun,5,Screen 5,Salt Road,salt,20:30,20:50,23:22,23:42,152,20,20,0,2D,M,260,prime
-2026-09-20,Sun,6,Screen 6,Meridian,meridian,11:20,11:40,14:03,14:23,143,20,20,0,2D,M,180,matinee
-2026-09-20,Sun,6,Screen 6,Hollow Creek,hollow,15:20,15:40,17:21,17:41,101,20,20,0,2D,R16,180,afternoon
-2026-09-20,Sun,6,Screen 6,Hollow Creek,hollow,18:10,18:30,20:11,20:31,101,20,20,0,2D,R16,180,prime
-2026-09-20,Sun,6,Screen 6,The Glasshouse,glasshouse,20:40,21:00,23:07,23:27,127,20,20,0,2D,M,180,prime
-2026-09-20,Sun,7,Screen 7,Anthem for the Small Hours,anthem,11:00,11:20,12:36,12:56,76,20,20,0,2D,E,180,matinee
-2026-09-20,Sun,7,Screen 7,Harbour Lights,harbour,13:00,13:20,15:15,15:35,115,20,20,0,2D,PG,180,matinee
-2026-09-20,Sun,7,Screen 7,Meridian,meridian,15:40,16:00,18:23,18:43,143,20,20,0,2D,M,180,afternoon
-2026-09-20,Sun,7,Screen 7,Hollow Creek,hollow,19:00,19:20,21:01,21:21,101,20,20,0,2D,R16,180,prime
-2026-09-20,Sun,7,Screen 7,Hollow Creek,hollow,21:30,21:50,23:31,23:51,101,20,20,0,2D,R16,180,late
-2026-09-20,Sun,8,Screen 8,Quarry,quarry,12:20,12:40,14:43,15:03,123,20,20,0,2D,M,180,matinee
-2026-09-20,Sun,8,Screen 8,Salt Road,salt,15:10,15:30,18:02,18:22,152,20,20,0,2D,M,180,afternoon
-2026-09-20,Sun,8,Screen 8,Stitch and Bone,stitch,18:30,18:50,20:48,21:08,118,20,20,0,2D,M,180,prime
-2026-09-20,Sun,8,Screen 8,Salt Road,salt,21:10,21:30,24:02,24:22,152,20,20,0,2D,M,180,late
-2026-09-20,Sun,9,Screen 9,The Cartographer's Daughter,cartographer,11:00,11:20,13:39,13:59,139,20,20,0,2D,M,180,matinee
-2026-09-20,Sun,9,Screen 9,Brass Sunday,brass,14:10,14:30,16:19,16:39,109,20,20,0,2D,PG,180,afternoon
-2026-09-20,Sun,9,Screen 9,Last Tango in Timaru,tango,16:40,17:00,18:44,19:04,104,20,20,0,2D,M,180,afternoon
-2026-09-20,Sun,9,Screen 9,The Ninth Floor,ninth,19:20,19:40,21:17,21:37,97,20,20,0,2D,R13,180,prime
-2026-09-20,Sun,9,Screen 9,Stitch and Bone,stitch,21:40,22:00,23:58,24:18,118,20,20,0,2D,M,180,late
-2026-09-20,Sun,10,Screen 10,Last Tango in Timaru,tango,11:10,11:30,13:14,13:34,104,20,20,0,2D,M,140,matinee
-2026-09-20,Sun,10,Screen 10,Anthem for the Small Hours,anthem,13:40,14:00,15:16,15:36,76,20,20,0,2D,E,140,matinee
-2026-09-20,Sun,10,Screen 10,Brass Sunday,brass,15:40,16:00,17:49,18:09,109,20,20,0,2D,PG,140,afternoon
-2026-09-20,Sun,10,Screen 10,Last Tango in Timaru,tango,18:10,18:30,20:14,20:34,104,20,20,0,2D,M,140,prime
-2026-09-20,Sun,10,Screen 10,The Cartographer's Daughter,cartographer,20:40,21:00,23:19,23:39,139,20,20,0,2D,M,140,prime
-2026-09-20,Sun,11,Screen 11,The Glasshouse,glasshouse,11:50,12:10,14:17,14:37,127,20,20,0,2D,M,140,matinee
-2026-09-20,Sun,11,Screen 11,Meridian,meridian,15:00,15:20,17:43,18:03,143,20,20,0,2D,M,140,afternoon
-2026-09-20,Sun,11,Screen 11,Meridian,meridian,18:10,18:30,20:53,21:13,143,20,20,0,2D,M,140,prime
-2026-09-20,Sun,11,Screen 11,Meridian,meridian,21:30,21:50,24:13,24:33,143,20,20,0,2D,M,140,late
-2026-09-20,Sun,12,Screen 12,Wren,wren,11:20,11:40,13:12,13:32,92,20,20,0,2D,PG,140,matinee
-2026-09-20,Sun,12,Screen 12,Stitch and Bone,stitch,13:40,14:00,15:58,16:18,118,20,20,0,2D,M,140,matinee
-2026-09-20,Sun,12,Screen 12,The Glasshouse,glasshouse,16:20,16:40,18:47,19:07,127,20,20,0,2D,M,140,afternoon
-2026-09-20,Sun,12,Screen 12,Brass Sunday,brass,19:10,19:30,21:19,21:39,109,20,20,0,2D,PG,140,prime
-2026-09-20,Sun,12,Screen 12,Salt Road,salt,21:40,22:00,24:32,24:52,152,20,20,0,2D,M,140,late
-2026-09-20,Sun,13,Screen 13,Meridian,meridian,11:30,11:50,14:13,14:33,143,20,20,0,2D,M,140,matinee
-2026-09-20,Sun,13,Screen 13,Stitch and Bone,stitch,14:50,15:10,17:08,17:28,118,20,20,0,2D,M,140,afternoon
-2026-09-20,Sun,13,Screen 13,Harbour Lights,harbour,17:50,18:10,20:05,20:25,115,20,20,0,2D,PG,140,prime
-2026-09-20,Sun,13,Screen 13,Salt Road,salt,20:30,20:50,23:22,23:42,152,20,20,0,2D,M,140,prime
+2026-09-19,Sat,14,Screen 14,The Glasshouse,glasshouse,22:50,23:10,25:17,25:32,127,20,15,0,2D,M,90,late
+2026-09-19,Sat,15,Screen 15,Harbour Lights,harbour,10:10,10:30,12:25,12:40,115,20,15,0,2D,PG,90,matinee
+2026-09-19,Sat,15,Screen 15,The Glasshouse,glasshouse,12:50,13:10,15:17,15:32,127,20,15,0,2D,M,90,matinee
+2026-09-19,Sat,15,Screen 15,The Ninth Floor,ninth,15:50,16:10,17:47,18:02,97,20,15,0,2D,R13,90,afternoon
+2026-09-19,Sat,15,Screen 15,The Ninth Floor,ninth,18:10,18:30,20:07,20:22,97,20,15,0,2D,R13,90,prime
+2026-09-19,Sat,15,Screen 15,The Pilgrim Years,pilgrim,20:30,20:50,23:41,23:56,171,20,15,0,2D,M,90,prime
+2026-09-19,Sat,16,Screen 16,Reel Twelve,reel,12:50,13:10,15:01,15:16,111,20,15,0,2D,M,60,matinee
+2026-09-19,Sat,16,Screen 16,Hollow Creek,hollow,15:20,15:40,17:21,17:36,101,20,15,0,2D,R16,60,afternoon
+2026-09-19,Sat,16,Screen 16,Harbour Lights,harbour,17:50,18:10,20:05,20:20,115,20,15,0,2D,PG,60,prime
+2026-09-19,Sat,16,Screen 16,Static,static,20:20,20:40,22:04,22:19,84,20,15,0,2D,R16,60,prime
+2026-09-19,Sat,16,Screen 16,The Cartographer's Daughter,cartographer,22:20,22:40,24:59,25:14,139,20,15,0,2D,M,60,late
+2026-09-20,Sun,1,Screen 1,Stitch and Bone,stitch,11:20,11:40,13:38,13:58,118,20,20,0,2D,M,400,matinee
+2026-09-20,Sun,1,Screen 1,Paper Lantern,lantern,14:20,14:50,17:01,17:21,131,30,20,0,PLF,PG,400,afternoon
+2026-09-20,Sun,1,Screen 1,Paper Lantern,lantern,17:30,18:00,20:11,20:31,131,30,20,0,PLF,PG,400,prime
+2026-09-20,Sun,1,Screen 1,The Iron Tide,tide,20:40,21:10,23:48,24:08,158,30,20,0,PLF,M,400,prime
+2026-09-20,Sun,2,Screen 2,The Iron Tide,tide,11:10,11:40,14:18,14:38,158,30,20,0,PLF,M,400,matinee
+2026-09-20,Sun,2,Screen 2,The Iron Tide,tide,14:40,15:10,17:48,18:08,158,30,20,0,PLF,M,400,afternoon
+2026-09-20,Sun,2,Screen 2,The Iron Tide,tide,18:10,18:40,21:18,21:38,158,30,20,0,PLF,M,400,prime
+2026-09-20,Sun,2,Screen 2,The Iron Tide,tide,21:40,22:10,24:48,25:08,158,30,20,0,PLF,M,400,late
+2026-09-20,Sun,3,Screen 3,The Orchard Keepers,orchard,11:00,11:25,13:01,13:21,96,25,20,0,3D,G,260,matinee
+2026-09-20,Sun,3,Screen 3,Kites Over Halden,kites,13:30,13:55,15:23,15:43,88,25,20,0,3D,G,260,matinee
+2026-09-20,Sun,3,Screen 3,Reef,reef,15:50,16:15,17:23,17:43,68,25,20,0,3D,G,260,afternoon
+2026-09-20,Sun,3,Screen 3,Salt Road,salt,18:00,18:20,20:52,21:12,152,20,20,0,2D,M,260,prime
+2026-09-20,Sun,3,Screen 3,The Ninth Floor,ninth,21:20,21:40,23:17,23:37,97,20,20,0,2D,R13,260,late
+2026-09-20,Sun,4,Screen 4,The Orchard Keepers,orchard,11:30,11:55,13:31,13:51,96,25,20,0,3D,G,260,matinee
+2026-09-20,Sun,4,Screen 4,Kites Over Halden,kites,14:10,14:35,16:03,16:23,88,25,20,0,3D,G,260,afternoon
+2026-09-20,Sun,4,Screen 4,The Orchard Keepers,orchard,16:30,16:55,18:31,18:51,96,25,20,0,3D,G,260,afternoon
+2026-09-20,Sun,4,Screen 4,Hollow Creek,hollow,19:00,19:20,21:01,21:21,101,20,20,0,2D,R16,260,prime
+2026-09-20,Sun,4,Screen 4,Salt Road,salt,21:30,21:50,24:22,24:42,152,20,20,0,2D,M,260,late
+2026-09-20,Sun,5,Screen 5,The Orchard Keepers,orchard,11:30,11:55,13:31,13:51,96,25,20,0,3D,G,260,matinee
+2026-09-20,Sun,5,Screen 5,The Orchard Keepers,orchard,14:10,14:35,16:11,16:31,96,25,20,0,3D,G,260,afternoon
+2026-09-20,Sun,5,Screen 5,The Orchard Keepers,orchard,17:20,17:45,19:21,19:41,96,25,20,0,3D,G,260,afternoon
+2026-09-20,Sun,5,Screen 5,Meridian,meridian,19:50,20:10,22:33,22:53,143,20,20,0,2D,M,260,prime
+2026-09-20,Sun,6,Screen 6,Last Tango in Timaru,tango,11:20,11:40,13:24,13:44,104,20,20,0,2D,M,180,matinee
+2026-09-20,Sun,6,Screen 6,Brass Sunday,brass,13:50,14:10,15:59,16:19,109,20,20,0,2D,PG,180,matinee
+2026-09-20,Sun,6,Screen 6,Brass Sunday,brass,16:30,16:50,18:39,18:59,109,20,20,0,2D,PG,180,afternoon
+2026-09-20,Sun,6,Screen 6,Harbour Lights,harbour,19:00,19:20,21:15,21:35,115,20,20,0,2D,PG,180,prime
+2026-09-20,Sun,6,Screen 6,Hollow Creek,hollow,21:40,22:00,23:41,24:01,101,20,20,0,2D,R16,180,late
+2026-09-20,Sun,7,Screen 7,Meridian,meridian,11:40,12:00,14:23,14:43,143,20,20,0,2D,M,180,matinee
+2026-09-20,Sun,7,Screen 7,Meridian,meridian,14:50,15:10,17:33,17:53,143,20,20,0,2D,M,180,afternoon
+2026-09-20,Sun,7,Screen 7,Stitch and Bone,stitch,18:30,18:50,20:48,21:08,118,20,20,0,2D,M,180,prime
+2026-09-20,Sun,7,Screen 7,Meridian,meridian,21:30,21:50,24:13,24:33,143,20,20,0,2D,M,180,late
+2026-09-20,Sun,8,Screen 8,Harbour Lights,harbour,11:50,12:10,14:05,14:25,115,20,20,0,2D,PG,180,matinee
+2026-09-20,Sun,8,Screen 8,Meridian,meridian,14:30,14:50,17:13,17:33,143,20,20,0,2D,M,180,afternoon
+2026-09-20,Sun,8,Screen 8,Brass Sunday,brass,17:40,18:00,19:49,20:09,109,20,20,0,2D,PG,180,prime
+2026-09-20,Sun,8,Screen 8,Salt Road,salt,20:10,20:30,23:02,23:22,152,20,20,0,2D,M,180,prime
+2026-09-20,Sun,9,Screen 9,Salt Road,salt,11:00,11:20,13:52,14:12,152,20,20,0,2D,M,180,matinee
+2026-09-20,Sun,9,Screen 9,The Cartographer's Daughter,cartographer,14:20,14:40,16:59,17:19,139,20,20,0,2D,M,180,afternoon
+2026-09-20,Sun,9,Screen 9,Brass Sunday,brass,18:10,18:30,20:19,20:39,109,20,20,0,2D,PG,180,prime
+2026-09-20,Sun,9,Screen 9,Stitch and Bone,stitch,21:20,21:40,23:38,23:58,118,20,20,0,2D,M,180,late
+2026-09-20,Sun,10,Screen 10,The Cartographer's Daughter,cartographer,11:00,11:20,13:39,13:59,139,20,20,0,2D,M,140,matinee
+2026-09-20,Sun,10,Screen 10,The Glasshouse,glasshouse,14:00,14:20,16:27,16:47,127,20,20,0,2D,M,140,afternoon
+2026-09-20,Sun,10,Screen 10,Hollow Creek,hollow,17:40,18:00,19:41,20:01,101,20,20,0,2D,R16,140,prime
+2026-09-20,Sun,10,Screen 10,The Pilgrim Years,pilgrim,20:10,20:30,23:21,23:41,171,20,20,0,2D,M,140,prime
+2026-09-20,Sun,11,Screen 11,The Glasshouse,glasshouse,11:10,11:30,13:37,13:57,127,20,20,0,2D,M,140,matinee
+2026-09-20,Sun,11,Screen 11,Anthem for the Small Hours,anthem,14:00,14:20,15:36,15:56,76,20,20,0,2D,E,140,afternoon
+2026-09-20,Sun,11,Screen 11,Stitch and Bone,stitch,16:00,16:20,18:18,18:38,118,20,20,0,2D,M,140,afternoon
+2026-09-20,Sun,11,Screen 11,Wren,wren,18:40,19:00,20:32,20:52,92,20,20,0,2D,PG,140,prime
+2026-09-20,Sun,11,Screen 11,Meridian,meridian,21:20,21:40,24:03,24:23,143,20,20,0,2D,M,140,late
+2026-09-20,Sun,12,Screen 12,Brass Sunday,brass,11:10,11:30,13:19,13:39,109,20,20,0,2D,PG,140,matinee
+2026-09-20,Sun,12,Screen 12,Wren,wren,13:40,14:00,15:32,15:52,92,20,20,0,2D,PG,140,matinee
+2026-09-20,Sun,12,Screen 12,The Ninth Floor,ninth,16:00,16:20,17:57,18:17,97,20,20,0,2D,R13,140,afternoon
+2026-09-20,Sun,12,Screen 12,The Ninth Floor,ninth,18:20,18:40,20:17,20:37,97,20,20,0,2D,R13,140,prime
+2026-09-20,Sun,12,Screen 12,The Glasshouse,glasshouse,20:40,21:00,23:07,23:27,127,20,20,0,2D,M,140,prime
+2026-09-20,Sun,13,Screen 13,Quarry,quarry,11:30,11:50,13:53,14:13,123,20,20,0,2D,M,140,matinee
+2026-09-20,Sun,13,Screen 13,Salt Road,salt,14:20,14:40,17:12,17:32,152,20,20,0,2D,M,140,afternoon
+2026-09-20,Sun,13,Screen 13,The Cartographer's Daughter,cartographer,17:40,18:00,20:19,20:39,139,20,20,0,2D,M,140,prime
+2026-09-20,Sun,13,Screen 13,Meridian,meridian,20:40,21:00,23:23,23:43,143,20,20,0,2D,M,140,prime
 2026-09-20,Sun,14,Screen 14,Brass Sunday,brass,11:40,12:00,13:49,14:04,109,20,15,0,2D,PG,90,matinee
-2026-09-20,Sun,14,Screen 14,The Ninth Floor,ninth,14:10,14:30,16:07,16:22,97,20,15,0,2D,R13,90,afternoon
-2026-09-20,Sun,14,Screen 14,Last Tango in Timaru,tango,17:20,17:40,19:24,19:39,104,20,15,0,2D,M,90,afternoon
-2026-09-20,Sun,14,Screen 14,The Pilgrim Years,pilgrim,19:40,20:00,22:51,23:06,171,20,15,0,2D,M,90,prime
-2026-09-20,Sun,15,Screen 15,Brass Sunday,brass,11:10,11:30,13:19,13:34,109,20,15,0,2D,PG,90,matinee
-2026-09-20,Sun,15,Screen 15,The Cartographer's Daughter,cartographer,14:00,14:20,16:39,16:54,139,20,15,0,2D,M,90,afternoon
-2026-09-20,Sun,15,Screen 15,Wren,wren,17:00,17:20,18:52,19:07,92,20,15,0,2D,PG,90,afternoon
-2026-09-20,Sun,15,Screen 15,Brass Sunday,brass,19:10,19:30,21:19,21:34,109,20,15,0,2D,PG,90,prime
-2026-09-20,Sun,15,Screen 15,The Ninth Floor,ninth,21:40,22:00,23:37,23:52,97,20,15,0,2D,R13,90,late
-2026-09-20,Sun,16,Screen 16,Wren,wren,12:10,12:30,14:02,14:17,92,20,15,0,2D,PG,60,matinee
-2026-09-20,Sun,16,Screen 16,Harbour Lights,harbour,14:30,14:50,16:45,17:00,115,20,15,0,2D,PG,60,afternoon
-2026-09-20,Sun,16,Screen 16,Reel Twelve,reel,17:40,18:00,19:51,20:06,111,20,15,0,2D,M,60,prime
-2026-09-20,Sun,16,Screen 16,The Ledger,ledger,20:20,20:40,22:54,23:09,134,20,15,0,2D,M,60,prime
-2026-09-21,Mon,1,Screen 1,Paper Lantern,lantern,10:50,11:20,13:31,13:51,131,30,20,0,PLF,PG,400,matinee
-2026-09-21,Mon,1,Screen 1,The Iron Tide,tide,14:00,14:30,17:08,17:28,158,30,20,0,PLF,M,400,afternoon
-2026-09-21,Mon,1,Screen 1,The Iron Tide,tide,18:00,18:30,21:08,21:28,158,30,20,0,PLF,M,400,prime
-2026-09-21,Mon,1,Screen 1,The Iron Tide,tide,21:30,22:00,24:38,24:58,158,30,20,0,PLF,M,400,late
-2026-09-21,Mon,2,Screen 2,The Iron Tide,tide,10:30,11:00,13:38,13:58,158,30,20,0,PLF,M,400,matinee
-2026-09-21,Mon,2,Screen 2,Paper Lantern,lantern,14:00,14:30,16:41,17:01,131,30,20,0,PLF,PG,400,afternoon
-2026-09-21,Mon,2,Screen 2,Paper Lantern,lantern,17:30,18:00,20:11,20:31,131,30,20,0,PLF,PG,400,prime
-2026-09-21,Mon,2,Screen 2,The Iron Tide,tide,20:40,21:10,23:48,24:08,158,30,20,0,PLF,M,400,prime
-2026-09-21,Mon,3,Screen 3,The Orchard Keepers,orchard,10:10,10:35,12:11,12:31,96,25,20,0,3D,G,260,matinee
-2026-09-21,Mon,3,Screen 3,Kites Over Halden,kites,12:40,13:05,14:33,14:53,88,25,20,0,3D,G,260,matinee
-2026-09-21,Mon,3,Screen 3,The Orchard Keepers,orchard,15:00,15:25,17:01,17:21,96,25,20,0,3D,G,260,afternoon
-2026-09-21,Mon,3,Screen 3,Meridian,meridian,18:10,18:30,20:53,21:13,143,20,20,0,2D,M,260,prime
-2026-09-21,Mon,3,Screen 3,Hollow Creek,hollow,21:20,21:40,23:21,23:41,101,20,20,0,2D,R16,260,late
-2026-09-21,Mon,4,Screen 4,Reef,reef,10:00,10:25,11:33,11:53,68,25,20,0,3D,G,260,matinee
-2026-09-21,Mon,4,Screen 4,The Orchard Keepers,orchard,12:00,12:25,14:01,14:21,96,25,20,0,3D,G,260,matinee
-2026-09-21,Mon,4,Screen 4,The Orchard Keepers,orchard,14:30,14:55,16:31,16:51,96,25,20,0,3D,G,260,afternoon
-2026-09-21,Mon,4,Screen 4,The Orchard Keepers,orchard,17:00,17:25,19:01,19:21,96,25,20,0,3D,G,260,afternoon
-2026-09-21,Mon,4,Screen 4,Static,static,19:30,19:50,21:14,21:34,84,20,20,0,2D,R16,260,prime
-2026-09-21,Mon,4,Screen 4,Meridian,meridian,21:40,22:00,24:23,24:43,143,20,20,0,2D,M,260,late
-2026-09-21,Mon,5,Screen 5,The Orchard Keepers,orchard,10:20,10:45,12:21,12:41,96,25,20,0,3D,G,260,matinee
-2026-09-21,Mon,5,Screen 5,Brass Sunday,brass,12:50,13:10,14:59,15:19,109,20,20,0,2D,PG,260,matinee
-2026-09-21,Mon,5,Screen 5,Kites Over Halden,kites,15:30,15:55,17:23,17:43,88,25,20,0,3D,G,260,afternoon
-2026-09-21,Mon,5,Screen 5,The Orchard Keepers,orchard,17:50,18:15,19:51,20:11,96,25,20,0,3D,G,260,prime
-2026-09-21,Mon,5,Screen 5,Salt Road,salt,20:20,20:40,23:12,23:32,152,20,20,0,2D,M,260,prime
+2026-09-20,Sun,14,Screen 14,Wren,wren,14:10,14:30,16:02,16:17,92,20,15,0,2D,PG,90,afternoon
+2026-09-20,Sun,14,Screen 14,Brass Sunday,brass,16:20,16:40,18:29,18:44,109,20,15,0,2D,PG,90,afternoon
+2026-09-20,Sun,14,Screen 14,Last Tango in Timaru,tango,18:50,19:10,20:54,21:09,104,20,15,0,2D,M,90,prime
+2026-09-20,Sun,14,Screen 14,Hollow Creek,hollow,21:10,21:30,23:11,23:26,101,20,15,0,2D,R16,90,late
+2026-09-20,Sun,15,Screen 15,Wren,wren,11:20,11:40,13:12,13:27,92,20,15,0,2D,PG,90,matinee
+2026-09-20,Sun,15,Screen 15,Last Tango in Timaru,tango,14:00,14:20,16:04,16:19,104,20,15,0,2D,M,90,afternoon
+2026-09-20,Sun,15,Screen 15,Harbour Lights,harbour,16:20,16:40,18:35,18:50,115,20,15,0,2D,PG,90,afternoon
+2026-09-20,Sun,15,Screen 15,Static,static,19:20,19:40,21:04,21:19,84,20,15,0,2D,R16,90,prime
+2026-09-20,Sun,15,Screen 15,Salt Road,salt,21:30,21:50,24:22,24:37,152,20,15,0,2D,M,90,late
+2026-09-20,Sun,16,Screen 16,The Ledger,ledger,12:00,12:20,14:34,14:49,134,20,15,0,2D,M,60,matinee
+2026-09-20,Sun,16,Screen 16,Anthem for the Small Hours,anthem,14:50,15:10,16:26,16:41,76,20,15,0,2D,E,60,afternoon
+2026-09-20,Sun,16,Screen 16,Hollow Creek,hollow,16:50,17:10,18:51,19:06,101,20,15,0,2D,R16,60,afternoon
+2026-09-20,Sun,16,Screen 16,Reel Twelve,reel,19:10,19:30,21:21,21:36,111,20,15,0,2D,M,60,prime
+2026-09-20,Sun,16,Screen 16,The Glasshouse,glasshouse,21:40,22:00,24:07,24:22,127,20,15,0,2D,M,60,late
+2026-09-21,Mon,1,Screen 1,The Iron Tide,tide,10:50,11:20,13:58,14:18,158,30,20,0,PLF,M,400,matinee
+2026-09-21,Mon,1,Screen 1,Paper Lantern,lantern,14:20,14:50,17:01,17:21,131,30,20,0,PLF,PG,400,afternoon
+2026-09-21,Mon,1,Screen 1,Paper Lantern,lantern,17:30,18:00,20:11,20:31,131,30,20,0,PLF,PG,400,prime
+2026-09-21,Mon,1,Screen 1,The Iron Tide,tide,20:40,21:10,23:48,24:08,158,30,20,0,PLF,M,400,prime
+2026-09-21,Mon,2,Screen 2,The Iron Tide,tide,10:40,11:10,13:48,14:08,158,30,20,0,PLF,M,400,matinee
+2026-09-21,Mon,2,Screen 2,The Iron Tide,tide,14:30,15:00,17:38,17:58,158,30,20,0,PLF,M,400,afternoon
+2026-09-21,Mon,2,Screen 2,The Iron Tide,tide,18:00,18:30,21:08,21:28,158,30,20,0,PLF,M,400,prime
+2026-09-21,Mon,2,Screen 2,The Iron Tide,tide,21:30,22:00,24:38,24:58,158,30,20,0,PLF,M,400,late
+2026-09-21,Mon,3,Screen 3,Kites Over Halden,kites,10:20,10:45,12:13,12:33,88,25,20,0,3D,G,260,matinee
+2026-09-21,Mon,3,Screen 3,The Orchard Keepers,orchard,13:00,13:25,15:01,15:21,96,25,20,0,3D,G,260,matinee
+2026-09-21,Mon,3,Screen 3,Reef,reef,15:50,16:15,17:23,17:43,68,25,20,0,3D,G,260,afternoon
+2026-09-21,Mon,3,Screen 3,Salt Road,salt,17:50,18:10,20:42,21:02,152,20,20,0,2D,M,260,prime
+2026-09-21,Mon,3,Screen 3,The Ninth Floor,ninth,21:20,21:40,23:17,23:37,97,20,20,0,2D,R13,260,late
+2026-09-21,Mon,4,Screen 4,The Orchard Keepers,orchard,11:00,11:25,13:01,13:21,96,25,20,0,3D,G,260,matinee
+2026-09-21,Mon,4,Screen 4,Kites Over Halden,kites,14:10,14:35,16:03,16:23,88,25,20,0,3D,G,260,afternoon
+2026-09-21,Mon,4,Screen 4,The Orchard Keepers,orchard,16:30,16:55,18:31,18:51,96,25,20,0,3D,G,260,afternoon
+2026-09-21,Mon,4,Screen 4,Hollow Creek,hollow,19:00,19:20,21:01,21:21,101,20,20,0,2D,R16,260,prime
+2026-09-21,Mon,4,Screen 4,Salt Road,salt,21:30,21:50,24:22,24:42,152,20,20,0,2D,M,260,late
+2026-09-21,Mon,5,Screen 5,The Orchard Keepers,orchard,10:10,10:35,12:11,12:31,96,25,20,0,3D,G,260,matinee
+2026-09-21,Mon,5,Screen 5,The Orchard Keepers,orchard,12:40,13:05,14:41,15:01,96,25,20,0,3D,G,260,matinee
+2026-09-21,Mon,5,Screen 5,The Orchard Keepers,orchard,15:20,15:45,17:21,17:41,96,25,20,0,3D,G,260,afternoon
+2026-09-21,Mon,5,Screen 5,Stitch and Bone,stitch,17:50,18:10,20:08,20:28,118,20,20,0,2D,M,260,prime
+2026-09-21,Mon,5,Screen 5,Meridian,meridian,20:30,20:50,23:13,23:33,143,20,20,0,2D,M,260,prime
 2026-09-21,Mon,6,Screen 6,Meridian,meridian,10:10,10:30,12:53,13:13,143,20,20,0,2D,M,180,matinee
-2026-09-21,Mon,6,Screen 6,Quarry,quarry,13:20,13:40,15:43,16:03,123,20,20,0,2D,M,180,matinee
-2026-09-21,Mon,6,Screen 6,Anthem for the Small Hours,anthem,16:10,16:30,17:46,18:06,76,20,20,0,2D,E,180,afternoon
-2026-09-21,Mon,6,Screen 6,Hollow Creek,hollow,18:10,18:30,20:11,20:31,101,20,20,0,2D,R16,180,prime
-2026-09-21,Mon,6,Screen 6,The Glasshouse,glasshouse,20:40,21:00,23:07,23:27,127,20,20,0,2D,M,180,prime
-2026-09-21,Mon,7,Screen 7,Wren,wren,10:40,11:00,12:32,12:52,92,20,20,0,2D,PG,180,matinee
-2026-09-21,Mon,7,Screen 7,Stitch and Bone,stitch,13:00,13:20,15:18,15:38,118,20,20,0,2D,M,180,matinee
-2026-09-21,Mon,7,Screen 7,Meridian,meridian,15:40,16:00,18:23,18:43,143,20,20,0,2D,M,180,afternoon
-2026-09-21,Mon,7,Screen 7,Stitch and Bone,stitch,18:50,19:10,21:08,21:28,118,20,20,0,2D,M,180,prime
-2026-09-21,Mon,7,Screen 7,Hollow Creek,hollow,21:30,21:50,23:31,23:51,101,20,20,0,2D,R16,180,late
-2026-09-21,Mon,8,Screen 8,Anthem for the Small Hours,anthem,10:20,10:40,11:56,12:16,76,20,20,0,2D,E,180,matinee
-2026-09-21,Mon,8,Screen 8,The Glasshouse,glasshouse,12:20,12:40,14:47,15:07,127,20,20,0,2D,M,180,matinee
-2026-09-21,Mon,8,Screen 8,Salt Road,salt,15:10,15:30,18:02,18:22,152,20,20,0,2D,M,180,afternoon
-2026-09-21,Mon,8,Screen 8,Hollow Creek,hollow,18:40,19:00,20:41,21:01,101,20,20,0,2D,R16,180,prime
-2026-09-21,Mon,8,Screen 8,Salt Road,salt,21:10,21:30,24:02,24:22,152,20,20,0,2D,M,180,late
-2026-09-21,Mon,9,Screen 9,Salt Road,salt,10:40,11:00,13:32,13:52,152,20,20,0,2D,M,180,matinee
-2026-09-21,Mon,9,Screen 9,Last Tango in Timaru,tango,14:10,14:30,16:14,16:34,104,20,20,0,2D,M,180,afternoon
-2026-09-21,Mon,9,Screen 9,Brass Sunday,brass,16:50,17:10,18:59,19:19,109,20,20,0,2D,PG,180,afternoon
-2026-09-21,Mon,9,Screen 9,The Ninth Floor,ninth,19:20,19:40,21:17,21:37,97,20,20,0,2D,R13,180,prime
-2026-09-21,Mon,9,Screen 9,Stitch and Bone,stitch,21:40,22:00,23:58,24:18,118,20,20,0,2D,M,180,late
-2026-09-21,Mon,10,Screen 10,The Glasshouse,glasshouse,10:10,10:30,12:37,12:57,127,20,20,0,2D,M,140,matinee
-2026-09-21,Mon,10,Screen 10,Harbour Lights,harbour,13:00,13:20,15:15,15:35,115,20,20,0,2D,PG,140,matinee
-2026-09-21,Mon,10,Screen 10,Brass Sunday,brass,15:40,16:00,17:49,18:09,109,20,20,0,2D,PG,140,afternoon
-2026-09-21,Mon,10,Screen 10,Last Tango in Timaru,tango,18:10,18:30,20:14,20:34,104,20,20,0,2D,M,140,prime
-2026-09-21,Mon,10,Screen 10,The Cartographer's Daughter,cartographer,20:40,21:00,23:19,23:39,139,20,20,0,2D,M,140,prime
-2026-09-21,Mon,11,Screen 11,Wren,wren,10:00,10:20,11:52,12:12,92,20,20,0,2D,PG,140,matinee
-2026-09-21,Mon,11,Screen 11,Wren,wren,12:20,12:40,14:12,14:32,92,20,20,0,2D,PG,140,matinee
-2026-09-21,Mon,11,Screen 11,Meridian,meridian,14:50,15:10,17:33,17:53,143,20,20,0,2D,M,140,afternoon
-2026-09-21,Mon,11,Screen 11,Meridian,meridian,18:30,18:50,21:13,21:33,143,20,20,0,2D,M,140,prime
-2026-09-21,Mon,11,Screen 11,Meridian,meridian,21:40,22:00,24:23,24:43,143,20,20,0,2D,M,140,late
-2026-09-21,Mon,12,Screen 12,The Cartographer's Daughter,cartographer,10:30,10:50,13:09,13:29,139,20,20,0,2D,M,140,matinee
-2026-09-21,Mon,12,Screen 12,Stitch and Bone,stitch,13:40,14:00,15:58,16:18,118,20,20,0,2D,M,140,matinee
-2026-09-21,Mon,12,Screen 12,Hollow Creek,hollow,16:20,16:40,18:21,18:41,101,20,20,0,2D,R16,140,afternoon
-2026-09-21,Mon,12,Screen 12,Brass Sunday,brass,18:50,19:10,20:59,21:19,109,20,20,0,2D,PG,140,prime
-2026-09-21,Mon,12,Screen 12,Salt Road,salt,21:30,21:50,24:22,24:42,152,20,20,0,2D,M,140,late
-2026-09-21,Mon,13,Screen 13,Meridian,meridian,11:40,12:00,14:23,14:43,143,20,20,0,2D,M,140,matinee
-2026-09-21,Mon,13,Screen 13,Stitch and Bone,stitch,14:50,15:10,17:08,17:28,118,20,20,0,2D,M,140,afternoon
-2026-09-21,Mon,13,Screen 13,Brass Sunday,brass,17:50,18:10,19:59,20:19,109,20,20,0,2D,PG,140,prime
-2026-09-21,Mon,13,Screen 13,Salt Road,salt,20:30,20:50,23:22,23:42,152,20,20,0,2D,M,140,prime
-2026-09-21,Mon,14,Screen 14,Last Tango in Timaru,tango,10:00,10:20,12:04,12:19,104,20,15,0,2D,M,90,matinee
-2026-09-21,Mon,14,Screen 14,The Ledger,ledger,12:30,12:50,15:04,15:19,134,20,15,0,2D,M,90,matinee
-2026-09-21,Mon,14,Screen 14,The Ninth Floor,ninth,15:20,15:40,17:17,17:32,97,20,15,0,2D,R13,90,afternoon
-2026-09-21,Mon,14,Screen 14,Harbour Lights,harbour,17:40,18:00,19:55,20:10,115,20,15,0,2D,PG,90,prime
-2026-09-21,Mon,14,Screen 14,The Pilgrim Years,pilgrim,20:20,20:40,23:31,23:46,171,20,15,0,2D,M,90,prime
-2026-09-21,Mon,15,Screen 15,Brass Sunday,brass,10:30,10:50,12:39,12:54,109,20,15,0,2D,PG,90,matinee
-2026-09-21,Mon,15,Screen 15,The Glasshouse,glasshouse,14:00,14:20,16:27,16:42,127,20,15,0,2D,M,90,afternoon
-2026-09-21,Mon,15,Screen 15,Wren,wren,16:50,17:10,18:42,18:57,92,20,15,0,2D,PG,90,afternoon
-2026-09-21,Mon,15,Screen 15,Wren,wren,19:00,19:20,20:52,21:07,92,20,15,0,2D,PG,90,prime
-2026-09-21,Mon,15,Screen 15,The Ninth Floor,ninth,21:10,21:30,23:07,23:22,97,20,15,0,2D,R13,90,late
-2026-09-21,Mon,16,Screen 16,Last Tango in Timaru,tango,12:00,12:20,14:04,14:19,104,20,15,0,2D,M,60,matinee
-2026-09-21,Mon,16,Screen 16,The Cartographer's Daughter,cartographer,14:20,14:40,16:59,17:14,139,20,15,0,2D,M,60,afternoon
-2026-09-21,Mon,16,Screen 16,Reel Twelve,reel,17:50,18:10,20:01,20:16,111,20,15,0,2D,M,60,prime
-2026-09-21,Mon,16,Screen 16,Stitch and Bone,stitch,20:20,20:40,22:38,22:53,118,20,15,0,2D,M,60,prime
-2026-09-22,Tue,1,Screen 1,The Iron Tide,tide,10:40,11:10,13:48,14:08,158,30,20,0,PLF,M,400,matinee
-2026-09-22,Tue,1,Screen 1,The Iron Tide,tide,14:10,14:40,17:18,17:38,158,30,20,0,PLF,M,400,afternoon
-2026-09-22,Tue,1,Screen 1,The Iron Tide,tide,17:40,18:10,20:48,21:08,158,30,20,0,PLF,M,400,prime
-2026-09-22,Tue,1,Screen 1,The Iron Tide,tide,21:20,21:50,24:28,24:48,158,30,20,0,PLF,M,400,late
+2026-09-21,Mon,6,Screen 6,Brass Sunday,brass,14:00,14:20,16:09,16:29,109,20,20,0,2D,PG,180,afternoon
+2026-09-21,Mon,6,Screen 6,The Ninth Floor,ninth,16:40,17:00,18:37,18:57,97,20,20,0,2D,R13,180,afternoon
+2026-09-21,Mon,6,Screen 6,Stitch and Bone,stitch,19:00,19:20,21:18,21:38,118,20,20,0,2D,M,180,prime
+2026-09-21,Mon,6,Screen 6,Meridian,meridian,21:40,22:00,24:23,24:43,143,20,20,0,2D,M,180,late
+2026-09-21,Mon,7,Screen 7,Brass Sunday,brass,10:00,10:20,12:09,12:29,109,20,20,0,2D,PG,180,matinee
+2026-09-21,Mon,7,Screen 7,Stitch and Bone,stitch,12:30,12:50,14:48,15:08,118,20,20,0,2D,M,180,matinee
+2026-09-21,Mon,7,Screen 7,The Cartographer's Daughter,cartographer,15:10,15:30,17:49,18:09,139,20,20,0,2D,M,180,afternoon
+2026-09-21,Mon,7,Screen 7,Salt Road,salt,18:20,18:40,21:12,21:32,152,20,20,0,2D,M,180,prime
+2026-09-21,Mon,7,Screen 7,Hollow Creek,hollow,21:40,22:00,23:41,24:01,101,20,20,0,2D,R16,180,late
+2026-09-21,Mon,8,Screen 8,Anthem for the Small Hours,anthem,10:30,10:50,12:06,12:26,76,20,20,0,2D,E,180,matinee
+2026-09-21,Mon,8,Screen 8,Harbour Lights,harbour,12:30,12:50,14:45,15:05,115,20,20,0,2D,PG,180,matinee
+2026-09-21,Mon,8,Screen 8,Meridian,meridian,15:20,15:40,18:03,18:23,143,20,20,0,2D,M,180,afternoon
+2026-09-21,Mon,8,Screen 8,Brass Sunday,brass,18:30,18:50,20:39,20:59,109,20,20,0,2D,PG,180,prime
+2026-09-21,Mon,8,Screen 8,Stitch and Bone,stitch,21:00,21:20,23:18,23:38,118,20,20,0,2D,M,180,late
+2026-09-21,Mon,9,Screen 9,Salt Road,salt,10:50,11:10,13:42,14:02,152,20,20,0,2D,M,180,matinee
+2026-09-21,Mon,9,Screen 9,Meridian,meridian,14:10,14:30,16:53,17:13,143,20,20,0,2D,M,180,afternoon
+2026-09-21,Mon,9,Screen 9,Hollow Creek,hollow,17:50,18:10,19:51,20:11,101,20,20,0,2D,R16,180,prime
+2026-09-21,Mon,9,Screen 9,Static,static,21:10,21:30,22:54,23:14,84,20,20,0,2D,R16,180,late
+2026-09-21,Mon,10,Screen 10,Meridian,meridian,10:20,10:40,13:03,13:23,143,20,20,0,2D,M,140,matinee
+2026-09-21,Mon,10,Screen 10,Salt Road,salt,14:10,14:30,17:02,17:22,152,20,20,0,2D,M,140,afternoon
+2026-09-21,Mon,10,Screen 10,The Pilgrim Years,pilgrim,17:40,18:00,20:51,21:11,171,20,20,0,2D,M,140,prime
+2026-09-21,Mon,10,Screen 10,Meridian,meridian,21:20,21:40,24:03,24:23,143,20,20,0,2D,M,140,late
+2026-09-21,Mon,11,Screen 11,The Glasshouse,glasshouse,11:00,11:20,13:27,13:47,127,20,20,0,2D,M,140,matinee
+2026-09-21,Mon,11,Screen 11,Anthem for the Small Hours,anthem,14:00,14:20,15:36,15:56,76,20,20,0,2D,E,140,afternoon
+2026-09-21,Mon,11,Screen 11,Stitch and Bone,stitch,16:00,16:20,18:18,18:38,118,20,20,0,2D,M,140,afternoon
+2026-09-21,Mon,11,Screen 11,Wren,wren,18:40,19:00,20:32,20:52,92,20,20,0,2D,PG,140,prime
+2026-09-21,Mon,11,Screen 11,Last Tango in Timaru,tango,21:10,21:30,23:14,23:34,104,20,20,0,2D,M,140,late
+2026-09-21,Mon,12,Screen 12,Wren,wren,10:00,10:20,11:52,12:12,92,20,20,0,2D,PG,140,matinee
+2026-09-21,Mon,12,Screen 12,Quarry,quarry,12:30,12:50,14:53,15:13,123,20,20,0,2D,M,140,matinee
+2026-09-21,Mon,12,Screen 12,The Glasshouse,glasshouse,15:30,15:50,17:57,18:17,127,20,20,0,2D,M,140,afternoon
+2026-09-21,Mon,12,Screen 12,The Ninth Floor,ninth,18:20,18:40,20:17,20:37,97,20,20,0,2D,R13,140,prime
+2026-09-21,Mon,12,Screen 12,Meridian,meridian,20:40,21:00,23:23,23:43,143,20,20,0,2D,M,140,prime
+2026-09-21,Mon,13,Screen 13,The Cartographer's Daughter,cartographer,10:10,10:30,12:49,13:09,139,20,20,0,2D,M,140,matinee
+2026-09-21,Mon,13,Screen 13,Anthem for the Small Hours,anthem,13:10,13:30,14:46,15:06,76,20,20,0,2D,E,140,matinee
+2026-09-21,Mon,13,Screen 13,The Ninth Floor,ninth,15:10,15:30,17:07,17:27,97,20,20,0,2D,R13,140,afternoon
+2026-09-21,Mon,13,Screen 13,The Cartographer's Daughter,cartographer,17:30,17:50,20:09,20:29,139,20,20,0,2D,M,140,prime
+2026-09-21,Mon,13,Screen 13,The Glasshouse,glasshouse,20:40,21:00,23:07,23:27,127,20,20,0,2D,M,140,prime
+2026-09-21,Mon,14,Screen 14,Brass Sunday,brass,11:30,11:50,13:39,13:54,109,20,15,0,2D,PG,90,matinee
+2026-09-21,Mon,14,Screen 14,Wren,wren,14:00,14:20,15:52,16:07,92,20,15,0,2D,PG,90,afternoon
+2026-09-21,Mon,14,Screen 14,Hollow Creek,hollow,16:30,16:50,18:31,18:46,101,20,15,0,2D,R16,90,afternoon
+2026-09-21,Mon,14,Screen 14,Last Tango in Timaru,tango,19:00,19:20,21:04,21:19,104,20,15,0,2D,M,90,prime
+2026-09-21,Mon,14,Screen 14,Hollow Creek,hollow,21:40,22:00,23:41,23:56,101,20,15,0,2D,R16,90,late
+2026-09-21,Mon,15,Screen 15,Wren,wren,10:00,10:20,11:52,12:07,92,20,15,0,2D,PG,90,matinee
+2026-09-21,Mon,15,Screen 15,Last Tango in Timaru,tango,12:10,12:30,14:14,14:29,104,20,15,0,2D,M,90,matinee
+2026-09-21,Mon,15,Screen 15,Last Tango in Timaru,tango,14:30,14:50,16:34,16:49,104,20,15,0,2D,M,90,afternoon
+2026-09-21,Mon,15,Screen 15,Brass Sunday,brass,16:50,17:10,18:59,19:14,109,20,15,0,2D,PG,90,afternoon
+2026-09-21,Mon,15,Screen 15,Static,static,19:30,19:50,21:14,21:29,84,20,15,0,2D,R16,90,prime
+2026-09-21,Mon,15,Screen 15,Salt Road,salt,21:30,21:50,24:22,24:37,152,20,15,0,2D,M,90,late
+2026-09-21,Mon,16,Screen 16,The Ledger,ledger,12:50,13:10,15:24,15:39,134,20,15,0,2D,M,60,matinee
+2026-09-21,Mon,16,Screen 16,Harbour Lights,harbour,15:50,16:10,18:05,18:20,115,20,15,0,2D,PG,60,afternoon
+2026-09-21,Mon,16,Screen 16,Reel Twelve,reel,18:40,19:00,20:51,21:06,111,20,15,0,2D,M,60,prime
+2026-09-21,Mon,16,Screen 16,The Glasshouse,glasshouse,21:20,21:40,23:47,24:02,127,20,15,0,2D,M,60,late
+2026-09-22,Tue,1,Screen 1,The Iron Tide,tide,10:20,10:50,13:28,13:48,158,30,20,0,PLF,M,400,matinee
+2026-09-22,Tue,1,Screen 1,The Iron Tide,tide,14:30,15:00,17:38,17:58,158,30,20,0,PLF,M,400,afternoon
+2026-09-22,Tue,1,Screen 1,The Iron Tide,tide,18:00,18:30,21:08,21:28,158,30,20,0,PLF,M,400,prime
+2026-09-22,Tue,1,Screen 1,The Iron Tide,tide,21:40,22:10,24:48,25:08,158,30,20,0,PLF,M,400,late
 2026-09-22,Tue,2,Screen 2,Paper Lantern,lantern,10:50,11:20,13:31,13:51,131,30,20,0,PLF,PG,400,matinee
-2026-09-22,Tue,2,Screen 2,The Iron Tide,tide,14:00,14:30,17:08,17:28,158,30,20,0,PLF,M,400,afternoon
+2026-09-22,Tue,2,Screen 2,Paper Lantern,lantern,14:20,14:50,17:01,17:21,131,30,20,0,PLF,PG,400,afternoon
 2026-09-22,Tue,2,Screen 2,Paper Lantern,lantern,17:30,18:00,20:11,20:31,131,30,20,0,PLF,PG,400,prime
 2026-09-22,Tue,2,Screen 2,The Iron Tide,tide,20:40,21:10,23:48,24:08,158,30,20,0,PLF,M,400,prime
-2026-09-22,Tue,3,Screen 3,The Orchard Keepers,orchard,10:00,10:25,12:01,12:21,96,25,20,0,3D,G,260,matinee
-2026-09-22,Tue,3,Screen 3,Kites Over Halden,kites,12:40,13:05,14:33,14:53,88,25,20,0,3D,G,260,matinee
-2026-09-22,Tue,3,Screen 3,The Orchard Keepers,orchard,15:00,15:25,17:01,17:21,96,25,20,0,3D,G,260,afternoon
-2026-09-22,Tue,3,Screen 3,Meridian,meridian,18:10,18:30,20:53,21:13,143,20,20,0,2D,M,260,prime
-2026-09-22,Tue,3,Screen 3,Hollow Creek,hollow,21:30,21:50,23:31,23:51,101,20,20,0,2D,R16,260,late
-2026-09-22,Tue,4,Screen 4,The Orchard Keepers,orchard,12:00,12:25,14:01,14:21,96,25,20,0,3D,G,260,matinee
-2026-09-22,Tue,4,Screen 4,The Orchard Keepers,orchard,14:30,14:55,16:31,16:51,96,25,20,0,3D,G,260,afternoon
-2026-09-22,Tue,4,Screen 4,The Orchard Keepers,orchard,17:00,17:25,19:01,19:21,96,25,20,0,3D,G,260,afternoon
-2026-09-22,Tue,4,Screen 4,Static,static,19:30,19:50,21:14,21:34,84,20,20,0,2D,R16,260,prime
-2026-09-22,Tue,4,Screen 4,Meridian,meridian,21:40,22:00,24:23,24:43,143,20,20,0,2D,M,260,late
-2026-09-22,Tue,5,Screen 5,Reef,reef,10:10,10:35,11:43,12:03,68,25,20,0,3D,G,260,matinee
-2026-09-22,Tue,5,Screen 5,The Orchard Keepers,orchard,12:40,13:05,14:41,15:01,96,25,20,0,3D,G,260,matinee
-2026-09-22,Tue,5,Screen 5,Kites Over Halden,kites,15:30,15:55,17:23,17:43,88,25,20,0,3D,G,260,afternoon
+2026-09-22,Tue,3,Screen 3,Kites Over Halden,kites,10:10,10:35,12:03,12:23,88,25,20,0,3D,G,260,matinee
+2026-09-22,Tue,3,Screen 3,The Orchard Keepers,orchard,12:30,12:55,14:31,14:51,96,25,20,0,3D,G,260,matinee
+2026-09-22,Tue,3,Screen 3,Reef,reef,15:40,16:05,17:13,17:33,68,25,20,0,3D,G,260,afternoon
+2026-09-22,Tue,3,Screen 3,Meridian,meridian,17:40,18:00,20:23,20:43,143,20,20,0,2D,M,260,prime
+2026-09-22,Tue,3,Screen 3,The Ninth Floor,ninth,21:00,21:20,22:57,23:17,97,20,20,0,2D,R13,260,late
+2026-09-22,Tue,4,Screen 4,The Orchard Keepers,orchard,10:10,10:35,12:11,12:31,96,25,20,0,3D,G,260,matinee
+2026-09-22,Tue,4,Screen 4,Kites Over Halden,kites,14:00,14:25,15:53,16:13,88,25,20,0,3D,G,260,afternoon
+2026-09-22,Tue,4,Screen 4,The Orchard Keepers,orchard,16:30,16:55,18:31,18:51,96,25,20,0,3D,G,260,afternoon
+2026-09-22,Tue,4,Screen 4,Hollow Creek,hollow,19:00,19:20,21:01,21:21,101,20,20,0,2D,R16,260,prime
+2026-09-22,Tue,4,Screen 4,Salt Road,salt,21:30,21:50,24:22,24:42,152,20,20,0,2D,M,260,late
+2026-09-22,Tue,5,Screen 5,The Orchard Keepers,orchard,10:20,10:45,12:21,12:41,96,25,20,0,3D,G,260,matinee
+2026-09-22,Tue,5,Screen 5,The Orchard Keepers,orchard,12:50,13:15,14:51,15:11,96,25,20,0,3D,G,260,matinee
+2026-09-22,Tue,5,Screen 5,The Orchard Keepers,orchard,15:20,15:45,17:21,17:41,96,25,20,0,3D,G,260,afternoon
 2026-09-22,Tue,5,Screen 5,The Orchard Keepers,orchard,17:50,18:15,19:51,20:11,96,25,20,0,3D,G,260,prime
-2026-09-22,Tue,5,Screen 5,Salt Road,salt,20:20,20:40,23:12,23:32,152,20,20,0,2D,M,260,prime
-2026-09-22,Tue,6,Screen 6,Meridian,meridian,10:10,10:30,12:53,13:13,143,20,20,0,2D,M,180,matinee
-2026-09-22,Tue,6,Screen 6,Quarry,quarry,13:20,13:40,15:43,16:03,123,20,20,0,2D,M,180,matinee
-2026-09-22,Tue,6,Screen 6,Anthem for the Small Hours,anthem,16:10,16:30,17:46,18:06,76,20,20,0,2D,E,180,afternoon
-2026-09-22,Tue,6,Screen 6,Hollow Creek,hollow,18:10,18:30,20:11,20:31,101,20,20,0,2D,R16,180,prime
-2026-09-22,Tue,6,Screen 6,The Glasshouse,glasshouse,20:40,21:00,23:07,23:27,127,20,20,0,2D,M,180,prime
-2026-09-22,Tue,7,Screen 7,Wren,wren,10:20,10:40,12:12,12:32,92,20,20,0,2D,PG,180,matinee
-2026-09-22,Tue,7,Screen 7,Stitch and Bone,stitch,13:00,13:20,15:18,15:38,118,20,20,0,2D,M,180,matinee
-2026-09-22,Tue,7,Screen 7,Meridian,meridian,15:40,16:00,18:23,18:43,143,20,20,0,2D,M,180,afternoon
-2026-09-22,Tue,7,Screen 7,Stitch and Bone,stitch,18:50,19:10,21:08,21:28,118,20,20,0,2D,M,180,prime
-2026-09-22,Tue,7,Screen 7,Hollow Creek,hollow,21:30,21:50,23:31,23:51,101,20,20,0,2D,R16,180,late
-2026-09-22,Tue,8,Screen 8,Anthem for the Small Hours,anthem,10:20,10:40,11:56,12:16,76,20,20,0,2D,E,180,matinee
-2026-09-22,Tue,8,Screen 8,The Glasshouse,glasshouse,12:20,12:40,14:47,15:07,127,20,20,0,2D,M,180,matinee
-2026-09-22,Tue,8,Screen 8,Salt Road,salt,15:10,15:30,18:02,18:22,152,20,20,0,2D,M,180,afternoon
-2026-09-22,Tue,8,Screen 8,Hollow Creek,hollow,18:40,19:00,20:41,21:01,101,20,20,0,2D,R16,180,prime
-2026-09-22,Tue,8,Screen 8,Salt Road,salt,21:10,21:30,24:02,24:22,152,20,20,0,2D,M,180,late
-2026-09-22,Tue,9,Screen 9,Salt Road,salt,10:40,11:00,13:32,13:52,152,20,20,0,2D,M,180,matinee
-2026-09-22,Tue,9,Screen 9,Last Tango in Timaru,tango,14:10,14:30,16:14,16:34,104,20,20,0,2D,M,180,afternoon
-2026-09-22,Tue,9,Screen 9,Brass Sunday,brass,16:50,17:10,18:59,19:19,109,20,20,0,2D,PG,180,afternoon
-2026-09-22,Tue,9,Screen 9,The Ninth Floor,ninth,19:20,19:40,21:17,21:37,97,20,20,0,2D,R13,180,prime
-2026-09-22,Tue,9,Screen 9,Stitch and Bone,stitch,21:40,22:00,23:58,24:18,118,20,20,0,2D,M,180,late
-2026-09-22,Tue,10,Screen 10,Harbour Lights,harbour,10:00,10:20,12:15,12:35,115,20,20,0,2D,PG,140,matinee
-2026-09-22,Tue,10,Screen 10,The Glasshouse,glasshouse,12:40,13:00,15:07,15:27,127,20,20,0,2D,M,140,matinee
-2026-09-22,Tue,10,Screen 10,Brass Sunday,brass,15:40,16:00,17:49,18:09,109,20,20,0,2D,PG,140,afternoon
-2026-09-22,Tue,10,Screen 10,Last Tango in Timaru,tango,18:10,18:30,20:14,20:34,104,20,20,0,2D,M,140,prime
-2026-09-22,Tue,10,Screen 10,The Cartographer's Daughter,cartographer,20:40,21:00,23:19,23:39,139,20,20,0,2D,M,140,prime
-2026-09-22,Tue,11,Screen 11,Wren,wren,10:00,10:20,11:52,12:12,92,20,20,0,2D,PG,140,matinee
-2026-09-22,Tue,11,Screen 11,Brass Sunday,brass,12:20,12:40,14:29,14:49,109,20,20,0,2D,PG,140,matinee
-2026-09-22,Tue,11,Screen 11,Meridian,meridian,14:50,15:10,17:33,17:53,143,20,20,0,2D,M,140,afternoon
-2026-09-22,Tue,11,Screen 11,Meridian,meridian,18:30,18:50,21:13,21:33,143,20,20,0,2D,M,140,prime
-2026-09-22,Tue,11,Screen 11,Meridian,meridian,21:40,22:00,24:23,24:43,143,20,20,0,2D,M,140,late
-2026-09-22,Tue,12,Screen 12,The Cartographer's Daughter,cartographer,10:30,10:50,13:09,13:29,139,20,20,0,2D,M,140,matinee
-2026-09-22,Tue,12,Screen 12,The Ninth Floor,ninth,14:00,14:20,15:57,16:17,97,20,20,0,2D,R13,140,afternoon
-2026-09-22,Tue,12,Screen 12,Hollow Creek,hollow,16:30,16:50,18:31,18:51,101,20,20,0,2D,R16,140,afternoon
-2026-09-22,Tue,12,Screen 12,Brass Sunday,brass,19:00,19:20,21:09,21:29,109,20,20,0,2D,PG,140,prime
-2026-09-22,Tue,12,Screen 12,Salt Road,salt,21:30,21:50,24:22,24:42,152,20,20,0,2D,M,140,late
-2026-09-22,Tue,13,Screen 13,Last Tango in Timaru,tango,11:10,11:30,13:14,13:34,104,20,20,0,2D,M,140,matinee
-2026-09-22,Tue,13,Screen 13,Stitch and Bone,stitch,14:50,15:10,17:08,17:28,118,20,20,0,2D,M,140,afternoon
-2026-09-22,Tue,13,Screen 13,Brass Sunday,brass,17:50,18:10,19:59,20:19,109,20,20,0,2D,PG,140,prime
-2026-09-22,Tue,13,Screen 13,Salt Road,salt,20:30,20:50,23:22,23:42,152,20,20,0,2D,M,140,prime
-2026-09-22,Tue,14,Screen 14,The Ledger,ledger,10:10,10:30,12:44,12:59,134,20,15,0,2D,M,90,matinee
-2026-09-22,Tue,14,Screen 14,Brass Sunday,brass,13:00,13:20,15:09,15:24,109,20,15,0,2D,PG,90,matinee
-2026-09-22,Tue,14,Screen 14,The Ninth Floor,ninth,15:40,16:00,17:37,17:52,97,20,15,0,2D,R13,90,afternoon
-2026-09-22,Tue,14,Screen 14,Harbour Lights,harbour,18:00,18:20,20:15,20:30,115,20,15,0,2D,PG,90,prime
-2026-09-22,Tue,14,Screen 14,The Pilgrim Years,pilgrim,20:30,20:50,23:41,23:56,171,20,15,0,2D,M,90,prime
-2026-09-22,Tue,15,Screen 15,Meridian,meridian,11:00,11:20,13:43,13:58,143,20,15,0,2D,M,90,matinee
-2026-09-22,Tue,15,Screen 15,The Glasshouse,glasshouse,14:00,14:20,16:27,16:42,127,20,15,0,2D,M,90,afternoon
-2026-09-22,Tue,15,Screen 15,Wren,wren,16:50,17:10,18:42,18:57,92,20,15,0,2D,PG,90,afternoon
-2026-09-22,Tue,15,Screen 15,Wren,wren,19:00,19:20,20:52,21:07,92,20,15,0,2D,PG,90,prime
-2026-09-22,Tue,15,Screen 15,The Ninth Floor,ninth,21:10,21:30,23:07,23:22,97,20,15,0,2D,R13,90,late
-2026-09-22,Tue,16,Screen 16,Reel Twelve,reel,12:00,12:20,14:11,14:26,111,20,15,0,2D,M,60,matinee
-2026-09-22,Tue,16,Screen 16,Harbour Lights,harbour,16:10,16:30,18:25,18:40,115,20,15,0,2D,PG,60,afternoon
-2026-09-22,Tue,16,Screen 16,The Ninth Floor,ninth,18:40,19:00,20:37,20:52,97,20,15,0,2D,R13,60,prime
-2026-09-22,Tue,16,Screen 16,The Ninth Floor,ninth,21:00,21:20,22:57,23:12,97,20,15,0,2D,R13,60,late
-2026-09-23,Wed,1,Screen 1,The Iron Tide,tide,10:40,11:10,13:48,14:08,158,30,20,0,PLF,M,400,matinee
-2026-09-23,Wed,1,Screen 1,The Iron Tide,tide,14:10,14:40,17:18,17:38,158,30,20,0,PLF,M,400,afternoon
-2026-09-23,Wed,1,Screen 1,The Iron Tide,tide,17:40,18:10,20:48,21:08,158,30,20,0,PLF,M,400,prime
+2026-09-22,Tue,5,Screen 5,Salt Road,salt,20:40,21:00,23:32,23:52,152,20,20,0,2D,M,260,prime
+2026-09-22,Tue,6,Screen 6,Salt Road,salt,10:40,11:00,13:32,13:52,152,20,20,0,2D,M,180,matinee
+2026-09-22,Tue,6,Screen 6,Brass Sunday,brass,14:00,14:20,16:09,16:29,109,20,20,0,2D,PG,180,afternoon
+2026-09-22,Tue,6,Screen 6,The Ninth Floor,ninth,16:30,16:50,18:27,18:47,97,20,20,0,2D,R13,180,afternoon
+2026-09-22,Tue,6,Screen 6,Stitch and Bone,stitch,18:50,19:10,21:08,21:28,118,20,20,0,2D,M,180,prime
+2026-09-22,Tue,6,Screen 6,Meridian,meridian,21:30,21:50,24:13,24:33,143,20,20,0,2D,M,180,late
+2026-09-22,Tue,7,Screen 7,Anthem for the Small Hours,anthem,10:00,10:20,11:36,11:56,76,20,20,0,2D,E,180,matinee
+2026-09-22,Tue,7,Screen 7,Stitch and Bone,stitch,12:00,12:20,14:18,14:38,118,20,20,0,2D,M,180,matinee
+2026-09-22,Tue,7,Screen 7,The Cartographer's Daughter,cartographer,14:50,15:10,17:29,17:49,139,20,20,0,2D,M,180,afternoon
+2026-09-22,Tue,7,Screen 7,Salt Road,salt,17:50,18:10,20:42,21:02,152,20,20,0,2D,M,180,prime
+2026-09-22,Tue,7,Screen 7,Stitch and Bone,stitch,21:20,21:40,23:38,23:58,118,20,20,0,2D,M,180,late
+2026-09-22,Tue,8,Screen 8,Brass Sunday,brass,10:00,10:20,12:09,12:29,109,20,20,0,2D,PG,180,matinee
+2026-09-22,Tue,8,Screen 8,Harbour Lights,harbour,12:40,13:00,14:55,15:15,115,20,20,0,2D,PG,180,matinee
+2026-09-22,Tue,8,Screen 8,Meridian,meridian,15:20,15:40,18:03,18:23,143,20,20,0,2D,M,180,afternoon
+2026-09-22,Tue,8,Screen 8,Hollow Creek,hollow,18:30,18:50,20:31,20:51,101,20,20,0,2D,R16,180,prime
+2026-09-22,Tue,8,Screen 8,Hollow Creek,hollow,21:00,21:20,23:01,23:21,101,20,20,0,2D,R16,180,late
+2026-09-22,Tue,9,Screen 9,Meridian,meridian,10:40,11:00,13:23,13:43,143,20,20,0,2D,M,180,matinee
+2026-09-22,Tue,9,Screen 9,Meridian,meridian,14:40,15:00,17:23,17:43,143,20,20,0,2D,M,180,afternoon
+2026-09-22,Tue,9,Screen 9,Brass Sunday,brass,17:50,18:10,19:59,20:19,109,20,20,0,2D,PG,180,prime
+2026-09-22,Tue,9,Screen 9,Harbour Lights,harbour,20:30,20:50,22:45,23:05,115,20,20,0,2D,PG,180,prime
+2026-09-22,Tue,10,Screen 10,Meridian,meridian,11:00,11:20,13:43,14:03,143,20,20,0,2D,M,140,matinee
+2026-09-22,Tue,10,Screen 10,Salt Road,salt,14:20,14:40,17:12,17:32,152,20,20,0,2D,M,140,afternoon
+2026-09-22,Tue,10,Screen 10,The Pilgrim Years,pilgrim,17:40,18:00,20:51,21:11,171,20,20,0,2D,M,140,prime
+2026-09-22,Tue,10,Screen 10,Meridian,meridian,21:20,21:40,24:03,24:23,143,20,20,0,2D,M,140,late
+2026-09-22,Tue,11,Screen 11,The Glasshouse,glasshouse,11:10,11:30,13:37,13:57,127,20,20,0,2D,M,140,matinee
+2026-09-22,Tue,11,Screen 11,Stitch and Bone,stitch,14:00,14:20,16:18,16:38,118,20,20,0,2D,M,140,afternoon
+2026-09-22,Tue,11,Screen 11,Anthem for the Small Hours,anthem,16:40,17:00,18:16,18:36,76,20,20,0,2D,E,140,afternoon
+2026-09-22,Tue,11,Screen 11,Wren,wren,18:50,19:10,20:42,21:02,92,20,20,0,2D,PG,140,prime
+2026-09-22,Tue,11,Screen 11,Static,static,21:20,21:40,23:04,23:24,84,20,20,0,2D,R16,140,late
+2026-09-22,Tue,12,Screen 12,Wren,wren,10:10,10:30,12:02,12:22,92,20,20,0,2D,PG,140,matinee
+2026-09-22,Tue,12,Screen 12,Quarry,quarry,12:30,12:50,14:53,15:13,123,20,20,0,2D,M,140,matinee
+2026-09-22,Tue,12,Screen 12,The Ninth Floor,ninth,15:20,15:40,17:17,17:37,97,20,20,0,2D,R13,140,afternoon
+2026-09-22,Tue,12,Screen 12,The Glasshouse,glasshouse,17:40,18:00,20:07,20:27,127,20,20,0,2D,M,140,prime
+2026-09-22,Tue,12,Screen 12,Meridian,meridian,20:30,20:50,23:13,23:33,143,20,20,0,2D,M,140,prime
+2026-09-22,Tue,13,Screen 13,The Cartographer's Daughter,cartographer,10:00,10:20,12:39,12:59,139,20,20,0,2D,M,140,matinee
+2026-09-22,Tue,13,Screen 13,Anthem for the Small Hours,anthem,13:00,13:20,14:36,14:56,76,20,20,0,2D,E,140,matinee
+2026-09-22,Tue,13,Screen 13,The Glasshouse,glasshouse,15:10,15:30,17:37,17:57,127,20,20,0,2D,M,140,afternoon
+2026-09-22,Tue,13,Screen 13,The Ninth Floor,ninth,18:00,18:20,19:57,20:17,97,20,20,0,2D,R13,140,prime
+2026-09-22,Tue,13,Screen 13,The Cartographer's Daughter,cartographer,20:30,20:50,23:09,23:29,139,20,20,0,2D,M,140,prime
+2026-09-22,Tue,14,Screen 14,Brass Sunday,brass,10:50,11:10,12:59,13:14,109,20,15,0,2D,PG,90,matinee
+2026-09-22,Tue,14,Screen 14,Wren,wren,14:10,14:30,16:02,16:17,92,20,15,0,2D,PG,90,afternoon
+2026-09-22,Tue,14,Screen 14,Hollow Creek,hollow,16:40,17:00,18:41,18:56,101,20,15,0,2D,R16,90,afternoon
+2026-09-22,Tue,14,Screen 14,Last Tango in Timaru,tango,19:00,19:20,21:04,21:19,104,20,15,0,2D,M,90,prime
+2026-09-22,Tue,14,Screen 14,Hollow Creek,hollow,21:40,22:00,23:41,23:56,101,20,15,0,2D,R16,90,late
+2026-09-22,Tue,15,Screen 15,Last Tango in Timaru,tango,10:20,10:40,12:24,12:39,104,20,15,0,2D,M,90,matinee
+2026-09-22,Tue,15,Screen 15,Wren,wren,12:40,13:00,14:32,14:47,92,20,15,0,2D,PG,90,matinee
+2026-09-22,Tue,15,Screen 15,Brass Sunday,brass,14:50,15:10,16:59,17:14,109,20,15,0,2D,PG,90,afternoon
+2026-09-22,Tue,15,Screen 15,Last Tango in Timaru,tango,17:20,17:40,19:24,19:39,104,20,15,0,2D,M,90,afternoon
+2026-09-22,Tue,15,Screen 15,Static,static,19:40,20:00,21:24,21:39,84,20,15,0,2D,R16,90,prime
+2026-09-22,Tue,15,Screen 15,Salt Road,salt,21:40,22:00,24:32,24:47,152,20,15,0,2D,M,90,late
+2026-09-22,Tue,16,Screen 16,The Ledger,ledger,12:50,13:10,15:24,15:39,134,20,15,0,2D,M,60,matinee
+2026-09-22,Tue,16,Screen 16,Harbour Lights,harbour,15:40,16:00,17:55,18:10,115,20,15,0,2D,PG,60,afternoon
+2026-09-22,Tue,16,Screen 16,Reel Twelve,reel,18:40,19:00,20:51,21:06,111,20,15,0,2D,M,60,prime
+2026-09-22,Tue,16,Screen 16,The Glasshouse,glasshouse,21:30,21:50,23:57,24:12,127,20,15,0,2D,M,60,late
+2026-09-23,Wed,1,Screen 1,The Iron Tide,tide,10:50,11:20,13:58,14:18,158,30,20,0,PLF,M,400,matinee
+2026-09-23,Wed,1,Screen 1,The Iron Tide,tide,14:20,14:50,17:28,17:48,158,30,20,0,PLF,M,400,afternoon
+2026-09-23,Wed,1,Screen 1,The Iron Tide,tide,17:50,18:20,20:58,21:18,158,30,20,0,PLF,M,400,prime
 2026-09-23,Wed,1,Screen 1,The Iron Tide,tide,21:20,21:50,24:28,24:48,158,30,20,0,PLF,M,400,late
-2026-09-23,Wed,2,Screen 2,Paper Lantern,lantern,10:50,11:20,13:31,13:51,131,30,20,0,PLF,PG,400,matinee
+2026-09-23,Wed,2,Screen 2,Paper Lantern,lantern,10:40,11:10,13:21,13:41,131,30,20,0,PLF,PG,400,matinee
 2026-09-23,Wed,2,Screen 2,The Iron Tide,tide,14:00,14:30,17:08,17:28,158,30,20,0,PLF,M,400,afternoon
 2026-09-23,Wed,2,Screen 2,Paper Lantern,lantern,17:30,18:00,20:11,20:31,131,30,20,0,PLF,PG,400,prime
 2026-09-23,Wed,2,Screen 2,The Iron Tide,tide,20:40,21:10,23:48,24:08,158,30,20,0,PLF,M,400,prime
-2026-09-23,Wed,3,Screen 3,Reef,reef,10:10,10:35,11:43,12:03,68,25,20,0,3D,G,260,matinee
-2026-09-23,Wed,3,Screen 3,Kites Over Halden,kites,12:40,13:05,14:33,14:53,88,25,20,0,3D,G,260,matinee
-2026-09-23,Wed,3,Screen 3,The Orchard Keepers,orchard,15:30,15:55,17:31,17:51,96,25,20,0,3D,G,260,afternoon
-2026-09-23,Wed,3,Screen 3,Meridian,meridian,18:20,18:40,21:03,21:23,143,20,20,0,2D,M,260,prime
-2026-09-23,Wed,3,Screen 3,Hollow Creek,hollow,21:30,21:50,23:31,23:51,101,20,20,0,2D,R16,260,late
-2026-09-23,Wed,4,Screen 4,Anthem for the Small Hours,anthem,10:00,10:20,11:36,11:56,76,20,20,0,2D,E,260,matinee
-2026-09-23,Wed,4,Screen 4,The Orchard Keepers,orchard,12:00,12:25,14:01,14:21,96,25,20,0,3D,G,260,matinee
-2026-09-23,Wed,4,Screen 4,The Orchard Keepers,orchard,14:30,14:55,16:31,16:51,96,25,20,0,3D,G,260,afternoon
-2026-09-23,Wed,4,Screen 4,The Orchard Keepers,orchard,17:00,17:25,19:01,19:21,96,25,20,0,3D,G,260,afternoon
-2026-09-23,Wed,4,Screen 4,Static,static,19:30,19:50,21:14,21:34,84,20,20,0,2D,R16,260,prime
-2026-09-23,Wed,4,Screen 4,Meridian,meridian,21:40,22:00,24:23,24:43,143,20,20,0,2D,M,260,late
-2026-09-23,Wed,5,Screen 5,The Orchard Keepers,orchard,10:30,10:55,12:31,12:51,96,25,20,0,3D,G,260,matinee
-2026-09-23,Wed,5,Screen 5,The Orchard Keepers,orchard,13:00,13:25,15:01,15:21,96,25,20,0,3D,G,260,matinee
-2026-09-23,Wed,5,Screen 5,Kites Over Halden,kites,15:30,15:55,17:23,17:43,88,25,20,0,3D,G,260,afternoon
-2026-09-23,Wed,5,Screen 5,The Orchard Keepers,orchard,17:50,18:15,19:51,20:11,96,25,20,0,3D,G,260,prime
-2026-09-23,Wed,5,Screen 5,Salt Road,salt,20:20,20:40,23:12,23:32,152,20,20,0,2D,M,260,prime
-2026-09-23,Wed,6,Screen 6,Meridian,meridian,10:10,10:30,12:53,13:13,143,20,20,0,2D,M,180,matinee
-2026-09-23,Wed,6,Screen 6,Quarry,quarry,13:20,13:40,15:43,16:03,123,20,20,0,2D,M,180,matinee
-2026-09-23,Wed,6,Screen 6,Anthem for the Small Hours,anthem,16:10,16:30,17:46,18:06,76,20,20,0,2D,E,180,afternoon
-2026-09-23,Wed,6,Screen 6,Hollow Creek,hollow,18:10,18:30,20:11,20:31,101,20,20,0,2D,R16,180,prime
-2026-09-23,Wed,6,Screen 6,The Glasshouse,glasshouse,20:40,21:00,23:07,23:27,127,20,20,0,2D,M,180,prime
-2026-09-23,Wed,7,Screen 7,Stitch and Bone,stitch,10:10,10:30,12:28,12:48,118,20,20,0,2D,M,180,matinee
-2026-09-23,Wed,7,Screen 7,The Glasshouse,glasshouse,12:50,13:10,15:17,15:37,127,20,20,0,2D,M,180,matinee
-2026-09-23,Wed,7,Screen 7,Salt Road,salt,15:40,16:00,18:32,18:52,152,20,20,0,2D,M,180,afternoon
-2026-09-23,Wed,7,Screen 7,Stitch and Bone,stitch,19:00,19:20,21:18,21:38,118,20,20,0,2D,M,180,prime
-2026-09-23,Wed,7,Screen 7,Stitch and Bone,stitch,21:40,22:00,23:58,24:18,118,20,20,0,2D,M,180,late
-2026-09-23,Wed,8,Screen 8,Anthem for the Small Hours,anthem,10:20,10:40,11:56,12:16,76,20,20,0,2D,E,180,matinee
-2026-09-23,Wed,8,Screen 8,Wren,wren,12:30,12:50,14:22,14:42,92,20,20,0,2D,PG,180,matinee
-2026-09-23,Wed,8,Screen 8,Meridian,meridian,15:00,15:20,17:43,18:03,143,20,20,0,2D,M,180,afternoon
-2026-09-23,Wed,8,Screen 8,Hollow Creek,hollow,18:40,19:00,20:41,21:01,101,20,20,0,2D,R16,180,prime
-2026-09-23,Wed,8,Screen 8,Salt Road,salt,21:20,21:40,24:12,24:32,152,20,20,0,2D,M,180,late
-2026-09-23,Wed,9,Screen 9,Salt Road,salt,10:30,10:50,13:22,13:42,152,20,20,0,2D,M,180,matinee
-2026-09-23,Wed,9,Screen 9,Brass Sunday,brass,14:10,14:30,16:19,16:39,109,20,20,0,2D,PG,180,afternoon
-2026-09-23,Wed,9,Screen 9,Last Tango in Timaru,tango,16:40,17:00,18:44,19:04,104,20,20,0,2D,M,180,afternoon
-2026-09-23,Wed,9,Screen 9,The Ninth Floor,ninth,19:10,19:30,21:07,21:27,97,20,20,0,2D,R13,180,prime
-2026-09-23,Wed,9,Screen 9,Hollow Creek,hollow,21:40,22:00,23:41,24:01,101,20,20,0,2D,R16,180,late
-2026-09-23,Wed,10,Screen 10,Harbour Lights,harbour,10:20,10:40,12:35,12:55,115,20,20,0,2D,PG,140,matinee
-2026-09-23,Wed,10,Screen 10,Last Tango in Timaru,tango,13:00,13:20,15:04,15:24,104,20,20,0,2D,M,140,matinee
-2026-09-23,Wed,10,Screen 10,Brass Sunday,brass,15:40,16:00,17:49,18:09,109,20,20,0,2D,PG,140,afternoon
-2026-09-23,Wed,10,Screen 10,Last Tango in Timaru,tango,18:10,18:30,20:14,20:34,104,20,20,0,2D,M,140,prime
-2026-09-23,Wed,10,Screen 10,The Cartographer's Daughter,cartographer,20:40,21:00,23:19,23:39,139,20,20,0,2D,M,140,prime
-2026-09-23,Wed,11,Screen 11,Wren,wren,10:00,10:20,11:52,12:12,92,20,20,0,2D,PG,140,matinee
-2026-09-23,Wed,11,Screen 11,Brass Sunday,brass,12:20,12:40,14:29,14:49,109,20,20,0,2D,PG,140,matinee
-2026-09-23,Wed,11,Screen 11,Stitch and Bone,stitch,15:10,15:30,17:28,17:48,118,20,20,0,2D,M,140,afternoon
-2026-09-23,Wed,11,Screen 11,Meridian,meridian,17:50,18:10,20:33,20:53,143,20,20,0,2D,M,140,prime
-2026-09-23,Wed,11,Screen 11,Salt Road,salt,21:00,21:20,23:52,24:12,152,20,20,0,2D,M,140,late
-2026-09-23,Wed,12,Screen 12,Stitch and Bone,stitch,11:00,11:20,13:18,13:38,118,20,20,0,2D,M,140,matinee
-2026-09-23,Wed,12,Screen 12,The Ninth Floor,ninth,14:10,14:30,16:07,16:27,97,20,20,0,2D,R13,140,afternoon
-2026-09-23,Wed,12,Screen 12,Hollow Creek,hollow,16:30,16:50,18:31,18:51,101,20,20,0,2D,R16,140,afternoon
-2026-09-23,Wed,12,Screen 12,Brass Sunday,brass,19:00,19:20,21:09,21:29,109,20,20,0,2D,PG,140,prime
-2026-09-23,Wed,12,Screen 12,Meridian,meridian,21:30,21:50,24:13,24:33,143,20,20,0,2D,M,140,late
-2026-09-23,Wed,13,Screen 13,The Cartographer's Daughter,cartographer,10:50,11:10,13:29,13:49,139,20,20,0,2D,M,140,matinee
-2026-09-23,Wed,13,Screen 13,Meridian,meridian,14:20,14:40,17:03,17:23,143,20,20,0,2D,M,140,afternoon
-2026-09-23,Wed,13,Screen 13,Brass Sunday,brass,17:30,17:50,19:39,19:59,109,20,20,0,2D,PG,140,prime
-2026-09-23,Wed,13,Screen 13,Salt Road,salt,20:00,20:20,22:52,23:12,152,20,20,0,2D,M,140,prime
-2026-09-23,Wed,14,Screen 14,The Ledger,ledger,10:00,10:20,12:34,12:49,134,20,15,0,2D,M,90,matinee
-2026-09-23,Wed,14,Screen 14,Brass Sunday,brass,12:50,13:10,14:59,15:14,109,20,15,0,2D,PG,90,matinee
-2026-09-23,Wed,14,Screen 14,The Ninth Floor,ninth,15:20,15:40,17:17,17:32,97,20,15,0,2D,R13,90,afternoon
-2026-09-23,Wed,14,Screen 14,Harbour Lights,harbour,18:00,18:20,20:15,20:30,115,20,15,0,2D,PG,90,prime
-2026-09-23,Wed,14,Screen 14,The Pilgrim Years,pilgrim,20:30,20:50,23:41,23:56,171,20,15,0,2D,M,90,prime
-2026-09-23,Wed,15,Screen 15,Meridian,meridian,10:50,11:10,13:33,13:48,143,20,15,0,2D,M,90,matinee
-2026-09-23,Wed,15,Screen 15,The Glasshouse,glasshouse,14:00,14:20,16:27,16:42,127,20,15,0,2D,M,90,afternoon
-2026-09-23,Wed,15,Screen 15,Wren,wren,16:50,17:10,18:42,18:57,92,20,15,0,2D,PG,90,afternoon
-2026-09-23,Wed,15,Screen 15,Wren,wren,19:00,19:20,20:52,21:07,92,20,15,0,2D,PG,90,prime
-2026-09-23,Wed,15,Screen 15,The Ninth Floor,ninth,21:10,21:30,23:07,23:22,97,20,15,0,2D,R13,90,late
-2026-09-23,Wed,16,Screen 16,Reel Twelve,reel,12:00,12:20,14:11,14:26,111,20,15,0,2D,M,60,matinee
-2026-09-23,Wed,16,Screen 16,Harbour Lights,harbour,15:10,15:30,17:25,17:40,115,20,15,0,2D,PG,60,afternoon
-2026-09-23,Wed,16,Screen 16,The Ninth Floor,ninth,17:50,18:10,19:47,20:02,97,20,15,0,2D,R13,60,prime
-2026-09-23,Wed,16,Screen 16,Stitch and Bone,stitch,20:30,20:50,22:48,23:03,118,20,15,0,2D,M,60,prime
+2026-09-23,Wed,3,Screen 3,The Orchard Keepers,orchard,10:00,10:25,12:01,12:21,96,25,20,0,3D,G,260,matinee
+2026-09-23,Wed,3,Screen 3,The Orchard Keepers,orchard,12:40,13:05,14:41,15:01,96,25,20,0,3D,G,260,matinee
+2026-09-23,Wed,3,Screen 3,Kites Over Halden,kites,15:20,15:45,17:13,17:33,88,25,20,0,3D,G,260,afternoon
+2026-09-23,Wed,3,Screen 3,Meridian,meridian,17:40,18:00,20:23,20:43,143,20,20,0,2D,M,260,prime
+2026-09-23,Wed,3,Screen 3,The Ninth Floor,ninth,21:00,21:20,22:57,23:17,97,20,20,0,2D,R13,260,late
+2026-09-23,Wed,4,Screen 4,Anthem for the Small Hours,anthem,10:10,10:30,11:46,12:06,76,20,20,0,2D,E,260,matinee
+2026-09-23,Wed,4,Screen 4,Kites Over Halden,kites,12:10,12:35,14:03,14:23,88,25,20,0,3D,G,260,matinee
+2026-09-23,Wed,4,Screen 4,Reef,reef,14:30,14:55,16:03,16:23,68,25,20,0,3D,G,260,afternoon
+2026-09-23,Wed,4,Screen 4,The Orchard Keepers,orchard,16:30,16:55,18:31,18:51,96,25,20,0,3D,G,260,afternoon
+2026-09-23,Wed,4,Screen 4,Hollow Creek,hollow,19:00,19:20,21:01,21:21,101,20,20,0,2D,R16,260,prime
+2026-09-23,Wed,4,Screen 4,Salt Road,salt,21:30,21:50,24:22,24:42,152,20,20,0,2D,M,260,late
+2026-09-23,Wed,5,Screen 5,The Orchard Keepers,orchard,10:20,10:45,12:21,12:41,96,25,20,0,3D,G,260,matinee
+2026-09-23,Wed,5,Screen 5,The Orchard Keepers,orchard,12:50,13:15,14:51,15:11,96,25,20,0,3D,G,260,matinee
+2026-09-23,Wed,5,Screen 5,The Orchard Keepers,orchard,15:30,15:55,17:31,17:51,96,25,20,0,3D,G,260,afternoon
+2026-09-23,Wed,5,Screen 5,The Orchard Keepers,orchard,18:00,18:25,20:01,20:21,96,25,20,0,3D,G,260,prime
+2026-09-23,Wed,5,Screen 5,Salt Road,salt,20:30,20:50,23:22,23:42,152,20,20,0,2D,M,260,prime
+2026-09-23,Wed,6,Screen 6,Salt Road,salt,10:30,10:50,13:22,13:42,152,20,20,0,2D,M,180,matinee
+2026-09-23,Wed,6,Screen 6,The Ninth Floor,ninth,14:00,14:20,15:57,16:17,97,20,20,0,2D,R13,180,afternoon
+2026-09-23,Wed,6,Screen 6,Brass Sunday,brass,16:20,16:40,18:29,18:49,109,20,20,0,2D,PG,180,afternoon
+2026-09-23,Wed,6,Screen 6,Stitch and Bone,stitch,18:50,19:10,21:08,21:28,118,20,20,0,2D,M,180,prime
+2026-09-23,Wed,6,Screen 6,Meridian,meridian,21:30,21:50,24:13,24:33,143,20,20,0,2D,M,180,late
+2026-09-23,Wed,7,Screen 7,Anthem for the Small Hours,anthem,10:00,10:20,11:36,11:56,76,20,20,0,2D,E,180,matinee
+2026-09-23,Wed,7,Screen 7,Stitch and Bone,stitch,12:00,12:20,14:18,14:38,118,20,20,0,2D,M,180,matinee
+2026-09-23,Wed,7,Screen 7,The Cartographer's Daughter,cartographer,15:00,15:20,17:39,17:59,139,20,20,0,2D,M,180,afternoon
+2026-09-23,Wed,7,Screen 7,Brass Sunday,brass,18:40,19:00,20:49,21:09,109,20,20,0,2D,PG,180,prime
+2026-09-23,Wed,7,Screen 7,Stitch and Bone,stitch,21:30,21:50,23:48,24:08,118,20,20,0,2D,M,180,late
+2026-09-23,Wed,8,Screen 8,Harbour Lights,harbour,10:30,10:50,12:45,13:05,115,20,20,0,2D,PG,180,matinee
+2026-09-23,Wed,8,Screen 8,Brass Sunday,brass,13:10,13:30,15:19,15:39,109,20,20,0,2D,PG,180,matinee
+2026-09-23,Wed,8,Screen 8,Meridian,meridian,15:40,16:00,18:23,18:43,143,20,20,0,2D,M,180,afternoon
+2026-09-23,Wed,8,Screen 8,Hollow Creek,hollow,18:50,19:10,20:51,21:11,101,20,20,0,2D,R16,180,prime
+2026-09-23,Wed,8,Screen 8,Hollow Creek,hollow,21:20,21:40,23:21,23:41,101,20,20,0,2D,R16,180,late
+2026-09-23,Wed,9,Screen 9,Meridian,meridian,11:30,11:50,14:13,14:33,143,20,20,0,2D,M,180,matinee
+2026-09-23,Wed,9,Screen 9,Stitch and Bone,stitch,15:10,15:30,17:28,17:48,118,20,20,0,2D,M,180,afternoon
+2026-09-23,Wed,9,Screen 9,Harbour Lights,harbour,17:50,18:10,20:05,20:25,115,20,20,0,2D,PG,180,prime
+2026-09-23,Wed,9,Screen 9,Salt Road,salt,20:30,20:50,23:22,23:42,152,20,20,0,2D,M,180,prime
+2026-09-23,Wed,10,Screen 10,Meridian,meridian,11:00,11:20,13:43,14:03,143,20,20,0,2D,M,140,matinee
+2026-09-23,Wed,10,Screen 10,Salt Road,salt,14:20,14:40,17:12,17:32,152,20,20,0,2D,M,140,afternoon
+2026-09-23,Wed,10,Screen 10,The Pilgrim Years,pilgrim,17:40,18:00,20:51,21:11,171,20,20,0,2D,M,140,prime
+2026-09-23,Wed,10,Screen 10,Meridian,meridian,21:20,21:40,24:03,24:23,143,20,20,0,2D,M,140,late
+2026-09-23,Wed,11,Screen 11,The Glasshouse,glasshouse,11:10,11:30,13:37,13:57,127,20,20,0,2D,M,140,matinee
+2026-09-23,Wed,11,Screen 11,Stitch and Bone,stitch,14:00,14:20,16:18,16:38,118,20,20,0,2D,M,140,afternoon
+2026-09-23,Wed,11,Screen 11,Anthem for the Small Hours,anthem,16:40,17:00,18:16,18:36,76,20,20,0,2D,E,140,afternoon
+2026-09-23,Wed,11,Screen 11,Wren,wren,18:40,19:00,20:32,20:52,92,20,20,0,2D,PG,140,prime
+2026-09-23,Wed,11,Screen 11,Static,static,21:10,21:30,22:54,23:14,84,20,20,0,2D,R16,140,late
+2026-09-23,Wed,12,Screen 12,Wren,wren,10:10,10:30,12:02,12:22,92,20,20,0,2D,PG,140,matinee
+2026-09-23,Wed,12,Screen 12,Quarry,quarry,12:30,12:50,14:53,15:13,123,20,20,0,2D,M,140,matinee
+2026-09-23,Wed,12,Screen 12,The Ninth Floor,ninth,15:20,15:40,17:17,17:37,97,20,20,0,2D,R13,140,afternoon
+2026-09-23,Wed,12,Screen 12,The Glasshouse,glasshouse,17:40,18:00,20:07,20:27,127,20,20,0,2D,M,140,prime
+2026-09-23,Wed,12,Screen 12,Meridian,meridian,20:30,20:50,23:13,23:33,143,20,20,0,2D,M,140,prime
+2026-09-23,Wed,13,Screen 13,Anthem for the Small Hours,anthem,10:30,10:50,12:06,12:26,76,20,20,0,2D,E,140,matinee
+2026-09-23,Wed,13,Screen 13,The Cartographer's Daughter,cartographer,12:30,12:50,15:09,15:29,139,20,20,0,2D,M,140,matinee
+2026-09-23,Wed,13,Screen 13,The Glasshouse,glasshouse,15:30,15:50,17:57,18:17,127,20,20,0,2D,M,140,afternoon
+2026-09-23,Wed,13,Screen 13,The Ninth Floor,ninth,18:20,18:40,20:17,20:37,97,20,20,0,2D,R13,140,prime
+2026-09-23,Wed,13,Screen 13,The Cartographer's Daughter,cartographer,20:40,21:00,23:19,23:39,139,20,20,0,2D,M,140,prime
+2026-09-23,Wed,14,Screen 14,Brass Sunday,brass,10:40,11:00,12:49,13:04,109,20,15,0,2D,PG,90,matinee
+2026-09-23,Wed,14,Screen 14,Wren,wren,14:10,14:30,16:02,16:17,92,20,15,0,2D,PG,90,afternoon
+2026-09-23,Wed,14,Screen 14,Hollow Creek,hollow,16:30,16:50,18:31,18:46,101,20,15,0,2D,R16,90,afternoon
+2026-09-23,Wed,14,Screen 14,Last Tango in Timaru,tango,19:20,19:40,21:24,21:39,104,20,15,0,2D,M,90,prime
+2026-09-23,Wed,14,Screen 14,Hollow Creek,hollow,21:40,22:00,23:41,23:56,101,20,15,0,2D,R16,90,late
+2026-09-23,Wed,15,Screen 15,Last Tango in Timaru,tango,10:20,10:40,12:24,12:39,104,20,15,0,2D,M,90,matinee
+2026-09-23,Wed,15,Screen 15,Wren,wren,12:40,13:00,14:32,14:47,92,20,15,0,2D,PG,90,matinee
+2026-09-23,Wed,15,Screen 15,Brass Sunday,brass,14:50,15:10,16:59,17:14,109,20,15,0,2D,PG,90,afternoon
+2026-09-23,Wed,15,Screen 15,Last Tango in Timaru,tango,17:20,17:40,19:24,19:39,104,20,15,0,2D,M,90,afternoon
+2026-09-23,Wed,15,Screen 15,Static,static,19:40,20:00,21:24,21:39,84,20,15,0,2D,R16,90,prime
+2026-09-23,Wed,15,Screen 15,Salt Road,salt,21:40,22:00,24:32,24:47,152,20,15,0,2D,M,90,late
+2026-09-23,Wed,16,Screen 16,The Ledger,ledger,12:50,13:10,15:24,15:39,134,20,15,0,2D,M,60,matinee
+2026-09-23,Wed,16,Screen 16,Harbour Lights,harbour,15:40,16:00,17:55,18:10,115,20,15,0,2D,PG,60,afternoon
+2026-09-23,Wed,16,Screen 16,Reel Twelve,reel,18:20,18:40,20:31,20:46,111,20,15,0,2D,M,60,prime
+2026-09-23,Wed,16,Screen 16,The Glasshouse,glasshouse,20:50,21:10,23:17,23:32,127,20,15,0,2D,M,60,late

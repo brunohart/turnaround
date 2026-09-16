@@ -1,11 +1,11 @@
 date,day,screen,screen_name,title,film,start,feature_start,feature_end,clear,runtime,preshow,clean,credits,format,rating,capacity,daypart
-2026-09-11,Fri,1,Screen 1,The Long Voyage,odyssey,10:30,10:50,13:38,13:58,168,20,20,0,PLF,M,320,matinee
-2026-09-11,Fri,1,Screen 1,The Long Voyage,odyssey,14:10,14:30,17:18,17:38,168,20,20,0,PLF,M,320,afternoon
-2026-09-11,Fri,1,Screen 1,The Long Voyage,odyssey,17:40,18:00,20:48,21:08,168,20,20,0,PLF,M,320,prime
-2026-09-11,Fri,1,Screen 1,The Long Voyage,odyssey,21:15,21:35,24:23,24:43,168,20,20,0,PLF,M,320,late
-2026-09-11,Fri,2,Screen 2,Harvest Moon,harvest,10:45,11:05,12:49,13:09,104,20,20,0,2D,PG,180,matinee
+2026-09-11,Fri,1,Screen 1,The Long Voyage,odyssey,10:40,11:00,13:48,14:08,168,20,20,0,PLF,M,320,matinee
+2026-09-11,Fri,1,Screen 1,The Long Voyage,odyssey,14:20,14:40,17:28,17:48,168,20,20,0,PLF,M,320,afternoon
+2026-09-11,Fri,1,Screen 1,The Long Voyage,odyssey,17:50,18:10,20:58,21:18,168,20,20,0,PLF,M,320,prime
+2026-09-11,Fri,1,Screen 1,The Long Voyage,odyssey,21:20,21:40,24:28,24:48,168,20,20,0,PLF,M,320,late
+2026-09-11,Fri,2,Screen 2,Harvest Moon,harvest,10:20,10:40,12:24,12:44,104,20,20,0,2D,PG,180,matinee
 2026-09-11,Fri,2,Screen 2,The Bee Kingdom,bees,14:00,14:20,15:44,16:04,84,20,20,0,3D,G,180,afternoon
-2026-09-11,Fri,2,Screen 2,Dead Signal,signal,16:05,16:25,17:57,18:17,92,20,20,0,2D,R16,180,afternoon
+2026-09-11,Fri,2,Screen 2,Dead Signal,signal,16:10,16:30,18:02,18:22,92,20,20,0,2D,R16,180,afternoon
 2026-09-11,Fri,2,Screen 2,Dead Signal,signal,18:25,18:45,20:17,20:37,92,20,20,0,2D,R16,180,prime
 2026-09-11,Fri,2,Screen 2,Harvest Moon,harvest,20:40,21:00,22:44,23:04,104,20,20,0,2D,PG,180,prime
 2026-09-11,Fri,3,Screen 3,Harvest Moon,harvest,10:00,10:20,12:04,12:19,104,20,15,0,2D,PG,96,matinee

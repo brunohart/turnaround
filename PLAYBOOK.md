@@ -95,11 +95,12 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - The sheet learns to render venues as screens and days as pages; strands get a mono tag, never a colour.
 - *Run in two sittings on the day:* the slot was cut off by a rate limit after the checker half was written and resumed from the working tree. *Shipped besides:* `available` (the festival days the print is in town) as a third festival term, because a festival solved day by day puts every title on the first day of its window otherwise; the guest reserve; a festival day's tables folded to the titles in town; ADR-018. *Left open:* the festival is solved day by day and the days first in a title's window take its screenings unless a window or a guest says otherwise; no day is hinted from the last; `explain` and `what-if` take a day of a house, not a festival; the sheet's programme table is wider than the page at ten days and scrolls in its box.
 
-## Day 11 — Wed 17 Sep — Diff
+## Day 11 — Wed 17 Sep — Diff ✅
 
 - `turnaround diff old.json new.json`: sessions added, removed, moved (same title, new time or room), seats delta, terms delta. Output as a table and as JSON.
 - The sheet renders a diff: moved blocks with a ghost outline at their old position in the ink hatch, additions with an orange stamp, removals struck through in the by-title table. This is the Thursday re-plan artefact.
 - Tests: every diff is symmetric and composable (diff(a,b) applied to a yields b).
+- *Shipped besides:* `apply` and `invert` on a diff, a `--json` print and `--out`, `diff --html` for a day, a week and a festival (each day page a re-plan), `docs/grids/regent-replan.html` in `run.sh` (the hand-made Thursday against the solved one), ADR-019, the re-plan paragraph in DESIGN.md. *Left open:* a diff across two briefs names a dropped title by id; a title with more than seven sessions a day is paired greedily; the ghosts of a five-minute nudge sit almost under the live block, and a threshold below which a move is "the same show, five minutes on" would read better than twelve ghosts; the what-if still writes no diff — `what-if --out` then `diff --against` is two commands where one would do (a `--diff` on what-if is the Day 12 candidate if the board wants it).
 
 ## Day 12 — Thu 18 Sep — The board
 
