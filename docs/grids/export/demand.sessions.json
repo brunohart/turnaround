@@ -1,0 +1,1806 @@
+{
+  "house": "The Regent",
+  "titles": [
+    {
+      "id": "odyssey",
+      "title": "The Long Voyage",
+      "runtime": 168,
+      "format": "PLF",
+      "rating": "M"
+    },
+    {
+      "id": "harvest",
+      "title": "Harvest Moon",
+      "runtime": 104,
+      "format": "2D",
+      "rating": "PG"
+    },
+    {
+      "id": "signal",
+      "title": "Dead Signal",
+      "runtime": 92,
+      "format": "2D",
+      "rating": "R16"
+    },
+    {
+      "id": "atlas",
+      "title": "Atlas of Small Rooms",
+      "runtime": 121,
+      "format": "2D",
+      "rating": "M"
+    },
+    {
+      "id": "bees",
+      "title": "The Bee Kingdom",
+      "runtime": 84,
+      "format": "3D",
+      "rating": "G"
+    }
+  ],
+  "days": [
+    {
+      "day": "Thu",
+      "date": "2026-10-01",
+      "status": "OPTIMAL",
+      "sessions": 15,
+      "screens": [
+        {
+          "id": "1",
+          "name": "Screen 1",
+          "capacity": 320,
+          "formats": [
+            "2D",
+            "PLF"
+          ],
+          "sessions": [
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "10:25",
+              "minutes": 625,
+              "feature_start": "10:45",
+              "feature_end": "13:33",
+              "clear": "13:53",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "14:10",
+              "minutes": 850,
+              "feature_start": "14:30",
+              "feature_end": "17:18",
+              "clear": "17:38",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "17:50",
+              "minutes": 1070,
+              "feature_start": "18:10",
+              "feature_end": "20:58",
+              "clear": "21:18",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "21:30",
+              "minutes": 1290,
+              "feature_start": "21:50",
+              "feature_end": "00:38",
+              "clear": "00:58",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Screen 2",
+          "capacity": 180,
+          "formats": [
+            "2D",
+            "3D"
+          ],
+          "sessions": [
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "10:00",
+              "minutes": 600,
+              "feature_start": "10:20",
+              "feature_end": "11:44",
+              "clear": "12:04",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "12:10",
+              "minutes": 730,
+              "feature_start": "12:30",
+              "feature_end": "13:54",
+              "clear": "14:14",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "14:20",
+              "minutes": 860,
+              "feature_start": "14:40",
+              "feature_end": "16:04",
+              "clear": "16:24",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "16:30",
+              "minutes": 990,
+              "feature_start": "16:50",
+              "feature_end": "18:34",
+              "clear": "18:54",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "18:55",
+              "minutes": 1135,
+              "feature_start": "19:15",
+              "feature_end": "20:59",
+              "clear": "21:19",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "21:20",
+              "minutes": 1280,
+              "feature_start": "21:40",
+              "feature_end": "23:12",
+              "clear": "23:32",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "name": "Screen 3",
+          "capacity": 96,
+          "formats": [
+            "2D"
+          ],
+          "sessions": [
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "10:15",
+              "minutes": 615,
+              "feature_start": "10:35",
+              "feature_end": "12:19",
+              "clear": "12:34",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "12:35",
+              "minutes": 755,
+              "feature_start": "12:55",
+              "feature_end": "14:39",
+              "clear": "14:54",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "15:20",
+              "minutes": 920,
+              "feature_start": "15:40",
+              "feature_end": "17:41",
+              "clear": "17:56",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "18:00",
+              "minutes": 1080,
+              "feature_start": "18:20",
+              "feature_end": "19:52",
+              "clear": "20:07",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "20:40",
+              "minutes": 1240,
+              "feature_start": "21:00",
+              "feature_end": "23:01",
+              "clear": "23:16",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "Fri",
+      "date": "2026-10-02",
+      "status": "OPTIMAL",
+      "sessions": 16,
+      "screens": [
+        {
+          "id": "1",
+          "name": "Screen 1",
+          "capacity": 320,
+          "formats": [
+            "2D",
+            "PLF"
+          ],
+          "sessions": [
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "10:30",
+              "minutes": 630,
+              "feature_start": "10:50",
+              "feature_end": "13:38",
+              "clear": "13:58",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "14:40",
+              "minutes": 880,
+              "feature_start": "15:00",
+              "feature_end": "17:48",
+              "clear": "18:08",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "18:20",
+              "minutes": 1100,
+              "feature_start": "18:40",
+              "feature_end": "21:28",
+              "clear": "21:48",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "21:55",
+              "minutes": 1315,
+              "feature_start": "22:15",
+              "feature_end": "01:03",
+              "clear": "01:23",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Screen 2",
+          "capacity": 180,
+          "formats": [
+            "2D",
+            "3D"
+          ],
+          "sessions": [
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "10:00",
+              "minutes": 600,
+              "feature_start": "10:20",
+              "feature_end": "11:44",
+              "clear": "12:04",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "12:05",
+              "minutes": 725,
+              "feature_start": "12:25",
+              "feature_end": "13:49",
+              "clear": "14:09",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "14:10",
+              "minutes": 850,
+              "feature_start": "14:30",
+              "feature_end": "16:14",
+              "clear": "16:34",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "16:35",
+              "minutes": 995,
+              "feature_start": "16:55",
+              "feature_end": "18:19",
+              "clear": "18:39",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "18:40",
+              "minutes": 1120,
+              "feature_start": "19:00",
+              "feature_end": "20:32",
+              "clear": "20:52",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "22:10",
+              "minutes": 1330,
+              "feature_start": "22:30",
+              "feature_end": "00:02",
+              "clear": "00:22",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "name": "Screen 3",
+          "capacity": 96,
+          "formats": [
+            "2D"
+          ],
+          "sessions": [
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "10:10",
+              "minutes": 610,
+              "feature_start": "10:30",
+              "feature_end": "12:14",
+              "clear": "12:29",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "12:30",
+              "minutes": 750,
+              "feature_start": "12:50",
+              "feature_end": "14:34",
+              "clear": "14:49",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "14:50",
+              "minutes": 890,
+              "feature_start": "15:10",
+              "feature_end": "17:11",
+              "clear": "17:26",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "17:30",
+              "minutes": 1050,
+              "feature_start": "17:50",
+              "feature_end": "19:34",
+              "clear": "19:49",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "19:50",
+              "minutes": 1190,
+              "feature_start": "20:10",
+              "feature_end": "22:11",
+              "clear": "22:26",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "22:30",
+              "minutes": 1350,
+              "feature_start": "22:50",
+              "feature_end": "00:22",
+              "clear": "00:37",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "Sat",
+      "date": "2026-10-03",
+      "status": "OPTIMAL",
+      "sessions": 16,
+      "screens": [
+        {
+          "id": "1",
+          "name": "Screen 1",
+          "capacity": 320,
+          "formats": [
+            "2D",
+            "PLF"
+          ],
+          "sessions": [
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "10:30",
+              "minutes": 630,
+              "feature_start": "10:50",
+              "feature_end": "13:38",
+              "clear": "13:58",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "14:40",
+              "minutes": 880,
+              "feature_start": "15:00",
+              "feature_end": "17:48",
+              "clear": "18:08",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "18:20",
+              "minutes": 1100,
+              "feature_start": "18:40",
+              "feature_end": "21:28",
+              "clear": "21:48",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "21:55",
+              "minutes": 1315,
+              "feature_start": "22:15",
+              "feature_end": "01:03",
+              "clear": "01:23",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Screen 2",
+          "capacity": 180,
+          "formats": [
+            "2D",
+            "3D"
+          ],
+          "sessions": [
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "10:00",
+              "minutes": 600,
+              "feature_start": "10:20",
+              "feature_end": "11:44",
+              "clear": "12:04",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "12:05",
+              "minutes": 725,
+              "feature_start": "12:25",
+              "feature_end": "13:49",
+              "clear": "14:09",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "14:10",
+              "minutes": 850,
+              "feature_start": "14:30",
+              "feature_end": "16:14",
+              "clear": "16:34",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "16:35",
+              "minutes": 995,
+              "feature_start": "16:55",
+              "feature_end": "18:19",
+              "clear": "18:39",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "18:50",
+              "minutes": 1130,
+              "feature_start": "19:10",
+              "feature_end": "20:54",
+              "clear": "21:14",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "22:10",
+              "minutes": 1330,
+              "feature_start": "22:30",
+              "feature_end": "00:02",
+              "clear": "00:22",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "name": "Screen 3",
+          "capacity": 96,
+          "formats": [
+            "2D"
+          ],
+          "sessions": [
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "10:10",
+              "minutes": 610,
+              "feature_start": "10:30",
+              "feature_end": "12:14",
+              "clear": "12:29",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "12:30",
+              "minutes": 750,
+              "feature_start": "12:50",
+              "feature_end": "14:34",
+              "clear": "14:49",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "15:05",
+              "minutes": 905,
+              "feature_start": "15:25",
+              "feature_end": "17:09",
+              "clear": "17:24",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "17:35",
+              "minutes": 1055,
+              "feature_start": "17:55",
+              "feature_end": "19:27",
+              "clear": "19:42",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "19:50",
+              "minutes": 1190,
+              "feature_start": "20:10",
+              "feature_end": "22:11",
+              "clear": "22:26",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "22:30",
+              "minutes": 1350,
+              "feature_start": "22:50",
+              "feature_end": "00:51",
+              "clear": "01:06",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "Sun",
+      "date": "2026-10-04",
+      "status": "OPTIMAL",
+      "sessions": 14,
+      "screens": [
+        {
+          "id": "1",
+          "name": "Screen 1",
+          "capacity": 320,
+          "formats": [
+            "2D",
+            "PLF"
+          ],
+          "sessions": [
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "11:00",
+              "minutes": 660,
+              "feature_start": "11:20",
+              "feature_end": "14:08",
+              "clear": "14:28",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "14:30",
+              "minutes": 870,
+              "feature_start": "14:50",
+              "feature_end": "17:38",
+              "clear": "17:58",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "18:00",
+              "minutes": 1080,
+              "feature_start": "18:20",
+              "feature_end": "21:08",
+              "clear": "21:28",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "21:30",
+              "minutes": 1290,
+              "feature_start": "21:50",
+              "feature_end": "00:38",
+              "clear": "00:58",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Screen 2",
+          "capacity": 180,
+          "formats": [
+            "2D",
+            "3D"
+          ],
+          "sessions": [
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "11:25",
+              "minutes": 685,
+              "feature_start": "11:45",
+              "feature_end": "13:09",
+              "clear": "13:29",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "13:40",
+              "minutes": 820,
+              "feature_start": "14:00",
+              "feature_end": "15:24",
+              "clear": "15:44",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "16:05",
+              "minutes": 965,
+              "feature_start": "16:25",
+              "feature_end": "17:49",
+              "clear": "18:09",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "18:10",
+              "minutes": 1090,
+              "feature_start": "18:30",
+              "feature_end": "20:14",
+              "clear": "20:34",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "21:20",
+              "minutes": 1280,
+              "feature_start": "21:40",
+              "feature_end": "23:12",
+              "clear": "23:32",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "name": "Screen 3",
+          "capacity": 96,
+          "formats": [
+            "2D"
+          ],
+          "sessions": [
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "11:10",
+              "minutes": 670,
+              "feature_start": "11:30",
+              "feature_end": "13:14",
+              "clear": "13:29",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "13:30",
+              "minutes": 810,
+              "feature_start": "13:50",
+              "feature_end": "15:34",
+              "clear": "15:49",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "15:50",
+              "minutes": 950,
+              "feature_start": "16:10",
+              "feature_end": "18:11",
+              "clear": "18:26",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "18:30",
+              "minutes": 1110,
+              "feature_start": "18:50",
+              "feature_end": "20:22",
+              "clear": "20:37",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "20:40",
+              "minutes": 1240,
+              "feature_start": "21:00",
+              "feature_end": "23:01",
+              "clear": "23:16",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "Mon",
+      "date": "2026-10-05",
+      "status": "OPTIMAL",
+      "sessions": 15,
+      "screens": [
+        {
+          "id": "1",
+          "name": "Screen 1",
+          "capacity": 320,
+          "formats": [
+            "2D",
+            "PLF"
+          ],
+          "sessions": [
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "10:25",
+              "minutes": 625,
+              "feature_start": "10:45",
+              "feature_end": "13:33",
+              "clear": "13:53",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "14:10",
+              "minutes": 850,
+              "feature_start": "14:30",
+              "feature_end": "17:18",
+              "clear": "17:38",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "17:50",
+              "minutes": 1070,
+              "feature_start": "18:10",
+              "feature_end": "20:58",
+              "clear": "21:18",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "21:30",
+              "minutes": 1290,
+              "feature_start": "21:50",
+              "feature_end": "00:38",
+              "clear": "00:58",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Screen 2",
+          "capacity": 180,
+          "formats": [
+            "2D",
+            "3D"
+          ],
+          "sessions": [
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "10:00",
+              "minutes": 600,
+              "feature_start": "10:20",
+              "feature_end": "11:44",
+              "clear": "12:04",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "12:10",
+              "minutes": 730,
+              "feature_start": "12:30",
+              "feature_end": "13:54",
+              "clear": "14:14",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "14:20",
+              "minutes": 860,
+              "feature_start": "14:40",
+              "feature_end": "16:04",
+              "clear": "16:24",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "16:30",
+              "minutes": 990,
+              "feature_start": "16:50",
+              "feature_end": "18:34",
+              "clear": "18:54",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "18:55",
+              "minutes": 1135,
+              "feature_start": "19:15",
+              "feature_end": "20:59",
+              "clear": "21:19",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "21:20",
+              "minutes": 1280,
+              "feature_start": "21:40",
+              "feature_end": "23:12",
+              "clear": "23:32",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "name": "Screen 3",
+          "capacity": 96,
+          "formats": [
+            "2D"
+          ],
+          "sessions": [
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "10:15",
+              "minutes": 615,
+              "feature_start": "10:35",
+              "feature_end": "12:19",
+              "clear": "12:34",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "12:35",
+              "minutes": 755,
+              "feature_start": "12:55",
+              "feature_end": "14:39",
+              "clear": "14:54",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "15:20",
+              "minutes": 920,
+              "feature_start": "15:40",
+              "feature_end": "17:41",
+              "clear": "17:56",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "18:00",
+              "minutes": 1080,
+              "feature_start": "18:20",
+              "feature_end": "19:52",
+              "clear": "20:07",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "20:40",
+              "minutes": 1240,
+              "feature_start": "21:00",
+              "feature_end": "23:01",
+              "clear": "23:16",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "Tue",
+      "date": "2026-10-06",
+      "status": "OPTIMAL",
+      "sessions": 15,
+      "screens": [
+        {
+          "id": "1",
+          "name": "Screen 1",
+          "capacity": 320,
+          "formats": [
+            "2D",
+            "PLF"
+          ],
+          "sessions": [
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "10:25",
+              "minutes": 625,
+              "feature_start": "10:45",
+              "feature_end": "13:33",
+              "clear": "13:53",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "14:10",
+              "minutes": 850,
+              "feature_start": "14:30",
+              "feature_end": "17:18",
+              "clear": "17:38",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "17:50",
+              "minutes": 1070,
+              "feature_start": "18:10",
+              "feature_end": "20:58",
+              "clear": "21:18",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "21:30",
+              "minutes": 1290,
+              "feature_start": "21:50",
+              "feature_end": "00:38",
+              "clear": "00:58",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Screen 2",
+          "capacity": 180,
+          "formats": [
+            "2D",
+            "3D"
+          ],
+          "sessions": [
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "10:00",
+              "minutes": 600,
+              "feature_start": "10:20",
+              "feature_end": "11:44",
+              "clear": "12:04",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "12:10",
+              "minutes": 730,
+              "feature_start": "12:30",
+              "feature_end": "13:54",
+              "clear": "14:14",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "14:20",
+              "minutes": 860,
+              "feature_start": "14:40",
+              "feature_end": "16:04",
+              "clear": "16:24",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "16:30",
+              "minutes": 990,
+              "feature_start": "16:50",
+              "feature_end": "18:34",
+              "clear": "18:54",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "18:55",
+              "minutes": 1135,
+              "feature_start": "19:15",
+              "feature_end": "20:59",
+              "clear": "21:19",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "21:20",
+              "minutes": 1280,
+              "feature_start": "21:40",
+              "feature_end": "23:12",
+              "clear": "23:32",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "name": "Screen 3",
+          "capacity": 96,
+          "formats": [
+            "2D"
+          ],
+          "sessions": [
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "10:15",
+              "minutes": 615,
+              "feature_start": "10:35",
+              "feature_end": "12:19",
+              "clear": "12:34",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "12:35",
+              "minutes": 755,
+              "feature_start": "12:55",
+              "feature_end": "14:39",
+              "clear": "14:54",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "15:20",
+              "minutes": 920,
+              "feature_start": "15:40",
+              "feature_end": "17:41",
+              "clear": "17:56",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "18:00",
+              "minutes": 1080,
+              "feature_start": "18:20",
+              "feature_end": "19:52",
+              "clear": "20:07",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "20:40",
+              "minutes": 1240,
+              "feature_start": "21:00",
+              "feature_end": "23:01",
+              "clear": "23:16",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": "Wed",
+      "date": "2026-10-07",
+      "status": "OPTIMAL",
+      "sessions": 15,
+      "screens": [
+        {
+          "id": "1",
+          "name": "Screen 1",
+          "capacity": 320,
+          "formats": [
+            "2D",
+            "PLF"
+          ],
+          "sessions": [
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "10:25",
+              "minutes": 625,
+              "feature_start": "10:45",
+              "feature_end": "13:33",
+              "clear": "13:53",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "14:10",
+              "minutes": 850,
+              "feature_start": "14:30",
+              "feature_end": "17:18",
+              "clear": "17:38",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "17:50",
+              "minutes": 1070,
+              "feature_start": "18:10",
+              "feature_end": "20:58",
+              "clear": "21:18",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "The Long Voyage",
+              "film": "odyssey",
+              "start": "21:30",
+              "minutes": 1290,
+              "feature_start": "21:50",
+              "feature_end": "00:38",
+              "clear": "00:58",
+              "runtime": 168,
+              "format": "PLF",
+              "rating": "M",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Screen 2",
+          "capacity": 180,
+          "formats": [
+            "2D",
+            "3D"
+          ],
+          "sessions": [
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "10:00",
+              "minutes": 600,
+              "feature_start": "10:20",
+              "feature_end": "11:44",
+              "clear": "12:04",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "12:10",
+              "minutes": 730,
+              "feature_start": "12:30",
+              "feature_end": "13:54",
+              "clear": "14:14",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "The Bee Kingdom",
+              "film": "bees",
+              "start": "14:20",
+              "minutes": 860,
+              "feature_start": "14:40",
+              "feature_end": "16:04",
+              "clear": "16:24",
+              "runtime": 84,
+              "format": "3D",
+              "rating": "G",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "16:30",
+              "minutes": 990,
+              "feature_start": "16:50",
+              "feature_end": "18:34",
+              "clear": "18:54",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "18:55",
+              "minutes": 1135,
+              "feature_start": "19:15",
+              "feature_end": "20:59",
+              "clear": "21:19",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "21:20",
+              "minutes": 1280,
+              "feature_start": "21:40",
+              "feature_end": "23:12",
+              "clear": "23:32",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "late",
+              "prime": false
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "name": "Screen 3",
+          "capacity": 96,
+          "formats": [
+            "2D"
+          ],
+          "sessions": [
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "10:15",
+              "minutes": 615,
+              "feature_start": "10:35",
+              "feature_end": "12:19",
+              "clear": "12:34",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Harvest Moon",
+              "film": "harvest",
+              "start": "12:35",
+              "minutes": 755,
+              "feature_start": "12:55",
+              "feature_end": "14:39",
+              "clear": "14:54",
+              "runtime": 104,
+              "format": "2D",
+              "rating": "PG",
+              "daypart": "matinee",
+              "prime": false
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "15:20",
+              "minutes": 920,
+              "feature_start": "15:40",
+              "feature_end": "17:41",
+              "clear": "17:56",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "afternoon",
+              "prime": false
+            },
+            {
+              "title": "Dead Signal",
+              "film": "signal",
+              "start": "18:00",
+              "minutes": 1080,
+              "feature_start": "18:20",
+              "feature_end": "19:52",
+              "clear": "20:07",
+              "runtime": 92,
+              "format": "2D",
+              "rating": "R16",
+              "daypart": "prime",
+              "prime": true
+            },
+            {
+              "title": "Atlas of Small Rooms",
+              "film": "atlas",
+              "start": "20:40",
+              "minutes": 1240,
+              "feature_start": "21:00",
+              "feature_end": "23:01",
+              "clear": "23:16",
+              "runtime": 121,
+              "format": "2D",
+              "rating": "M",
+              "daypart": "prime",
+              "prime": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -5,15 +5,15 @@
   "objective": 1573.21,
   "admissions": 1573.21,
   "hold_paid": 0.0,
-  "solve_seconds": 19.598,
+  "solve_seconds": 19.228,
   "sessions": [
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 635,
-      "feature_start": 655,
-      "feature_end": 823,
-      "clear": 843,
+      "start": 645,
+      "feature_start": 665,
+      "feature_end": 833,
+      "clear": 853,
       "forced": null
     },
     {
@@ -28,10 +28,10 @@
     {
       "screen": "1",
       "film": "odyssey",
-      "start": 1065,
-      "feature_start": 1085,
-      "feature_end": 1253,
-      "clear": 1273,
+      "start": 1070,
+      "feature_start": 1090,
+      "feature_end": 1258,
+      "clear": 1278,
       "forced": null
     },
     {
@@ -46,10 +46,10 @@
     {
       "screen": "2",
       "film": "harvest",
-      "start": 625,
-      "feature_start": 645,
-      "feature_end": 749,
-      "clear": 769,
+      "start": 635,
+      "feature_start": 655,
+      "feature_end": 759,
+      "clear": 779,
       "forced": null
     },
     {
