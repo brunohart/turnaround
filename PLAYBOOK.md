@@ -109,8 +109,9 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - Playwright pass on the board at desktop and phone widths; screenshots committed.
 - *Run on 20 Sep; the slots of 18 and 19 Sep did not fire.* *Shipped besides:* a week and a festival drawn day by day, a grid alone drawn by id, `render.board_css()` so the stylesheet is cut from the template and a test holds it there, a CSP that lets nothing leave, ADR-020. *Left open:* the deploy (bruno-gated, the command is in the log); the pass is not in CI; the board has no proof, re-plan or terms sheets by design, and no way to jump between a week's days; `what-if --diff` was not built.
 
-## Day 13 — Fri 19 Sep — The write-up
+## Day 13 — Fri 19 Sep — The write-up ✅
 
 - README rewritten around the sheets (Day 0 → Day 12 screenshots inline), the benchmark table, and the argument: why constraint programming for the cinema week, why the checker, what the tool refuses to do.
 - `docs/post.md`: a draft essay on CP-SAT for exhibition scheduling — evidence first, the infeasibility explanation as the hero, no hype.
 - Tag `v0.1.0`. PyPI publish is **bruno-gated** (`uv publish` needs a token); prepare the release and leave the command in the log.
+- *Run on 20 Sep with Day 12.* `uv build` makes the sdist and the wheel; the publish command and the name check are in the log's *For Bruno*. *Left open:* the brief reference wants its own `docs/brief.md`; the hero image predates the why marks; the README's bench table is pasted by hand.
