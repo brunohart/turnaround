@@ -16,6 +16,28 @@
   "removed": [],
   "moved": [
     {
+      "film": "harvest",
+      "title": "Harvest Moon",
+      "old": {
+        "screen": "2",
+        "film": "harvest",
+        "start": 875,
+        "feature_start": 895,
+        "feature_end": 999,
+        "clear": 1019,
+        "forced": null
+      },
+      "new": {
+        "screen": "3",
+        "film": "harvest",
+        "start": 660,
+        "feature_start": 680,
+        "feature_end": 784,
+        "clear": 799,
+        "forced": null
+      }
+    },
+    {
       "film": "bees",
       "title": "The Bee Kingdom",
       "old": {
@@ -30,74 +52,8 @@
       "new": {
         "screen": "2",
         "film": "bees",
-        "start": 600,
-        "feature_start": 620,
-        "feature_end": 704,
-        "clear": 724,
-        "forced": null
-      }
-    },
-    {
-      "film": "harvest",
-      "title": "Harvest Moon",
-      "old": {
-        "screen": "2",
-        "film": "harvest",
-        "start": 600,
-        "feature_start": 620,
-        "feature_end": 724,
-        "clear": 744,
-        "forced": null
-      },
-      "new": {
-        "screen": "3",
-        "film": "harvest",
-        "start": 625,
-        "feature_start": 645,
-        "feature_end": 749,
-        "clear": 764,
-        "forced": null
-      }
-    },
-    {
-      "film": "odyssey",
-      "title": "The Long Voyage",
-      "old": {
-        "screen": "1",
-        "film": "odyssey",
-        "start": 630,
-        "feature_start": 650,
-        "feature_end": 818,
-        "clear": 838,
-        "forced": null
-      },
-      "new": {
-        "screen": "1",
-        "film": "odyssey",
-        "start": 640,
-        "feature_start": 660,
-        "feature_end": 828,
-        "clear": 848,
-        "forced": null
-      }
-    },
-    {
-      "film": "harvest",
-      "title": "Harvest Moon",
-      "old": {
-        "screen": "3",
-        "film": "harvest",
-        "start": 1190,
-        "feature_start": 1210,
-        "feature_end": 1314,
-        "clear": 1329,
-        "forced": null
-      },
-      "new": {
-        "screen": "2",
-        "film": "harvest",
-        "start": 725,
-        "feature_start": 745,
+        "start": 745,
+        "feature_start": 765,
         "feature_end": 849,
         "clear": 869,
         "forced": null
@@ -118,76 +74,10 @@
       "new": {
         "screen": "3",
         "film": "atlas",
-        "start": 765,
-        "feature_start": 785,
-        "feature_end": 906,
-        "clear": 921,
-        "forced": null
-      }
-    },
-    {
-      "film": "odyssey",
-      "title": "The Long Voyage",
-      "old": {
-        "screen": "1",
-        "film": "odyssey",
-        "start": 840,
-        "feature_start": 860,
-        "feature_end": 1028,
-        "clear": 1048,
-        "forced": null
-      },
-      "new": {
-        "screen": "1",
-        "film": "odyssey",
-        "start": 855,
-        "feature_start": 875,
-        "feature_end": 1043,
-        "clear": 1063,
-        "forced": null
-      }
-    },
-    {
-      "film": "harvest",
-      "title": "Harvest Moon",
-      "old": {
-        "screen": "2",
-        "film": "harvest",
-        "start": 875,
-        "feature_start": 895,
-        "feature_end": 999,
-        "clear": 1019,
-        "forced": null
-      },
-      "new": {
-        "screen": "2",
-        "film": "harvest",
-        "start": 870,
-        "feature_start": 890,
-        "feature_end": 994,
-        "clear": 1014,
-        "forced": null
-      }
-    },
-    {
-      "film": "signal",
-      "title": "Dead Signal",
-      "old": {
-        "screen": "3",
-        "film": "signal",
-        "start": 930,
-        "feature_start": 950,
-        "feature_end": 1042,
-        "clear": 1057,
-        "forced": null
-      },
-      "new": {
-        "screen": "3",
-        "film": "signal",
-        "start": 965,
-        "feature_start": 985,
-        "feature_end": 1077,
-        "clear": 1092,
+        "start": 810,
+        "feature_start": 830,
+        "feature_end": 951,
+        "clear": 966,
         "forced": null
       }
     },
@@ -206,10 +96,76 @@
       "new": {
         "screen": "2",
         "film": "bees",
-        "start": 1015,
-        "feature_start": 1035,
-        "feature_end": 1119,
-        "clear": 1139,
+        "start": 875,
+        "feature_start": 895,
+        "feature_end": 979,
+        "clear": 999,
+        "forced": null
+      }
+    },
+    {
+      "film": "signal",
+      "title": "Dead Signal",
+      "old": {
+        "screen": "3",
+        "film": "signal",
+        "start": 930,
+        "feature_start": 950,
+        "feature_end": 1042,
+        "clear": 1057,
+        "forced": null
+      },
+      "new": {
+        "screen": "3",
+        "film": "signal",
+        "start": 970,
+        "feature_start": 990,
+        "feature_end": 1082,
+        "clear": 1097,
+        "forced": null
+      }
+    },
+    {
+      "film": "harvest",
+      "title": "Harvest Moon",
+      "old": {
+        "screen": "3",
+        "film": "harvest",
+        "start": 1190,
+        "feature_start": 1210,
+        "feature_end": 1314,
+        "clear": 1329,
+        "forced": null
+      },
+      "new": {
+        "screen": "2",
+        "film": "harvest",
+        "start": 1000,
+        "feature_start": 1020,
+        "feature_end": 1124,
+        "clear": 1144,
+        "forced": null
+      }
+    },
+    {
+      "film": "odyssey",
+      "title": "The Long Voyage",
+      "old": {
+        "screen": "1",
+        "film": "odyssey",
+        "start": 1065,
+        "feature_start": 1085,
+        "feature_end": 1253,
+        "clear": 1273,
+        "forced": null
+      },
+      "new": {
+        "screen": "1",
+        "film": "odyssey",
+        "start": 1050,
+        "feature_start": 1070,
+        "feature_end": 1238,
+        "clear": 1258,
         "forced": null
       }
     },
@@ -228,10 +184,10 @@
       "new": {
         "screen": "3",
         "film": "signal",
-        "start": 1105,
-        "feature_start": 1125,
-        "feature_end": 1217,
-        "clear": 1232,
+        "start": 1100,
+        "feature_start": 1120,
+        "feature_end": 1212,
+        "clear": 1227,
         "forced": null
       }
     },
@@ -250,10 +206,10 @@
       "new": {
         "screen": "2",
         "film": "harvest",
-        "start": 1140,
-        "feature_start": 1160,
-        "feature_end": 1264,
-        "clear": 1284,
+        "start": 1145,
+        "feature_start": 1165,
+        "feature_end": 1269,
+        "clear": 1289,
         "forced": null
       }
     },
@@ -272,15 +228,15 @@
       "new": {
         "screen": "1",
         "film": "odyssey",
-        "start": 1275,
-        "feature_start": 1295,
-        "feature_end": 1463,
-        "clear": 1483,
+        "start": 1270,
+        "feature_start": 1290,
+        "feature_end": 1458,
+        "clear": 1478,
         "forced": null
       }
     }
   ],
-  "unchanged": 2,
+  "unchanged": 4,
   "sessions": [
     14,
     15

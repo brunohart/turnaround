@@ -6,7 +6,7 @@
   "admissions": 1573.21,
   "hold_paid": 0.0,
   "clash_paid": 0.0,
-  "solve_seconds": 19.349,
+  "solve_seconds": 20.832,
   "sessions": [
     {
       "screen": "1",
@@ -47,19 +47,19 @@
     {
       "screen": "2",
       "film": "harvest",
-      "start": 620,
-      "feature_start": 640,
-      "feature_end": 744,
-      "clear": 764,
+      "start": 610,
+      "feature_start": 630,
+      "feature_end": 734,
+      "clear": 754,
       "forced": null
     },
     {
       "screen": "2",
       "film": "bees",
-      "start": 840,
-      "feature_start": 860,
-      "feature_end": 944,
-      "clear": 964,
+      "start": 845,
+      "feature_start": 865,
+      "feature_end": 949,
+      "clear": 969,
       "forced": null
     },
     {
@@ -176,7 +176,7 @@
     "slot_min": 5,
     "slot_asked": 5,
     "slot_reason": null,
-    "first_feasible_s": 0.104,
+    "first_feasible_s": 0.103,
     "bound": 1573.21,
     "gap": 0.0,
     "hinted": 0,

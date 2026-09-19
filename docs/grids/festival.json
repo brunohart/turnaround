@@ -21,7 +21,7 @@
       "admissions": 1480.14,
       "hold_paid": 0.0,
       "clash_paid": 0.0,
-      "solve_seconds": 0.435,
+      "solve_seconds": 0.446,
       "sessions": [
         {
           "screen": "annexe",
@@ -43,65 +43,65 @@
         },
         {
           "screen": "annexe",
-          "film": "nocturne",
-          "start": 1110,
-          "feature_start": 1120,
-          "feature_end": 1224,
-          "clear": 1244,
+          "film": "glass-harbour",
+          "start": 1080,
+          "feature_start": 1090,
+          "feature_end": 1198,
+          "clear": 1218,
           "forced": null
         },
         {
           "screen": "annexe",
-          "film": "teeth",
-          "start": 1275,
-          "feature_start": 1285,
-          "feature_end": 1381,
-          "clear": 1401,
+          "film": "nocturne",
+          "start": 1230,
+          "feature_start": 1240,
+          "feature_end": 1344,
+          "clear": 1364,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "static",
+          "start": 1410,
+          "feature_start": 1420,
+          "feature_end": 1503,
+          "clear": 1523,
           "forced": null
         },
         {
           "screen": "hall",
           "film": "projectionist",
-          "start": 840,
-          "feature_start": 850,
-          "feature_end": 938,
-          "clear": 963,
-          "forced": null
-        },
-        {
-          "screen": "hall",
-          "film": "glass-harbour",
-          "start": 1080,
-          "feature_start": 1090,
-          "feature_end": 1198,
-          "clear": 1223,
+          "start": 855,
+          "feature_start": 865,
+          "feature_end": 953,
+          "clear": 978,
           "forced": null
         },
         {
           "screen": "hall",
           "film": "salt-road",
-          "start": 1230,
-          "feature_start": 1240,
-          "feature_end": 1358,
-          "clear": 1383,
+          "start": 1065,
+          "feature_start": 1075,
+          "feature_end": 1193,
+          "clear": 1218,
           "forced": null
         },
         {
           "screen": "hall",
-          "film": "static",
-          "start": 1395,
-          "feature_start": 1405,
-          "feature_end": 1488,
-          "clear": 1513,
+          "film": "teeth",
+          "start": 1260,
+          "feature_start": 1270,
+          "feature_end": 1366,
+          "clear": 1391,
           "forced": null
         },
         {
           "screen": "vault",
           "film": "bright-room",
-          "start": 1155,
-          "feature_start": 1165,
-          "feature_end": 1243,
-          "clear": 1258,
+          "start": 1215,
+          "feature_start": 1225,
+          "feature_end": 1303,
+          "clear": 1318,
           "forced": null
         }
       ],
@@ -116,7 +116,7 @@
         "slot_min": 15,
         "slot_asked": 15,
         "slot_reason": null,
-        "first_feasible_s": 0.226,
+        "first_feasible_s": 0.228,
         "bound": 1480.14,
         "gap": 0.0,
         "hinted": 0,
@@ -131,42 +131,42 @@
       "admissions": 1859.82,
       "hold_paid": 0.0,
       "clash_paid": 0.0,
-      "solve_seconds": 0.898,
+      "solve_seconds": 0.839,
       "sessions": [
         {
           "screen": "annexe",
-          "film": "moth-lantern",
+          "film": "kite-library",
           "start": 660,
           "feature_start": 670,
-          "feature_end": 749,
-          "clear": 769,
-          "forced": null
-        },
-        {
-          "screen": "annexe",
-          "film": "nocturne",
-          "start": 840,
-          "feature_start": 850,
-          "feature_end": 954,
-          "clear": 974,
+          "feature_end": 756,
+          "clear": 776,
           "forced": null
         },
         {
           "screen": "annexe",
           "film": "glasshouse",
-          "start": 1035,
-          "feature_start": 1045,
-          "feature_end": 1121,
-          "clear": 1141,
+          "start": 840,
+          "feature_start": 850,
+          "feature_end": 926,
+          "clear": 946,
           "forced": null
         },
         {
           "screen": "annexe",
-          "film": "second-summer",
-          "start": 1155,
-          "feature_start": 1165,
-          "feature_end": 1279,
-          "clear": 1299,
+          "film": "projectionist",
+          "start": 960,
+          "feature_start": 970,
+          "feature_end": 1058,
+          "clear": 1078,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "house-north",
+          "start": 1080,
+          "feature_start": 1090,
+          "feature_end": 1221,
+          "clear": 1241,
           "forced": null
         },
         {
@@ -180,29 +180,29 @@
         },
         {
           "screen": "hall",
-          "film": "kite-library",
-          "start": 780,
-          "feature_start": 790,
-          "feature_end": 876,
-          "clear": 901,
+          "film": "moth-lantern",
+          "start": 795,
+          "feature_start": 805,
+          "feature_end": 884,
+          "clear": 909,
           "forced": null
         },
         {
           "screen": "hall",
-          "film": "projectionist",
+          "film": "nocturne",
           "start": 915,
           "feature_start": 925,
-          "feature_end": 1013,
-          "clear": 1038,
+          "feature_end": 1029,
+          "clear": 1054,
           "forced": null
         },
         {
           "screen": "hall",
-          "film": "house-north",
-          "start": 1050,
-          "feature_start": 1060,
-          "feature_end": 1191,
-          "clear": 1216,
+          "film": "second-summer",
+          "start": 1065,
+          "feature_start": 1075,
+          "feature_end": 1189,
+          "clear": 1214,
           "forced": null
         },
         {
@@ -226,19 +226,19 @@
         {
           "screen": "vault",
           "film": "bright-room",
-          "start": 1110,
-          "feature_start": 1120,
-          "feature_end": 1198,
-          "clear": 1213,
+          "start": 1050,
+          "feature_start": 1060,
+          "feature_end": 1138,
+          "clear": 1153,
           "forced": null
         },
         {
           "screen": "vault",
           "film": "pigeon",
-          "start": 1215,
-          "feature_start": 1225,
-          "feature_end": 1310,
-          "clear": 1325,
+          "start": 1200,
+          "feature_start": 1210,
+          "feature_end": 1295,
+          "clear": 1310,
           "forced": null
         }
       ],
@@ -247,13 +247,13 @@
       "relaxed": [],
       "stats": {
         "candidates": 1467,
-        "booleans": 2493,
+        "booleans": 2494,
         "rank_literals": 667,
-        "constraints": 3788,
+        "constraints": 3789,
         "slot_min": 15,
         "slot_asked": 15,
         "slot_reason": null,
-        "first_feasible_s": 0.341,
+        "first_feasible_s": 0.304,
         "bound": 1859.82,
         "gap": 0.0,
         "hinted": 0,
@@ -268,78 +268,78 @@
       "admissions": 1092.78,
       "hold_paid": 0.0,
       "clash_paid": 0.0,
-      "solve_seconds": 0.414,
+      "solve_seconds": 0.415,
       "sessions": [
         {
           "screen": "annexe",
-          "film": "ninety-days",
-          "start": 855,
-          "feature_start": 865,
-          "feature_end": 960,
-          "clear": 980,
+          "film": "orchard",
+          "start": 840,
+          "feature_start": 850,
+          "feature_end": 932,
+          "clear": 952,
           "forced": null
         },
         {
           "screen": "annexe",
-          "film": "cartographer",
-          "start": 1095,
-          "feature_start": 1105,
-          "feature_end": 1202,
-          "clear": 1222,
+          "film": "moth-lantern",
+          "start": 960,
+          "feature_start": 970,
+          "feature_end": 1049,
+          "clear": 1069,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "understudy",
+          "start": 1125,
+          "feature_start": 1135,
+          "feature_end": 1227,
+          "clear": 1247,
           "forced": null
         },
         {
           "screen": "annexe",
           "film": "lodger",
-          "start": 1275,
-          "feature_start": 1285,
-          "feature_end": 1384,
-          "clear": 1404,
+          "start": 1260,
+          "feature_start": 1270,
+          "feature_end": 1369,
+          "clear": 1389,
           "forced": null
         },
         {
           "screen": "hall",
-          "film": "moth-lantern",
-          "start": 840,
-          "feature_start": 850,
-          "feature_end": 929,
-          "clear": 954,
+          "film": "ninety-days",
+          "start": 945,
+          "feature_start": 955,
+          "feature_end": 1050,
+          "clear": 1075,
           "forced": null
         },
         {
           "screen": "hall",
-          "film": "orchard",
-          "start": 960,
-          "feature_start": 970,
-          "feature_end": 1052,
-          "clear": 1077,
-          "forced": null
-        },
-        {
-          "screen": "hall",
-          "film": "understudy",
+          "film": "cartographer",
           "start": 1080,
           "feature_start": 1090,
-          "feature_end": 1182,
-          "clear": 1207,
+          "feature_end": 1187,
+          "clear": 1212,
           "forced": null
         },
         {
           "screen": "hall",
           "film": "house-north",
-          "start": 1230,
-          "feature_start": 1240,
-          "feature_end": 1371,
-          "clear": 1396,
+          "start": 1215,
+          "feature_start": 1225,
+          "feature_end": 1356,
+          "clear": 1381,
           "forced": null
         },
         {
           "screen": "vault",
           "film": "pigeon",
-          "start": 1215,
-          "feature_start": 1225,
-          "feature_end": 1310,
-          "clear": 1325,
+          "start": 1230,
+          "feature_start": 1240,
+          "feature_end": 1325,
+          "clear": 1340,
           "forced": null
         }
       ],
@@ -369,33 +369,24 @@
       "admissions": 905.58,
       "hold_paid": 0.0,
       "clash_paid": 0.0,
-      "solve_seconds": 0.268,
+      "solve_seconds": 0.27,
       "sessions": [
         {
           "screen": "annexe",
-          "film": "orchard",
-          "start": 840,
-          "feature_start": 850,
-          "feature_end": 932,
-          "clear": 952,
-          "forced": null
-        },
-        {
-          "screen": "annexe",
-          "film": "copper-street",
-          "start": 960,
-          "feature_start": 970,
-          "feature_end": 1059,
-          "clear": 1079,
+          "film": "ninety-days",
+          "start": 885,
+          "feature_start": 895,
+          "feature_end": 990,
+          "clear": 1010,
           "forced": null
         },
         {
           "screen": "annexe",
           "film": "understudy",
-          "start": 1095,
-          "feature_start": 1105,
-          "feature_end": 1197,
-          "clear": 1217,
+          "start": 1065,
+          "feature_start": 1075,
+          "feature_end": 1167,
+          "clear": 1187,
           "forced": null
         },
         {
@@ -409,11 +400,20 @@
         },
         {
           "screen": "hall",
-          "film": "ninety-days",
-          "start": 945,
-          "feature_start": 955,
-          "feature_end": 1050,
-          "clear": 1075,
+          "film": "copper-street",
+          "start": 840,
+          "feature_start": 850,
+          "feature_end": 939,
+          "clear": 964,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "orchard",
+          "start": 990,
+          "feature_start": 1000,
+          "feature_end": 1082,
+          "clear": 1107,
           "forced": null
         },
         {
@@ -428,10 +428,10 @@
         {
           "screen": "hall",
           "film": "lodger",
-          "start": 1275,
-          "feature_start": 1285,
-          "feature_end": 1384,
-          "clear": 1409,
+          "start": 1290,
+          "feature_start": 1300,
+          "feature_end": 1399,
+          "clear": 1424,
           "forced": null
         }
       ],
@@ -446,7 +446,7 @@
         "slot_min": 15,
         "slot_asked": 15,
         "slot_reason": null,
-        "first_feasible_s": 0.118,
+        "first_feasible_s": 0.122,
         "bound": 905.58,
         "gap": 0.0,
         "hinted": 0,
@@ -461,7 +461,7 @@
       "admissions": 990.66,
       "hold_paid": 0.0,
       "clash_paid": 0.0,
-      "solve_seconds": 0.285,
+      "solve_seconds": 0.279,
       "sessions": [
         {
           "screen": "annexe",
@@ -484,10 +484,10 @@
         {
           "screen": "annexe",
           "film": "winter-pasture",
-          "start": 1215,
-          "feature_start": 1225,
-          "feature_end": 1351,
-          "clear": 1371,
+          "start": 1200,
+          "feature_start": 1210,
+          "feature_end": 1336,
+          "clear": 1356,
           "forced": null
         },
         {
@@ -502,28 +502,28 @@
         {
           "screen": "hall",
           "film": "long-division",
-          "start": 1065,
-          "feature_start": 1075,
-          "feature_end": 1196,
-          "clear": 1221,
+          "start": 1095,
+          "feature_start": 1105,
+          "feature_end": 1226,
+          "clear": 1251,
           "forced": null
         },
         {
           "screen": "hall",
           "film": "bloodmoss",
-          "start": 1290,
-          "feature_start": 1300,
-          "feature_end": 1387,
-          "clear": 1412,
+          "start": 1260,
+          "feature_start": 1270,
+          "feature_end": 1357,
+          "clear": 1382,
           "forced": null
         },
         {
           "screen": "vault",
           "film": "km-zero",
-          "start": 1185,
-          "feature_start": 1195,
-          "feature_end": 1269,
-          "clear": 1284,
+          "start": 1110,
+          "feature_start": 1120,
+          "feature_end": 1194,
+          "clear": 1209,
           "forced": null
         }
       ],
@@ -538,7 +538,7 @@
         "slot_min": 15,
         "slot_asked": 15,
         "slot_reason": null,
-        "first_feasible_s": 0.124,
+        "first_feasible_s": 0.122,
         "bound": 990.66,
         "gap": 0.0,
         "hinted": 0,
@@ -553,7 +553,7 @@
       "admissions": 799.86,
       "hold_paid": 0.0,
       "clash_paid": 0.0,
-      "solve_seconds": 0.234,
+      "solve_seconds": 0.229,
       "sessions": [
         {
           "screen": "annexe",
@@ -566,38 +566,38 @@
         },
         {
           "screen": "annexe",
-          "film": "winter-pasture",
-          "start": 1185,
-          "feature_start": 1195,
-          "feature_end": 1321,
-          "clear": 1341,
+          "film": "bloodmoss",
+          "start": 1290,
+          "feature_start": 1300,
+          "feature_end": 1387,
+          "clear": 1407,
           "forced": null
         },
         {
           "screen": "hall",
           "film": "quiet-machines",
-          "start": 915,
-          "feature_start": 925,
-          "feature_end": 995,
-          "clear": 1020,
+          "start": 960,
+          "feature_start": 970,
+          "feature_end": 1040,
+          "clear": 1065,
           "forced": null
         },
         {
           "screen": "hall",
           "film": "sundowners",
-          "start": 1050,
-          "feature_start": 1060,
-          "feature_end": 1148,
-          "clear": 1173,
+          "start": 1065,
+          "feature_start": 1075,
+          "feature_end": 1163,
+          "clear": 1188,
           "forced": null
         },
         {
           "screen": "hall",
-          "film": "bloodmoss",
-          "start": 1290,
-          "feature_start": 1300,
-          "feature_end": 1387,
-          "clear": 1412,
+          "film": "winter-pasture",
+          "start": 1215,
+          "feature_start": 1225,
+          "feature_end": 1351,
+          "clear": 1376,
           "forced": null
         },
         {
@@ -621,7 +621,7 @@
         "slot_min": 15,
         "slot_asked": 15,
         "slot_reason": null,
-        "first_feasible_s": 0.097,
+        "first_feasible_s": 0.095,
         "bound": 799.86,
         "gap": 0.0,
         "hinted": 0,
@@ -636,33 +636,33 @@
       "admissions": 510.0,
       "hold_paid": 0.0,
       "clash_paid": 0.0,
-      "solve_seconds": 0.162,
+      "solve_seconds": 0.16,
       "sessions": [
         {
           "screen": "annexe",
-          "film": "bells",
+          "film": "silent-partner",
           "start": 1065,
           "feature_start": 1075,
-          "feature_end": 1176,
-          "clear": 1196,
+          "feature_end": 1177,
+          "clear": 1197,
           "forced": null
         },
         {
           "screen": "annexe",
-          "film": "silent-partner",
+          "film": "bells",
           "start": 1200,
           "feature_start": 1210,
-          "feature_end": 1312,
-          "clear": 1332,
+          "feature_end": 1311,
+          "clear": 1331,
           "forced": null
         },
         {
           "screen": "hall",
           "film": "field-guide",
-          "start": 1005,
-          "feature_start": 1015,
-          "feature_end": 1106,
-          "clear": 1131,
+          "start": 930,
+          "feature_start": 940,
+          "feature_end": 1031,
+          "clear": 1056,
           "forced": null
         },
         {
@@ -701,7 +701,7 @@
       "admissions": 637.62,
       "hold_paid": 0.0,
       "clash_paid": 0.0,
-      "solve_seconds": 0.205,
+      "solve_seconds": 0.203,
       "sessions": [
         {
           "screen": "annexe",
@@ -766,17 +766,8 @@
       "admissions": 1646.22,
       "hold_paid": 0.0,
       "clash_paid": 0.0,
-      "solve_seconds": 0.621,
+      "solve_seconds": 0.628,
       "sessions": [
-        {
-          "screen": "annexe",
-          "film": "small-whale",
-          "start": 690,
-          "feature_start": 700,
-          "feature_end": 772,
-          "clear": 792,
-          "forced": null
-        },
         {
           "screen": "annexe",
           "film": "hedgehog",
@@ -798,28 +789,37 @@
         {
           "screen": "annexe",
           "film": "ash-wednesday",
-          "start": 1140,
-          "feature_start": 1150,
-          "feature_end": 1246,
-          "clear": 1266,
-          "forced": null
-        },
-        {
-          "screen": "annexe",
-          "film": "vespers",
-          "start": 1275,
-          "feature_start": 1285,
-          "feature_end": 1390,
-          "clear": 1410,
+          "start": 1095,
+          "feature_start": 1105,
+          "feature_end": 1201,
+          "clear": 1221,
           "forced": null
         },
         {
           "screen": "annexe",
           "film": "night-bus",
+          "start": 1275,
+          "feature_start": 1285,
+          "feature_end": 1377,
+          "clear": 1397,
+          "forced": null
+        },
+        {
+          "screen": "annexe",
+          "film": "vespers",
           "start": 1410,
           "feature_start": 1420,
-          "feature_end": 1512,
-          "clear": 1532,
+          "feature_end": 1525,
+          "clear": 1545,
+          "forced": null
+        },
+        {
+          "screen": "hall",
+          "film": "small-whale",
+          "start": 720,
+          "feature_start": 730,
+          "feature_end": 802,
+          "clear": 827,
           "forced": null
         },
         {
@@ -861,10 +861,10 @@
         {
           "screen": "vault",
           "film": "brackish",
-          "start": 1080,
-          "feature_start": 1090,
-          "feature_end": 1171,
-          "clear": 1186,
+          "start": 1200,
+          "feature_start": 1210,
+          "feature_end": 1291,
+          "clear": 1306,
           "forced": null
         }
       ],
@@ -879,7 +879,7 @@
         "slot_min": 15,
         "slot_asked": 15,
         "slot_reason": null,
-        "first_feasible_s": 0.281,
+        "first_feasible_s": 0.286,
         "bound": 1646.22,
         "gap": 0.0,
         "hinted": 0,
@@ -894,7 +894,7 @@
       "admissions": 929.88,
       "hold_paid": 0.0,
       "clash_paid": 0.0,
-      "solve_seconds": 0.205,
+      "solve_seconds": 0.209,
       "sessions": [
         {
           "screen": "annexe",
@@ -972,5 +972,5 @@
   ],
   "hold_days": [],
   "held": [],
-  "solve_seconds": 6.122
+  "solve_seconds": 6.076
 }
