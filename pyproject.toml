@@ -1,20 +1,24 @@
 [project]
 name = "turnaround"
-version = "0.1.0"
+version = "0.1.1"
 description = "The showtime grid, solved. A constraint solver for the cinema week: every screen, every session, every distributor term, and the turnaround between them."
-readme = "README.md"
+readme = "docs/pypi.md"
 license = "MIT"
 authors = [
     { name = "designedbybruno", email = "123848709+brunohart@users.noreply.github.com" }
 ]
 requires-python = ">=3.13"
-keywords = ["cinema", "scheduling", "constraint-programming", "cp-sat", "exhibition", "showtimes"]
+keywords = ["cinema", "scheduling", "constraint-programming", "cp-sat", "or-tools", "exhibition", "showtimes", "film-festival", "optimization"]
 classifiers = [
     "Development Status :: 3 - Alpha",
+    "Environment :: Console",
     "Intended Audience :: Developers",
+    "Intended Audience :: Other Audience",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3.13",
     "Topic :: Office/Business :: Scheduling",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Typing :: Typed",
 ]
 dependencies = [
     "ortools>=9.15",
@@ -23,6 +27,15 @@ dependencies = [
     "rich>=14",
     "jinja2>=3.1",
 ]
+
+[project.urls]
+Homepage = "https://github.com/brunohart/turnaround"
+"The board" = "https://turnaround-tau.vercel.app"
+Documentation = "https://github.com/brunohart/turnaround#readme"
+"The essay" = "https://github.com/brunohart/turnaround/blob/main/docs/post.md"
+Changelog = "https://github.com/brunohart/turnaround/blob/main/docs/LOG.md"
+Issues = "https://github.com/brunohart/turnaround/issues"
+Source = "https://github.com/brunohart/turnaround"
 
 [project.scripts]
 turnaround = "turnaround.cli:app"

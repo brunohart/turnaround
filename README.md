@@ -92,7 +92,7 @@ The showtime grid is a constraint problem wearing a spreadsheet. A screen holds 
 ## Install
 
 ```bash
-uv tool install turnaround      # once it is on PyPI
+uv tool install turnaround      # or: pipx install turnaround · pip install turnaround
 # or, from source
 git clone https://github.com/brunohart/turnaround && cd turnaround && uv sync
 uv run turnaround plan examples/regent.json --html sheet.html
@@ -167,7 +167,7 @@ A brief the tool cannot take is refused in sentences, not stack traces: *"Dead S
 
 <img src="docs/grids/day-11-replan.png" alt="The re-plan sheet: the Regent's hand-made Thursday against the solved one, dashed ghost outlines where twelve sessions were, one orange ADDED stamp, and the re-plan table under the grid" width="100%">
 
-**The board** (Day 12) is a static page in `board/`: drop a grid JSON on it, and its brief beside it, and it draws the sheet in your browser — the same ruler, the same three-strip block, the booth strips on a phone, a week or a festival day by day. No server, no accounts, no tracking, nothing in the address; a content-security policy that lets nothing leave and a test that holds it there. It draws and does nothing else: the right-hand panel is headed *The grid's claims*, not *Proof*, because the checker does not run in a browser (ADR-020). `scripts/board.sh --serve` runs it locally.
+**The board** (Day 12) is a static page in `board/`: drop a grid JSON on it, and its brief beside it, and it draws the sheet in your browser — the same ruler, the same three-strip block, the booth strips on a phone, a week or a festival day by day. No server, no accounts, no tracking, nothing in the address; a content-security policy that lets nothing leave and a test that holds it there. It draws and does nothing else: the right-hand panel is headed *The grid's claims*, not *Proof*, because the checker does not run in a browser (ADR-020). It is live at **[turnaround-tau.vercel.app](https://turnaround-tau.vercel.app)**; `scripts/board.sh --serve` runs it locally.
 
 <p><img src="docs/grids/day-12-board.png" alt="The board with the Regent's grid and brief dropped on it: the sheet drawn client-side, every block where the package puts it, the right-hand panel stamped The grid's claims" width="64%"> <img src="docs/grids/day-12-board-phone.png" alt="The board on a phone: the booth strips in place of the grid" width="33%"></p>
 
@@ -226,7 +226,7 @@ Built a day at a time from `PLAYBOOK.md`; each day ends with a green build, ever
 
 ## What is still rough
 
-No day of the sixteen is proven optimal in a minute, and the bound is probably the loose half of the gap. A week is solved day by day, so a week term reaches a day as a debt and the week as a whole is never optimised at once. A re-plan five minutes off everywhere reads as twelve moves. The board draws less than the package's sheet — no expected admissions, no re-plan, no terms sheets — and the Playwright pass that holds it to the package is not in CI. Demand is stated, never learned. It is not on PyPI yet.
+No day of the sixteen is proven optimal in a minute, and the bound is probably the loose half of the gap. A week is solved day by day, so a week term reaches a day as a debt and the week as a whole is never optimised at once. A re-plan five minutes off everywhere reads as twelve moves. The board draws less than the package's sheet — no expected admissions, no re-plan, no terms sheets — and the Playwright pass that holds it to the package is not in CI. Demand is stated, never learned. The board is live at [turnaround-tau.vercel.app](https://turnaround-tau.vercel.app); the package is on [PyPI](https://pypi.org/project/turnaround/), whose page is `docs/pypi.md` — shorter than this file, every link absolute and pinned to the release tag, and a test holds it so.
 
 ## Proof
 
