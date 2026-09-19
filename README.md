@@ -4,7 +4,7 @@
 
 <img src="docs/grids/regent.png" alt="The Regent's week sheet: three screens, fifteen sessions, the prime window washed in navy, every proof check green" width="100%">
 
-*The Regent — 3 screens, 5 titles, one PLF exclusive with a prime guarantee, a kids' 3D title that must start by 17:00, a horror title held to 16:00 or later. Solved `OPTIMAL` in 7.5 s for 1,609 expected admissions of 2,840 seats on offer. Every check green.*
+*The Regent — 3 screens, 5 titles, one PLF exclusive with a prime guarantee, a kids' 3D title that must start by 17:00, a horror title held to 16:00 or later. Solved and proven `OPTIMAL` in about five seconds for 1,609 expected admissions of 2,840 seats on offer. Every check green.*
 
 ---
 
@@ -110,6 +110,9 @@ Python 3.13+. The only heavy dependency is `ortools`.
 | `turnaround terms brief.json grid.json --html terms.html` | The terms sheets: one page per title, every term the booking carries, its scope, what the grid delivered day by day, and the checker's verdict — the document a programmer sends back to the distributor. |
 | `turnaround validate brief.json` | Validate and summarise a brief; refuse a bad one in sentences. |
 | `turnaround import --csv sessions.csv [--brief brief.json] [--out grid.json]` | A plain showtimes export (`screen`, `title`, `start`, `runtime`) as a grid the checker can read — against the house's brief, or with a brief skeleton made from the CSV alone — so a hand-made grid can be checked before the solver is trusted with anything. The import never judges the grid; `check` does. |
+| `turnaround explain brief.json grid.json 1@17:45` | Why a session is where it is: the terms it helps satisfy and what it sells (the checker's half), and — by forbidding it and solving again — whether the terms or the objective force it (the solver's claim, said so). `plan --why` does it for every session and the sheet carries the marks. |
+| `turnaround what-if brief.json --drop bees` (or `--set clean_min=15`) | The day without a title, or under a changed policy, beside the day as it stands. Terms are never relaxed; a what-if that cannot hold them says `INFEASIBLE`. |
+| `turnaround diff old.json new.json [--brief brief.json] [--html replan.html]` | What changed between two grids: sessions added, removed and moved, seats and show counts by title, the grids' claims. Symmetric and composable. The Thursday re-plan artefact. |
 | `turnaround export brief.json grid.json [--ical] [--csv] [--json] [--out-dir DIR]` | A grid out: a calendar per screen (`.ics`), a flat CSV for signage, JSON for a website. With no format named, all three. A week goes out as one CSV and one JSON of seven days and a calendar per screen across the week. |
 
 ## The brief
@@ -152,21 +155,90 @@ A brief the tool cannot take is refused in sentences, not stack traces: *"Dead S
 
 <p><img src="docs/grids/day-6-print-strip.png" alt="Screen 1's A4 booth strip: four sessions of The Long Voyage as vertical three-strip blocks, doors, feature, turnaround over the credits, clear, and the dark minutes between" width="48%"> <img src="docs/grids/day-6-phone.png" alt="The sheet on a phone: the booth strips in place of the grid, then the tables" width="48%"></p>
 
-## What it does not do yet
+**Why a session is where it is** (Day 7): `turnaround explain` answers for one session, `plan --why` for all of them. The terms a session helps satisfy and what it sells are the checker's reading; whether it is *forced* is found by forbidding it and solving again, which is the solver's claim and is labelled as one. On the sheet a session the terms force carries a navy corner, one the objective forces an ink corner, and the by-title table prints what the day gives up without it.
 
-This is Day 9 of a fourteen-day build (`PLAYBOOK.md`). Not here yet: a festival profile (Day 10); grid diffs for the Thursday re-plan (Day 11); a static board (Day 12). Days 7 and 8 — *why* each session is where it is, and the sixteen-screen benchmark — are in `docs/LOG.md` and `docs/bench.md` and not yet written up here.
+<img src="docs/grids/day-7-why.png" alt="The Regent's sheet with the why marks: a navy corner on the prime session of The Long Voyage that its terms force, ink corners on the sessions the objective forces, and the by-title table printing the admissions each start is worth" width="100%">
 
-The design decisions and their reasons are in `DECISIONS.md`. The log of what each day shipped and what it left rough is in `docs/LOG.md`.
+**A festival** (Day 10) is a week with different terms: venues for screens, up to twenty-one days, a title screened a stated number of times, a guest who can attend only on some days and between some hours, a print that is only in town for part of the run, and a penalty for two titles of one strand clashing. `examples/festival.json` is ten days, three venues, six strands.
+
+<img src="docs/grids/day-10-festival.png" alt="The festival sheet: the programme table with days across and titles down, each screening a time and a venue in mono, the guest's days washed navy, strands as mono tags" width="100%">
+
+**The Thursday re-plan** (Day 11): `turnaround diff` reads two grids and nothing else. On the sheet a moved session leaves a dashed ghost where it was, an added one carries an orange stamp, a removed one is struck through in the by-title table, and a table under the grid names every change beside the two grids' claims.
+
+<img src="docs/grids/day-11-replan.png" alt="The re-plan sheet: the Regent's hand-made Thursday against the solved one, dashed ghost outlines where twelve sessions were, one orange ADDED stamp, and the re-plan table under the grid" width="100%">
+
+**The board** (Day 12) is a static page in `board/`: drop a grid JSON on it, and its brief beside it, and it draws the sheet in your browser — the same ruler, the same three-strip block, the booth strips on a phone, a week or a festival day by day. No server, no accounts, no tracking, nothing in the address; a content-security policy that lets nothing leave and a test that holds it there. It draws and does nothing else: the right-hand panel is headed *The grid's claims*, not *Proof*, because the checker does not run in a browser (ADR-020). `scripts/board.sh --serve` runs it locally.
+
+<p><img src="docs/grids/day-12-board.png" alt="The board with the Regent's grid and brief dropped on it: the sheet drawn client-side, every block where the package puts it, the right-hand panel stamped The grid's claims" width="64%"> <img src="docs/grids/day-12-board-phone.png" alt="The board on a phone: the booth strips in place of the grid" width="33%"></p>
+
+## At scale
+
+`examples/sixteen.json` is The Palladium: sixteen screens in six capacity classes, twenty-two titles, a week. The target was written down before optimising — *one day under 60 s to a proven-optimal grid or a gap of 2 % or less* — and **it was not met**. `docs/bench.md` has every row and what each switch did; this is the short of it, Thursday, 60 s limit:
+
+| model | start grid | booleans | first grid | status | objective | bound | gap |
+|---|--:|--:|--:|---|--:|--:|--:|
+| Day 7 model, as shipped | 5′ | 59,739 | 14.9 s | FEASIBLE | 6,815.9 | 8,689.4 | 21.6 % |
+| + ranks per capacity class | 5′ | 43,682 | 50.5 s | FEASIBLE | 6,729.1 | 8,603.1 | 21.8 % |
+| + identical screens ordered by load | 5′ | 43,682 | — | UNKNOWN | — | — | — |
+| candidate cap, 10-minute grid (the unhinted default) | 10′ | 42,257 | 11.7 s | FEASIBLE | 7,249.6 | 8,660.7 | 16.3 % |
+| the same, hinted from a grid of the day (the hinted default) | 10′ | 26,470 | 24.9 s | FEASIBLE | 7,410.8 | 8,561.9 | **13.4 %** |
+| The Regent, for scale: 3 screens, 5 titles | 5′ | 1,439 | 0.1 s | OPTIMAL | 1,608.6 | 1,608.6 | proven |
+
+A sixteen-screen week comes back in about eleven minutes, every day `FEASIBLE`, every grid passing the checker, every sheet saying *not proven best, gap 13 %* in its header. The grids are good and checkable; they are not proven. The one switch that is not exact — solving on a 10-minute start grid when the 5-minute one has more than 20,000 candidates — is stated on the grid, in the CLI and on the sheet (ADR-016).
+
+<img src="docs/grids/day-8-sixteen.png" alt="The Palladium's Thursday: sixteen screens, seventy-odd sessions, the header saying not proven best with the gap" width="100%">
+
+## The argument
+
+**Why constraint programming for the cinema week.** Because the week is already written as constraints. A booking confirmation says *three shows a day, one in prime, its own screen through Sunday*; the booth says *twenty minutes to turn the room, two rooms at a time*; the lobby says *not two starts in ten minutes*. None of that is a preference to be traded against revenue, and a method that treats it as one — a score with penalties, a heuristic that usually gets there — will one Wednesday hand over a grid that is a show short, and nobody will know until the distributor's report. CP-SAT takes the rules as rules: a boolean per (screen, title, start), an interval per session with the turnaround inside it, `NoOverlap` per screen, every term a linear constraint behind its own assumption literal. What is left to optimise is the only thing that should be: expected admissions, under capacity, with a second show in a daypart drawing less than the first.
+
+**Why the checker.** A solver's `OPTIMAL` is a statement about a model, and the model was written by the same hand that might have misread the term. `check.py` re-reads the brief and the sessions and shares no code with `solve.py` (ADR-003): when a day adds a constraint it goes into the checker first, then the solver, then a test that the checker catches a hand-built violation. Two readings that agree are evidence; one is an assertion. It is also why a grid made by hand can be checked before the solver is trusted with anything: `import --csv` then `check` found five slips in a Thursday a manager typed, and the sheet prints them.
+
+**What the tool refuses to do.**
+
+- It does not relax a term silently. If the terms cannot all hold it says `INFEASIBLE`, names the smallest set of terms that cannot hold together — in the trade's words, *"this cannot hold on its own: The Long Voyage min_shows 6 — the house has 3 screens (1 PLF), doors 10:00 to last start 21:30"* — and gives no grid. `--relax` drops terms one at a time in a fixed order, out loud, and stamps each one on the sheet (ADR-002, ADR-009).
+- It does not call a grid optimal that it has not proven. `FEASIBLE` comes with its gap, on the sheet.
+- It does not judge an imported grid while importing it, and a diff does not judge the grids it compares (ADR-017, ADR-019).
+- It does not let the explanation borrow the checker's authority: *forced* is the solver's claim and is labelled so (ADR-015).
+- It does not forecast. Demand is what the brief states, with the programmer's assumptions in words beside the numbers, and the report says who is turned away at capacity under those numbers.
+- It does not colour films, carry a vendor's name, run a server, or send a grid anywhere.
+
+## Fourteen days
+
+Built a day at a time from `PLAYBOOK.md`; each day ends with a green build, every example re-solved and checked, a screenshot looked at, and a log entry that says what is still rough. `docs/LOG.md` is the record, `DECISIONS.md` the twenty decisions a later day must not reverse, `docs/post.md` the essay.
+
+| Day | What shipped | Sheet |
+|--:|---|---|
+| 0 | The grid exists: brief, CP-SAT model, independent checker, the sheet | [the grid](docs/grids/day-0-the-grid.png) |
+| 1 | Infeasibility, explained: a minimal conflict in the trade's words; `--relax`, out loud | [relaxed](docs/grids/day-1-relaxed.png) |
+| 2 | The week: seven days from one brief, titles holding their times | [week](docs/grids/day-2-week.png) |
+| 3 | Demand: the objective becomes expected admissions under capacity | [demand](docs/grids/day-3-demand.png) |
+| 4 | The booth's realities: credits overlap, preshow by format, floor staff, own hours | [booth](docs/grids/day-4-booth.png) |
+| 5 | Distributor terms, fully: week terms, the exclusive that lifts, the terms sheet | [terms](docs/grids/day-5-terms.png) |
+| 6 | The sheet, properly: A3 pin-up, A4 booth strips, the phone | [sheet](docs/grids/day-6-sheet.png) · [A3](docs/grids/day-6-print-a3.png) · [strip](docs/grids/day-6-print-strip.png) · [phone](docs/grids/day-6-phone.png) |
+| 7 | Explain: every session's why; forced by the terms, or by the objective | [why](docs/grids/day-7-why.png) |
+| 8 | Scale: the sixteen, measured against a target written first, and missed | [sixteen](docs/grids/day-8-sixteen.png) |
+| 9 | In and out: a four-column CSV in, calendars, signage CSV and JSON out | [hand-made](docs/grids/day-9-hand-made.png) |
+| 10 | The festival profile: venues, guests, prints in town, strands | [festival](docs/grids/day-10-festival.png) |
+| 11 | Diff: the Thursday re-plan, ghosts on the sheet, symmetric and composable | [re-plan](docs/grids/day-11-replan.png) |
+| 12 | The board: the sheet drawn in a browser from a dropped grid | [board](docs/grids/day-12-board.png) · [phone](docs/grids/day-12-board-phone.png) |
+| 13 | The write-up: this file, `docs/post.md`, `v0.1.0` | — |
+
+## What is still rough
+
+No day of the sixteen is proven optimal in a minute, and the bound is probably the loose half of the gap. A week is solved day by day, so a week term reaches a day as a debt and the week as a whole is never optimised at once. A re-plan five minutes off everywhere reads as twelve moves. The board draws less than the package's sheet — no expected admissions, no re-plan, no terms sheets — and the Playwright pass that holds it to the package is not in CI. Demand is stated, never learned. It is not on PyPI yet.
 
 ## Proof
 
 ```bash
-scripts/build.sh    # ruff, format check, mypy --strict
-scripts/test.sh     # pytest
-scripts/run.sh      # solve every example into docs/grids/, then `turnaround check` each
+scripts/build.sh              # ruff, format check, mypy --strict
+scripts/test.sh               # pytest, Hypothesis included
+scripts/run.sh                # solve every example into docs/grids/, then `turnaround check` each
+scripts/board.sh              # write the board's stylesheet and example from the package
+uv run scripts/board_pass.py  # the Playwright pass on the board, desk and phone
 ```
 
-CI runs all three on every push.
+CI runs the first three on every push.
 
 ## Licence
 
