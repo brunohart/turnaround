@@ -4,6 +4,8 @@ Newest first. One entry per slot.
 
 ## Day 14 — 2026-09-20 — Backlog
 
+**CI, found and fixed the same day.** CI had not been green since Day 7: the Day 8, 9 and 10 runs were cancelled at GitHub's six-hour limit and Day 11's failed after five and a half. One cause. `run.sh` solves the sixteen at 90 s a day; the hosted runner has two to four cores where the bench machine gives CP-SAT eight workers, and found no first grid in the time: `UNKNOWN`. A day with no grid leaves its share of the week's terms to the days after it, so Monday to Wednesday then said `INFEASIBLE`, `plan` exited 2 for the lot, and `run.sh` — which reads 2 as "the terms conflict on purpose" — re-planned the week with `--relax`, dropping The Iron Tide's week terms one slow solve at a time for hours, and still had no grid. That is ADR-002 broken by an exit code: terms dropped because the machine was slow. **Fixed:** out of time is exit **4**, never 2, for a day, a week, a festival and a what-if (`_exit_without_a_grid`); a week with any `UNKNOWN` day exits 4 and says that a later day's `INFEASIBLE` may be the clock's; `run.sh` stops on 4; a test holds both codes (the sixteen at 0.2 s is 4 and offers no `--relax`, the overbooked Regent is 2 and does). CI skips the sixteen's solve (`TURNAROUND_SKIP=sixteen`; a benchmark is not a proof and belongs to the bench machine) and still runs the checker over its committed grid; the job has a 40-minute timeout and a newer push cancels an older run. 140 tests.
+
 Backlog-driven from today, and Linear is not reachable from this slot, so no issue could be taken; nothing scheduled. The day went to catching up Days 12 and 13 below.
 
 ## Day 13 — 2026-09-20 (scheduled Fri 19 Sep; slot did not fire) — The write-up

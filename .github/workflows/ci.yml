@@ -3,9 +3,15 @@ on:
   push:
     branches: [main]
   pull_request:
+# a newer push makes an older run's answer moot
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   prove:
     runs-on: ubuntu-latest
+    # the whole job is about fifteen minutes; nothing here is worth six hours of a runner
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
@@ -13,7 +19,12 @@ jobs:
           python-version: "3.13"
       - run: scripts/build.sh
       - run: scripts/test.sh
-      - run: scripts/run.sh
+      - name: solve every example but the benchmark
+        run: scripts/run.sh
+        env:
+          # the sixteen is measured on the bench machine (docs/bench.md); its committed
+          # grid is still checked below
+          TURNAROUND_SKIP: sixteen
       - name: every example grid passes the checker
         run: |
           for b in examples/*.json; do

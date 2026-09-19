@@ -136,3 +136,15 @@ def test_diff_names_the_re_plan_as_a_table_and_as_json(tmp_path: Path) -> None:
     assert r.exit_code == 0 and '"moved"' in r.output
     r = runner.invoke(app, ["diff", str(grid), str(new_path), "--html", str(html)])
     assert r.exit_code == 1 and "--html needs --brief" in r.output
+
+
+def test_out_of_time_is_not_infeasible() -> None:
+    """Exit 2 is an answer about the brief and the one a caller may relax on; a clock that
+    ran out is exit 4 and says so. CI's small runner once read the sixteen's UNKNOWN as 2,
+    and run.sh spent five hours dropping terms nobody had asked it to drop."""
+    r = runner.invoke(app, ["plan", str(EXAMPLES / "sixteen.json"), "--time-limit", "0.2"])
+    assert r.exit_code == 4, r.output
+    assert "out of time" in r.output and "--relax drops" not in r.output
+    r = runner.invoke(app, ["plan", str(EXAMPLES / "regent-overbooked.json")])
+    assert r.exit_code == 2, r.output
+    assert "INFEASIBLE" in r.output and "--relax drops" in r.output

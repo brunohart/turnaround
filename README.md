@@ -104,7 +104,7 @@ Python 3.13+. The only heavy dependency is `ortools`.
 
 | Command | What it does |
 |---|---|
-| `turnaround plan brief.json [--out grid.json] [--html sheet.html]` | Solve a day, or a week if the brief has `days`; print the grid and its proof. Exit 2 if infeasible, 3 if the checker ever disagrees with the solver. `--relax` drops conflicting terms one at a time, out loud. |
+| `turnaround plan brief.json [--out grid.json] [--html sheet.html]` | Solve a day, or a week if the brief has `days`; print the grid and its proof. Exit 2 if infeasible, 3 if the checker ever disagrees with the solver, 4 if the time limit ran out before any grid was found (which is never a reason to relax a term). `--relax` drops conflicting terms one at a time, out loud. |
 | `turnaround check brief.json grid.json` | Verify any grid — the solver's or one made by hand — against its brief. |
 | `turnaround render brief.json grid.json --html sheet.html` | Render an existing grid as the week sheet. |
 | `turnaround terms brief.json grid.json --html terms.html` | The terms sheets: one page per title, every term the booking carries, its scope, what the grid delivered day by day, and the checker's verdict — the document a programmer sends back to the distributor. |

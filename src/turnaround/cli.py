@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, NoReturn
 
 import typer
 from pydantic import ValidationError
@@ -208,6 +208,30 @@ def _find_session(brief: Brief, grid: Grid, key: str) -> Session:
     raise typer.Exit(code=1)
 
 
+OUT_OF_TIME = 4
+
+
+def _exit_without_a_grid(statuses: list[str], relax_terms: bool, *, week: bool) -> NoReturn:
+    """No grid, and why matters: exit 2 says the terms conflict, which is an answer about
+    the brief (ADR-002); exit 4 says the clock ran out, which is an answer about the
+    machine. A caller that relaxes terms on 2 must never do it on 4 — a slow runner is
+    not a reason to drop a distributor's minimum. In a week, a day with no grid leaves its
+    share of every week term to the days after it, so an INFEASIBLE after an UNKNOWN is
+    not to be believed either, and the whole week exits 4."""
+    if any(st != "INFEASIBLE" for st in statuses):
+        if week and "INFEASIBLE" in statuses:
+            console.print(
+                "[dim]a day that ran out of time leaves its share of the week's terms to the "
+                "days after it — their INFEASIBLE may be the clock's, not the terms'[/dim]"
+            )
+        console.print("[dim]out of time, not out of options: raise --time-limit[/dim]")
+        raise typer.Exit(code=OUT_OF_TIME)
+    if not relax_terms:
+        drops = "day by day until each day fits" if week else "until a grid exists"
+        console.print(f"[dim]turnaround plan --relax drops terms {drops}[/dim]")
+    raise typer.Exit(code=2)
+
+
 def _say_relaxed(brief: Brief, grid: Grid, prefix: str = "") -> None:
     for r in grid.relaxed:
         console.print(
@@ -366,11 +390,7 @@ def _plan_week(
             console.print(f"[red bold]{name} {g.status}[/red bold] — no grid within {time_limit}s")
             _say_relaxed(b, g, prefix=f"{name} ")
     if bad:
-        if not relax_terms and any(g.status == "INFEASIBLE" for _, _, g in bad):
-            console.print(
-                "[dim]turnaround plan --relax drops terms day by day until each day fits[/dim]"
-            )
-        raise typer.Exit(code=2)
+        _exit_without_a_grid([g.status for _, _, g in bad], relax_terms, week=True)
     if not quiet:
         _print_week(week, wg)
     for d, b, g in zip(week.days, briefs, wg.grids, strict=True):
@@ -416,11 +436,7 @@ def _plan_festival(
             console.print(f"[red bold]{name} {g.status}[/red bold] — no grid within {time_limit}s")
             _say_relaxed(b, g, prefix=f"{name} ")
     if bad:
-        if not relax_terms and any(g.status == "INFEASIBLE" for _, _, g in bad):
-            console.print(
-                "[dim]turnaround plan --relax drops terms day by day until each day fits[/dim]"
-            )
-        raise typer.Exit(code=2)
+        _exit_without_a_grid([g.status for _, _, g in bad], relax_terms, week=True)
     if not quiet:
         _print_festival(fest, wg)
     for d, b, g in zip(fest.days, briefs, wg.grids, strict=True):
@@ -485,7 +501,8 @@ def plan(
         ),
     ] = 20_000,
 ) -> None:
-    """Solve a day, or a week, and print the grid with its proof. Exit 2 if the terms conflict."""
+    """Solve a day, or a week, and print the grid with its proof. Exit 2 if the terms conflict,
+    4 if the clock ran out before any grid was found."""
     tuning = _tuning(max_candidates)
     if _is_festival(brief_path):
         if why:
@@ -514,6 +531,7 @@ def plan(
         else:
             console.print(f"[red bold]{grid.status}[/red bold] — no grid within {time_limit}s")
             _say_relaxed(brief, grid)  # what had already been given up when time ran out
+            _exit_without_a_grid([grid.status], relax_terms, week=False)
         raise typer.Exit(code=2)
     if not quiet:
         _print_grid(brief, grid)
@@ -710,6 +728,7 @@ def what_if_cmd(
             console.print(f"[red bold]INFEASIBLE[/red bold] — {explain(changed, grid)}")
         else:
             console.print(f"[red bold]{grid.status}[/red bold] — no grid within {time_limit}s")
+            raise typer.Exit(code=OUT_OF_TIME)
         raise typer.Exit(code=2)
     _print_what_if(brief, base, changed, grid)
     rep = run_check(changed, grid)

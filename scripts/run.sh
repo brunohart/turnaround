@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Solve every example and write its grid + sheet into docs/grids/. The sheets are the screenshots.
 # An example whose terms conflict on purpose (exit 2) is re-planned with --relax so its sheet
-# shows what was given up; any other failure stops the script.
+# shows what was given up; any other failure stops the script — exit 4 above all, which is
+# the clock running out and never a reason to drop a term.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
@@ -18,6 +19,11 @@ else
 fi
 for b in "${briefs[@]}"; do
   n=$(basename "$b" .json)
+  # TURNAROUND_SKIP="sixteen" leaves an example's committed grid as it stands. CI sets it:
+  # the sixteen needs eight workers to find a first grid inside its minute and a half, a
+  # hosted runner has two to four, and a benchmark is not a proof (docs/bench.md). CI still
+  # runs the checker over the committed grid.
+  case " ${TURNAROUND_SKIP:-} " in *" $n "*) echo "$n: skipped, the committed grid stands"; continue ;; esac
   rc=0
   why=""
   tl=30
