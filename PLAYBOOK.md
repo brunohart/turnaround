@@ -102,11 +102,12 @@ Shipped: the brief (house, slate, terms, policy) as Pydantic models; the CP-SAT 
 - Tests: every diff is symmetric and composable (diff(a,b) applied to a yields b).
 - *Shipped besides:* `apply` and `invert` on a diff, a `--json` print and `--out`, `diff --html` for a day, a week and a festival (each day page a re-plan), `docs/grids/regent-replan.html` in `run.sh` (the hand-made Thursday against the solved one), ADR-019, the re-plan paragraph in DESIGN.md. *Left open:* a diff across two briefs names a dropped title by id; a title with more than seven sessions a day is paired greedily; the ghosts of a five-minute nudge sit almost under the live block, and a threshold below which a move is "the same show, five minutes on" would read better than twelve ghosts; the what-if still writes no diff — `what-if --out` then `diff --against` is two commands where one would do (a `--diff` on what-if is the Day 12 candidate if the board wants it).
 
-## Day 12 — Thu 18 Sep — The board
+## Day 12 — Thu 18 Sep — The board ✅
 
 - A static page (`board/`) that loads a grid JSON by drag-and-drop and renders the sheet client-side; the template logic ported to a small JavaScript module with the same three-strip block. No server, no accounts, no tracking; the URL carries nothing.
 - Deploy to Vercel as `turnaround.vercel.app` — the deploy is **bruno-gated** (project creation); the build can prepare `vercel.json` and a preview script.
 - Playwright pass on the board at desktop and phone widths; screenshots committed.
+- *Run on 20 Sep; the slots of 18 and 19 Sep did not fire.* *Shipped besides:* a week and a festival drawn day by day, a grid alone drawn by id, `render.board_css()` so the stylesheet is cut from the template and a test holds it there, a CSP that lets nothing leave, ADR-020. *Left open:* the deploy (bruno-gated, the command is in the log); the pass is not in CI; the board has no proof, re-plan or terms sheets by design, and no way to jump between a week's days; `what-if --diff` was not built.
 
 ## Day 13 — Fri 19 Sep — The write-up
 
