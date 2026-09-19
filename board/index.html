@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>The board — turnaround</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="sheet.css">
+<link rel="stylesheet" href="board.css">
+</head>
+<body>
+<main id="desk" class="sheet desk">
+  <div class="wash"></div>
+  <header>
+    <div>
+      <div class="stamp mono">The board</div>
+      <h1><span class="ghost" aria-hidden="true">Turnaround</span>Turnaround</h1>
+    </div>
+    <div class="meta mono">
+      <div><b>a grid in, a sheet out</b></div>
+      <div>drawn in this tab · no server · no accounts · no tracking</div>
+      <div>the address carries nothing</div>
+    </div>
+  </header>
+  <div class="divider"></div>
+
+  <label id="drop" class="drop" for="files">
+    <input id="files" type="file" accept=".json,application/json" multiple>
+    <span class="drop-title">Drop a grid here</span>
+    <span class="mono">grid.json from <b>turnaround plan --out</b> · add the brief.json beside it for titles, seats and prime · or click to choose</span>
+    <span id="held" class="mono held-files"></span>
+  </label>
+  <p id="error" class="mono error" role="alert" hidden></p>
+
+  <div class="cols notes">
+    <div class="panel">
+      <div class="stamp mono">What it draws</div>
+      <p>The sheet the command line renders: hours across, a row per screen, every session as three strips — preshow on the ink hatch, the feature in cream (white in prime), the turnaround on the orange hatch. On a phone, the booth strips. A week or a festival draws day by day. It prints as the sheet prints.</p>
+    </div>
+    <div class="panel">
+      <div class="stamp mono">What it does not</div>
+      <p>It does not solve and it does not check. The proof is the checker's and the checker is not here, so the board prints what the grid claims and says so. A grid without its brief is drawn by id. The files are read by this page and go nowhere.</p>
+      <p class="mono"><button id="example" type="button" class="link">or load the Regent's Thursday</button></p>
+    </div>
+  </div>
+  <footer class="mono"><span>turnaround · the showtime grid, solved</span><span>the board</span></footer>
+</main>
+
+<div id="bar" class="bar mono" hidden>
+  <span id="bar-what"></span>
+  <span><button id="print" type="button" class="link">print</button> · <button id="again" type="button" class="link">another grid</button></span>
+</div>
+<div id="out"></div>
+<script type="module" src="board.js"></script>
+</body>
+</html>

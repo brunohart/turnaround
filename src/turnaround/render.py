@@ -39,6 +39,18 @@ def _env() -> Environment:
     return env
 
 
+def board_css() -> str:
+    """The sheet's stylesheet as the board takes it (Day 12): the style macro of
+    `_day.html.j2`, cut out between its tags and dedented. The board draws the same sheet
+    in a browser; `scripts/board.sh` writes this to `board/sheet.css` and a test holds the
+    file to it, so the paper cannot drift between the two."""
+    text = (_TEMPLATES / "_day.html.j2").read_text(encoding="utf-8")
+    css = text.split("<style>", 1)[1].split("</style>", 1)[0]
+    lines = [line[2:] if line.startswith("  ") else line for line in css.strip("\n").splitlines()]
+    head = "/* Written by scripts/board.sh from templates/_day.html.j2. Do not edit. */"
+    return head + "\n" + "\n".join(lines) + "\n"
+
+
 def day_context(
     brief: Brief, grid: Grid, *, hide_away: bool = False, diff: GridDiff | None = None
 ) -> dict[str, Any]:

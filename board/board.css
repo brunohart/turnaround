@@ -1,0 +1,25 @@
+/* The board's own few rules; the sheet's are sheet.css, written from the template by
+   scripts/board.sh and never edited here. */
+.desk[hidden], .bar[hidden], .error[hidden] { display:none; }
+.drop { display:flex; flex-direction:column; gap:12px; align-items:flex-start; padding:44px 32px; cursor:pointer;
+  border:1px dashed var(--ink); background:repeating-linear-gradient(135deg, transparent 0 3px, rgba(26,26,26,.07) 3px 4px); }
+.drop input { position:absolute; width:1px; height:1px; opacity:0; }
+.drop:focus-within { outline:2px solid var(--blue); outline-offset:3px; }
+.drop .drop-title { font-family:"Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; font-size:34px; letter-spacing:-.03em; line-height:1; }
+.drop .mono { color:var(--grey); line-height:1.7; } .drop .mono b { color:var(--ink); font-weight:500; }
+/* a grid over the drop zone: the hatch turns to the turnaround's */
+.drop.over { border-style:solid; background:repeating-linear-gradient(45deg, transparent 0 2px, rgba(212,98,43,.4) 2px 3px); }
+.held-files:empty { display:none; } .drop .held-files { color:var(--blue); }
+.error { color:var(--red); margin:14px 0 0; line-height:1.7; }
+.notes p { font-size:14px; line-height:1.55; max-width:56ch; margin:0 0 12px; }
+button.link { font:inherit; letter-spacing:inherit; text-transform:inherit; color:var(--ink); background:none; border:0; border-bottom:1px solid var(--ink); padding:0 0 1px; cursor:pointer; min-height:24px; }
+button.link:hover { color:var(--blue); border-color:var(--blue); }
+.bar { display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; max-width:1240px; margin:0 auto; padding:14px 32px 0; color:var(--grey); }
+.claims { color:var(--grey); line-height:1.9; } .claims b { color:var(--ink); font-weight:500; }
+.probed b { color:var(--ink); font-weight:500; text-transform:none; letter-spacing:.02em; }
+@media print { .bar { display:none; } }
+@media screen and (max-width:800px) {
+  .bar { padding:12px 16px 0; }
+  .drop { padding:32px 18px; } .drop .drop-title { font-size:28px; }
+  .desk .notes { order:0; }
+}
