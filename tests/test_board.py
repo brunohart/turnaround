@@ -37,5 +37,5 @@ def test_the_board_asks_for_nothing_from_anywhere_else() -> None:
         assert "https://" not in text, page.name
         for word in ("localStorage", "sessionStorage", "cookie", "sendBeacon", "location.search"):
             assert word not in text, f"{page.name} mentions {word}"
-    policy = json.loads((BOARD / "vercel.json").read_text())["headers"][0]["headers"][0]["value"]
+    policy = json.loads((ROOT / "vercel.json").read_text())["headers"][0]["headers"][0]["value"]
     assert "default-src 'none'" in policy and "connect-src 'self'" in policy

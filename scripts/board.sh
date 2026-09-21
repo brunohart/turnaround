@@ -5,7 +5,9 @@
 # Regent's brief and grid as the page's one example — then, asked, serves or previews it.
 #   scripts/board.sh            write board/sheet.css and board/examples/
 #   scripts/board.sh --serve    and serve it on http://localhost:8712
-#   scripts/board.sh --preview  and deploy a Vercel preview (bruno-gated: needs `vercel login`)
+#   scripts/board.sh --preview  and deploy a Vercel preview from the repo root (needs `vercel login`
+#                               and a link at the root); every push to main deploys production itself:
+#                               the project is connected to GitHub and the root vercel.json serves board/
 set -euo pipefail
 cd "$(dirname "$0")/.."
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
@@ -17,5 +19,5 @@ cp docs/grids/regent.json board/examples/regent.grid.json
 echo "board/sheet.css and board/examples/ written"
 case "${1:-}" in
   --serve) exec python3 -m http.server 8712 --directory board ;;
-  --preview) exec npx --yes vercel deploy board ;;
+  --preview) exec npx --yes vercel deploy ;;
 esac
