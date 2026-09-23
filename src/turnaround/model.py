@@ -22,6 +22,7 @@ festival's own terms reaching each day as a debt the way a week's do.
 
 from __future__ import annotations
 
+import functools
 import re
 from datetime import date
 from typing import Annotated, Any, Literal
@@ -42,6 +43,14 @@ def parse_time(value: str | int) -> int:
     """'19:30' -> 1170. Hours past 24 are allowed for late shows ('25:00' -> 1500)."""
     if isinstance(value, int):
         return value
+    return _parse_clock(value)
+
+
+@functools.lru_cache(maxsize=4096)
+def _parse_clock(value: str) -> int:
+    """parse_time for a string, remembered: a brief names a few dozen times and the
+    candidate enumeration asks for them about ten times a candidate. A refusal raises
+    and is not remembered, so a bad time is refused every time it is asked."""
     m = _TIME.match(value.strip())
     if not m:
         raise ValueError(f"time must look like HH:MM, got {value!r}")
