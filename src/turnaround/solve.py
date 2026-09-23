@@ -226,28 +226,37 @@ def terms_of(film: Film) -> list[TermRef]:
     return out
 
 
-def day_bound(brief: Brief, film: Film) -> tuple[int, int]:
-    """The most sessions, and the most prime sessions, a title could have on this day:
-    per eligible screen, how many of its blocks fit between its first and last allowed
-    start, capped by max_shows. An upper bound, not a plan; it is what a week term can
-    still hope for from a day not yet solved."""
-    shows = 0
-    prime = 0
-    cands = [c for c in candidates(brief) if c.film == film.id]
-    for scr in brief.screens:
-        mine = [c for c in cands if c.screen == scr.id]
-        if not mine:
-            continue
-        block = brief.block_len(scr, film)
-        starts = [c.start for c in mine]
-        shows += (max(starts) - min(starts)) // block + 1
-        ps = [c.start for c in mine if c.prime]
-        if ps:
-            prime += (max(ps) - min(ps)) // block + 1
-    if film.terms.max_shows is not None:
-        shows = min(shows, film.terms.max_shows)
-        prime = min(prime, film.terms.max_shows)
-    return shows, min(prime, shows)
+def day_bounds(brief: Brief) -> dict[str, tuple[int, int]]:
+    """The day_bound of every title: the most sessions, and the most prime sessions, it
+    could have on this day — per eligible screen, how many of its blocks fit between its
+    first and last allowed start, capped by max_shows. An upper bound, not a plan; it is
+    what a week or festival term can still hope for from a day not yet solved. One pass
+    over the day's candidates for the whole slate: one pass per title was 22 × 34,109
+    candidates a day on the sixteen, about 22 s of a week spent before Thursday's solve."""
+    starts: dict[tuple[str, str], list[int]] = {}
+    primes: dict[tuple[str, str], list[int]] = {}
+    for c in candidates(brief):
+        starts.setdefault((c.film, c.screen), []).append(c.start)
+        if c.prime:
+            primes.setdefault((c.film, c.screen), []).append(c.start)
+    out: dict[str, tuple[int, int]] = {}
+    for film in brief.films:
+        shows = 0
+        prime = 0
+        for scr in brief.screens:
+            mine = starts.get((film.id, scr.id))
+            if not mine:
+                continue
+            block = brief.block_len(scr, film)
+            shows += (max(mine) - min(mine)) // block + 1
+            ps = primes.get((film.id, scr.id))
+            if ps:
+                prime += (max(ps) - min(ps)) // block + 1
+        if film.terms.max_shows is not None:
+            shows = min(shows, film.terms.max_shows)
+            prime = min(prime, film.terms.max_shows)
+        out[film.id] = (shows, min(prime, shows))
+    return out
 
 
 @dataclass
@@ -1160,7 +1169,7 @@ def solve_week(
     anchor: Hold | None = None
     hold_set = set(week.hold_indices)
     briefs = week.briefs()
-    bounds = [{f.id: day_bound(b, f) for f in b.films} for b in briefs]
+    bounds = [day_bounds(b) for b in briefs]
     for i in range(len(week.days)):
         brief = briefs[i]
         hold = anchor if i in hold_set else None
@@ -1254,7 +1263,7 @@ def solve_festival(
     t0 = time.perf_counter()
     grids: list[Grid] = []
     briefs = fest.briefs()
-    bounds = [{f.id: day_bound(b, f) for f in b.films} for b in briefs]
+    bounds = [day_bounds(b) for b in briefs]
     for i in range(len(fest.days)):
         owed = _owed_festival(fest, grids, bounds, i)
         run = relax if relax_terms else solve
