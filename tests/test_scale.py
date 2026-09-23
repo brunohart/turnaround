@@ -2,18 +2,23 @@
 is exact (the tuned optimum is the plain optimum); the cap coarsens the grid and says so;
 hints start the search and change nothing; a probe with a budget says unknown honestly."""
 
+from pathlib import Path
+
 from turnaround.check import check
-from turnaround.model import Brief, WeekBrief
+from turnaround.model import Brief, FestivalBrief, Film, WeekBrief
 from turnaround.solve import (
     PLAIN,
     Tuning,
     candidates,
     choose_slot,
+    day_bounds,
     identical_screens,
     probe_all,
     solve,
     solve_week,
 )
+
+EXAMPLES = Path(__file__).resolve().parents[1] / "examples"
 
 
 def _twins(tiny: Brief) -> Brief:
@@ -123,3 +128,33 @@ def test_a_probe_budget_marks_the_rest_unknown(tiny: Brief) -> None:
     )
     probe_all(tiny, grid, time_limit_s=5, budget_s=None)
     assert all(s.forced and s.forced.by != "unknown" for s in grid.sessions)
+
+
+def _day_bound_one_title(brief: Brief, film: Film) -> tuple[int, int]:
+    """The definition, one title at a time, as it was written before the one-pass version."""
+    shows = 0
+    prime = 0
+    cands = [c for c in candidates(brief) if c.film == film.id]
+    for scr in brief.screens:
+        mine = [c for c in cands if c.screen == scr.id]
+        if not mine:
+            continue
+        block = brief.block_len(scr, film)
+        starts = [c.start for c in mine]
+        shows += (max(starts) - min(starts)) // block + 1
+        ps = [c.start for c in mine if c.prime]
+        if ps:
+            prime += (max(ps) - min(ps)) // block + 1
+    if film.terms.max_shows is not None:
+        shows = min(shows, film.terms.max_shows)
+        prime = min(prime, film.terms.max_shows)
+    return shows, min(prime, shows)
+
+
+def test_day_bounds_is_every_title_s_bound_from_one_pass() -> None:
+    week = WeekBrief.model_validate_json((EXAMPLES / "regent-week.json").read_text())
+    fest = FestivalBrief.model_validate_json((EXAMPLES / "festival.json").read_text())
+    # The festival's first four days: prints away, guests due, late nights; the rest repeat them.
+    for brief in week.briefs() + fest.briefs()[:4]:
+        bounds = day_bounds(brief)
+        assert bounds == {f.id: _day_bound_one_title(brief, f) for f in brief.films}
