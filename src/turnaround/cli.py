@@ -53,18 +53,18 @@ console = Console()
 def _is_week(path: Path) -> bool:
     """A week brief carries `days`; a week grid carries `grids`. Cheap to tell apart. A
     festival brief carries `days` too, and `festival`; it is not a week."""
-    head = json.loads(path.read_text())
+    head = json.loads(path.read_text(encoding="utf-8"))
     return isinstance(head, dict) and ("days" in head or "grids" in head) and "festival" not in head
 
 
 def _is_festival(path: Path) -> bool:
     """A festival brief says `festival` where a house says `house`."""
-    head = json.loads(path.read_text())
+    head = json.loads(path.read_text(encoding="utf-8"))
     return isinstance(head, dict) and "festival" in head
 
 
 def _load_festival(path: Path) -> FestivalBrief:
-    raw = json.loads(path.read_text())
+    raw = json.loads(path.read_text(encoding="utf-8"))
     try:
         return FestivalBrief.model_validate(raw)
     except ValidationError as e:
@@ -81,7 +81,7 @@ def _refuse(err: ValidationError, raw: object, path: Path) -> None:
 
 
 def _load_brief(path: Path) -> Brief:
-    raw = json.loads(path.read_text())
+    raw = json.loads(path.read_text(encoding="utf-8"))
     try:
         return Brief.model_validate(raw)
     except ValidationError as e:
@@ -90,7 +90,7 @@ def _load_brief(path: Path) -> Brief:
 
 
 def _load_week(path: Path) -> WeekBrief:
-    raw = json.loads(path.read_text())
+    raw = json.loads(path.read_text(encoding="utf-8"))
     try:
         return WeekBrief.model_validate(raw)
     except ValidationError as e:
@@ -99,11 +99,11 @@ def _load_week(path: Path) -> WeekBrief:
 
 
 def _load_grid(path: Path) -> Grid:
-    return Grid.model_validate_json(path.read_text())
+    return Grid.model_validate_json(path.read_text(encoding="utf-8"))
 
 
 def _load_week_grid(path: Path) -> WeekGrid:
-    return WeekGrid.model_validate_json(path.read_text())
+    return WeekGrid.model_validate_json(path.read_text(encoding="utf-8"))
 
 
 def _print_grid(brief: Brief, grid: Grid) -> None:
@@ -400,10 +400,10 @@ def _plan_week(
             _say_stats(g)
     rep = _print_week_report(week, wg) if not quiet else check_week(week, wg)
     if out:
-        out.write_text(wg.model_dump_json(indent=2))
+        out.write_text(wg.model_dump_json(indent=2), encoding="utf-8")
         console.print(f"grid → {out}")
     if html:
-        html.write_text(render_week_html(week, wg, rep))
+        html.write_text(render_week_html(week, wg, rep), encoding="utf-8")
         console.print(f"sheet → {html}")
     if not rep.ok:
         console.print(
@@ -446,10 +446,10 @@ def _plan_festival(
             _say_stats(g)
     rep = _print_week_report(fest, wg) if not quiet else check_festival(fest, wg)
     if out:
-        out.write_text(wg.model_dump_json(indent=2))
+        out.write_text(wg.model_dump_json(indent=2), encoding="utf-8")
         console.print(f"grid → {out}")
     if html:
-        html.write_text(render_festival_html(fest, wg, rep))
+        html.write_text(render_festival_html(fest, wg, rep), encoding="utf-8")
         console.print(f"sheet → {html}")
     if not rep.ok:
         console.print(
@@ -544,10 +544,10 @@ def plan(
             _print_whys(brief, grid)
         _say_forced(grid)
     if out:
-        out.write_text(grid.model_dump_json(indent=2))
+        out.write_text(grid.model_dump_json(indent=2), encoding="utf-8")
         console.print(f"grid → {out}")
     if html:
-        html.write_text(render_html(brief, grid, run_check(brief, grid)))
+        html.write_text(render_html(brief, grid, run_check(brief, grid)), encoding="utf-8")
         console.print(f"sheet → {html}")
     if not ok:
         console.print(
@@ -614,7 +614,7 @@ def explain_cmd(
     elif do_probe:
         _say_forced(grid)
     if out:
-        out.write_text(grid.model_dump_json(indent=2))
+        out.write_text(grid.model_dump_json(indent=2), encoding="utf-8")
         console.print(f"grid → {out}")
 
 
@@ -733,10 +733,10 @@ def what_if_cmd(
     _print_what_if(brief, base, changed, grid)
     rep = run_check(changed, grid)
     if out:
-        out.write_text(grid.model_dump_json(indent=2))
+        out.write_text(grid.model_dump_json(indent=2), encoding="utf-8")
         console.print(f"grid → {out}")
     if html:
-        html.write_text(render_html(changed, grid, rep))
+        html.write_text(render_html(changed, grid, rep), encoding="utf-8")
         console.print(f"sheet → {html}")
     if not rep.ok:
         console.print("[red bold]the what-if grid fails its own check — this is a bug[/red bold]")
@@ -814,7 +814,7 @@ def _print_diff(d: GridDiff, heading: str) -> None:
 
 
 def _is_week_grid(path: Path) -> bool:
-    head = json.loads(path.read_text())
+    head = json.loads(path.read_text(encoding="utf-8"))
     return isinstance(head, dict) and "grids" in head
 
 
@@ -869,7 +869,7 @@ def diff_cmd(
                     f"holds: {', '.join(wd.held[0]) or 'none'} → {', '.join(wd.held[1]) or 'none'}"
                 )
         if out:
-            out.write_text(wd.model_dump_json(indent=2))
+            out.write_text(wd.model_dump_json(indent=2), encoding="utf-8")
             console.print(f"diff → {out}")
         if html and week is not None:
             diffs = {d.day: d for d in wd.days if d.day}
@@ -877,7 +877,7 @@ def diff_cmd(
                 text = render_festival_html(week, new_w, check_festival(week, new_w), diffs=diffs)
             else:
                 text = render_week_html(week, new_w, check_week(week, new_w), diffs=diffs)
-            html.write_text(text)
+            html.write_text(text, encoding="utf-8")
             console.print(f"sheet → {html}")
         return
     old_g, new_g = _load_grid(old_path), _load_grid(new_path)
@@ -888,10 +888,12 @@ def diff_cmd(
     else:
         _print_diff(d, f"{d.house} · {d.date or 'the day'} · {d.summary}")
     if out:
-        out.write_text(d.model_dump_json(indent=2))
+        out.write_text(d.model_dump_json(indent=2), encoding="utf-8")
         console.print(f"diff → {out}")
     if html and brief is not None:
-        html.write_text(render_html(brief, new_g, run_check(brief, new_g), diff=d))
+        html.write_text(
+            render_html(brief, new_g, run_check(brief, new_g), diff=d), encoding="utf-8"
+        )
         console.print(f"sheet → {html}")
 
 
@@ -986,7 +988,7 @@ def import_cmd(
             brief = _load_brief(brief_path)
     try:
         brief, grid, notes = import_csv(
-            csv_path.read_text(),
+            csv_path.read_text(encoding="utf-8-sig"),
             brief=brief,
             house=house or csv_path.stem,
             day=day,
@@ -1012,11 +1014,13 @@ def import_cmd(
     for n in notes:
         console.print(f"  [yellow]·[/yellow] {n}")
     grid_path = out or csv_path.with_suffix(".grid.json")
-    grid_path.write_text(grid.model_dump_json(indent=2))
+    grid_path.write_text(grid.model_dump_json(indent=2), encoding="utf-8")
     console.print(f"grid → {grid_path}")
     if brief_path is None:
         skeleton_path = brief_out or csv_path.with_suffix(".brief.json")
-        skeleton_path.write_text(brief.model_dump_json(indent=2, exclude_none=True))
+        skeleton_path.write_text(
+            brief.model_dump_json(indent=2, exclude_none=True), encoding="utf-8"
+        )
         console.print(f"brief skeleton → {skeleton_path}")
         brief_path = skeleton_path
     rep = run_check(brief, grid)
@@ -1082,7 +1086,7 @@ def export(
         console.print(f"  [red]✗[/red] {e}")
         raise typer.Exit(code=1) from None
     for kind, name, text in files:
-        (where / name).write_text(text)
+        (where / name).write_text(text, encoding="utf-8")
         console.print(f"{kind} → {where / name}")
 
 
@@ -1096,18 +1100,18 @@ def render(
     if _is_festival(brief_path):
         fest = _load_festival(brief_path)
         wg = _load_week_grid(grid_path)
-        html.write_text(render_festival_html(fest, wg, check_festival(fest, wg)))
+        html.write_text(render_festival_html(fest, wg, check_festival(fest, wg)), encoding="utf-8")
         console.print(f"sheet → {html}")
         return
     if _is_week(brief_path):
         week = _load_week(brief_path)
         wg = _load_week_grid(grid_path)
-        html.write_text(render_week_html(week, wg, check_week(week, wg)))
+        html.write_text(render_week_html(week, wg, check_week(week, wg)), encoding="utf-8")
         console.print(f"sheet → {html}")
         return
     brief = _load_brief(brief_path)
     grid = _load_grid(grid_path)
-    html.write_text(render_html(brief, grid, run_check(brief, grid)))
+    html.write_text(render_html(brief, grid, run_check(brief, grid)), encoding="utf-8")
     console.print(f"sheet → {html}")
 
 
@@ -1123,15 +1127,17 @@ def terms(
     if _is_festival(brief_path):
         fest = _load_festival(brief_path)
         wg = _load_week_grid(grid_path)
-        html.write_text(render_festival_terms_html(fest, wg, check_festival(fest, wg)))
+        html.write_text(
+            render_festival_terms_html(fest, wg, check_festival(fest, wg)), encoding="utf-8"
+        )
     elif _is_week(brief_path):
         week = _load_week(brief_path)
         wg = _load_week_grid(grid_path)
-        html.write_text(render_week_terms_html(week, wg, check_week(week, wg)))
+        html.write_text(render_week_terms_html(week, wg, check_week(week, wg)), encoding="utf-8")
     else:
         brief = _load_brief(brief_path)
         grid = _load_grid(grid_path)
-        html.write_text(render_terms_html(brief, grid, run_check(brief, grid)))
+        html.write_text(render_terms_html(brief, grid, run_check(brief, grid)), encoding="utf-8")
     console.print(f"terms → {html}")
 
 
