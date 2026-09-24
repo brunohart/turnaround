@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ast
 import json
 from pathlib import Path
 
@@ -148,3 +149,22 @@ def test_out_of_time_is_not_infeasible() -> None:
     r = runner.invoke(app, ["plan", str(EXAMPLES / "regent-overbooked.json")])
     assert r.exit_code == 2, r.output
     assert "INFEASIBLE" in r.output and "--relax drops" in r.output
+
+
+def test_every_file_the_package_reads_or_writes_names_its_encoding() -> None:
+    """The sheet says <meta charset="utf-8"> and prints ′ · — ✓, JSON is UTF-8, and so are
+    the exports. Without `encoding=` Python uses the locale's (cp1252 on Windows): the sheet
+    fails to write (′ is not in cp1252) and an accented title reads back as mojibake."""
+    src = Path(__file__).parent.parent / "src" / "turnaround"
+    bare = []
+    for path in sorted(src.glob("*.py")):
+        for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"))):
+            if not isinstance(node, ast.Call):
+                continue
+            f = node.func
+            io = (isinstance(f, ast.Attribute) and f.attr in ("read_text", "write_text")) or (
+                isinstance(f, ast.Name) and f.id == "open"
+            )
+            if io and not any(k.arg == "encoding" for k in node.keywords):
+                bare.append(f"{path.name}:{node.lineno}")
+    assert not bare, f"read or written in the locale's encoding: {', '.join(bare)}"
