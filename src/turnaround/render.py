@@ -12,7 +12,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from jinja2 import Environment, FileSystemLoader, select_autoescape
+from jinja2 import Environment, FileSystemLoader
 
 from .check import Check, Report, WeekReport, admissions, clashes, term_is_set, whys
 from .diff import GridDiff
@@ -34,7 +34,9 @@ _TEMPLATES = Path(__file__).parent / "templates"
 
 
 def _env() -> Environment:
-    env = Environment(loader=FileSystemLoader(_TEMPLATES), autoescape=select_autoescape(["html"]))
+    # every template is HTML and named *.html.j2, which select_autoescape(["html"]) never
+    # matched: a title or house name from a brief is data, never markup
+    env = Environment(loader=FileSystemLoader(_TEMPLATES), autoescape=True)
     env.filters["hhmm"] = fmt_time
     return env
 

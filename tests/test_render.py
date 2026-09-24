@@ -12,7 +12,7 @@ from functools import cache
 from pathlib import Path
 
 from turnaround.check import check, check_week
-from turnaround.model import Brief, WeekBrief
+from turnaround.model import Brief, Grid, WeekBrief
 from turnaround.render import render_html, render_terms_html, render_week_html
 from turnaround.solve import solve, solve_week
 
@@ -136,3 +136,20 @@ def test_the_re_plan_sheet_marks_moves_additions_and_removals() -> None:
     ctx = day_context(away, gone, hide_away=True, diff=d2)
     assert any(f["film"].id == last.film and f["removed"] for f in ctx["films"])
     assert all(f["film"].id != last.film for f in day_context(away, gone, hide_away=True)["films"])
+
+
+def test_a_brief_is_data_and_never_markup_on_the_sheet(regent: Brief) -> None:
+    """Every template is named *.html.j2, which select_autoescape(["html"]) never matched,
+    so a title or a house name went into the sheet as markup: a CSV import's titles, or a
+    brief from a distributor, could put a script in the booth's browser, and a title with a
+    quote cut its own hover title short."""
+    evil = '"><img src=x onerror=alert(1)>'
+    films = [f.model_copy(update={"title": evil}) for f in regent.films]
+    b = regent.model_copy(update={"house": evil, "films": films})
+    grid = Grid.model_validate_json(
+        (EXAMPLES.parent / "docs/grids/regent.json").read_text(encoding="utf-8")
+    )
+    for html in (render_html(b, grid, check(b, grid)), render_terms_html(b, grid, check(b, grid))):
+        assert "<img" not in html
+        assert "&lt;img src=x onerror" in html
+        assert "<style>" in html  # the style macro is markup and stays markup
