@@ -7,14 +7,20 @@ on:
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
+# the job reads the repository and nothing else
+permissions:
+  contents: read
 jobs:
   prove:
     runs-on: ubuntu-latest
     # the whole job is about fifteen minutes; nothing here is worth six hours of a runner
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      # pinned by commit: a moved tag cannot change what runs here
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
         with:
           python-version: "3.13"
       - run: scripts/build.sh
